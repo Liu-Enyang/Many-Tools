@@ -12,16 +12,12 @@ a.view:hover{text-decoration:underline}
 </head>
 <body>
 
-
 <h1>Automation Test Report</h1>
 
 <div>
-<b>Total Cases:</b> 2 <br>
-<b>Total Steps:</b> 10 <br>
-<b>PASS:</b> <span class="pass">10</span> <br>
-<b>FAIL:</b> <span class="fail">0</span> <br>
-<b>Pass Rate:</b> 100.0% <br>
-<b>Total Duration:</b> 0.684s
+<b>Total Cases:</b> 3 <br>
+<b>PASS:</b> <span class="pass">0</span> <br>
+<b>FAIL:</b> <span class="fail">3</span> <br>
 </div>
 
 <br>
@@ -31,122 +27,201 @@ a.view:hover{text-decoration:underline}
 <tr>
 <th>Test Case</th>
 <th>Result</th>
-<th>Duration(s)</th>
 <th>Replay</th>
 </tr>
 
 <tr>
+<td>empty_input_validation</td>
+<td class="fail">FAIL</td>
+<td><a class="view" href="../reports/gifs/empty_input_validation.gif" target="_blank">Replay</a></td>
+</tr>
+
+<tr>
 <td>login_success</td>
-<td class="pass">PASS</td>
-<td>0.38</td>
+<td class="fail">FAIL</td>
 <td><a class="view" href="../reports/gifs/login_success.gif" target="_blank">Replay</a></td>
 </tr>
 
 <tr>
-<td>login_failed</td>
-<td class="pass">PASS</td>
-<td>0.302</td>
-<td><a class="view" href="../reports/gifs/login_failed.gif" target="_blank">Replay</a></td>
+<td>navigation_flow</td>
+<td class="fail">FAIL</td>
+<td><a class="view" href="../reports/gifs/navigation_flow.gif" target="_blank">Replay</a></td>
 </tr>
 </table><br><br>
 <table border=1 cellpadding=10>
-
 <tr>
 <th>No.</th>
 <th>Test Case</th>
 <th>Step</th>
+<th>Step Duration</th>
+<th>Case Duration</th>
+<th>Total Duration</th>
 <th>Result</th>
-<th>Duration(s)</th>
 <th>Screenshot</th>
 </tr>
 
 <tr>
 <td>1</td>
-<td>login_success</td>
-<td>{'action': 'goto', 'url': 'http://localhost:8000/demo/testpage.html'}</td>
-<td class="pass">PASS</td>
-<td>0.139</td>
-<td><a class="view" href="../reports/screenshots/login_success_0.png" target="_blank">View</a></td>
+<td>empty_input_validation</td>
+<td>goto</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
 </tr>
 
 <tr>
 <td>2</td>
-<td>login_success</td>
-<td>{'action': 'fill', 'target': '#username', 'value': 'admin'}</td>
-<td class="pass">PASS</td>
-<td>0.058</td>
-<td><a class="view" href="../reports/screenshots/login_success_1.png" target="_blank">View</a></td>
+<td>empty_input_validation</td>
+<td>fill</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
 </tr>
 
 <tr>
 <td>3</td>
-<td>login_success</td>
-<td>{'action': 'fill', 'target': '#password', 'value': '123456'}</td>
-<td class="pass">PASS</td>
-<td>0.068</td>
-<td><a class="view" href="../reports/screenshots/login_success_2.png" target="_blank">View</a></td>
+<td>empty_input_validation</td>
+<td>fill</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
 </tr>
 
 <tr>
 <td>4</td>
-<td>login_success</td>
-<td>{'action': 'click', 'target': '#login'}</td>
-<td class="pass">PASS</td>
-<td>0.066</td>
-<td><a class="view" href="../reports/screenshots/login_success_3.png" target="_blank">View</a></td>
+<td>empty_input_validation</td>
+<td>click</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
 </tr>
 
 <tr>
 <td>5</td>
-<td>login_success</td>
-<td>{'action': 'expect_text', 'target': '#result', 'value': 'Login success'}</td>
-<td class="pass">PASS</td>
-<td>0.05</td>
-<td><a class="view" href="../reports/screenshots/login_success_4.png" target="_blank">View</a></td>
+<td>empty_input_validation</td>
+<td>expect_text</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
 </tr>
 
 <tr>
 <td>6</td>
-<td>login_failed</td>
-<td>{'action': 'goto', 'url': 'http://localhost:8000/demo/testpage.html'}</td>
-<td class="pass">PASS</td>
-<td>0.049</td>
-<td><a class="view" href="../reports/screenshots/login_failed_0.png" target="_blank">View</a></td>
+<td>login_success</td>
+<td>goto</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
 </tr>
 
 <tr>
 <td>7</td>
-<td>login_failed</td>
-<td>{'action': 'fill', 'target': '#username', 'value': 'admin'}</td>
-<td class="pass">PASS</td>
-<td>0.051</td>
-<td><a class="view" href="../reports/screenshots/login_failed_1.png" target="_blank">View</a></td>
+<td>login_success</td>
+<td>fill</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
 </tr>
 
 <tr>
 <td>8</td>
-<td>login_failed</td>
-<td>{'action': 'fill', 'target': '#password', 'value': 'wrongpassword'}</td>
-<td class="pass">PASS</td>
-<td>0.068</td>
-<td><a class="view" href="../reports/screenshots/login_failed_2.png" target="_blank">View</a></td>
+<td>login_success</td>
+<td>fill</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
 </tr>
 
 <tr>
 <td>9</td>
-<td>login_failed</td>
-<td>{'action': 'click', 'target': '#login'}</td>
-<td class="pass">PASS</td>
-<td>0.068</td>
-<td><a class="view" href="../reports/screenshots/login_failed_3.png" target="_blank">View</a></td>
+<td>login_success</td>
+<td>click</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
 </tr>
 
 <tr>
 <td>10</td>
-<td>login_failed</td>
-<td>{'action': 'expect_text', 'target': '#result', 'value': 'Login failed'}</td>
-<td class="pass">PASS</td>
-<td>0.067</td>
-<td><a class="view" href="../reports/screenshots/login_failed_4.png" target="_blank">View</a></td>
+<td>login_success</td>
+<td>expect_text</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
+</tr>
+
+<tr>
+<td>11</td>
+<td>navigation_flow</td>
+<td>goto</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
+</tr>
+
+<tr>
+<td>12</td>
+<td>navigation_flow</td>
+<td>fill</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
+</tr>
+
+<tr>
+<td>13</td>
+<td>navigation_flow</td>
+<td>fill</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
+</tr>
+
+<tr>
+<td>14</td>
+<td>navigation_flow</td>
+<td>click</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
+</tr>
+
+<tr>
+<td>15</td>
+<td>navigation_flow</td>
+<td>expect_text</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td>0.00s</td>
+<td class="fail">FAIL</td>
+<td></td>
 </tr>
 </table></body></html>

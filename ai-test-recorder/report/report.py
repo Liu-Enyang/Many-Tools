@@ -1,86 +1,36 @@
-import sys
 import os
+import json
+import yaml
+import glob
 import imageio.v2 as imageio
-from collections import defaultdict
 
-# Add project root to Python path so runner module can be found
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-if PROJECT_ROOT not in sys.path:
-    sys.path.insert(0, PROJECT_ROOT)
+# Paths
+STATE_FILE = "state/cases_state.json"
+CHECKLIST_DIR = "checklist"
+GIF_DIR = "reports/gifs"
+REPORT_PATH = "reports/report.html"
 
-from runner.runner import run_tests
+os.makedirs(GIF_DIR, exist_ok=True)
 
+# Load case state
+if os.path.exists(STATE_FILE):
+    with open(STATE_FILE) as f:
+        state = json.load(f)
+else:
+    state = {}
 
-results = run_tests()
+# Collect all case YAML files
+case_files = glob.glob(f"{CHECKLIST_DIR}/*.yaml")
 
-# -------------------------------
-# Generate GIF replay per test case
-# -------------------------------
-gif_dir = "reports/gifs"
-os.makedirs(gif_dir, exist_ok=True)
-
-case_images = defaultdict(list)
-
-# collect screenshots by case
-for r in results:
-    if r.get("type") == "case_summary":
-        continue
-
-    img = r.get("screenshot")
-    case = r.get("case")
-
-    if img and os.path.exists(img):
-        case_images[case].append(img)
-
+# Prepare GIFs mapping
 case_gifs = {}
+for file in case_files:
+    case_name = os.path.splitext(os.path.basename(file))[0]
+    gif_path = f"{GIF_DIR}/{case_name}.gif"
+    if os.path.exists(gif_path):
+        case_gifs[case_name] = gif_path
 
-# create gif for each case
-for case, imgs in case_images.items():
-    frames = []
-    for img in imgs:
-        try:
-            frames.append(imageio.imread(img))
-        except Exception:
-            pass
-
-    if frames:
-        gif_path = f"{gif_dir}/{case}.gif"
-        imageio.mimsave(gif_path, frames, duration=0.8)
-        case_gifs[case] = gif_path
-
-# Calculate statistics (ignore case_summary records)
-step_results = [r for r in results if r.get("type") != "case_summary"]
-
-total_steps = len(step_results)
-pass_count = sum(1 for r in step_results if r["result"] == "PASS")
-fail_count = sum(1 for r in step_results if r["result"] == "FAIL")
-
-cases = set(r.get("case", "") for r in step_results if r.get("case"))
-total_cases = len(cases)
-
-pass_rate = (pass_count / total_steps * 100) if total_steps else 0
-# Calculate total duration from all step durations
-total_duration = round(sum(r.get("duration", 0) for r in step_results), 3)
-
-# Calculate case level results and duration
-case_results = {}
-case_durations = {}
-
-for r in results:
-    case_name = r.get("case", "")
-    if not case_name:
-        continue
-
-    if r.get("type") == "case_summary":
-        case_durations[case_name] = r.get("duration", "")
-        continue
-
-    if case_name not in case_results:
-        case_results[case_name] = "PASS"
-
-    if r["result"] == "FAIL":
-        case_results[case_name] = "FAIL"
-
+# Generate HTML
 html = f"""
 <html>
 <head>
@@ -95,16 +45,12 @@ a.view:hover{{text-decoration:underline}}
 </head>
 <body>
 
-
 <h1>Automation Test Report</h1>
 
 <div>
-<b>Total Cases:</b> {total_cases} <br>
-<b>Total Steps:</b> {total_steps} <br>
-<b>PASS:</b> <span class="pass">{pass_count}</span> <br>
-<b>FAIL:</b> <span class="fail">{fail_count}</span> <br>
-<b>Pass Rate:</b> {pass_rate:.1f}% <br>
-<b>Total Duration:</b> {total_duration}s
+<b>Total Cases:</b> {len(case_files)} <br>
+<b>PASS:</b> <span class="pass">{sum(1 for s in state.values() if s=='PASS')}</span> <br>
+<b>FAIL:</b> <span class="fail">{sum(1 for s in state.values() if s=='FAIL')}</span> <br>
 </div>
 
 <br>
@@ -114,68 +60,85 @@ a.view:hover{{text-decoration:underline}}
 <tr>
 <th>Test Case</th>
 <th>Result</th>
-<th>Duration(s)</th>
 <th>Replay</th>
 </tr>
 """
 
-for case_name, result in case_results.items():
+for file in case_files:
+    case_name = os.path.splitext(os.path.basename(file))[0]
+    result = state.get(case_name, "NOT RUN")
     cls = "pass" if result == "PASS" else "fail"
-    duration = case_durations.get(case_name, "")
     gif = case_gifs.get(case_name, "")
     replay = f'<a class="view" href="../{gif}" target="_blank">Replay</a>' if gif else ""
-
     html += f"""
 <tr>
 <td>{case_name}</td>
 <td class="{cls}">{result}</td>
-<td>{duration}</td>
 <td>{replay}</td>
 </tr>
 """
+
 html += "</table><br><br>"
 
+# Step details table with durations
 html += """
 <table border=1 cellpadding=10>
-
 <tr>
 <th>No.</th>
 <th>Test Case</th>
 <th>Step</th>
+<th>Step Duration</th>
+<th>Case Duration</th>
+<th>Total Duration</th>
 <th>Result</th>
-<th>Duration(s)</th>
 <th>Screenshot</th>
 </tr>
 """
 
 step_index = 1
-for r in results:
+total_duration = 0.0
 
-    if r.get("type") == "case_summary":
-        continue
+for file in case_files:
+    case_name = os.path.splitext(os.path.basename(file))[0]
+    with open(file) as f:
+        case = yaml.safe_load(f)
+    steps = case.get("steps", [])
+    case_start = steps[0].get("start_time", 0) if steps else 0
+    case_end = steps[-1].get("end_time", 0) if steps else 0
+    case_duration = case_end - case_start
+    total_duration += case_duration
 
-    cls = "pass" if r["result"] == "PASS" else "fail"
-    duration = r.get("duration", "")
-
-    html += f"""
+    for step in steps:
+        step_name = step.get("action", "")
+        step_duration = step.get("duration", 0)
+        result = state.get(case_name, "NOT RUN")
+        cls = "pass" if result=="PASS" else "fail"
+        screenshot = step.get("screenshot", "")
+        # screenshot_link = f'<a class="view" href="../{screenshot}" target="_blank">View</a>' if screenshot else ""
+        if screenshot:
+            # Adjust path to be relative to reports/report.html in reports/screenshots/
+            screenshot_path = f"screenshots/{os.path.basename(screenshot)}"
+            screenshot_link = f'<a class="view" href="{screenshot_path}" target="_blank">View</a>'
+        else:
+            screenshot_link = ""
+        html += f"""
 <tr>
 <td>{step_index}</td>
-<td>{r.get('case', '')}</td>
-<td>{r['step']}</td>
-<td class="{cls}">{r['result']}</td>
-<td>{duration}</td>
-<td><a class="view" href="../{r['screenshot']}" target="_blank">View</a></td>
+<td>{case_name}</td>
+<td>{step_name}</td>
+<td>{step_duration:.2f}s</td>
+<td>{case_duration:.2f}s</td>
+<td>{total_duration:.2f}s</td>
+<td class="{cls}">{result}</td>
+<td>{screenshot_link}</td>
 </tr>
 """
-    step_index += 1
+        step_index += 1
 
 html += "</table></body></html>"
 
-import os
-
 os.makedirs("reports", exist_ok=True)
-
-with open("reports/report.html", "w") as f:
+with open(REPORT_PATH, "w") as f:
     f.write(html)
 
-print("Report generated: reports/report.html")
+print(f"Report generated: {REPORT_PATH}")

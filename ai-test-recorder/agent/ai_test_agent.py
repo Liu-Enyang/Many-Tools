@@ -215,16 +215,13 @@ def normalize_yaml(data):
 
 def save_yaml(text):
 
-    print("Saving tests.yaml")
+    print("Saving test cases as separate files")
 
     try:
         data = yaml.safe_load(text)
         data = normalize_yaml(data)
-
     except Exception:
-
         print("AI YAML invalid, fallback template")
-
         data = {
             "tests": [
                 {
@@ -241,20 +238,27 @@ def save_yaml(text):
 
     os.makedirs("checklist", exist_ok=True)
 
-    with open(CHECKLIST_PATH, "w") as f:
-        yaml.dump(data, f)
+    # write each test case as a separate YAML file
+    for case in data.get("tests", []):
+        case_name = case.get("name", "unnamed_case")
+        file_path = f"checklist/{case_name}.yaml"
+        with open(file_path, "w") as f:
+            yaml.dump(case, f)
+        print(f"Saved case: {case_name} -> {file_path}")
 
 
 # -----------------------------
 # 执行测试
 # -----------------------------
 
+import glob
+import json
+
+STATE_FILE = "state/cases_state.json"
+
 def run_tests():
-
-    print("Running tests...")
-
-    subprocess.run(["python", "runner/runner.py"])
-
+    print("Running all cases using run_all_cases.py")
+    subprocess.run(["python", "runner/run_all_cases.py"])
     subprocess.run(["python", "report/report.py"])
 
 
@@ -347,43 +351,61 @@ def report_has_fail():
 # -----------------------------
 
 def run_ai_test(url):
-
     html = fetch_html(url)
-
     elements = extract_dom(html)
 
     yaml_text = ai_generate_tests(url, html, elements)
-
     save_yaml(yaml_text)
 
+    os.makedirs("state", exist_ok=True)
+    if os.path.exists(STATE_FILE):
+        with open(STATE_FILE) as f:
+            state = json.load(f)
+    else:
+        state = {}
+
+    case_files = glob.glob("checklist/*.yaml")
     max_retry = 1
 
     for i in range(max_retry):
-
         print(f"\n=== Test Attempt {i+1} ===")
+        all_passed = True
 
-        run_tests()
+        for case_file in case_files:
+            case_name = os.path.splitext(os.path.basename(case_file))[0]
 
-        if not report_has_fail():
-            print("All tests PASS")
+            # Only attempt cases that haven't passed yet
+            if state.get(case_name) == "PASS":
+                continue
+
+            print(f"Running case: {case_name}")
+            result = subprocess.run(["python", "runner/run_single_case.py", case_file])
+            exit_code = result.returncode
+
+            if exit_code == 0:
+                state[case_name] = "PASS"
+            else:
+                all_passed = False
+                state[case_name] = "FAIL"
+                error = parse_error()
+                print(f"Detected error in case {case_name}: {error}")
+                with open(case_file) as f:
+                    current_yaml = f.read()
+                fixed_yaml = ai_fix_tests(url, elements, current_yaml, error)
+                # Overwrite only the failed case file
+                with open(case_file, "w") as f:
+                    f.write(fixed_yaml)
+                print(f"Updated case: {case_name} after AI fix")
+
+        # Save state after each attempt
+        with open(STATE_FILE, "w") as f:
+            json.dump(state, f, indent=2)
+
+        if all_passed:
+            print("All cases PASS")
             break
-
-        error = parse_error()
-
-        print("Detected error:", error)
-
-        with open(CHECKLIST_PATH, "r") as f:
-            current_yaml = f.read()
-
-        yaml_text = ai_fix_tests(
-            url,
-            elements,
-            current_yaml,
-            error
-        )
-
-        save_yaml(yaml_text)
-
+    # Generate report after tests
+    subprocess.run([sys.executable, "report/report.py"], check=True)
     print("Done. Open reports/report.html")
 
 
