@@ -2,3 +2,6 @@ playwright
 pyyaml
 jinja2
 imageio
+openai
+beautifulsoup4
+requests
