@@ -33,6 +33,7 @@ playwright install
 1 录制浏览器操作
 
 python recorder.py http://localhost:8080
+python recorder.py file:///Users/liuenyang/Documents/GitHub/Many%20Tools/ai-test-recorder/test_page.html
 
 生成
 

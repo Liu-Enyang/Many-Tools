@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Automation Test Page</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:40px;
+}
+
+.container{
+    width:600px;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:6px;
+}
+
+button{
+    margin-top:20px;
+    padding:10px 20px;
+}
+
+#result{
+    margin-top:30px;
+    padding:15px;
+    border:1px solid #ccc;
+    background:#f5f5f5;
+}
+
+table{
+    margin-top:20px;
+    border-collapse: collapse;
+}
+
+td,th{
+    border:1px solid #ddd;
+    padding:8px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Automation Test Demo Page</h2>
+
+<label>Username</label>
+<input id="username" placeholder="Enter username">
+
+<label>Password</label>
+<input id="password" type="password">
+
+<label>Message</label>
+<textarea id="message"></textarea>
+
+<label>Country</label>
+<select id="country">
+<option value="">Select</option>
+<option value="jp">Japan</option>
+<option value="cn">China</option>
+<option value="us">USA</option>
+</select>
+
+<label>Gender</label>
+<input type="radio" name="gender" value="male"> Male
+<input type="radio" name="gender" value="female"> Female
+
+<label>
+<input type="checkbox" id="agree">
+Agree Terms
+</label>
+
+<button id="submitBtn" onclick="submitForm()">Submit</button>
+
+<div id="result">
+Result will appear here
+</div>
+
+<table id="dataTable">
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>1</td>
+<td>Test User</td>
+<td>Active</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>Automation</td>
+<td>Pending</td>
+</tr>
+
+</table>
+
+</div>
+
+<script>
+
+function submitForm(){
+
+    const username=document.getElementById("username").value
+    const country=document.getElementById("country").value
+    const message=document.getElementById("message").value
+    const agree=document.getElementById("agree").checked
+
+    document.getElementById("result").innerHTML=
+        "User: "+username+
+        "<br>Country: "+country+
+        "<br>Message: "+message+
+        "<br>Agree: "+agree
+}
+
+</script>
+
+</body>
+</html>

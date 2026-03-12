@@ -1,51 +1,82 @@
 import yaml
+import os
 from playwright.sync_api import sync_playwright
 
+SCREENSHOT_DIR = "reports/screenshots"
+os.makedirs(SCREENSHOT_DIR, exist_ok=True)
 
-CHECKLIST_FILE = "checklist/test.yaml"
+def run_tests():
 
-
-def execute():
-
-    with open(CHECKLIST_FILE) as f:
+    with open("checklist/tests.yaml") as f:
         data = yaml.safe_load(f)
-
-    steps = data["steps"]
 
     results = []
 
     with sync_playwright() as p:
 
         browser = p.chromium.launch(headless=False)
-        page = browser.new_page()
 
-        for step in steps:
+        for test in data["tests"]:
 
-            try:
+            page = browser.new_page()
 
-                action = step["action"]
+            print("Running:", test["name"])
 
-                if action == "goto":
-                    page.goto(step["url"])
+            for i, step in enumerate(test["steps"]):
 
-                elif action == "fill":
-                    page.fill(step["target"], step["value"])
+                try:
 
-                elif action == "click":
-                    page.click(step["target"])
+                    action = step["action"]
 
-                results.append({
-                    "result": "PASS",
-                    "step": step
-                })
+                    if action == "goto":
 
-            except Exception as e:
+                        page.goto(step["url"])
 
-                results.append({
-                    "result": "FAIL",
-                    "step": step,
-                    "error": str(e)
-                })
+
+                    elif action == "click":
+
+                        page.locator(step["target"]).click(timeout=10000)
+
+
+                    elif action == "fill":
+
+                        page.locator(step["target"]).fill(step["value"], timeout=10000)
+
+
+                    elif action == "expect_text":
+
+                        text = page.locator(step["target"]).inner_text()
+
+                        assert step["value"] in text
+
+
+                    screenshot = f"{SCREENSHOT_DIR}/{test['name']}_{i}_pass.png"
+                    page.screenshot(path=screenshot)
+
+                    results.append({
+                        "test": test["name"],
+                        "step": action,
+                        "result": "PASS",
+                        "screenshot": screenshot
+                    })
+
+                except Exception as e:
+
+                    screenshot = f"{SCREENSHOT_DIR}/{test['name']}_{i}_fail.png"
+
+                    page.screenshot(path=screenshot)
+
+                    results.append({
+                        "test": test["name"],
+                        "step": action,
+                        "result": "FAIL",
+                        "error": str(e),
+                        "screenshot": screenshot
+                    })
+
+                    break
+
+            page.close()
 
         browser.close()
 
@@ -54,7 +85,7 @@ def execute():
 
 if __name__ == "__main__":
 
-    results = execute()
+    r = run_tests()
 
-    for r in results:
-        print(r)
+    for x in r:
+        print(x)
