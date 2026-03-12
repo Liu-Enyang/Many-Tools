@@ -103,6 +103,9 @@ def run_tests():
                         "screenshot": screenshot
                     })
 
+                    # stop executing remaining steps in this test case
+                    break
+
         browser.close()
 
     return results

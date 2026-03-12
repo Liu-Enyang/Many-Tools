@@ -17,7 +17,7 @@ tests:
     target: role=button[name="Login"]
   - action: expect_text
     target: "#result"
-    value: "Login failed"
+    value: "Login success"
 - name: test login success
   steps:
   - action: goto

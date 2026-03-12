@@ -12,8 +12,36 @@ a.view:hover{text-decoration:underline}
 </head>
 <body>
 
+
 <h1>Automation Test Report</h1>
 
+<div>
+<b>Total Cases:</b> 2 <br>
+<b>Total Steps:</b> 14 <br>
+<b>PASS:</b> <span class="pass">13</span> <br>
+<b>FAIL:</b> <span class="fail">1</span> <br>
+<b>Pass Rate:</b> 92.9%
+</div>
+
+<br>
+
+<h2>Case Summary</h2>
+<table border=1 cellpadding=8>
+<tr>
+<th>Test Case</th>
+<th>Result</th>
+</tr>
+
+<tr>
+<td>test login failed</td>
+<td class="fail">FAIL</td>
+</tr>
+
+<tr>
+<td>test login success</td>
+<td class="pass">PASS</td>
+</tr>
+</table><br><br>
 <table border=1 cellpadding=10>
 
 <tr>
@@ -75,9 +103,9 @@ a.view:hover{text-decoration:underline}
 <tr>
 <td>7</td>
 <td>test login failed</td>
-<td>{'action': 'expect_text', 'target': '#result', 'value': 'Login failed'}</td>
-<td class="pass">PASS</td>
-<td><a class="view" href="../reports/screenshots/test login failed_6.png" target="_blank">View</a></td>
+<td>{'action': 'expect_text', 'target': '#result', 'value': 'Login success'}</td>
+<td class="fail">FAIL</td>
+<td><a class="view" href="../reports/screenshots/test login failed_6_fail.png" target="_blank">View</a></td>
 </tr>
 
 <tr>
