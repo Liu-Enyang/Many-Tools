@@ -1,5 +1,7 @@
 import sys
 import os
+import imageio.v2 as imageio
+from collections import defaultdict
 
 # Add project root to Python path so runner module can be found
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -10,6 +12,41 @@ from runner.runner import run_tests
 
 
 results = run_tests()
+
+# -------------------------------
+# Generate GIF replay per test case
+# -------------------------------
+gif_dir = "reports/gifs"
+os.makedirs(gif_dir, exist_ok=True)
+
+case_images = defaultdict(list)
+
+# collect screenshots by case
+for r in results:
+    if r.get("type") == "case_summary":
+        continue
+
+    img = r.get("screenshot")
+    case = r.get("case")
+
+    if img and os.path.exists(img):
+        case_images[case].append(img)
+
+case_gifs = {}
+
+# create gif for each case
+for case, imgs in case_images.items():
+    frames = []
+    for img in imgs:
+        try:
+            frames.append(imageio.imread(img))
+        except Exception:
+            pass
+
+    if frames:
+        gif_path = f"{gif_dir}/{case}.gif"
+        imageio.mimsave(gif_path, frames, duration=0.8)
+        case_gifs[case] = gif_path
 
 # Calculate statistics (ignore case_summary records)
 step_results = [r for r in results if r.get("type") != "case_summary"]
@@ -78,17 +115,22 @@ a.view:hover{{text-decoration:underline}}
 <th>Test Case</th>
 <th>Result</th>
 <th>Duration(s)</th>
+<th>Replay</th>
 </tr>
 """
 
 for case_name, result in case_results.items():
     cls = "pass" if result == "PASS" else "fail"
     duration = case_durations.get(case_name, "")
+    gif = case_gifs.get(case_name, "")
+    replay = f'<a class="view" href="../{gif}" target="_blank">Replay</a>' if gif else ""
+
     html += f"""
 <tr>
 <td>{case_name}</td>
 <td class="{cls}">{result}</td>
 <td>{duration}</td>
+<td>{replay}</td>
 </tr>
 """
 html += "</table><br><br>"

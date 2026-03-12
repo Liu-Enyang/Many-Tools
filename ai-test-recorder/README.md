@@ -18,10 +18,15 @@
 - 浏览器操作录制（Playwright Codegen）
 - Playwright 脚本自动转换为 YAML Checklist
 - 自动执行 YAML 测试步骤
+- 支持多个 TestCase
+- Step 失败后当前 Case 自动停止
 - 每一步自动截图
 - 当前操作元素红框标记
+- 自动生成 GIF 测试回放
 - HTML 测试报告
-- 支持多个 TestCase
+- Step 执行耗时统计
+- Case 执行耗时统计
+- 总执行时间统计（Total Duration）
 - YAML 断言（expect_text）
 
 ---
@@ -32,6 +37,7 @@
 - Playwright
 - YAML
 - Jinja2
+- ImageIO（用于生成 GIF 回放）
 
 ---
 
@@ -57,7 +63,8 @@ ai-test-recorder
 │
 ├── reports/                  # 测试报告
 │   ├── report.html
-│   └── screenshots/
+│   ├── screenshots/          # 每一步截图
+│   └── gifs/                 # 自动生成的测试回放 GIF
 │
 ├── recorded_script.py        # 录制生成的 Playwright 脚本
 └── test_page.html            # 本地测试页面
@@ -200,9 +207,12 @@ reports/report.html
 报告内容包含：
 
 - TestCase 名称
-- 执行步骤
-- 执行结果（PASS / FAIL）
-- 每一步的截图
+- Step 执行结果（PASS / FAIL）
+- Step 执行耗时（Step Duration）
+- Case 执行耗时（Case Duration）
+- 总执行时间（Total Duration）
+- 每一步截图
+- GIF 测试回放（Replay）
 
 ---
 
@@ -210,13 +220,15 @@ reports/report.html
 
 报告示例：
 
-| Test | Step | Result | Screenshot |
-|-----|-----|-----|-----|
-| login_test | goto | PASS | view |
-| login_test | fill username | PASS | view |
-| login_test | click login | FAIL | view |
+| Case | Step | Result | Duration | Screenshot |
+|-----|-----|-----|-----|-----|
+| login_test | goto | PASS | 0.21s | view |
+| login_test | fill username | PASS | 0.12s | view |
+| login_test | click login | FAIL | 0.45s | view |
 
 点击 **view** 可以查看当时页面截图。
+
+在 Case Summary 中还可以点击 **Replay** 查看自动生成的 GIF 测试回放，可以快速查看整个测试执行过程。
 
 ---
 
