@@ -1,0 +1,74 @@
+
+<html>
+<head>
+<title>Test Report</title>
+<style>
+body{font-family:Arial}
+.pass{color:green}
+.fail{color:red}
+a.view{color:#0066cc;text-decoration:none;font-weight:bold}
+a.view:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<h1>Automation Test Report</h1>
+
+<table border=1 cellpadding=10>
+
+<tr>
+<th>No.</th>
+<th>Step</th>
+<th>Result</th>
+<th>Screenshot</th>
+</tr>
+
+<tr>
+<td>1</td>
+<td>{'action': 'goto', 'url': 'http://localhost:8000/demo/testpage.html'}</td>
+<td class="pass">PASS</td>
+<td><a class="view" href="../reports/screenshots/recorded_test_0.png" target="_blank">View</a></td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>{'action': 'click', 'target': '#username'}</td>
+<td class="pass">PASS</td>
+<td><a class="view" href="../reports/screenshots/recorded_test_1.png" target="_blank">View</a></td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>{'action': 'fill', 'target': '#username', 'value': 'wang'}</td>
+<td class="pass">PASS</td>
+<td><a class="view" href="../reports/screenshots/recorded_test_2.png" target="_blank">View</a></td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>{'action': 'click', 'target': '#password'}</td>
+<td class="pass">PASS</td>
+<td><a class="view" href="../reports/screenshots/recorded_test_3.png" target="_blank">View</a></td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>{'action': 'fill', 'target': '#password', 'value': '234'}</td>
+<td class="pass">PASS</td>
+<td><a class="view" href="../reports/screenshots/recorded_test_4.png" target="_blank">View</a></td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>{'action': 'click', 'target': 'role=button[name="Login"]'}</td>
+<td class="pass">PASS</td>
+<td><a class="view" href="../reports/screenshots/recorded_test_5.png" target="_blank">View</a></td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>{'action': 'expect_text', 'target': '#result', 'value': 'Login success'}</td>
+<td class="fail">FAIL</td>
+<td><a class="view" href="../reports/screenshots/recorded_test_6_fail.png" target="_blank">View</a></td>
+</tr>
+</table></body></html>

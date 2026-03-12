@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Demo Login</title>
+
+<script>
+
+function login(){
+
+var u=document.getElementById("username").value
+var p=document.getElementById("password").value
+
+if(u=="admin" && p=="123456"){
+
+document.getElementById("result").innerText="Login success"
+
+}else{
+
+document.getElementById("result").innerText="Login failed"
+
+}
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<h2>Demo Login</h2>
+
+Username
+<input id="username">
+
+<br><br>
+
+Password
+<input id="password" type="password">
+
+<br><br>
+
+<button id="login" onclick="login()">Login</button>
+
+<p id="result"></p>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+tests:
+- name: recorded_test
+  steps:
+  - action: goto
+    url: http://localhost:8000/demo/testpage.html
+  - action: click
+    target: '#username'
+  - action: fill
+    target: '#username'
+    value: wang
+  - action: click
+    target: '#password'
+  - action: fill
+    target: '#password'
+    value: '234'
+  - action: click
+    target: role=button[name="Login"]
+  - action: expect_text
+    target: "#result"
+    value: "Login success"
