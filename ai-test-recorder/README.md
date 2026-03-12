@@ -85,16 +85,22 @@ playwright install
 
 ## 1 录制浏览器操作
 
-启动录制：
+先启动本地 Demo 页面：
 
 ```
-python recorder.py http://localhost:8080
+python start_demo.py
 ```
 
-或录制本地页面：
+默认会启动：
 
 ```
-python recorder.py file:///Users/liuenyang/Documents/GitHub/Many%20Tools/ai-test-recorder/test_page.html
+http://localhost:8000/demo/testpage.html
+```
+
+然后开始录制浏览器操作：
+
+```
+python recorder/recorder.py http://localhost:8000/demo/testpage.html
 ```
 
 录制完成后会生成：
@@ -110,7 +116,7 @@ recorded_script.py
 将录制脚本转换为 YAML 测试用例：
 
 ```
-python converter.py
+python converter/converter.py
 ```
 
 生成文件：
@@ -151,7 +157,7 @@ tests:
 执行 YAML 测试步骤：
 
 ```
-python runner.py
+python runner/runner.py
 ```
 
 执行过程中：
@@ -182,7 +188,7 @@ login_test_2_fail.png
 生成 HTML 报告：
 
 ```
-python report.py
+python report/report.py
 ```
 
 报告位置：
