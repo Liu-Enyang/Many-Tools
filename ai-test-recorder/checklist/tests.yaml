@@ -9,9 +9,6 @@ tests:
     target: role=textbox[name="Enter username"]
     value: liu
   - action: fill
-    target: role=textbox[name="Enter username"]
-    value: liu
-  - action: fill
     target: '#password'
     value: '12'
   - action: fill
