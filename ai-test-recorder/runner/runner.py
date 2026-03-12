@@ -1,5 +1,6 @@
 import yaml
 import os
+import time
 from playwright.sync_api import sync_playwright
 
 
@@ -46,13 +47,21 @@ def run_tests():
 
         browser = p.chromium.launch(headless=True)
 
-        page = browser.new_page()
+        context = browser.new_context(
+            viewport={"width": 1920, "height": 1080}
+        )
+
+        page = context.new_page()
 
         for test in tests:
+
+            case_start = time.time()
 
             name = test["name"]
 
             for i, step in enumerate(test["steps"]):
+
+                step_start = time.time()
 
                 try:
 
@@ -80,12 +89,15 @@ def run_tests():
 
                     screenshot = f"reports/screenshots/{name}_{i}.png"
 
-                    page.screenshot(path=screenshot)
+                    page.screenshot(path=screenshot, full_page=True)
+
+                    step_duration = round(time.time() - step_start, 3)
 
                     results.append({
                         "case": name,
                         "step": step,
                         "result": "PASS",
+                        "duration": step_duration,
                         "screenshot": screenshot
                     })
 
@@ -93,18 +105,29 @@ def run_tests():
 
                     screenshot = f"reports/screenshots/{name}_{i}_fail.png"
 
-                    page.screenshot(path=screenshot)
+                    page.screenshot(path=screenshot, full_page=True)
+
+                    step_duration = round(time.time() - step_start, 3)
 
                     results.append({
                         "case": name,
                         "step": step,
                         "result": "FAIL",
+                        "duration": step_duration,
                         "error": str(e),
                         "screenshot": screenshot
                     })
 
                     # stop executing remaining steps in this test case
                     break
+
+            case_duration = round(time.time() - case_start, 3)
+
+            results.append({
+                "case": name,
+                "type": "case_summary",
+                "duration": case_duration
+            })
 
         browser.close()
 

@@ -11,22 +11,36 @@ from runner.runner import run_tests
 
 results = run_tests()
 
-# Calculate statistics
-total_steps = len(results)
-pass_count = sum(1 for r in results if r["result"] == "PASS")
-fail_count = sum(1 for r in results if r["result"] == "FAIL")
-cases = set(r.get("case", "") for r in results if r.get("case"))
-total_cases = len(cases)
-pass_rate = (pass_count / total_steps * 100) if total_steps else 0
+# Calculate statistics (ignore case_summary records)
+step_results = [r for r in results if r.get("type") != "case_summary"]
 
-# Calculate case level results
+total_steps = len(step_results)
+pass_count = sum(1 for r in step_results if r["result"] == "PASS")
+fail_count = sum(1 for r in step_results if r["result"] == "FAIL")
+
+cases = set(r.get("case", "") for r in step_results if r.get("case"))
+total_cases = len(cases)
+
+pass_rate = (pass_count / total_steps * 100) if total_steps else 0
+# Calculate total duration from all step durations
+total_duration = round(sum(r.get("duration", 0) for r in step_results), 3)
+
+# Calculate case level results and duration
 case_results = {}
+case_durations = {}
+
 for r in results:
     case_name = r.get("case", "")
     if not case_name:
         continue
+
+    if r.get("type") == "case_summary":
+        case_durations[case_name] = r.get("duration", "")
+        continue
+
     if case_name not in case_results:
         case_results[case_name] = "PASS"
+
     if r["result"] == "FAIL":
         case_results[case_name] = "FAIL"
 
@@ -52,7 +66,8 @@ a.view:hover{{text-decoration:underline}}
 <b>Total Steps:</b> {total_steps} <br>
 <b>PASS:</b> <span class="pass">{pass_count}</span> <br>
 <b>FAIL:</b> <span class="fail">{fail_count}</span> <br>
-<b>Pass Rate:</b> {pass_rate:.1f}%
+<b>Pass Rate:</b> {pass_rate:.1f}% <br>
+<b>Total Duration:</b> {total_duration}s
 </div>
 
 <br>
@@ -62,15 +77,18 @@ a.view:hover{{text-decoration:underline}}
 <tr>
 <th>Test Case</th>
 <th>Result</th>
+<th>Duration(s)</th>
 </tr>
 """
 
 for case_name, result in case_results.items():
     cls = "pass" if result == "PASS" else "fail"
+    duration = case_durations.get(case_name, "")
     html += f"""
 <tr>
 <td>{case_name}</td>
 <td class="{cls}">{result}</td>
+<td>{duration}</td>
 </tr>
 """
 html += "</table><br><br>"
@@ -83,23 +101,31 @@ html += """
 <th>Test Case</th>
 <th>Step</th>
 <th>Result</th>
+<th>Duration(s)</th>
 <th>Screenshot</th>
 </tr>
 """
 
-for i, r in enumerate(results, start=1):
+step_index = 1
+for r in results:
+
+    if r.get("type") == "case_summary":
+        continue
 
     cls = "pass" if r["result"] == "PASS" else "fail"
+    duration = r.get("duration", "")
 
     html += f"""
 <tr>
-<td>{i}</td>
+<td>{step_index}</td>
 <td>{r.get('case', '')}</td>
 <td>{r['step']}</td>
 <td class="{cls}">{r['result']}</td>
+<td>{duration}</td>
 <td><a class="view" href="../{r['screenshot']}" target="_blank">View</a></td>
 </tr>
 """
+    step_index += 1
 
 html += "</table></body></html>"
 
