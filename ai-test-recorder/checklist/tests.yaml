@@ -1,39 +1,32 @@
 tests:
-- name: test login failed
+- name: login_success
   steps:
   - action: goto
     url: http://localhost:8000/demo/testpage.html
-  - action: click
-    target: '#username'
   - action: fill
-    target: '#username'
-    value: wang
-  - action: click
-    target: '#password'
+    target: "#username"
+    value: "admin"
   - action: fill
-    target: '#password'
-    value: '234'
+    target: "#password"
+    value: "123456"
   - action: click
-    target: role=button[name="Login"]
+    target: "#login"
   - action: expect_text
     target: "#result"
     value: "Login success"
-- name: test login success
+
+- name: login_failed
   steps:
   - action: goto
     url: http://localhost:8000/demo/testpage.html
-  - action: click
-    target: '#username'
   - action: fill
-    target: '#username'
-    value: admin
-  - action: click
-    target: '#password'
+    target: "#username"
+    value: "admin"
   - action: fill
-    target: '#password'
-    value: '123456'
+    target: "#password"
+    value: "wrongpassword"
   - action: click
-    target: role=button[name="Login"]
+    target: "#login"
   - action: expect_text
     target: "#result"
-    value: "Login success"
+    value: "Login failed"
