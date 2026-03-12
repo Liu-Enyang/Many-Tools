@@ -15,12 +15,14 @@
 
 当前版本支持：
 
-- 浏览器操作录制
+- 浏览器操作录制（Playwright Codegen）
 - Playwright 脚本自动转换为 YAML Checklist
-- 自动执行测试步骤
+- 自动执行 YAML 测试步骤
 - 每一步自动截图
+- 当前操作元素红框标记
 - HTML 测试报告
 - 支持多个 TestCase
+- YAML 断言（expect_text）
 
 ---
 
@@ -38,20 +40,27 @@
 ```
 ai-test-recorder
 │
-├── recorder.py           # 浏览器操作录制
-├── converter.py          # Playwright 脚本转 YAML
-├── runner.py             # 执行测试
-├── report.py             # 生成 HTML 报告
+├── recorder/
+│   └── recorder.py           # 浏览器操作录制
 │
-├── checklist/            # 测试用例
+├── converter/
+│   └── converter.py          # Playwright 脚本转 YAML
+│
+├── runner/
+│   └── runner.py             # 执行 YAML 测试
+│
+├── report/
+│   └── report.py             # 生成 HTML 报告
+│
+├── checklist/                # 测试用例
 │   └── tests.yaml
 │
-├── reports/              # 测试报告
+├── reports/                  # 测试报告
 │   ├── report.html
 │   └── screenshots/
 │
-├── recorded_script.py    # 录制生成的脚本
-└── test_page.html        # 本地测试页面
+├── recorded_script.py        # 录制生成的 Playwright 脚本
+└── test_page.html            # 本地测试页面
 ```
 
 ---
@@ -114,17 +123,25 @@ checklist/tests.yaml
 
 ```
 tests:
-- name: recorded_test
+- name: login_test
   steps:
   - action: goto
     url: http://localhost:8080
 
   - action: fill
-    target: role=textbox[name="username"]
+    target: '#username'
     value: admin
+
+  - action: fill
+    target: '#password'
+    value: 123456
 
   - action: click
     target: role=button[name="Login"]
+
+  - action: expect_text
+    target: "#result"
+    value: "Login success"
 ```
 
 ---
@@ -141,6 +158,7 @@ python runner.py
 
 - 每个步骤都会执行浏览器操作
 - 每一步都会自动截图
+- 当前操作的控件会用红框高亮
 
 截图位置：
 
@@ -201,8 +219,9 @@ reports/report.html
 未来可以扩展：
 
 - AI 自动生成测试步骤
-- 自动等待元素
+- LLM 自动生成 YAML 测试用例
 - 更智能的 selector 解析
 - 并行执行测试
 - Allure 风格测试报告
+- CI/CD 自动执行测试（GitHub Actions）
 - Web UI 测试管理界面

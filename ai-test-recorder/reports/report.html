@@ -1,177 +1,74 @@
 
 <html>
 <head>
-<title>Automation Report</title>
-
+<title>Test Report</title>
 <style>
-
-body{
-font-family:Arial;
-background:#f5f5f5;
-}
-
-table{
-border-collapse: collapse;
-width:90%;
-background:white;
-}
-
-th,td{
-border:1px solid #ddd;
-padding:10px;
-}
-
-.pass{
-color:green;
-font-weight:bold;
-}
-
-.fail{
-color:red;
-font-weight:bold;
-}
-
+body{font-family:Arial}
+.pass{color:green}
+.fail{color:red}
+a.view{color:#0066cc;text-decoration:none;font-weight:bold}
+a.view:hover{text-decoration:underline}
 </style>
-
 </head>
-
 <body>
 
 <h1>Automation Test Report</h1>
 
-<table>
+<table border=1 cellpadding=10>
 
 <tr>
-<th>Test</th>
+<th>No.</th>
 <th>Step</th>
 <th>Result</th>
-<th>Error</th>
 <th>Screenshot</th>
 </tr>
 
-
-
 <tr>
-
-<td>recorded_test</td>
-
-<td>goto</td>
-
+<td>1</td>
+<td>{'action': 'goto', 'url': 'http://localhost:8000/demo/testpage.html'}</td>
 <td class="pass">PASS</td>
-
-<td></td>
-
-<td>
-
-<a href="../reports/screenshots/recorded_test_0_pass.png">view</a>
-
-</td>
-
+<td><a class="view" href="../reports/screenshots/recorded_test_0.png" target="_blank">View</a></td>
 </tr>
 
-
-
 <tr>
-
-<td>recorded_test</td>
-
-<td>click</td>
-
+<td>2</td>
+<td>{'action': 'click', 'target': '#username'}</td>
 <td class="pass">PASS</td>
-
-<td></td>
-
-<td>
-
-<a href="../reports/screenshots/recorded_test_1_pass.png">view</a>
-
-</td>
-
+<td><a class="view" href="../reports/screenshots/recorded_test_1.png" target="_blank">View</a></td>
 </tr>
 
-
-
 <tr>
-
-<td>recorded_test</td>
-
-<td>fill</td>
-
+<td>3</td>
+<td>{'action': 'fill', 'target': '#username', 'value': 'wang'}</td>
 <td class="pass">PASS</td>
-
-<td></td>
-
-<td>
-
-<a href="../reports/screenshots/recorded_test_2_pass.png">view</a>
-
-</td>
-
+<td><a class="view" href="../reports/screenshots/recorded_test_2.png" target="_blank">View</a></td>
 </tr>
 
-
-
 <tr>
-
-<td>recorded_test</td>
-
-<td>fill</td>
-
+<td>4</td>
+<td>{'action': 'click', 'target': '#password'}</td>
 <td class="pass">PASS</td>
-
-<td></td>
-
-<td>
-
-<a href="../reports/screenshots/recorded_test_3_pass.png">view</a>
-
-</td>
-
+<td><a class="view" href="../reports/screenshots/recorded_test_3.png" target="_blank">View</a></td>
 </tr>
 
-
-
 <tr>
-
-<td>recorded_test</td>
-
-<td>fill</td>
-
+<td>5</td>
+<td>{'action': 'fill', 'target': '#password', 'value': '234'}</td>
 <td class="pass">PASS</td>
-
-<td></td>
-
-<td>
-
-<a href="../reports/screenshots/recorded_test_4_pass.png">view</a>
-
-</td>
-
+<td><a class="view" href="../reports/screenshots/recorded_test_4.png" target="_blank">View</a></td>
 </tr>
 
-
-
 <tr>
-
-<td>recorded_test</td>
-
-<td>click</td>
-
+<td>6</td>
+<td>{'action': 'click', 'target': 'role=button[name="Login"]'}</td>
 <td class="pass">PASS</td>
-
-<td></td>
-
-<td>
-
-<a href="../reports/screenshots/recorded_test_5_pass.png">view</a>
-
-</td>
-
+<td><a class="view" href="../reports/screenshots/recorded_test_5.png" target="_blank">View</a></td>
 </tr>
 
-
-
-</table>
-
-</body>
-</html>
+<tr>
+<td>7</td>
+<td>{'action': 'expect_text', 'target': '#result', 'value': 'Login success'}</td>
+<td class="fail">FAIL</td>
+<td><a class="view" href="../reports/screenshots/recorded_test_6_fail.png" target="_blank">View</a></td>
+</tr>
+</table></body></html>
