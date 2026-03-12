@@ -30,6 +30,7 @@ a.view:hover{text-decoration:underline}
 
 <tr>
 <th>No.</th>
+<th>Test Case</th>
 <th>Step</th>
 <th>Result</th>
 <th>Screenshot</th>
@@ -43,6 +44,7 @@ for i, r in enumerate(results, start=1):
     html += f"""
 <tr>
 <td>{i}</td>
+<td>{r.get('case', '')}</td>
 <td>{r['step']}</td>
 <td class="{cls}">{r['result']}</td>
 <td><a class="view" href="../{r['screenshot']}" target="_blank">View</a></td>

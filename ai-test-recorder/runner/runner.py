@@ -83,6 +83,7 @@ def run_tests():
                     page.screenshot(path=screenshot)
 
                     results.append({
+                        "case": name,
                         "step": step,
                         "result": "PASS",
                         "screenshot": screenshot
@@ -95,6 +96,7 @@ def run_tests():
                     page.screenshot(path=screenshot)
 
                     results.append({
+                        "case": name,
                         "step": step,
                         "result": "FAIL",
                         "error": str(e),

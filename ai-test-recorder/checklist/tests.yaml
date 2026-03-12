@@ -1,5 +1,5 @@
 tests:
-- name: recorded_test
+- name: test login failed
   steps:
   - action: goto
     url: http://localhost:8000/demo/testpage.html
@@ -13,6 +13,25 @@ tests:
   - action: fill
     target: '#password'
     value: '234'
+  - action: click
+    target: role=button[name="Login"]
+  - action: expect_text
+    target: "#result"
+    value: "Login failed"
+- name: test login success
+  steps:
+  - action: goto
+    url: http://localhost:8000/demo/testpage.html
+  - action: click
+    target: '#username'
+  - action: fill
+    target: '#username'
+    value: admin
+  - action: click
+    target: '#password'
+  - action: fill
+    target: '#password'
+    value: '123456'
   - action: click
     target: role=button[name="Login"]
   - action: expect_text
