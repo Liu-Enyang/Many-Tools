@@ -230,6 +230,10 @@ reports/report.html
 
 在 Case Summary 中还可以点击 **Replay** 查看自动生成的 GIF 测试回放，可以快速查看整个测试执行过程。
 
+示例 GIF：
+
+<img src="reports/gifs/login_success.gif" alt="测试回放" loop="infinite" />
+
 ---
 
 # 后续可扩展功能
