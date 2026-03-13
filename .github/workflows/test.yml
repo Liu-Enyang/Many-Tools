@@ -27,6 +27,8 @@ jobs:
     - name: Run AI Test Recorder
       run: |
         cd ai-test-recorder
+        python -m http.server 8000 &
+        sleep 2
         python report/report.py
 
     - name: Upload HTML/GIF reports
