@@ -1,0 +1,35 @@
+name: Run AI Test Recorder Demo
+
+on:
+  push:
+    branches: [ ai-test-recorder ]
+  pull_request:
+    branches: [ ai-test-recorder ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        playwright install
+
+    - name: Run AI Test Recorder
+      run: |
+        python report/report.py
+
+    - name: Upload HTML/GIF reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: ai-test-reports
+        path: reports/
