@@ -26,10 +26,11 @@ jobs:
 
     - name: Run AI Test Recorder
       run: |
+        cd ai-test-recorder
         python report/report.py
 
     - name: Upload HTML/GIF reports
       uses: actions/upload-artifact@v3
       with:
         name: ai-test-reports
-        path: reports/
+        path: ai-test-recorder/reports/
