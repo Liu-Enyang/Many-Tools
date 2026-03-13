@@ -29,4 +29,4 @@ tests:
     target: "#login"
   - action: expect_text
     target: "#result"
-    value: "Login failed"
+    value: "Login success"
