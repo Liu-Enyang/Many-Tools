@@ -247,3 +247,61 @@ reports/report.html
 - Allure 风格测试报告
 - CI/CD 自动执行测试（GitHub Actions）
 - Web UI 测试管理界面
+
+
+---
+
+# CI/CD 自动执行
+
+可通过 GitHub Actions 实现自动化测试执行和报告上传：
+
+- **触发条件**：当 `ai-test-recorder` 分支有推送时触发。
+- **运行环境**：可使用自托管 Runner 或本地机器。
+- **启动本地 Demo 服务器**（可选）：在测试前启动 `start_demo.py`。
+- **执行测试**：运行 `runner/runner.py` 或 `report/report.py` 生成测试报告。
+- **上传报告**：将 `reports/report.html`、`reports/gifs/` 和 `reports/screenshots/` 目录作为构件上传，方便查看测试结果。
+
+示例工作流步骤：
+
+```yaml
+name: Run AI Test Recorder Demo
+
+on:
+  push:
+    branches: [ ai-test-recorder ]
+  pull_request:
+    branches: [ ai-test-recorder ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13'
+
+    - name: Install dependencies
+      run: |
+        pip install -r ai-test-recorder/requirements.txt
+        playwright install
+
+    - name: Run AI Test Recorder
+      run: |
+        cd ai-test-recorder
+        python -m http.server 8000 &
+        sleep 2
+        python report/report.py
+
+    - name: Upload HTML/GIF reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: ai-test-reports
+        path: ai-test-recorder/reports/
+```
+
+通过此方式，可实现代码提交后自动执行测试并收集测试结果，提升测试效率和质量。
