@@ -21,7 +21,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
+        pip install -r ai-test-recorder/requirements.txt
         playwright install
 
     - name: Run AI Test Recorder
