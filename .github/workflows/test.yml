@@ -30,7 +30,7 @@ jobs:
         python report/report.py
 
     - name: Upload HTML/GIF reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ai-test-reports
         path: ai-test-recorder/reports/
