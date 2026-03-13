@@ -123,7 +123,10 @@ for case_name, result in case_results.items():
     cls = "pass" if result == "PASS" else "fail"
     duration = case_durations.get(case_name, "")
     gif = case_gifs.get(case_name, "")
-    replay = f'<a class="view" href="../{gif}" target="_blank">Replay</a>' if gif else ""
+    replay = ""
+    if gif:
+        gif_filename = os.path.basename(gif)
+        replay = f'<a class="view" href="gifs/{gif_filename}" target="_blank">Replay</a>'
 
     html += f"""
 <tr>
@@ -156,6 +159,10 @@ for r in results:
 
     cls = "pass" if r["result"] == "PASS" else "fail"
     duration = r.get("duration", "")
+    screenshot_link = ""
+    if r.get('screenshot'):
+        screenshot_filename = os.path.basename(r['screenshot'])
+        screenshot_link = f'<a class="view" href="screenshots/{screenshot_filename}" target="_blank">View</a>'
 
     html += f"""
 <tr>
@@ -164,7 +171,7 @@ for r in results:
 <td>{r['step']}</td>
 <td class="{cls}">{r['result']}</td>
 <td>{duration}</td>
-<td><a class="view" href="../{r['screenshot']}" target="_blank">View</a></td>
+<td>{screenshot_link}</td>
 </tr>
 """
     step_index += 1
