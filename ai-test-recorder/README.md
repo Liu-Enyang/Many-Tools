@@ -232,7 +232,7 @@ reports/report.html
 
 示例 GIF：
 
-<img src="reports/gifs/login_success.gif" alt="测试回放" loop="infinite" />
+<img src="reports/gifs/login_success.gif" alt="测试回放" />
 
 ---
 

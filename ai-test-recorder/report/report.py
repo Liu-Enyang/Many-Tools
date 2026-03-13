@@ -45,7 +45,7 @@ for case, imgs in case_images.items():
 
     if frames:
         gif_path = f"{gif_dir}/{case}.gif"
-        imageio.mimsave(gif_path, frames, duration=0.8)
+        imageio.mimsave(gif_path, frames, duration=0.8 , loop=0)
         case_gifs[case] = gif_path
 
 # Calculate statistics (ignore case_summary records)
