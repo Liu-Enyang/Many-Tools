@@ -37,9 +37,21 @@ def load_javascript_sources(input_dir: Path) -> list[dict]:
 
 
 def main() -> None:
-    aspx_path = SAMPLE_INPUT_DIR / "Summary.aspx"
-    codebehind_path = SAMPLE_INPUT_DIR / "Summary.aspx.cs"
-    spec_path = SAMPLE_INPUT_DIR / "spec.xlsx"
+    # ▼ 自動検出：ASPX / CS / Excel
+    aspx_files = list(SAMPLE_INPUT_DIR.glob("*.aspx"))
+    codebehind_files = list(SAMPLE_INPUT_DIR.glob("*.aspx.cs"))
+    spec_files = list(SAMPLE_INPUT_DIR.glob("*.xlsx"))
+
+    if not aspx_files:
+        raise FileNotFoundError("ASPXファイルが見つかりません。")
+    if not codebehind_files:
+        raise FileNotFoundError("CodeBehindファイルが見つかりません。")
+    if not spec_files:
+        raise FileNotFoundError("Excel設計書が見つかりません。")
+
+    aspx_path = aspx_files[0]
+    codebehind_path = codebehind_files[0]
+    spec_path = spec_files[0]
 
     aspx_data = parse_aspx(aspx_path)
     codebehind_data = parse_codebehind(codebehind_path)
@@ -77,7 +89,10 @@ def main() -> None:
     )
 
     # ▼ Excel（テスト仕様書）生成
-    excel_file = OUTPUT_DIR / "test_spec.xlsx"
+    screen_name = analysis.get("screen_name") or "画面"
+    safe_name = str(screen_name).replace("/", "_").replace(" ", "_")
+    excel_file = OUTPUT_DIR / f"{safe_name}_単体テスト仕様書.xlsx"
+
     generate_excel(
         json_path=testcases_file,
         output_path=excel_file,

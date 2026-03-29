@@ -18,6 +18,7 @@ SECTION_FILL = PatternFill("solid", fgColor="BDD7EE")
 SUBHEADER_FILL = PatternFill("solid", fgColor="E2F0D9")
 CENTER = Alignment(horizontal="center", vertical="center", wrap_text=True)
 LEFT = Alignment(horizontal="left", vertical="center", wrap_text=True)
+CIRCLE_FONT = Font(name="ＭＳ ゴシック")
 
 # PCL colors
 PCL_COLOR_MAP = {
@@ -294,14 +295,16 @@ def _fill_section_rows(
         for case_index, test_case in enumerate(test_cases):
             col = CASE_START_COL + case_index
             related_ids = test_case.get(relation_key, [])
-            _set_cell_value_safe(ws, row, col, "○" if item_id in related_ids else None)
+            circle_value = "○" if item_id in related_ids else None
+            _set_cell_value_safe(ws, row, col, circle_value)
             target_cell = ws.cell(row=row, column=col)
             if target_cell.__class__.__name__ == "MergedCell":
                 for merged_range in ws.merged_cells.ranges:
                     if merged_range.min_row <= row <= merged_range.max_row and merged_range.min_col <= col <= merged_range.max_col:
                         target_cell = ws.cell(merged_range.min_row, merged_range.min_col)
                         break
-            target_cell.alignment = CENTER
+            if circle_value == "○":
+                target_cell.font = CIRCLE_FONT
         _print_case_progress(f"{section_label} 書き込み進捗", index + 1, len(items))
 
 
@@ -347,14 +350,16 @@ def _fill_template_section_rows(
         for case_index, test_case in enumerate(test_cases):
             col = CASE_START_COL + case_index
             related_ids = test_case.get(relation_key, [])
-            _set_cell_value_safe(ws, row, col, "○" if item_id in related_ids else None)
+            circle_value = "○" if item_id in related_ids else None
+            _set_cell_value_safe(ws, row, col, circle_value)
             target_cell = ws.cell(row=row, column=col)
             if target_cell.__class__.__name__ == "MergedCell":
                 for merged_range in ws.merged_cells.ranges:
                     if merged_range.min_row <= row <= merged_range.max_row and merged_range.min_col <= col <= merged_range.max_col:
                         target_cell = ws.cell(merged_range.min_row, merged_range.min_col)
                         break
-            target_cell.alignment = CENTER
+            if circle_value == "○":
+                target_cell.font = CIRCLE_FONT
 
         _print_case_progress(f"{section_label} テンプレート書き込み進捗", index + 1, len(items))
 
@@ -672,8 +677,10 @@ def _generate_simple_matrix(
             for case_index, test_case in enumerate(test_cases):
                 col = 4 + case_index
                 related_ids = test_case.get(relation_key, [])
-                ws.cell(row=current_row, column=col).value = "○" if item_id in related_ids else None
-                ws.cell(row=current_row, column=col).alignment = CENTER
+                circle_value = "○" if item_id in related_ids else None
+                ws.cell(row=current_row, column=col).value = circle_value
+                if circle_value == "○":
+                    ws.cell(row=current_row, column=col).font = CIRCLE_FONT
         row += len(items)
 
     _print_progress("補助シートを書き込みます")

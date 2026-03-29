@@ -4,7 +4,7 @@
   "sources": {
     "aspx": "/Users/liuenyang/Documents/GitHub/Many Tools/jp_test_spec_generator/sample_input/Summary.aspx",
     "codebehind": "/Users/liuenyang/Documents/GitHub/Many Tools/jp_test_spec_generator/sample_input/Summary.aspx.cs",
-    "spec": "/Users/liuenyang/Documents/GitHub/Many Tools/jp_test_spec_generator/sample_input/spec.xlsx"
+    "spec": "/Users/liuenyang/Documents/GitHub/Many Tools/jp_test_spec_generator/sample_input/単体テスト仕様書base.xlsx"
   },
   "controls": [
     {
@@ -1258,9 +1258,7 @@
       }
     ]
   },
-  "notes": [
-    "定義書は未読込、またはファイルが存在しません。"
-  ],
+  "notes": [],
   "table_headers": [
     "店番・店名",
     "顧客番号",
@@ -1295,7 +1293,6 @@
     }
   ],
   "spec_summary": {
-    "sheet_count": 0,
-    "note": "spec file not found"
+    "sheet_count": 3
   }
 }
