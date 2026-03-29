@@ -798,26 +798,6 @@ namespace Isid.RiskTaker.Web
         }
         #endregion
 
-
-        /// <summary>
-        /// ページを移動する。
-        /// </summary>
-        /// <param name="sender">イベントが発生されたオブジェクト</param>
-        /// <param name="e">イベントデータを持つ個体クラス</param>
-        /// <returns>なし</returns>
-        /// <remarks>
-        /// リスト上位のページ番号をクリックした場合、該当ページデータを表示する。
-        /// </remarks>
-        protected void ListPaging1_Click(object sender, System.EventArgs e)
-        {
-            //// 該当ページデータを再取得し、貸出債権明細リストを表示
-            //SetDataRepeater(tbxSortItem.Text, tbxSortMode.Text);
-            //// 検索条件再設定
-            //SetSearchControl();
-            //// 検索条件の保存処理
-            //SaveSearchCondition();
-        }
-
         /// <summary>
         /// char(8)日付（yyyyMMdd）→ yyyy/MM/dd 変換
         /// </summary>

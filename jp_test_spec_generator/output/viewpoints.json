@@ -1,0 +1,293 @@
+{
+  "screen_id": "Summary",
+  "screen_name": "概況",
+  "viewpoints": [
+    {
+      "id": "VP-001",
+      "category": "初期表示",
+      "title": "通常表示時の初期表示確認",
+      "details": [
+        "主要入力項目が初期表示されること",
+        "主要ボタンが初期表示されること",
+        "一覧領域が初期状態で表示されること"
+      ],
+      "source_basis": [
+        "screen_modes.initial_display",
+        "controls"
+      ]
+    },
+    {
+      "id": "VP-002",
+      "category": "入力項目",
+      "title": "店番・店名 の入力確認",
+      "details": [
+        "店番・店名 が入力可能であること"
+      ],
+      "source_basis": [
+        "ddlBranchNo"
+      ]
+    },
+    {
+      "id": "VP-003",
+      "category": "入力項目",
+      "title": "顧客番号 の入力確認",
+      "details": [
+        "顧客番号 が入力可能であること"
+      ],
+      "source_basis": [
+        "tbxCustomerNo"
+      ]
+    },
+    {
+      "id": "VP-004",
+      "category": "入力項目",
+      "title": "事象ステータス の入力確認",
+      "details": [
+        "事象ステータス が入力可能であること"
+      ],
+      "source_basis": [
+        "rblJisyoStatus"
+      ]
+    },
+    {
+      "id": "VP-005",
+      "category": "入力項目",
+      "title": "事故及び延滞に至った原因 の入力確認",
+      "details": [
+        "事故及び延滞に至った原因 が入力可能であること"
+      ],
+      "source_basis": [
+        "txtReason"
+      ]
+    },
+    {
+      "id": "VP-006",
+      "category": "入力項目",
+      "title": "債務者および保証人の現況 の入力確認",
+      "details": [
+        "債務者および保証人の現況 が入力可能であること"
+      ],
+      "source_basis": [
+        "txtCurrentSituation"
+      ]
+    },
+    {
+      "id": "VP-007",
+      "category": "入力項目",
+      "title": "回収、解消の方針、スケジュール の入力確認",
+      "details": [
+        "回収、解消の方針、スケジュール が入力可能であること"
+      ],
+      "source_basis": [
+        "txtPolicy"
+      ]
+    },
+    {
+      "id": "VP-008",
+      "category": "入力項目",
+      "title": "備考、特記事項 の入力確認",
+      "details": [
+        "備考、特記事項 が入力可能であること"
+      ],
+      "source_basis": [
+        "txtRemarks"
+      ]
+    },
+    {
+      "id": "VP-009",
+      "category": "入力項目",
+      "title": "chkAllReport の入力確認",
+      "details": [
+        "chkAllReport が入力可能であること"
+      ],
+      "source_basis": [
+        "chkAllReport"
+      ]
+    },
+    {
+      "id": "VP-010",
+      "category": "入力項目",
+      "title": "chkReport の入力確認",
+      "details": [
+        "chkReport が入力可能であること"
+      ],
+      "source_basis": [
+        "chkReport"
+      ]
+    },
+    {
+      "id": "VP-011",
+      "category": "入力チェック",
+      "title": "顧客番号 の長さ制御確認",
+      "details": [
+        "顧客番号 に maxlength=12 のヒントがあること"
+      ],
+      "source_basis": [
+        "tbxCustomerNo",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "id": "VP-012",
+      "category": "入力チェック",
+      "title": "事故及び延滞に至った原因 の長さ制御確認",
+      "details": [
+        "事故及び延滞に至った原因 に maxlength=2000 のヒントがあること"
+      ],
+      "source_basis": [
+        "txtReason",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "id": "VP-013",
+      "category": "入力チェック",
+      "title": "債務者および保証人の現況 の長さ制御確認",
+      "details": [
+        "債務者および保証人の現況 に maxlength=2000 のヒントがあること"
+      ],
+      "source_basis": [
+        "txtCurrentSituation",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "id": "VP-014",
+      "category": "入力チェック",
+      "title": "回収、解消の方針、スケジュール の長さ制御確認",
+      "details": [
+        "回収、解消の方針、スケジュール に maxlength=2000 のヒントがあること"
+      ],
+      "source_basis": [
+        "txtPolicy",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "id": "VP-015",
+      "category": "入力チェック",
+      "title": "備考、特記事項 の長さ制御確認",
+      "details": [
+        "備考、特記事項 に maxlength=2000 のヒントがあること"
+      ],
+      "source_basis": [
+        "txtRemarks",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "id": "VP-016",
+      "category": "イベント",
+      "title": "ddlBranchNo 選択変更時の処理確認",
+      "details": [
+        "イベント実行後の画面表示・処理結果が正しいこと"
+      ],
+      "source_basis": [
+        "ddlBranchNo_SelectedIndexChanged"
+      ]
+    },
+    {
+      "id": "VP-017",
+      "category": "イベント",
+      "title": "ListPaging1 押下時の処理確認",
+      "details": [
+        "イベント実行後の画面表示・処理結果が正しいこと"
+      ],
+      "source_basis": [
+        "ListPaging1_Click"
+      ]
+    },
+    {
+      "id": "VP-018",
+      "category": "イベント",
+      "title": "btnCustShow 押下時の処理確認",
+      "details": [
+        "イベント実行後の画面表示・処理結果が正しいこと"
+      ],
+      "source_basis": [
+        "btnCustShow_Click"
+      ]
+    },
+    {
+      "id": "VP-019",
+      "category": "イベント",
+      "title": "btnRegister 押下時の処理確認",
+      "details": [
+        "イベント実行後の画面表示・処理結果が正しいこと"
+      ],
+      "source_basis": [
+        "btnRegister_Click"
+      ]
+    },
+    {
+      "id": "VP-020",
+      "category": "イベント",
+      "title": "rptSaikenMeisai 一覧操作時の処理確認",
+      "details": [
+        "イベント実行後の画面表示・処理結果が正しいこと"
+      ],
+      "source_basis": [
+        "rptSaikenMeisai_ItemCommand"
+      ]
+    },
+    {
+      "id": "VP-021",
+      "category": "一覧表示",
+      "title": "rptSaikenMeisai の一覧表示確認",
+      "details": [
+        "一覧データが正しく表示されること"
+      ],
+      "source_basis": [
+        "rptSaikenMeisai"
+      ]
+    },
+    {
+      "id": "VP-022",
+      "category": "一覧表示",
+      "title": "rptJishoList の一覧表示確認",
+      "details": [
+        "一覧データが正しく表示されること"
+      ],
+      "source_basis": [
+        "rptJishoList"
+      ]
+    },
+    {
+      "id": "VP-023",
+      "category": "一覧表示",
+      "title": "rptReportList の一覧表示確認",
+      "details": [
+        "一覧データが正しく表示されること"
+      ],
+      "source_basis": [
+        "rptReportList"
+      ]
+    },
+    {
+      "id": "VP-024",
+      "category": "画面モード",
+      "title": "参照モード時の非活性制御確認",
+      "details": [
+        "参照モード時に対象コントロールが非活性となること",
+        "対象コントロール数: 15"
+      ],
+      "source_basis": [
+        "screen_modes.reference_mode"
+      ]
+    },
+    {
+      "id": "VP-025",
+      "category": "排他制御",
+      "title": "更新時の排他チェック確認",
+      "details": [
+        "更新時に排他制御が実施されること"
+      ],
+      "source_basis": [
+        "validations.concurrency_check_hint"
+      ]
+    }
+  ],
+  "summary": {
+    "viewpoint_count": 25
+  }
+}
