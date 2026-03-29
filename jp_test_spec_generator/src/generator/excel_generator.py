@@ -16,6 +16,14 @@ SUBHEADER_FILL = PatternFill("solid", fgColor="E2F0D9")
 CENTER = Alignment(horizontal="center", vertical="center", wrap_text=True)
 LEFT = Alignment(horizontal="left", vertical="center", wrap_text=True)
 
+# PCL colors
+PCL_COLOR_MAP = {
+    "N": PatternFill("solid", fgColor="C6EFCE"),  # green
+    "E": PatternFill("solid", fgColor="FFC7CE"),  # red
+    "L": PatternFill("solid", fgColor="FFEB9C"),  # yellow
+    "I": PatternFill("solid", fgColor="BDD7EE"),  # blue
+}
+
 
 class ExcelGenerationError(Exception):
     pass
@@ -133,6 +141,42 @@ def _write_case_header(ws, start_row: int, test_cases: List[Dict[str, Any]]) -> 
         header_cell.font = Font(bold=True)
         header_cell.alignment = CENTER
         header_cell.fill = HEADER_FILL
+
+    return start_row + 1
+
+
+# Write PCL row under case header
+def _write_pcl_row(ws, start_row: int, test_cases: List[Dict[str, Any]]) -> int:
+    """Write PCL row under case header"""
+    # left labels
+    ws.cell(row=start_row, column=1).value = "PCL"
+    ws.cell(row=start_row, column=1).font = Font(bold=True)
+    ws.cell(row=start_row, column=1).alignment = CENTER
+    ws.cell(row=start_row, column=1).fill = SUBHEADER_FILL
+
+    ws.cell(row=start_row, column=2).value = ""
+    ws.cell(row=start_row, column=3).value = ""
+
+    case_start_col = 4
+
+    for index, test_case in enumerate(test_cases):
+        col = case_start_col + index
+        cell = ws.cell(row=start_row, column=col)
+
+        pcl_list = test_case.get("pcl", [])
+        pcl_text = ",".join(pcl_list) if pcl_list else "N"
+        cell.value = pcl_text
+        cell.alignment = CENTER
+
+        # apply color (if multiple, use first for color)
+        if pcl_list:
+            color_key = pcl_list[0]
+        else:
+            color_key = "N"
+
+        fill = PCL_COLOR_MAP.get(color_key)
+        if fill:
+            cell.fill = fill
 
     return start_row + 1
 
@@ -255,11 +299,12 @@ def generate_excel(
     wb = Workbook()
     ws = wb.active
     ws.title = sheet_name
-    ws.freeze_panes = "D7"
+    ws.freeze_panes = "D8"
     ws.sheet_view.showGridLines = False
 
     row = _write_title(ws, screen_id, screen_name, len(test_cases))
     row = _write_case_header(ws, row, test_cases)
+    row = _write_pcl_row(ws, row, test_cases)
     row = _write_section(ws, row, "チェック条件", check_conditions, test_cases, "check_condition_ids")
     row = _write_section(ws, row, "アクション", actions, test_cases, "action_ids")
     row = _write_section(ws, row, "確認内容", confirmations, test_cases, "confirmation_ids")

@@ -3,6 +3,29 @@ from __future__ import annotations
 from typing import Any, Dict, List
 
 
+def _detect_pcl(category: str, title: str, details: List[str]) -> List[str]:
+    text = f"{category} {title} {' '.join(details)}"
+    pcl = set()
+
+    # Normal (N)
+    if any(k in text for k in ["正常", "初期表示", "表示", "一覧"]):
+        pcl.add("N")
+
+    # Error (E)
+    if any(k in text for k in ["エラー", "異常", "チェック", "制御"]):
+        pcl.add("E")
+
+    # Limit/Boundary (L)
+    if any(k in text for k in ["桁", "以上", "以下", "最大", "最小", "長さ"]):
+        pcl.add("L")
+
+    # Interface (I)
+    if any(k in text for k in ["API", "連携", "DB", "インタフェース"]):
+        pcl.add("I")
+
+    # default
+    return sorted(pcl) if pcl else ["N"]
+
 def _make_viewpoint(
     vp_id: str,
     category: str,
@@ -10,11 +33,14 @@ def _make_viewpoint(
     details: List[str],
     source_basis: List[str],
 ) -> Dict[str, Any]:
+    pcl = _detect_pcl(category, title, details)
+
     return {
         "id": vp_id,
         "category": category,
         "title": title,
         "details": details,
+        "pcl": pcl,
         "source_basis": source_basis,
     }
 

@@ -140,6 +140,9 @@
       "category": "初期表示",
       "test_viewpoint_id": "VP-001",
       "test_viewpoint": "通常表示時の初期表示確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -163,6 +166,9 @@
       "category": "入力項目",
       "test_viewpoint_id": "VP-002",
       "test_viewpoint": "店番・店名 の入力確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -183,6 +189,9 @@
       "category": "入力項目",
       "test_viewpoint_id": "VP-003",
       "test_viewpoint": "顧客番号 の入力確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -203,6 +212,9 @@
       "category": "入力項目",
       "test_viewpoint_id": "VP-004",
       "test_viewpoint": "事象ステータス の入力確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -223,6 +235,9 @@
       "category": "入力項目",
       "test_viewpoint_id": "VP-005",
       "test_viewpoint": "事故及び延滞に至った原因 の入力確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -243,6 +258,9 @@
       "category": "入力項目",
       "test_viewpoint_id": "VP-006",
       "test_viewpoint": "債務者および保証人の現況 の入力確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -263,6 +281,9 @@
       "category": "入力項目",
       "test_viewpoint_id": "VP-007",
       "test_viewpoint": "回収、解消の方針、スケジュール の入力確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -283,6 +304,9 @@
       "category": "入力項目",
       "test_viewpoint_id": "VP-008",
       "test_viewpoint": "備考、特記事項 の入力確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -303,6 +327,9 @@
       "category": "入力項目",
       "test_viewpoint_id": "VP-009",
       "test_viewpoint": "chkAllReport の入力確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -323,6 +350,9 @@
       "category": "入力項目",
       "test_viewpoint_id": "VP-010",
       "test_viewpoint": "chkReport の入力確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -343,6 +373,10 @@
       "category": "入力チェック",
       "test_viewpoint_id": "VP-011",
       "test_viewpoint": "顧客番号 の長さ制御確認",
+      "pcl": [
+        "E",
+        "L"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -364,6 +398,10 @@
       "category": "入力チェック",
       "test_viewpoint_id": "VP-012",
       "test_viewpoint": "事故及び延滞に至った原因 の長さ制御確認",
+      "pcl": [
+        "E",
+        "L"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -385,6 +423,10 @@
       "category": "入力チェック",
       "test_viewpoint_id": "VP-013",
       "test_viewpoint": "債務者および保証人の現況 の長さ制御確認",
+      "pcl": [
+        "E",
+        "L"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -406,6 +448,10 @@
       "category": "入力チェック",
       "test_viewpoint_id": "VP-014",
       "test_viewpoint": "回収、解消の方針、スケジュール の長さ制御確認",
+      "pcl": [
+        "E",
+        "L"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -427,6 +473,10 @@
       "category": "入力チェック",
       "test_viewpoint_id": "VP-015",
       "test_viewpoint": "備考、特記事項 の長さ制御確認",
+      "pcl": [
+        "E",
+        "L"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -448,6 +498,9 @@
       "category": "イベント",
       "test_viewpoint_id": "VP-016",
       "test_viewpoint": "ddlBranchNo 選択変更時の処理確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -468,6 +521,9 @@
       "category": "イベント",
       "test_viewpoint_id": "VP-017",
       "test_viewpoint": "btnCustShow 押下時の処理確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -488,6 +544,9 @@
       "category": "イベント",
       "test_viewpoint_id": "VP-018",
       "test_viewpoint": "btnRegister 押下時の処理確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -508,6 +567,9 @@
       "category": "イベント",
       "test_viewpoint_id": "VP-019",
       "test_viewpoint": "rptSaikenMeisai 一覧操作時の処理確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-001"
       ],
@@ -528,6 +590,9 @@
       "category": "一覧表示",
       "test_viewpoint_id": "VP-020",
       "test_viewpoint": "rptSaikenMeisai の一覧表示確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-002"
       ],
@@ -548,6 +613,9 @@
       "category": "一覧表示",
       "test_viewpoint_id": "VP-021",
       "test_viewpoint": "rptJishoList の一覧表示確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-002"
       ],
@@ -568,6 +636,9 @@
       "category": "一覧表示",
       "test_viewpoint_id": "VP-022",
       "test_viewpoint": "rptReportList の一覧表示確認",
+      "pcl": [
+        "N"
+      ],
       "check_condition_ids": [
         "C-002"
       ],
@@ -588,6 +659,9 @@
       "category": "画面モード",
       "test_viewpoint_id": "VP-023",
       "test_viewpoint": "参照モード時の非活性制御確認",
+      "pcl": [
+        "E"
+      ],
       "check_condition_ids": [
         "C-003"
       ],
@@ -609,6 +683,9 @@
       "category": "排他制御",
       "test_viewpoint_id": "VP-024",
       "test_viewpoint": "更新時の排他チェック確認",
+      "pcl": [
+        "E"
+      ],
       "check_condition_ids": [
         "C-004"
       ],
@@ -628,6 +705,7 @@
     "test_case_count": 24,
     "check_condition_count": 4,
     "action_count": 5,
-    "confirmation_count": 22
+    "confirmation_count": 22,
+    "pcl_assigned_case_count": 24
   }
 }

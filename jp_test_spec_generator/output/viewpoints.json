@@ -11,6 +11,9 @@
         "主要ボタンが初期表示されること",
         "一覧領域が初期状態で表示されること"
       ],
+      "pcl": [
+        "N"
+      ],
       "source_basis": [
         "screen_modes.initial_display",
         "controls"
@@ -23,6 +26,9 @@
       "details": [
         "店番・店名 が入力可能であること"
       ],
+      "pcl": [
+        "N"
+      ],
       "source_basis": [
         "ddlBranchNo"
       ]
@@ -33,6 +39,9 @@
       "title": "顧客番号 の入力確認",
       "details": [
         "顧客番号 が入力可能であること"
+      ],
+      "pcl": [
+        "N"
       ],
       "source_basis": [
         "tbxCustomerNo"
@@ -45,6 +54,9 @@
       "details": [
         "事象ステータス が入力可能であること"
       ],
+      "pcl": [
+        "N"
+      ],
       "source_basis": [
         "rblJisyoStatus"
       ]
@@ -55,6 +67,9 @@
       "title": "事故及び延滞に至った原因 の入力確認",
       "details": [
         "事故及び延滞に至った原因 が入力可能であること"
+      ],
+      "pcl": [
+        "N"
       ],
       "source_basis": [
         "txtReason"
@@ -67,6 +82,9 @@
       "details": [
         "債務者および保証人の現況 が入力可能であること"
       ],
+      "pcl": [
+        "N"
+      ],
       "source_basis": [
         "txtCurrentSituation"
       ]
@@ -77,6 +95,9 @@
       "title": "回収、解消の方針、スケジュール の入力確認",
       "details": [
         "回収、解消の方針、スケジュール が入力可能であること"
+      ],
+      "pcl": [
+        "N"
       ],
       "source_basis": [
         "txtPolicy"
@@ -89,6 +110,9 @@
       "details": [
         "備考、特記事項 が入力可能であること"
       ],
+      "pcl": [
+        "N"
+      ],
       "source_basis": [
         "txtRemarks"
       ]
@@ -99,6 +123,9 @@
       "title": "chkAllReport の入力確認",
       "details": [
         "chkAllReport が入力可能であること"
+      ],
+      "pcl": [
+        "N"
       ],
       "source_basis": [
         "chkAllReport"
@@ -111,6 +138,9 @@
       "details": [
         "chkReport が入力可能であること"
       ],
+      "pcl": [
+        "N"
+      ],
       "source_basis": [
         "chkReport"
       ]
@@ -121,6 +151,10 @@
       "title": "顧客番号 の長さ制御確認",
       "details": [
         "顧客番号 に maxlength=12 の入力チェックがあること"
+      ],
+      "pcl": [
+        "E",
+        "L"
       ],
       "source_basis": [
         "tbxCustomerNo",
@@ -134,6 +168,10 @@
       "details": [
         "事故及び延滞に至った原因 に maxlength=2000 の入力チェックがあること"
       ],
+      "pcl": [
+        "E",
+        "L"
+      ],
       "source_basis": [
         "txtReason",
         "validations.maxlength"
@@ -145,6 +183,10 @@
       "title": "債務者および保証人の現況 の長さ制御確認",
       "details": [
         "債務者および保証人の現況 に maxlength=2000 の入力チェックがあること"
+      ],
+      "pcl": [
+        "E",
+        "L"
       ],
       "source_basis": [
         "txtCurrentSituation",
@@ -158,6 +200,10 @@
       "details": [
         "回収、解消の方針、スケジュール に maxlength=2000 の入力チェックがあること"
       ],
+      "pcl": [
+        "E",
+        "L"
+      ],
       "source_basis": [
         "txtPolicy",
         "validations.maxlength"
@@ -169,6 +215,10 @@
       "title": "備考、特記事項 の長さ制御確認",
       "details": [
         "備考、特記事項 に maxlength=2000 の入力チェックがあること"
+      ],
+      "pcl": [
+        "E",
+        "L"
       ],
       "source_basis": [
         "txtRemarks",
@@ -182,6 +232,9 @@
       "details": [
         "イベント実行後の画面表示・処理結果が正しいこと"
       ],
+      "pcl": [
+        "N"
+      ],
       "source_basis": [
         "ddlBranchNo_SelectedIndexChanged"
       ]
@@ -192,6 +245,9 @@
       "title": "btnCustShow 押下時の処理確認",
       "details": [
         "イベント実行後の画面表示・処理結果が正しいこと"
+      ],
+      "pcl": [
+        "N"
       ],
       "source_basis": [
         "btnCustShow_Click"
@@ -204,6 +260,9 @@
       "details": [
         "イベント実行後の画面表示・処理結果が正しいこと"
       ],
+      "pcl": [
+        "N"
+      ],
       "source_basis": [
         "btnRegister_Click"
       ]
@@ -214,6 +273,9 @@
       "title": "rptSaikenMeisai 一覧操作時の処理確認",
       "details": [
         "イベント実行後の画面表示・処理結果が正しいこと"
+      ],
+      "pcl": [
+        "N"
       ],
       "source_basis": [
         "rptSaikenMeisai_ItemCommand"
@@ -226,6 +288,9 @@
       "details": [
         "一覧データが正しく表示されること"
       ],
+      "pcl": [
+        "N"
+      ],
       "source_basis": [
         "rptSaikenMeisai"
       ]
@@ -237,6 +302,9 @@
       "details": [
         "一覧データが正しく表示されること"
       ],
+      "pcl": [
+        "N"
+      ],
       "source_basis": [
         "rptJishoList"
       ]
@@ -247,6 +315,9 @@
       "title": "rptReportList の一覧表示確認",
       "details": [
         "一覧データが正しく表示されること"
+      ],
+      "pcl": [
+        "N"
       ],
       "source_basis": [
         "rptReportList"
@@ -260,6 +331,9 @@
         "参照モード時に対象コントロールが非活性となること",
         "対象コントロール数: 15"
       ],
+      "pcl": [
+        "E"
+      ],
       "source_basis": [
         "screen_modes.reference_mode"
       ]
@@ -270,6 +344,9 @@
       "title": "更新時の排他チェック確認",
       "details": [
         "更新時に排他制御が実施されること"
+      ],
+      "pcl": [
+        "E"
       ],
       "source_basis": [
         "validations.concurrency_check_hint"

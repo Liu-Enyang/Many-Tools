@@ -100,6 +100,7 @@ def _build_testcase_from_viewpoint(
     viewpoint_id = str(viewpoint.get("id", "")).strip()
     viewpoint_title = str(viewpoint.get("title", "")).strip()
     source_basis = _unique_texts([viewpoint_id] + [str(value) for value in viewpoint.get("source_basis", [])])
+    pcl = _unique_texts([str(value) for value in viewpoint.get("pcl", [])])
 
     check_conditions, actions, confirmations = _build_case_items(viewpoint)
 
@@ -137,6 +138,7 @@ def _build_testcase_from_viewpoint(
         "category": category,
         "test_viewpoint_id": viewpoint_id,
         "test_viewpoint": viewpoint_title,
+        "pcl": pcl,
         "check_condition_ids": check_condition_ids,
         "action_ids": action_ids,
         "confirmation_ids": confirmation_ids,
@@ -185,5 +187,6 @@ def generate_testcases(
             "check_condition_count": len(check_condition_definitions),
             "action_count": len(action_definitions),
             "confirmation_count": len(confirmation_definitions),
+            "pcl_assigned_case_count": sum(1 for case in test_cases if case.get("pcl")),
         },
     }
