@@ -9,14 +9,22 @@
       },
       {
         "id": "C-002",
-        "text": "一覧表示対象データが存在する状態で画面を起動する"
-      },
-      {
-        "id": "C-003",
         "text": "参照モードで画面を起動する"
       },
       {
+        "id": "C-003",
+        "text": "一覧表示対象データが存在しない状態で画面を起動する"
+      },
+      {
         "id": "C-004",
+        "text": "一覧表示対象データが1件存在する状態で画面を起動する"
+      },
+      {
+        "id": "C-005",
+        "text": "一覧表示対象データが複数件存在する状態で画面を起動する"
+      },
+      {
+        "id": "C-006",
         "text": "対象データが更新済みの状態で更新処理を実行する"
       }
     ],
@@ -31,14 +39,78 @@
       },
       {
         "id": "A-003",
-        "text": "対象項目に規定外の値を入力する"
+        "text": "顧客番号に正常値を入力する"
       },
       {
         "id": "A-004",
-        "text": "対象イベントを実行する"
+        "text": "顧客番号を空白で入力する"
       },
       {
         "id": "A-005",
+        "text": "顧客番号に上限値を入力する"
+      },
+      {
+        "id": "A-006",
+        "text": "顧客番号に上限超過の値を入力する"
+      },
+      {
+        "id": "A-007",
+        "text": "事故及び延滞に至った原因に正常値を入力する"
+      },
+      {
+        "id": "A-008",
+        "text": "事故及び延滞に至った原因に上限値を入力する"
+      },
+      {
+        "id": "A-009",
+        "text": "事故及び延滞に至った原因に上限超過の値を入力する"
+      },
+      {
+        "id": "A-010",
+        "text": "債務者および保証人の現況に正常値を入力する"
+      },
+      {
+        "id": "A-011",
+        "text": "債務者および保証人の現況に上限値を入力する"
+      },
+      {
+        "id": "A-012",
+        "text": "債務者および保証人の現況に上限超過の値を入力する"
+      },
+      {
+        "id": "A-013",
+        "text": "回収、解消の方針、スケジュールに正常値を入力する"
+      },
+      {
+        "id": "A-014",
+        "text": "回収、解消の方針、スケジュールに上限値を入力する"
+      },
+      {
+        "id": "A-015",
+        "text": "回収、解消の方針、スケジュールに上限超過の値を入力する"
+      },
+      {
+        "id": "A-016",
+        "text": "備考、特記事項に正常値を入力する"
+      },
+      {
+        "id": "A-017",
+        "text": "備考、特記事項に上限値を入力する"
+      },
+      {
+        "id": "A-018",
+        "text": "備考、特記事項に上限超過の値を入力する"
+      },
+      {
+        "id": "A-019",
+        "text": "対象イベントを実行する"
+      },
+      {
+        "id": "A-020",
+        "text": "一覧のソート操作を実行する"
+      },
+      {
+        "id": "A-021",
         "text": "更新処理を実行する"
       }
     ],
@@ -97,38 +169,118 @@
       },
       {
         "id": "E-014",
-        "text": "事故及び延滞に至った原因 に maxlength=2000 の入力チェックがあること"
+        "text": "顧客番号に正常値を入力した場合、エラーとならないこと"
       },
       {
         "id": "E-015",
-        "text": "債務者および保証人の現況 に maxlength=2000 の入力チェックがあること"
+        "text": "顧客番号を空白で入力した場合、エラーメッセージが表示されること"
       },
       {
         "id": "E-016",
-        "text": "回収、解消の方針、スケジュール に maxlength=2000 の入力チェックがあること"
+        "text": "顧客番号に上限値を入力した場合、境界値チェック結果が正しいこと"
       },
       {
         "id": "E-017",
-        "text": "備考、特記事項 に maxlength=2000 の入力チェックがあること"
+        "text": "顧客番号に上限超過の値を入力した場合、境界値チェック結果が正しいこと"
       },
       {
         "id": "E-018",
-        "text": "イベント実行後の画面表示・処理結果が正しいこと"
+        "text": "事故及び延滞に至った原因 に maxlength=2000 の入力チェックがあること"
       },
       {
         "id": "E-019",
-        "text": "一覧データが正しく表示されること"
+        "text": "事故及び延滞に至った原因に正常値を入力した場合、エラーとならないこと"
       },
       {
         "id": "E-020",
-        "text": "参照モード時に対象コントロールが非活性となること"
+        "text": "事故及び延滞に至った原因に上限値を入力した場合、境界値チェック結果が正しいこと"
       },
       {
         "id": "E-021",
-        "text": "対象コントロール数: 15"
+        "text": "事故及び延滞に至った原因に上限超過の値を入力した場合、境界値チェック結果が正しいこと"
       },
       {
         "id": "E-022",
+        "text": "債務者および保証人の現況 に maxlength=2000 の入力チェックがあること"
+      },
+      {
+        "id": "E-023",
+        "text": "債務者および保証人の現況に正常値を入力した場合、エラーとならないこと"
+      },
+      {
+        "id": "E-024",
+        "text": "債務者および保証人の現況に上限値を入力した場合、境界値チェック結果が正しいこと"
+      },
+      {
+        "id": "E-025",
+        "text": "債務者および保証人の現況に上限超過の値を入力した場合、境界値チェック結果が正しいこと"
+      },
+      {
+        "id": "E-026",
+        "text": "回収、解消の方針、スケジュール に maxlength=2000 の入力チェックがあること"
+      },
+      {
+        "id": "E-027",
+        "text": "回収、解消の方針、スケジュールに正常値を入力した場合、エラーとならないこと"
+      },
+      {
+        "id": "E-028",
+        "text": "回収、解消の方針、スケジュールに上限値を入力した場合、境界値チェック結果が正しいこと"
+      },
+      {
+        "id": "E-029",
+        "text": "回収、解消の方針、スケジュールに上限超過の値を入力した場合、境界値チェック結果が正しいこと"
+      },
+      {
+        "id": "E-030",
+        "text": "備考、特記事項 に maxlength=2000 の入力チェックがあること"
+      },
+      {
+        "id": "E-031",
+        "text": "備考、特記事項に正常値を入力した場合、エラーとならないこと"
+      },
+      {
+        "id": "E-032",
+        "text": "備考、特記事項に上限値を入力した場合、境界値チェック結果が正しいこと"
+      },
+      {
+        "id": "E-033",
+        "text": "備考、特記事項に上限超過の値を入力した場合、境界値チェック結果が正しいこと"
+      },
+      {
+        "id": "E-034",
+        "text": "イベント実行後の画面表示・処理結果が正しいこと"
+      },
+      {
+        "id": "E-035",
+        "text": "一覧データが正しく表示されること"
+      },
+      {
+        "id": "E-036",
+        "text": "一覧が0件で表示されること"
+      },
+      {
+        "id": "E-037",
+        "text": "一覧が1件で正しく表示されること"
+      },
+      {
+        "id": "E-038",
+        "text": "一覧が複数件で正しく表示されること"
+      },
+      {
+        "id": "E-039",
+        "text": "一覧が指定条件でソートされること"
+      },
+      {
+        "id": "E-040",
+        "text": "参照モード時に対象コントロールが非活性となること"
+      },
+      {
+        "id": "E-041",
+        "text": "対象コントロール数: 15"
+      },
+      {
+        "id": "E-042",
         "text": "更新時に排他制御が実施されること"
       }
     ]
@@ -139,7 +291,7 @@
       "case_no": "0001",
       "category": "初期表示",
       "test_viewpoint_id": "VP-001",
-      "test_viewpoint": "通常表示時の初期表示確認",
+      "test_viewpoint": "通常表示時の初期表示確認（通常モード）",
       "pcl": [
         "N"
       ],
@@ -163,6 +315,32 @@
     {
       "case_id": "TC-002",
       "case_no": "0002",
+      "category": "初期表示",
+      "test_viewpoint_id": "VP-001",
+      "test_viewpoint": "通常表示時の初期表示確認（参照モード）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-002"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-001",
+        "E-002",
+        "E-003"
+      ],
+      "source_basis": [
+        "VP-001",
+        "screen_modes.initial_display",
+        "controls"
+      ]
+    },
+    {
+      "case_id": "TC-003",
+      "case_no": "0003",
       "category": "入力項目",
       "test_viewpoint_id": "VP-002",
       "test_viewpoint": "店番・店名 の入力確認",
@@ -184,8 +362,8 @@
       ]
     },
     {
-      "case_id": "TC-003",
-      "case_no": "0003",
+      "case_id": "TC-004",
+      "case_no": "0004",
       "category": "入力項目",
       "test_viewpoint_id": "VP-003",
       "test_viewpoint": "顧客番号 の入力確認",
@@ -207,8 +385,8 @@
       ]
     },
     {
-      "case_id": "TC-004",
-      "case_no": "0004",
+      "case_id": "TC-005",
+      "case_no": "0005",
       "category": "入力項目",
       "test_viewpoint_id": "VP-004",
       "test_viewpoint": "事象ステータス の入力確認",
@@ -230,8 +408,8 @@
       ]
     },
     {
-      "case_id": "TC-005",
-      "case_no": "0005",
+      "case_id": "TC-006",
+      "case_no": "0006",
       "category": "入力項目",
       "test_viewpoint_id": "VP-005",
       "test_viewpoint": "事故及び延滞に至った原因 の入力確認",
@@ -253,8 +431,8 @@
       ]
     },
     {
-      "case_id": "TC-006",
-      "case_no": "0006",
+      "case_id": "TC-007",
+      "case_no": "0007",
       "category": "入力項目",
       "test_viewpoint_id": "VP-006",
       "test_viewpoint": "債務者および保証人の現況 の入力確認",
@@ -276,8 +454,8 @@
       ]
     },
     {
-      "case_id": "TC-007",
-      "case_no": "0007",
+      "case_id": "TC-008",
+      "case_no": "0008",
       "category": "入力項目",
       "test_viewpoint_id": "VP-007",
       "test_viewpoint": "回収、解消の方針、スケジュール の入力確認",
@@ -299,8 +477,8 @@
       ]
     },
     {
-      "case_id": "TC-008",
-      "case_no": "0008",
+      "case_id": "TC-009",
+      "case_no": "0009",
       "category": "入力項目",
       "test_viewpoint_id": "VP-008",
       "test_viewpoint": "備考、特記事項 の入力確認",
@@ -322,8 +500,8 @@
       ]
     },
     {
-      "case_id": "TC-009",
-      "case_no": "0009",
+      "case_id": "TC-010",
+      "case_no": "0010",
       "category": "入力項目",
       "test_viewpoint_id": "VP-009",
       "test_viewpoint": "chkAllReport の入力確認",
@@ -345,8 +523,8 @@
       ]
     },
     {
-      "case_id": "TC-010",
-      "case_no": "0010",
+      "case_id": "TC-011",
+      "case_no": "0011",
       "category": "入力項目",
       "test_viewpoint_id": "VP-010",
       "test_viewpoint": "chkReport の入力確認",
@@ -368,14 +546,13 @@
       ]
     },
     {
-      "case_id": "TC-011",
-      "case_no": "0011",
+      "case_id": "TC-012",
+      "case_no": "0012",
       "category": "入力チェック",
       "test_viewpoint_id": "VP-011",
-      "test_viewpoint": "顧客番号 の長さ制御確認",
+      "test_viewpoint": "顧客番号 の長さ制御確認（正常値）",
       "pcl": [
-        "E",
-        "L"
+        "N"
       ],
       "check_condition_ids": [
         "C-001"
@@ -384,7 +561,8 @@
         "A-003"
       ],
       "confirmation_ids": [
-        "E-013"
+        "E-013",
+        "E-014"
       ],
       "source_basis": [
         "VP-011",
@@ -393,23 +571,98 @@
       ]
     },
     {
-      "case_id": "TC-012",
-      "case_no": "0012",
+      "case_id": "TC-013",
+      "case_no": "0013",
       "category": "入力チェック",
-      "test_viewpoint_id": "VP-012",
-      "test_viewpoint": "事故及び延滞に至った原因 の長さ制御確認",
+      "test_viewpoint_id": "VP-011",
+      "test_viewpoint": "顧客番号 の長さ制御確認（空白）",
       "pcl": [
-        "E",
+        "E"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-004"
+      ],
+      "confirmation_ids": [
+        "E-013",
+        "E-015"
+      ],
+      "source_basis": [
+        "VP-011",
+        "tbxCustomerNo",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "case_id": "TC-014",
+      "case_no": "0014",
+      "category": "入力チェック",
+      "test_viewpoint_id": "VP-011",
+      "test_viewpoint": "顧客番号 の長さ制御確認（上限値）",
+      "pcl": [
         "L"
       ],
       "check_condition_ids": [
         "C-001"
       ],
       "action_ids": [
-        "A-003"
+        "A-005"
       ],
       "confirmation_ids": [
-        "E-014"
+        "E-013",
+        "E-016"
+      ],
+      "source_basis": [
+        "VP-011",
+        "tbxCustomerNo",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "case_id": "TC-015",
+      "case_no": "0015",
+      "category": "入力チェック",
+      "test_viewpoint_id": "VP-011",
+      "test_viewpoint": "顧客番号 の長さ制御確認（上限超過）",
+      "pcl": [
+        "L"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-006"
+      ],
+      "confirmation_ids": [
+        "E-013",
+        "E-017"
+      ],
+      "source_basis": [
+        "VP-011",
+        "tbxCustomerNo",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "case_id": "TC-016",
+      "case_no": "0016",
+      "category": "入力チェック",
+      "test_viewpoint_id": "VP-012",
+      "test_viewpoint": "事故及び延滞に至った原因 の長さ制御確認（正常値）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-007"
+      ],
+      "confirmation_ids": [
+        "E-018",
+        "E-019"
       ],
       "source_basis": [
         "VP-012",
@@ -418,23 +671,73 @@
       ]
     },
     {
-      "case_id": "TC-013",
-      "case_no": "0013",
+      "case_id": "TC-017",
+      "case_no": "0017",
       "category": "入力チェック",
-      "test_viewpoint_id": "VP-013",
-      "test_viewpoint": "債務者および保証人の現況 の長さ制御確認",
+      "test_viewpoint_id": "VP-012",
+      "test_viewpoint": "事故及び延滞に至った原因 の長さ制御確認（上限値）",
       "pcl": [
-        "E",
         "L"
       ],
       "check_condition_ids": [
         "C-001"
       ],
       "action_ids": [
-        "A-003"
+        "A-008"
       ],
       "confirmation_ids": [
-        "E-015"
+        "E-018",
+        "E-020"
+      ],
+      "source_basis": [
+        "VP-012",
+        "txtReason",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "case_id": "TC-018",
+      "case_no": "0018",
+      "category": "入力チェック",
+      "test_viewpoint_id": "VP-012",
+      "test_viewpoint": "事故及び延滞に至った原因 の長さ制御確認（上限超過）",
+      "pcl": [
+        "L"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-009"
+      ],
+      "confirmation_ids": [
+        "E-018",
+        "E-021"
+      ],
+      "source_basis": [
+        "VP-012",
+        "txtReason",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "case_id": "TC-019",
+      "case_no": "0019",
+      "category": "入力チェック",
+      "test_viewpoint_id": "VP-013",
+      "test_viewpoint": "債務者および保証人の現況 の長さ制御確認（正常値）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-010"
+      ],
+      "confirmation_ids": [
+        "E-022",
+        "E-023"
       ],
       "source_basis": [
         "VP-013",
@@ -443,23 +746,73 @@
       ]
     },
     {
-      "case_id": "TC-014",
-      "case_no": "0014",
+      "case_id": "TC-020",
+      "case_no": "0020",
       "category": "入力チェック",
-      "test_viewpoint_id": "VP-014",
-      "test_viewpoint": "回収、解消の方針、スケジュール の長さ制御確認",
+      "test_viewpoint_id": "VP-013",
+      "test_viewpoint": "債務者および保証人の現況 の長さ制御確認（上限値）",
       "pcl": [
-        "E",
         "L"
       ],
       "check_condition_ids": [
         "C-001"
       ],
       "action_ids": [
-        "A-003"
+        "A-011"
       ],
       "confirmation_ids": [
-        "E-016"
+        "E-022",
+        "E-024"
+      ],
+      "source_basis": [
+        "VP-013",
+        "txtCurrentSituation",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "case_id": "TC-021",
+      "case_no": "0021",
+      "category": "入力チェック",
+      "test_viewpoint_id": "VP-013",
+      "test_viewpoint": "債務者および保証人の現況 の長さ制御確認（上限超過）",
+      "pcl": [
+        "L"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-012"
+      ],
+      "confirmation_ids": [
+        "E-022",
+        "E-025"
+      ],
+      "source_basis": [
+        "VP-013",
+        "txtCurrentSituation",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "case_id": "TC-022",
+      "case_no": "0022",
+      "category": "入力チェック",
+      "test_viewpoint_id": "VP-014",
+      "test_viewpoint": "回収、解消の方針、スケジュール の長さ制御確認（正常値）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-013"
+      ],
+      "confirmation_ids": [
+        "E-026",
+        "E-027"
       ],
       "source_basis": [
         "VP-014",
@@ -468,23 +821,73 @@
       ]
     },
     {
-      "case_id": "TC-015",
-      "case_no": "0015",
+      "case_id": "TC-023",
+      "case_no": "0023",
       "category": "入力チェック",
-      "test_viewpoint_id": "VP-015",
-      "test_viewpoint": "備考、特記事項 の長さ制御確認",
+      "test_viewpoint_id": "VP-014",
+      "test_viewpoint": "回収、解消の方針、スケジュール の長さ制御確認（上限値）",
       "pcl": [
-        "E",
         "L"
       ],
       "check_condition_ids": [
         "C-001"
       ],
       "action_ids": [
-        "A-003"
+        "A-014"
       ],
       "confirmation_ids": [
-        "E-017"
+        "E-026",
+        "E-028"
+      ],
+      "source_basis": [
+        "VP-014",
+        "txtPolicy",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "case_id": "TC-024",
+      "case_no": "0024",
+      "category": "入力チェック",
+      "test_viewpoint_id": "VP-014",
+      "test_viewpoint": "回収、解消の方針、スケジュール の長さ制御確認（上限超過）",
+      "pcl": [
+        "L"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-015"
+      ],
+      "confirmation_ids": [
+        "E-026",
+        "E-029"
+      ],
+      "source_basis": [
+        "VP-014",
+        "txtPolicy",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "case_id": "TC-025",
+      "case_no": "0025",
+      "category": "入力チェック",
+      "test_viewpoint_id": "VP-015",
+      "test_viewpoint": "備考、特記事項 の長さ制御確認（正常値）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-016"
+      ],
+      "confirmation_ids": [
+        "E-030",
+        "E-031"
       ],
       "source_basis": [
         "VP-015",
@@ -493,8 +896,58 @@
       ]
     },
     {
-      "case_id": "TC-016",
-      "case_no": "0016",
+      "case_id": "TC-026",
+      "case_no": "0026",
+      "category": "入力チェック",
+      "test_viewpoint_id": "VP-015",
+      "test_viewpoint": "備考、特記事項 の長さ制御確認（上限値）",
+      "pcl": [
+        "L"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-017"
+      ],
+      "confirmation_ids": [
+        "E-030",
+        "E-032"
+      ],
+      "source_basis": [
+        "VP-015",
+        "txtRemarks",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "case_id": "TC-027",
+      "case_no": "0027",
+      "category": "入力チェック",
+      "test_viewpoint_id": "VP-015",
+      "test_viewpoint": "備考、特記事項 の長さ制御確認（上限超過）",
+      "pcl": [
+        "L"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-018"
+      ],
+      "confirmation_ids": [
+        "E-030",
+        "E-033"
+      ],
+      "source_basis": [
+        "VP-015",
+        "txtRemarks",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "case_id": "TC-028",
+      "case_no": "0028",
       "category": "イベント",
       "test_viewpoint_id": "VP-016",
       "test_viewpoint": "ddlBranchNo 選択変更時の処理確認",
@@ -505,10 +958,10 @@
         "C-001"
       ],
       "action_ids": [
-        "A-004"
+        "A-019"
       ],
       "confirmation_ids": [
-        "E-018"
+        "E-034"
       ],
       "source_basis": [
         "VP-016",
@@ -516,8 +969,8 @@
       ]
     },
     {
-      "case_id": "TC-017",
-      "case_no": "0017",
+      "case_id": "TC-029",
+      "case_no": "0029",
       "category": "イベント",
       "test_viewpoint_id": "VP-017",
       "test_viewpoint": "btnCustShow 押下時の処理確認",
@@ -528,10 +981,10 @@
         "C-001"
       ],
       "action_ids": [
-        "A-004"
+        "A-019"
       ],
       "confirmation_ids": [
-        "E-018"
+        "E-034"
       ],
       "source_basis": [
         "VP-017",
@@ -539,8 +992,8 @@
       ]
     },
     {
-      "case_id": "TC-018",
-      "case_no": "0018",
+      "case_id": "TC-030",
+      "case_no": "0030",
       "category": "イベント",
       "test_viewpoint_id": "VP-018",
       "test_viewpoint": "btnRegister 押下時の処理確認",
@@ -551,10 +1004,10 @@
         "C-001"
       ],
       "action_ids": [
-        "A-004"
+        "A-019"
       ],
       "confirmation_ids": [
-        "E-018"
+        "E-034"
       ],
       "source_basis": [
         "VP-018",
@@ -562,8 +1015,8 @@
       ]
     },
     {
-      "case_id": "TC-019",
-      "case_no": "0019",
+      "case_id": "TC-031",
+      "case_no": "0031",
       "category": "イベント",
       "test_viewpoint_id": "VP-019",
       "test_viewpoint": "rptSaikenMeisai 一覧操作時の処理確認",
@@ -574,10 +1027,10 @@
         "C-001"
       ],
       "action_ids": [
-        "A-004"
+        "A-019"
       ],
       "confirmation_ids": [
-        "E-018"
+        "E-034"
       ],
       "source_basis": [
         "VP-019",
@@ -585,82 +1038,13 @@
       ]
     },
     {
-      "case_id": "TC-020",
-      "case_no": "0020",
+      "case_id": "TC-032",
+      "case_no": "0032",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-020",
-      "test_viewpoint": "rptSaikenMeisai の一覧表示確認",
+      "test_viewpoint": "rptSaikenMeisai の一覧表示確認（0件）",
       "pcl": [
         "N"
-      ],
-      "check_condition_ids": [
-        "C-002"
-      ],
-      "action_ids": [
-        "A-001"
-      ],
-      "confirmation_ids": [
-        "E-019"
-      ],
-      "source_basis": [
-        "VP-020",
-        "rptSaikenMeisai"
-      ]
-    },
-    {
-      "case_id": "TC-021",
-      "case_no": "0021",
-      "category": "一覧表示",
-      "test_viewpoint_id": "VP-021",
-      "test_viewpoint": "rptJishoList の一覧表示確認",
-      "pcl": [
-        "N"
-      ],
-      "check_condition_ids": [
-        "C-002"
-      ],
-      "action_ids": [
-        "A-001"
-      ],
-      "confirmation_ids": [
-        "E-019"
-      ],
-      "source_basis": [
-        "VP-021",
-        "rptJishoList"
-      ]
-    },
-    {
-      "case_id": "TC-022",
-      "case_no": "0022",
-      "category": "一覧表示",
-      "test_viewpoint_id": "VP-022",
-      "test_viewpoint": "rptReportList の一覧表示確認",
-      "pcl": [
-        "N"
-      ],
-      "check_condition_ids": [
-        "C-002"
-      ],
-      "action_ids": [
-        "A-001"
-      ],
-      "confirmation_ids": [
-        "E-019"
-      ],
-      "source_basis": [
-        "VP-022",
-        "rptReportList"
-      ]
-    },
-    {
-      "case_id": "TC-023",
-      "case_no": "0023",
-      "category": "画面モード",
-      "test_viewpoint_id": "VP-023",
-      "test_viewpoint": "参照モード時の非活性制御確認",
-      "pcl": [
-        "E"
       ],
       "check_condition_ids": [
         "C-003"
@@ -669,8 +1053,296 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-020",
-        "E-021"
+        "E-035",
+        "E-036"
+      ],
+      "source_basis": [
+        "VP-020",
+        "rptSaikenMeisai"
+      ]
+    },
+    {
+      "case_id": "TC-033",
+      "case_no": "0033",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-020",
+      "test_viewpoint": "rptSaikenMeisai の一覧表示確認（1件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-004"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-035",
+        "E-037"
+      ],
+      "source_basis": [
+        "VP-020",
+        "rptSaikenMeisai"
+      ]
+    },
+    {
+      "case_id": "TC-034",
+      "case_no": "0034",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-020",
+      "test_viewpoint": "rptSaikenMeisai の一覧表示確認（複数件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-005"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-035",
+        "E-038"
+      ],
+      "source_basis": [
+        "VP-020",
+        "rptSaikenMeisai"
+      ]
+    },
+    {
+      "case_id": "TC-035",
+      "case_no": "0035",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-020",
+      "test_viewpoint": "rptSaikenMeisai の一覧表示確認（ソート）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-005"
+      ],
+      "action_ids": [
+        "A-020"
+      ],
+      "confirmation_ids": [
+        "E-035",
+        "E-039"
+      ],
+      "source_basis": [
+        "VP-020",
+        "rptSaikenMeisai"
+      ]
+    },
+    {
+      "case_id": "TC-036",
+      "case_no": "0036",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-021",
+      "test_viewpoint": "rptJishoList の一覧表示確認（0件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-003"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-035",
+        "E-036"
+      ],
+      "source_basis": [
+        "VP-021",
+        "rptJishoList"
+      ]
+    },
+    {
+      "case_id": "TC-037",
+      "case_no": "0037",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-021",
+      "test_viewpoint": "rptJishoList の一覧表示確認（1件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-004"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-035",
+        "E-037"
+      ],
+      "source_basis": [
+        "VP-021",
+        "rptJishoList"
+      ]
+    },
+    {
+      "case_id": "TC-038",
+      "case_no": "0038",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-021",
+      "test_viewpoint": "rptJishoList の一覧表示確認（複数件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-005"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-035",
+        "E-038"
+      ],
+      "source_basis": [
+        "VP-021",
+        "rptJishoList"
+      ]
+    },
+    {
+      "case_id": "TC-039",
+      "case_no": "0039",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-021",
+      "test_viewpoint": "rptJishoList の一覧表示確認（ソート）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-005"
+      ],
+      "action_ids": [
+        "A-020"
+      ],
+      "confirmation_ids": [
+        "E-035",
+        "E-039"
+      ],
+      "source_basis": [
+        "VP-021",
+        "rptJishoList"
+      ]
+    },
+    {
+      "case_id": "TC-040",
+      "case_no": "0040",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-022",
+      "test_viewpoint": "rptReportList の一覧表示確認（0件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-003"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-035",
+        "E-036"
+      ],
+      "source_basis": [
+        "VP-022",
+        "rptReportList"
+      ]
+    },
+    {
+      "case_id": "TC-041",
+      "case_no": "0041",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-022",
+      "test_viewpoint": "rptReportList の一覧表示確認（1件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-004"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-035",
+        "E-037"
+      ],
+      "source_basis": [
+        "VP-022",
+        "rptReportList"
+      ]
+    },
+    {
+      "case_id": "TC-042",
+      "case_no": "0042",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-022",
+      "test_viewpoint": "rptReportList の一覧表示確認（複数件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-005"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-035",
+        "E-038"
+      ],
+      "source_basis": [
+        "VP-022",
+        "rptReportList"
+      ]
+    },
+    {
+      "case_id": "TC-043",
+      "case_no": "0043",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-022",
+      "test_viewpoint": "rptReportList の一覧表示確認（ソート）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-005"
+      ],
+      "action_ids": [
+        "A-020"
+      ],
+      "confirmation_ids": [
+        "E-035",
+        "E-039"
+      ],
+      "source_basis": [
+        "VP-022",
+        "rptReportList"
+      ]
+    },
+    {
+      "case_id": "TC-044",
+      "case_no": "0044",
+      "category": "画面モード",
+      "test_viewpoint_id": "VP-023",
+      "test_viewpoint": "参照モード時の非活性制御確認（通常モード）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-040",
+        "E-041"
       ],
       "source_basis": [
         "VP-023",
@@ -678,8 +1350,32 @@
       ]
     },
     {
-      "case_id": "TC-024",
-      "case_no": "0024",
+      "case_id": "TC-045",
+      "case_no": "0045",
+      "category": "画面モード",
+      "test_viewpoint_id": "VP-023",
+      "test_viewpoint": "参照モード時の非活性制御確認（参照モード）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-002"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-040",
+        "E-041"
+      ],
+      "source_basis": [
+        "VP-023",
+        "screen_modes.reference_mode"
+      ]
+    },
+    {
+      "case_id": "TC-046",
+      "case_no": "0046",
       "category": "排他制御",
       "test_viewpoint_id": "VP-024",
       "test_viewpoint": "更新時の排他チェック確認",
@@ -687,13 +1383,13 @@
         "E"
       ],
       "check_condition_ids": [
-        "C-004"
+        "C-006"
       ],
       "action_ids": [
-        "A-005"
+        "A-021"
       ],
       "confirmation_ids": [
-        "E-022"
+        "E-042"
       ],
       "source_basis": [
         "VP-024",
@@ -702,10 +1398,12 @@
     }
   ],
   "summary": {
-    "test_case_count": 24,
-    "check_condition_count": 4,
-    "action_count": 5,
-    "confirmation_count": 22,
-    "pcl_assigned_case_count": 24
+    "test_case_count": 46,
+    "source_viewpoint_count": 24,
+    "check_condition_count": 6,
+    "action_count": 21,
+    "confirmation_count": 42,
+    "pcl_assigned_case_count": 46,
+    "analysis_linked_field_count": 30
   }
 }

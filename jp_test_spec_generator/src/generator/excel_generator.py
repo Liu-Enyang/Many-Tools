@@ -1,12 +1,15 @@
 from __future__ import annotations
 
+import copy
 import json
+import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from openpyxl import Workbook
+from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
+from openpyxl.worksheet.worksheet import Worksheet
 
 
 THIN_SIDE = Side(style="thin", color="000000")
@@ -24,9 +27,46 @@ PCL_COLOR_MAP = {
     "I": PatternFill("solid", fgColor="BDD7EE"),  # blue
 }
 
+# Template layout
+CHECK_START_ROW = 4
+CHECK_END_ROW = 33
+ACTION_START_ROW = 34
+ACTION_END_ROW = 66
+CONFIRM_START_ROW = 67
+CONFIRM_END_ROW = 117
+PCL_ROW = 120
+CASE_HEADER_ROW = 3
+CASE_START_COL = 10  # J列
+CASE_TEMPLATE_COPY_COL = 45  # AS列
+ITEM_NO_COL = 2      # B列
+ITEM_TEXT_COL = 3    # C列
+TEMPLATE_ITEM_TEXT_COL = 2  # テンプレート主表では B列（結合セルの左上）に説明文を書く
+SECTION_LABEL_COL = 1  # A列
+CHECK_TEMPLATE_COPY_ROW = 32
+ACTION_TEMPLATE_COPY_ROW = 65
+CONFIRM_TEMPLATE_COPY_ROW = 116
+TEMPLATE_PATH = Path(__file__).resolve().parents[2] / "Sample_input" / "単体テスト仕様書base.xlsx"
+
+
 
 class ExcelGenerationError(Exception):
     pass
+
+
+def _print_progress(message: str) -> None:
+    sys.stdout.write(f"{message}\n")
+    sys.stdout.flush()
+
+
+def _print_case_progress(prefix: str, current: int, total: int) -> None:
+    if total <= 0:
+        print(f"{prefix}: 0/0", end="\r", flush=True)
+        return
+
+    percent = int((current / total) * 100)
+    print(f"{prefix}: {current}/{total} ({percent}%)", end="\r", flush=True)
+    if current >= total:
+        print("", flush=True)
 
 
 
@@ -59,18 +99,6 @@ def _validate_testcases(data: Dict[str, Any]) -> None:
 
 
 
-def _build_definition_map(definitions: List[Dict[str, str]]) -> Dict[str, str]:
-    result: Dict[str, str] = {}
-    for item in definitions:
-        item_id = str(item.get("id", "")).strip()
-        text = str(item.get("text", "")).strip()
-        if not item_id or not text:
-            continue
-        result[item_id] = text
-    return result
-
-
-
 def _apply_border_range(ws, start_row: int, end_row: int, start_col: int, end_col: int) -> None:
     for row in range(start_row, end_row + 1):
         for col in range(start_col, end_col + 1):
@@ -83,153 +111,317 @@ def _apply_border_range(ws, start_row: int, end_row: int, start_col: int, end_co
 
 
 
-def _set_column_widths(ws, case_count: int) -> None:
-    ws.column_dimensions["A"].width = 16
-    ws.column_dimensions["B"].width = 16
-    ws.column_dimensions["C"].width = 48
+def _copy_cell_style(src_cell, dst_cell) -> None:
+    if src_cell.__class__.__name__ == "MergedCell" or dst_cell.__class__.__name__ == "MergedCell":
+        return
 
-    case_start_col = 4
-    for offset in range(case_count):
-        ws.column_dimensions[get_column_letter(case_start_col + offset)].width = 10
-
-
-
-def _write_title(ws, screen_id: str, screen_name: str, case_count: int) -> int:
-    ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=max(4, 3 + case_count))
-    title_cell = ws.cell(row=1, column=1)
-    title_cell.value = f"単体テスト仕様書マトリクス - {screen_id} {screen_name}".strip()
-    title_cell.font = Font(bold=True, size=14)
-    title_cell.alignment = LEFT
-    title_cell.fill = HEADER_FILL
-
-    ws.merge_cells(start_row=2, start_column=1, end_row=2, end_column=2)
-    ws.cell(row=2, column=1).value = "画面ID"
-    ws.cell(row=2, column=1).font = Font(bold=True)
-    ws.cell(row=2, column=1).alignment = CENTER
-    ws.cell(row=2, column=1).fill = SUBHEADER_FILL
-    ws.cell(row=2, column=3).value = screen_id
-    ws.cell(row=2, column=3).alignment = LEFT
-
-    ws.merge_cells(start_row=3, start_column=1, end_row=3, end_column=2)
-    ws.cell(row=3, column=1).value = "画面名"
-    ws.cell(row=3, column=1).font = Font(bold=True)
-    ws.cell(row=3, column=1).alignment = CENTER
-    ws.cell(row=3, column=1).fill = SUBHEADER_FILL
-    ws.cell(row=3, column=3).value = screen_name
-    ws.cell(row=3, column=3).alignment = LEFT
-
-    return 5
+    if src_cell.has_style:
+        dst_cell._style = copy.copy(src_cell._style)
+    if src_cell.font:
+        dst_cell.font = copy.copy(src_cell.font)
+    if src_cell.fill:
+        dst_cell.fill = copy.copy(src_cell.fill)
+    if src_cell.border:
+        dst_cell.border = copy.copy(src_cell.border)
+    if src_cell.alignment:
+        dst_cell.alignment = copy.copy(src_cell.alignment)
+    if src_cell.number_format:
+        dst_cell.number_format = src_cell.number_format
+    if src_cell.protection:
+        dst_cell.protection = copy.copy(src_cell.protection)
 
 
 
-def _write_case_header(ws, start_row: int, test_cases: List[Dict[str, Any]]) -> int:
-    ws.cell(row=start_row, column=1).value = "区分"
-    ws.cell(row=start_row, column=2).value = "項番"
-    ws.cell(row=start_row, column=3).value = "内容"
-
-    for col in range(1, 4):
-        cell = ws.cell(row=start_row, column=col)
-        cell.font = Font(bold=True)
-        cell.alignment = CENTER
-        cell.fill = HEADER_FILL
-
-    case_start_col = 4
-    for index, test_case in enumerate(test_cases):
-        col = case_start_col + index
-        header_cell = ws.cell(row=start_row, column=col)
-        header_cell.value = test_case.get("case_no") or test_case.get("case_id")
-        header_cell.font = Font(bold=True)
-        header_cell.alignment = CENTER
-        header_cell.fill = HEADER_FILL
-
-    return start_row + 1
+def _copy_row_style(ws: Worksheet, source_row: int, target_row: int, max_col: int) -> None:
+    ws.row_dimensions[target_row].height = ws.row_dimensions[source_row].height
+    for col in range(1, max_col + 1):
+        _copy_cell_style(ws.cell(source_row, col), ws.cell(target_row, col))
 
 
-# Write PCL row under case header
-def _write_pcl_row(ws, start_row: int, test_cases: List[Dict[str, Any]]) -> int:
-    """Write PCL row under case header"""
-    # left labels
-    ws.cell(row=start_row, column=1).value = "PCL"
-    ws.cell(row=start_row, column=1).font = Font(bold=True)
-    ws.cell(row=start_row, column=1).alignment = CENTER
-    ws.cell(row=start_row, column=1).fill = SUBHEADER_FILL
-
-    ws.cell(row=start_row, column=2).value = ""
-    ws.cell(row=start_row, column=3).value = ""
-
-    case_start_col = 4
-
-    for index, test_case in enumerate(test_cases):
-        col = case_start_col + index
-        cell = ws.cell(row=start_row, column=col)
-
-        pcl_list = test_case.get("pcl", [])
-        pcl_text = ",".join(pcl_list) if pcl_list else "N"
-        cell.value = pcl_text
-        cell.alignment = CENTER
-
-        # apply color (if multiple, use first for color)
-        if pcl_list:
-            color_key = pcl_list[0]
-        else:
-            color_key = "N"
-
-        fill = PCL_COLOR_MAP.get(color_key)
-        if fill:
-            cell.fill = fill
-
-    return start_row + 1
+# Helper to copy merged-cell structure for a single row.
+def _copy_row_merges(ws: Worksheet, source_row: int, target_row: int) -> None:
+    existing_ranges = {str(rng) for rng in ws.merged_cells.ranges}
+    for merged_range in list(ws.merged_cells.ranges):
+        if merged_range.min_row == source_row and merged_range.max_row == source_row:
+            new_range = f"{get_column_letter(merged_range.min_col)}{target_row}:{get_column_letter(merged_range.max_col)}{target_row}"
+            if new_range not in existing_ranges:
+                ws.merge_cells(new_range)
+                existing_ranges.add(new_range)
 
 
 
-def _write_section(
-    ws,
-    start_row: int,
-    section_title: str,
-    items: List[Dict[str, str]],
-    test_cases: List[Dict[str, Any]],
-    relation_key: str,
+def _copy_column_style(ws: Worksheet, source_col: int, target_col: int, max_row: int) -> None:
+    source_letter = get_column_letter(source_col)
+    target_letter = get_column_letter(target_col)
+    case_base_letter = get_column_letter(CASE_START_COL)
+    ws.column_dimensions[target_letter].width = ws.column_dimensions[case_base_letter].width
+    ws.column_dimensions[target_letter].hidden = ws.column_dimensions[source_letter].hidden
+    for row in range(1, max_row + 1):
+        _copy_cell_style(ws.cell(row, source_col), ws.cell(row, target_col))
+
+
+
+
+def _clear_cell_value_keep_style(ws: Worksheet, row: int, col: int) -> None:
+    cell = ws.cell(row=row, column=col)
+    if cell.__class__.__name__ == "MergedCell":
+        return
+    cell.value = None
+
+
+# Helper to safely set cell value, handling merged cells.
+def _set_cell_value_safe(ws: Worksheet, row: int, col: int, value: Any) -> None:
+    cell = ws.cell(row=row, column=col)
+    if cell.__class__.__name__ != "MergedCell":
+        cell.value = value
+        return
+
+    for merged_range in ws.merged_cells.ranges:
+        if merged_range.min_row <= row <= merged_range.max_row and merged_range.min_col <= col <= merged_range.max_col:
+            # Merged child cells cannot be written directly.
+            # When clearing a non-anchor merged cell, just skip.
+            if value is None and (row != merged_range.min_row or col != merged_range.min_col):
+                return
+
+            anchor_cell = ws.cell(row=merged_range.min_row, column=merged_range.min_col)
+            if anchor_cell.__class__.__name__ == "MergedCell":
+                return
+
+            anchor_cell.value = value
+            return
+
+    # Fallback: if this is still a merged child cell, do nothing.
+    if cell.__class__.__name__ == "MergedCell":
+        return
+    cell.value = value
+
+
+
+def _find_case_template_capacity(ws: Worksheet) -> int:
+    col = CASE_START_COL
+    count = 0
+    while True:
+        value = ws.cell(row=CASE_HEADER_ROW, column=col).value
+        if value is None or str(value).strip() == "":
+            break
+        count += 1
+        col += 1
+    return count
+
+
+
+def _ensure_case_columns(ws: Worksheet, required_case_count: int) -> None:
+    existing_case_count = _find_case_template_capacity(ws)
+    max_row = max(ws.max_row, PCL_ROW)
+
+    case_base_letter = get_column_letter(CASE_START_COL)
+    template_copy_letter = get_column_letter(CASE_TEMPLATE_COPY_COL)
+    ws.column_dimensions[template_copy_letter].width = ws.column_dimensions[case_base_letter].width
+
+    additional_count = max(0, required_case_count - existing_case_count)
+    if additional_count > 0:
+        _print_progress(f"ケース列を拡張します: 追加 {additional_count} 列")
+
+    for offset in range(additional_count):
+        insert_at = CASE_TEMPLATE_COPY_COL + 1 + offset
+        source_col = CASE_TEMPLATE_COPY_COL + offset
+        ws.insert_cols(insert_at, 1)
+        _copy_column_style(ws, source_col, insert_at, max_row)
+        for row in range(1, max_row + 1):
+            _clear_cell_value_keep_style(ws, row, insert_at)
+        _print_case_progress("ケース列作成進捗", offset + 1, additional_count)
+
+
+
+def _ensure_section_rows(
+    ws: Worksheet,
+    section_start_row: int,
+    reserved_end_row: int,
+    required_count: int,
+    template_copy_row: int,
 ) -> int:
+    reserved_count = reserved_end_row - section_start_row + 1
+    extra = max(0, required_count - reserved_count)
+    if extra > 0:
+        _print_progress(f"行を拡張します: 開始行={section_start_row}, 追加 {extra} 行")
+    if extra <= 0:
+        return 0
+
+    max_col = max(ws.max_column, CASE_START_COL)
+
+    for offset in range(extra):
+        source_row = template_copy_row + offset
+        insert_at = source_row + 1
+        ws.insert_rows(insert_at, 1)
+        _copy_row_style(ws, source_row, insert_at, max_col)
+        _copy_row_merges(ws, source_row, insert_at)
+        for col in range(1, max_col + 1):
+            _clear_cell_value_keep_style(ws, insert_at, col)
+        _print_case_progress("行作成進捗", offset + 1, extra)
+
+    return extra
+
+
+
+
+def _fill_section_rows(
+    ws: Worksheet,
+    start_row: int,
+    items: List[Dict[str, str]],
+    section_label: str,
+    relation_key: str,
+    test_cases: List[Dict[str, Any]],
+) -> None:
     if not items:
-        return start_row
+        return
 
-    case_start_col = 4
-    section_start_row = start_row
-    section_end_row = start_row + len(items)
+    _print_progress(f"{section_label} を書き込みます: {len(items)} 行")
 
-    ws.merge_cells(start_row=section_start_row, start_column=1, end_row=section_end_row, end_column=1)
-    section_cell = ws.cell(row=section_start_row, column=1)
-    section_cell.value = section_title
-    section_cell.font = Font(bold=True)
-    section_cell.alignment = CENTER
-    section_cell.fill = SECTION_FILL
-
-    for item_index, item in enumerate(items, start=1):
-        row = start_row + item_index - 1
+    for index, item in enumerate(items):
+        row = start_row + index
         item_id = str(item.get("id", "")).strip()
         item_text = str(item.get("text", "")).strip()
 
-        no_cell = ws.cell(row=row, column=2)
-        no_cell.value = item_id
-        no_cell.alignment = CENTER
+        if index == 0:
+            _set_cell_value_safe(ws, row, SECTION_LABEL_COL, section_label)
+        else:
+            _set_cell_value_safe(ws, row, SECTION_LABEL_COL, None)
 
-        text_cell = ws.cell(row=row, column=3)
-        text_cell.value = item_text
-        text_cell.alignment = LEFT
+        _set_cell_value_safe(ws, row, ITEM_NO_COL, item_id)
+        _set_cell_value_safe(ws, row, ITEM_TEXT_COL, item_text)
+        ws.cell(row=row, column=ITEM_TEXT_COL).alignment = LEFT
 
         for case_index, test_case in enumerate(test_cases):
-            col = case_start_col + case_index
-            cell = ws.cell(row=row, column=col)
+            col = CASE_START_COL + case_index
             related_ids = test_case.get(relation_key, [])
-            cell.value = "○" if item_id in related_ids else ""
-            cell.alignment = CENTER
+            _set_cell_value_safe(ws, row, col, "○" if item_id in related_ids else None)
+            target_cell = ws.cell(row=row, column=col)
+            if target_cell.__class__.__name__ == "MergedCell":
+                for merged_range in ws.merged_cells.ranges:
+                    if merged_range.min_row <= row <= merged_range.max_row and merged_range.min_col <= col <= merged_range.max_col:
+                        target_cell = ws.cell(merged_range.min_row, merged_range.min_col)
+                        break
+            target_cell.alignment = CENTER
+        _print_case_progress(f"{section_label} 書き込み進捗", index + 1, len(items))
 
-    _apply_border_range(ws, section_start_row, section_end_row, 1, 3 + len(test_cases))
-    return section_end_row + 1
+
+# テンプレート主表用の行書き込みヘルパ
+def _fill_template_section_rows(
+    ws: Worksheet,
+    start_row: int,
+    items: List[Dict[str, str]],
+    section_label: str,
+    relation_key: str,
+    test_cases: List[Dict[str, Any]],
+) -> None:
+    if not items:
+        return
+
+    _print_progress(f"{section_label} をテンプレートへ書き込みます: {len(items)} 行")
+
+    for index, item in enumerate(items):
+        row = start_row + index
+        item_id = str(item.get("id", "")).strip()
+        item_text = str(item.get("text", "")).strip()
+
+        if index == 0:
+            _set_cell_value_safe(ws, row, SECTION_LABEL_COL, section_label)
+        else:
+            _set_cell_value_safe(ws, row, SECTION_LABEL_COL, None)
+
+        _clear_cell_value_keep_style(ws, row, ITEM_NO_COL)
+
+        # テンプレート主表では定義IDは表示せず、説明文だけを結合セル左上へ出力する
+        _set_cell_value_safe(ws, row, TEMPLATE_ITEM_TEXT_COL, item_text)
+        if ITEM_TEXT_COL != TEMPLATE_ITEM_TEXT_COL:
+            _clear_cell_value_keep_style(ws, row, ITEM_TEXT_COL)
+
+        target_text_cell = ws.cell(row=row, column=TEMPLATE_ITEM_TEXT_COL)
+        if target_text_cell.__class__.__name__ == "MergedCell":
+            for merged_range in ws.merged_cells.ranges:
+                if merged_range.min_row <= row <= merged_range.max_row and merged_range.min_col <= TEMPLATE_ITEM_TEXT_COL <= merged_range.max_col:
+                    target_text_cell = ws.cell(merged_range.min_row, merged_range.min_col)
+                    break
+        target_text_cell.alignment = LEFT
+
+        for case_index, test_case in enumerate(test_cases):
+            col = CASE_START_COL + case_index
+            related_ids = test_case.get(relation_key, [])
+            _set_cell_value_safe(ws, row, col, "○" if item_id in related_ids else None)
+            target_cell = ws.cell(row=row, column=col)
+            if target_cell.__class__.__name__ == "MergedCell":
+                for merged_range in ws.merged_cells.ranges:
+                    if merged_range.min_row <= row <= merged_range.max_row and merged_range.min_col <= col <= merged_range.max_col:
+                        target_cell = ws.cell(merged_range.min_row, merged_range.min_col)
+                        break
+            target_cell.alignment = CENTER
+
+        _print_case_progress(f"{section_label} テンプレート書き込み進捗", index + 1, len(items))
+
+
+
+def _clear_unused_rows(ws: Worksheet, start_row: int, reserved_count: int, used_count: int, max_col: int) -> None:
+    for row in range(start_row + used_count, start_row + reserved_count):
+        for col in range(SECTION_LABEL_COL, max_col + 1):
+            _clear_cell_value_keep_style(ws, row, col)
+        _clear_cell_value_keep_style(ws, row, TEMPLATE_ITEM_TEXT_COL)
+        if ITEM_TEXT_COL != TEMPLATE_ITEM_TEXT_COL:
+            _clear_cell_value_keep_style(ws, row, ITEM_TEXT_COL)
+
+
+
+def _fill_case_header(ws: Worksheet, test_cases: List[Dict[str, Any]], pcl_row: int) -> None:
+    _print_progress(f"ケース列ヘッダとPCLを書き込みます: {len(test_cases)} 件")
+    for case_index, test_case in enumerate(test_cases):
+        col = CASE_START_COL + case_index
+        _set_cell_value_safe(ws, CASE_HEADER_ROW, col, test_case.get("case_no") or test_case.get("case_id"))
+        header_cell = ws.cell(row=CASE_HEADER_ROW, column=col)
+        if header_cell.__class__.__name__ == "MergedCell":
+            for merged_range in ws.merged_cells.ranges:
+                if merged_range.min_row <= CASE_HEADER_ROW <= merged_range.max_row and merged_range.min_col <= col <= merged_range.max_col:
+                    header_cell = ws.cell(merged_range.min_row, merged_range.min_col)
+                    break
+        header_cell.alignment = CENTER
+
+        pcl_list = test_case.get("pcl", [])
+        pcl_text = pcl_list[0] if pcl_list else "N"
+        _set_cell_value_safe(ws, pcl_row, col, pcl_text)
+        pcl_cell = ws.cell(pcl_row, col)
+        if pcl_cell.__class__.__name__ == "MergedCell":
+            for merged_range in ws.merged_cells.ranges:
+                if merged_range.min_row <= pcl_row <= merged_range.max_row and merged_range.min_col <= col <= merged_range.max_col:
+                    pcl_cell = ws.cell(merged_range.min_row, merged_range.min_col)
+                    break
+        pcl_cell.alignment = CENTER
+        fill = PCL_COLOR_MAP.get(pcl_text)
+        if fill:
+            pcl_cell.fill = fill
+        _print_case_progress("ケースヘッダ書き込み進捗", case_index + 1, len(test_cases))
+
+
+
+def _clear_unused_case_columns(ws: Worksheet, start_col: int, used_count: int, max_clear_row: int) -> None:
+    col = start_col + used_count
+    while col <= ws.max_column:
+        header_value = ws.cell(row=CASE_HEADER_ROW, column=col).value
+        if header_value is None or str(header_value).strip() == "":
+            break
+        for row in range(1, max_clear_row + 1):
+            _clear_cell_value_keep_style(ws, row, col)
+        col += 1
+
+
+
+def _write_metadata(ws: Worksheet, screen_id: str, screen_name: str) -> None:
+    _set_cell_value_safe(ws, 1, 2, screen_id)
+    _set_cell_value_safe(ws, 2, 2, screen_name)
 
 
 
 def _write_case_detail_sheet(wb: Workbook, test_cases: List[Dict[str, Any]]) -> None:
+    if "CaseList" in wb.sheetnames:
+        del wb["CaseList"]
+
     ws = wb.create_sheet("CaseList")
     headers = [
         "case_no",
@@ -237,6 +429,7 @@ def _write_case_detail_sheet(wb: Workbook, test_cases: List[Dict[str, Any]]) -> 
         "category",
         "test_viewpoint_id",
         "test_viewpoint",
+        "pcl",
         "check_condition_ids",
         "action_ids",
         "confirmation_ids",
@@ -256,21 +449,23 @@ def _write_case_detail_sheet(wb: Workbook, test_cases: List[Dict[str, Any]]) -> 
         ws.cell(row=row_index, column=3).value = test_case.get("category")
         ws.cell(row=row_index, column=4).value = test_case.get("test_viewpoint_id")
         ws.cell(row=row_index, column=5).value = test_case.get("test_viewpoint")
-        ws.cell(row=row_index, column=6).value = ", ".join(test_case.get("check_condition_ids", []))
-        ws.cell(row=row_index, column=7).value = ", ".join(test_case.get("action_ids", []))
-        ws.cell(row=row_index, column=8).value = ", ".join(test_case.get("confirmation_ids", []))
-        ws.cell(row=row_index, column=9).value = ", ".join(test_case.get("source_basis", []))
+        ws.cell(row=row_index, column=6).value = ", ".join(test_case.get("pcl", []))
+        ws.cell(row=row_index, column=7).value = ", ".join(test_case.get("check_condition_ids", []))
+        ws.cell(row=row_index, column=8).value = ", ".join(test_case.get("action_ids", []))
+        ws.cell(row=row_index, column=9).value = ", ".join(test_case.get("confirmation_ids", []))
+        ws.cell(row=row_index, column=10).value = ", ".join(test_case.get("source_basis", []))
 
     widths = {
         "A": 12,
         "B": 12,
         "C": 14,
         "D": 16,
-        "E": 36,
-        "F": 20,
+        "E": 42,
+        "F": 10,
         "G": 20,
         "H": 20,
-        "I": 30,
+        "I": 20,
+        "J": 30,
     }
     for col_letter, width in widths.items():
         ws.column_dimensions[col_letter].width = width
@@ -279,43 +474,19 @@ def _write_case_detail_sheet(wb: Workbook, test_cases: List[Dict[str, Any]]) -> 
 
 
 
-def generate_excel(
-    json_path: str | Path,
-    output_path: str | Path,
-    sheet_name: str = "TestSpec",
-) -> Path:
-    data = _load_json(json_path)
-    _validate_testcases(data)
+def _write_definitions_sheet(
+    wb: Workbook,
+    check_conditions: List[Dict[str, str]],
+    actions: List[Dict[str, str]],
+    confirmations: List[Dict[str, str]],
+) -> None:
+    if "Definitions" in wb.sheetnames:
+        del wb["Definitions"]
 
-    screen_id = str(data.get("screen_id", "")).strip()
-    screen_name = str(data.get("screen_name", "")).strip()
-    definitions = data["definitions"]
-    test_cases = data.get("test_cases", [])
-
-    check_conditions = definitions.get("check_conditions", [])
-    actions = definitions.get("actions", [])
-    confirmations = definitions.get("confirmations", [])
-
-    wb = Workbook()
-    ws = wb.active
-    ws.title = sheet_name
-    ws.freeze_panes = "D8"
-    ws.sheet_view.showGridLines = False
-
-    row = _write_title(ws, screen_id, screen_name, len(test_cases))
-    row = _write_case_header(ws, row, test_cases)
-    row = _write_pcl_row(ws, row, test_cases)
-    row = _write_section(ws, row, "チェック条件", check_conditions, test_cases, "check_condition_ids")
-    row = _write_section(ws, row, "アクション", actions, test_cases, "action_ids")
-    row = _write_section(ws, row, "確認内容", confirmations, test_cases, "confirmation_ids")
-
-    _set_column_widths(ws, len(test_cases))
-    _apply_border_range(ws, 1, row - 1, 1, 3 + len(test_cases))
-
-    definition_map_sheet = wb.create_sheet("Definitions")
-    definition_headers = ["type", "id", "text"]
-    for col, header in enumerate(definition_headers, start=1):
-        cell = definition_map_sheet.cell(row=1, column=col)
+    ws = wb.create_sheet("Definitions")
+    headers = ["type", "id", "text"]
+    for col, header in enumerate(headers, start=1):
+        cell = ws.cell(row=1, column=col)
         cell.value = header
         cell.font = Font(bold=True)
         cell.alignment = CENTER
@@ -328,22 +499,219 @@ def generate_excel(
         ("confirmation", confirmations),
     ]:
         for item in section_items:
-            definition_map_sheet.cell(row=definition_row, column=1).value = section_type
-            definition_map_sheet.cell(row=definition_row, column=2).value = item.get("id")
-            definition_map_sheet.cell(row=definition_row, column=3).value = item.get("text")
+            ws.cell(row=definition_row, column=1).value = section_type
+            ws.cell(row=definition_row, column=2).value = item.get("id")
+            ws.cell(row=definition_row, column=3).value = item.get("text")
             definition_row += 1
 
-    definition_map_sheet.column_dimensions["A"].width = 18
-    definition_map_sheet.column_dimensions["B"].width = 12
-    definition_map_sheet.column_dimensions["C"].width = 60
-    _apply_border_range(definition_map_sheet, 1, max(2, definition_row - 1), 1, 3)
+    ws.column_dimensions["A"].width = 18
+    ws.column_dimensions["B"].width = 12
+    ws.column_dimensions["C"].width = 60
+    _apply_border_range(ws, 1, max(2, definition_row - 1), 1, 3)
 
+
+
+def _generate_from_template(
+    data: Dict[str, Any],
+    output_path: str | Path,
+    template_path: str | Path,
+    sheet_name: Optional[str] = None,
+) -> Path:
+    template = Path(template_path)
+    if not template.exists():
+        raise ExcelGenerationError(f"Template file not found: {template}")
+
+    wb = load_workbook(template)
+    _print_progress(f"テンプレートを読み込みました: {template}")
+    ws = wb[sheet_name] if sheet_name and sheet_name in wb.sheetnames else wb.active
+
+    screen_id = str(data.get("screen_id", "")).strip()
+    screen_name = str(data.get("screen_name", "")).strip()
+    definitions = data["definitions"]
+    test_cases = data.get("test_cases", [])
+    check_conditions = definitions.get("check_conditions", [])
+    actions = definitions.get("actions", [])
+    confirmations = definitions.get("confirmations", [])
+
+    _print_progress(
+        f"生成開始: ケース数={len(test_cases)}, チェック条件={len(check_conditions)}, アクション={len(actions)}, 確認内容={len(confirmations)}"
+    )
+
+    _ensure_case_columns(ws, len(test_cases))
+
+    check_extra = _ensure_section_rows(
+        ws,
+        CHECK_START_ROW,
+        CHECK_END_ROW,
+        len(check_conditions),
+        CHECK_TEMPLATE_COPY_ROW,
+    )
+    action_start = ACTION_START_ROW + check_extra
+    action_end = ACTION_END_ROW + check_extra
+
+    action_extra = _ensure_section_rows(
+        ws,
+        action_start,
+        action_end,
+        len(actions),
+        ACTION_TEMPLATE_COPY_ROW + check_extra,
+    )
+    confirm_start = CONFIRM_START_ROW + check_extra + action_extra
+    confirm_end = CONFIRM_END_ROW + check_extra + action_extra
+
+    confirm_extra = _ensure_section_rows(
+        ws,
+        confirm_start,
+        confirm_end,
+        len(confirmations),
+        CONFIRM_TEMPLATE_COPY_ROW + check_extra + action_extra,
+    )
+    pcl_row = PCL_ROW + check_extra + action_extra + confirm_extra
+
+    _print_progress("テンプレートへの書き込みを開始します")
+    _write_metadata(ws, screen_id, screen_name)
+    _fill_case_header(ws, test_cases, pcl_row)
+
+    _fill_template_section_rows(ws, CHECK_START_ROW, check_conditions, "チェック条件", "check_condition_ids", test_cases)
+    _fill_template_section_rows(ws, action_start, actions, "アクション", "action_ids", test_cases)
+    _fill_template_section_rows(ws, confirm_start, confirmations, "確認内容", "confirmation_ids", test_cases)
+
+    _clear_unused_rows(ws, CHECK_START_ROW, max(0, CHECK_END_ROW - CHECK_START_ROW + 1), len(check_conditions), ws.max_column)
+    _clear_unused_rows(ws, action_start, max(0, action_end - action_start + 1), len(actions), ws.max_column)
+    _clear_unused_rows(ws, confirm_start, max(0, confirm_end - confirm_start + 1), len(confirmations), ws.max_column)
+    _clear_unused_case_columns(ws, CASE_START_COL, len(test_cases), pcl_row)
+
+    _set_cell_value_safe(ws, pcl_row, SECTION_LABEL_COL, "PCL区分")
+    ws.freeze_panes = f"{get_column_letter(CASE_START_COL)}{CHECK_START_ROW}"
+
+    _print_progress("補助シートを書き込みます")
+    _write_definitions_sheet(wb, check_conditions, actions, confirmations)
     _write_case_detail_sheet(wb, test_cases)
 
     output = Path(output_path)
     output.parent.mkdir(parents=True, exist_ok=True)
+    _print_progress(f"Excelを保存します: {output}")
     wb.save(output)
+    _print_progress("Excel保存が完了しました")
     return output
+
+
+
+def _generate_simple_matrix(
+    data: Dict[str, Any],
+    output_path: str | Path,
+    sheet_name: str = "TestSpec",
+) -> Path:
+    screen_id = str(data.get("screen_id", "")).strip()
+    screen_name = str(data.get("screen_name", "")).strip()
+    definitions = data["definitions"]
+    test_cases = data.get("test_cases", [])
+
+    check_conditions = definitions.get("check_conditions", [])
+    actions = definitions.get("actions", [])
+    confirmations = definitions.get("confirmations", [])
+
+    _print_progress(
+        f"簡易マトリクス生成開始: ケース数={len(test_cases)}, チェック条件={len(check_conditions)}, アクション={len(actions)}, 確認内容={len(confirmations)}"
+    )
+
+    wb = Workbook()
+    ws = wb.active
+    ws.title = sheet_name
+    ws.freeze_panes = "D8"
+    ws.sheet_view.showGridLines = False
+
+    ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=max(4, 3 + len(test_cases)))
+    title_cell = ws.cell(row=1, column=1)
+    title_cell.value = f"単体テスト仕様書マトリクス - {screen_id} {screen_name}".strip()
+    title_cell.font = Font(bold=True, size=14)
+    title_cell.alignment = LEFT
+    title_cell.fill = HEADER_FILL
+
+    row = 5
+    ws.cell(row=row, column=1).value = "区分"
+    ws.cell(row=row, column=2).value = "項番"
+    ws.cell(row=row, column=3).value = "内容"
+    for case_index, test_case in enumerate(test_cases):
+        col = 4 + case_index
+        ws.cell(row=row, column=col).value = test_case.get("case_no") or test_case.get("case_id")
+        ws.cell(row=row, column=col).alignment = CENTER
+        ws.cell(row=row, column=col).fill = HEADER_FILL
+    row += 1
+
+    ws.cell(row=row, column=1).value = "PCL"
+    for case_index, test_case in enumerate(test_cases):
+        col = 4 + case_index
+        pcl_value = (test_case.get("pcl") or ["N"])[0]
+        ws.cell(row=row, column=col).value = pcl_value
+        ws.cell(row=row, column=col).alignment = CENTER
+        fill = PCL_COLOR_MAP.get(pcl_value)
+        if fill:
+            ws.cell(row=row, column=col).fill = fill
+    row += 1
+
+    for section_title, items, relation_key in [
+        ("チェック条件", check_conditions, "check_condition_ids"),
+        ("アクション", actions, "action_ids"),
+        ("確認内容", confirmations, "confirmation_ids"),
+    ]:
+        start_row = row
+        end_row = row + max(0, len(items) - 1)
+        if items:
+            ws.merge_cells(start_row=start_row, start_column=1, end_row=end_row, end_column=1)
+            ws.cell(row=start_row, column=1).value = section_title
+            ws.cell(row=start_row, column=1).alignment = CENTER
+            ws.cell(row=start_row, column=1).fill = SECTION_FILL
+        for index, item in enumerate(items):
+            current_row = row + index
+            item_id = str(item.get("id", "")).strip()
+            item_text = str(item.get("text", "")).strip()
+            ws.cell(row=current_row, column=2).value = item_id
+            ws.cell(row=current_row, column=3).value = item_text
+            ws.cell(row=current_row, column=3).alignment = LEFT
+            for case_index, test_case in enumerate(test_cases):
+                col = 4 + case_index
+                related_ids = test_case.get(relation_key, [])
+                ws.cell(row=current_row, column=col).value = "○" if item_id in related_ids else None
+                ws.cell(row=current_row, column=col).alignment = CENTER
+        row += len(items)
+
+    _print_progress("補助シートを書き込みます")
+    _write_definitions_sheet(wb, check_conditions, actions, confirmations)
+    _write_case_detail_sheet(wb, test_cases)
+
+    output = Path(output_path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    _print_progress(f"Excelを保存します: {output}")
+    wb.save(output)
+    _print_progress("Excel保存が完了しました")
+    return output
+
+
+
+def generate_excel(
+    json_path: str | Path,
+    output_path: str | Path,
+    sheet_name: str = "TestSpec",
+    template_path: Optional[str | Path] = None,
+) -> Path:
+    data = _load_json(json_path)
+    _validate_testcases(data)
+
+    resolved_template = Path(template_path) if template_path else TEMPLATE_PATH
+    if resolved_template.exists():
+        return _generate_from_template(
+            data=data,
+            output_path=output_path,
+            template_path=resolved_template,
+            sheet_name=sheet_name,
+        )
+
+    return _generate_simple_matrix(
+        data=data,
+        output_path=output_path,
+        sheet_name=sheet_name,
+    )
 
 
 
@@ -354,12 +722,14 @@ def main() -> None:
     parser.add_argument("json_path", help="Path to testcases.json")
     parser.add_argument("output_path", help="Path to output .xlsx file")
     parser.add_argument("--sheet-name", default="TestSpec", help="Main sheet name")
+    parser.add_argument("--template-path", default=str(TEMPLATE_PATH), help="Path to template .xlsx file")
     args = parser.parse_args()
 
     output = generate_excel(
         json_path=args.json_path,
         output_path=args.output_path,
         sheet_name=args.sheet_name,
+        template_path=args.template_path,
     )
     print(f"Excel generated: {output}")
 
