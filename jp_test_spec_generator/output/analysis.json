@@ -1,6 +1,6 @@
 {
   "screen_id": "Summary",
-  "screen_name": "画面名称未判定",
+  "screen_name": "概況",
   "sources": {
     "aspx": "/Users/liuenyang/Documents/GitHub/Many Tools/jp_test_spec_generator/sample_input/Summary.aspx",
     "codebehind": "/Users/liuenyang/Documents/GitHub/Many Tools/jp_test_spec_generator/sample_input/Summary.aspx.cs",
@@ -23,7 +23,18 @@
         "runat": "server",
         "cssclass": "js-disable-in-ref"
       },
-      "label": null
+      "label": null,
+      "control_role": "action",
+      "test_target": false,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "hidReferenceMode",
@@ -41,7 +52,18 @@
         "runat": "server",
         "value": "0"
       },
-      "label": null
+      "label": null,
+      "control_role": "hidden",
+      "test_target": false,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "ddlBranchNo",
@@ -62,7 +84,18 @@
         "autopostback": "True",
         "onselectedindexchanged": "ddlBranchNo_SelectedIndexChanged"
       },
-      "label": "店番・店名"
+      "label": "店番・店名",
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "tbxCustomerNo",
@@ -83,7 +116,18 @@
         "cssclass": "js-disable-in-ref",
         "required": ""
       },
-      "label": "顧客番号"
+      "label": "顧客番号",
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": true,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": "12",
+        "business_rule": null
+      }
     },
     {
       "id": "lblCustomerName",
@@ -102,7 +146,18 @@
         "cssclass": "readonly",
         "style": "margin-left: 10px;"
       },
-      "label": null
+      "label": "顧客番号",
+      "control_role": "display",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "btnCustShow",
@@ -122,7 +177,18 @@
         "cssclass": "button-normal js-disable-in-ref",
         "onclick": "btnCustShow_Click"
       },
-      "label": null
+      "label": "顧客番号",
+      "control_role": "action",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "btnCustSearch",
@@ -141,7 +207,18 @@
         "class": "button-normal js-disable-in-ref",
         "value": "検索"
       },
-      "label": null
+      "label": "顧客番号",
+      "control_role": "action",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "btnClear",
@@ -160,7 +237,18 @@
         "class": "button-normal js-disable-in-ref",
         "value": "クリア"
       },
-      "label": null
+      "label": "顧客番号",
+      "control_role": "action",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "rblJisyoStatus",
@@ -179,7 +267,18 @@
         "repeatdirection": "Horizontal",
         "cssclass": "radio-list js-disable-in-ref"
       },
-      "label": null
+      "label": "事象ステータス",
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "rptSaikenMeisai",
@@ -197,7 +296,18 @@
         "runat": "server",
         "onitemcommand": "rptSaikenMeisai_ItemCommand"
       },
-      "label": null
+      "label": null,
+      "control_role": "list",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "lnkSaikenNo",
@@ -217,7 +327,18 @@
         "commandname": "SaikenNo",
         "commandargument": "<%# Eval(\"JGskm_ShinseiNo\") %>"
       },
-      "label": null
+      "label": null,
+      "control_role": "action",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "rptJishoList",
@@ -234,7 +355,18 @@
         "id": "rptJishoList",
         "runat": "server"
       },
-      "label": null
+      "label": null,
+      "control_role": "list",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "lblUpdateDate",
@@ -251,7 +383,18 @@
         "id": "lblUpdateDate",
         "runat": "server"
       },
-      "label": "最終更新日"
+      "label": "最終更新日",
+      "control_role": "display",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "lblUpdateUser",
@@ -268,7 +411,18 @@
         "id": "lblUpdateUser",
         "runat": "server"
       },
-      "label": "最終更新者"
+      "label": "最終更新者",
+      "control_role": "display",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "hidUpdateDateTime",
@@ -285,7 +439,18 @@
         "id": "hidUpdateDateTime",
         "runat": "server"
       },
-      "label": null
+      "label": null,
+      "control_role": "hidden",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "txtReason",
@@ -307,7 +472,18 @@
         "width": "100%",
         "cssclass": "js-disable-in-ref"
       },
-      "label": "事故及び延滞に至った原因"
+      "label": "事故及び延滞に至った原因",
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": "2000",
+        "business_rule": null
+      }
     },
     {
       "id": "txtCurrentSituation",
@@ -329,7 +505,18 @@
         "width": "100%",
         "cssclass": "js-disable-in-ref"
       },
-      "label": null
+      "label": "債務者および保証人の現況",
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": "2000",
+        "business_rule": null
+      }
     },
     {
       "id": "txtPolicy",
@@ -351,7 +538,18 @@
         "width": "100%",
         "cssclass": "js-disable-in-ref"
       },
-      "label": null
+      "label": "回収、解消の方針、スケジュール",
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": "2000",
+        "business_rule": null
+      }
     },
     {
       "id": "txtRemarks",
@@ -373,7 +571,18 @@
         "width": "100%",
         "cssclass": "js-disable-in-ref"
       },
-      "label": null
+      "label": "備考、特記事項",
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": "2000",
+        "business_rule": null
+      }
     },
     {
       "id": "btnSummaryClear",
@@ -392,7 +601,18 @@
         "class": "button-normal js-disable-in-ref",
         "value": "クリア"
       },
-      "label": null
+      "label": null,
+      "control_role": "action",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "btnRegister",
@@ -412,7 +632,18 @@
         "cssclass": "button-normal js-disable-in-ref",
         "onclick": "btnRegister_Click"
       },
-      "label": null
+      "label": null,
+      "control_role": "action",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "chkAllReport",
@@ -429,7 +660,18 @@
         "id": "chkAllReport",
         "runat": "server"
       },
-      "label": null
+      "label": null,
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "rptReportList",
@@ -446,7 +688,18 @@
         "id": "rptReportList",
         "runat": "server"
       },
-      "label": null
+      "label": null,
+      "control_role": "list",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "chkReport",
@@ -463,7 +716,18 @@
         "id": "chkReport",
         "runat": "server"
       },
-      "label": null
+      "label": null,
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "hidReportName",
@@ -481,7 +745,18 @@
         "runat": "server",
         "value": "<%# Eval(\"ReportName\") %>"
       },
-      "label": null
+      "label": null,
+      "control_role": "hidden",
+      "test_target": false,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "hidReportClass",
@@ -499,7 +774,18 @@
         "runat": "server",
         "value": "<%# Eval(\"ReportClass\") %>"
       },
-      "label": null
+      "label": null,
+      "control_role": "hidden",
+      "test_target": false,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "hidElementId",
@@ -517,7 +803,18 @@
         "runat": "server",
         "value": "<%# Eval(\"ElementId\") %>"
       },
-      "label": null
+      "label": null,
+      "control_role": "hidden",
+      "test_target": false,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "hidDefinition",
@@ -535,7 +832,18 @@
         "runat": "server",
         "value": "<%# Eval(\"Definition\") %>"
       },
-      "label": null
+      "label": null,
+      "control_role": "hidden",
+      "test_target": false,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "hidKind",
@@ -553,7 +861,18 @@
         "runat": "server",
         "value": "<%# Eval(\"Kind\") %>"
       },
-      "label": null
+      "label": null,
+      "control_role": "hidden",
+      "test_target": false,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     },
     {
       "id": "btnDownload",
@@ -572,257 +891,315 @@
         "text": "ダウンロード",
         "cssclass": "button-normal js-disable-in-ref"
       },
-      "label": null
+      "label": null,
+      "control_role": "action",
+      "test_target": true,
+      "source_basis": [
+        "aspx"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null
+      }
     }
   ],
-  "events": [
-    {
-      "name": "OnInit",
-      "event_type": "Method",
-      "related_controls": []
-    },
-    {
-      "name": "InitializeComponent",
-      "event_type": "Method",
-      "related_controls": []
-    },
-    {
-      "name": "Page_Load",
-      "event_type": "PageLoad",
-      "related_controls": []
-    },
-    {
-      "name": "LoadJisyoStatus",
-      "event_type": "Method",
-      "related_controls": []
-    },
-    {
-      "name": "SetReferenceMode",
-      "event_type": "Method",
-      "related_controls": []
-    },
-    {
-      "name": "ApplyBranchControlByUserRole",
-      "event_type": "Method",
-      "related_controls": []
-    },
-    {
-      "name": "InitializeBranchDropDown",
-      "event_type": "Method",
-      "related_controls": []
-    },
-    {
-      "name": "ddlBranchNo_SelectedIndexChanged",
-      "event_type": "SelectedIndexChanged",
-      "related_controls": []
-    },
-    {
-      "name": "ClearDisplayArea",
-      "event_type": "Method",
-      "related_controls": []
-    },
-    {
-      "name": "Display",
-      "event_type": "Method",
-      "related_controls": []
-    },
-    {
-      "name": "DisplaySaikenMeisaiList",
-      "event_type": "Method",
-      "related_controls": []
-    },
-    {
-      "name": "DisplayJishoList",
-      "event_type": "Method",
-      "related_controls": []
-    },
-    {
-      "name": "DisplayComment",
-      "event_type": "Method",
-      "related_controls": []
-    },
-    {
-      "name": "ListPaging1_Click",
-      "event_type": "Click",
-      "related_controls": []
-    },
-    {
-      "name": "btnCustShow_Click",
-      "event_type": "Click",
-      "related_controls": []
-    },
-    {
-      "name": "btnRegister_Click",
-      "event_type": "Click",
-      "related_controls": []
-    },
-    {
-      "name": "rptSaikenMeisai_ItemCommand",
-      "event_type": "ItemCommand",
-      "related_controls": []
-    },
-    {
-      "name": "InitReportNameInfo",
-      "event_type": "Method",
-      "related_controls": []
-    },
-    {
-      "name": "SetReportObjectInfo",
-      "event_type": "Method",
-      "related_controls": []
-    }
-  ],
+  "events": {
+    "user_actions": [
+      {
+        "name": "ddlBranchNo_SelectedIndexChanged",
+        "event_type": "SelectedIndexChanged",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "ListPaging1_Click",
+        "event_type": "Click",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "btnCustShow_Click",
+        "event_type": "Click",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "btnRegister_Click",
+        "event_type": "Click",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "rptSaikenMeisai_ItemCommand",
+        "event_type": "ItemCommand",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      }
+    ],
+    "lifecycle": [
+      {
+        "name": "OnInit",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "InitializeComponent",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "Page_Load",
+        "event_type": "PageLoad",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      }
+    ],
+    "internal_methods": [
+      {
+        "name": "LoadJisyoStatus",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "SetReferenceMode",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "ApplyBranchControlByUserRole",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "InitializeBranchDropDown",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "ClearDisplayArea",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "Display",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "DisplaySaikenMeisaiList",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "DisplayJishoList",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "DisplayComment",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "InitReportNameInfo",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "SetReportObjectInfo",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      }
+    ]
+  },
   "validations": [
     {
       "target": "tbxCustomerNo",
-      "check_type": "required",
-      "detail": "顧客番号 は必須入力の可能性あり",
-      "source": "aspx"
+      "check_type": "required_ui_hint",
+      "detail": "顧客番号 に required 属性あり",
+      "source": "aspx",
+      "source_basis": [
+        "aspx.required"
+      ]
     },
     {
       "target": "tbxCustomerNo",
       "check_type": "maxlength",
       "detail": "maxlength=12",
-      "source": "aspx"
+      "source": "aspx",
+      "source_basis": [
+        "aspx.maxlength"
+      ]
     },
     {
       "target": "txtReason",
       "check_type": "maxlength",
       "detail": "maxlength=2000",
-      "source": "aspx"
+      "source": "aspx",
+      "source_basis": [
+        "aspx.maxlength"
+      ]
     },
     {
       "target": "txtCurrentSituation",
       "check_type": "maxlength",
       "detail": "maxlength=2000",
-      "source": "aspx"
+      "source": "aspx",
+      "source_basis": [
+        "aspx.maxlength"
+      ]
     },
     {
       "target": "txtPolicy",
       "check_type": "maxlength",
       "detail": "maxlength=2000",
-      "source": "aspx"
+      "source": "aspx",
+      "source_basis": [
+        "aspx.maxlength"
+      ]
     },
     {
       "target": "txtRemarks",
       "check_type": "maxlength",
       "detail": "maxlength=2000",
-      "source": "aspx"
+      "source": "aspx",
+      "source_basis": [
+        "aspx.maxlength"
+      ]
     },
     {
       "check_type": "length_check_hint",
       "target": null,
       "detail": "コードビハインド内に桁数・長さチェックの可能性あり",
-      "source": "codebehind"
+      "source": "codebehind",
+      "source_basis": [
+        "codebehind"
+      ]
     },
     {
       "check_type": "message_output_hint",
       "target": null,
       "detail": "メッセージエリア出力処理の可能性あり",
-      "source": "codebehind"
+      "source": "codebehind",
+      "source_basis": [
+        "codebehind"
+      ]
     },
     {
       "check_type": "concurrency_check_hint",
       "target": "hidUpdateDateTime",
       "detail": "排他チェックの可能性あり",
-      "source": "codebehind"
+      "source": "codebehind",
+      "source_basis": [
+        "codebehind"
+      ]
     }
   ],
   "screen_modes": [
     {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "Dummy は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
       "mode_name": "reference_mode",
-      "detail": "画面上に参照モード用HiddenFieldあり",
-      "source": "aspx"
+      "trigger": [
+        "hidReferenceMode",
+        "QueryString"
+      ],
+      "effects": {
+        "disable_controls": [
+          "Dummy",
+          "btnClear",
+          "btnCustSearch",
+          "btnCustShow",
+          "btnDownload",
+          "btnRegister",
+          "btnSummaryClear",
+          "ddlBranchNo",
+          "lnkSaikenNo",
+          "rblJisyoStatus",
+          "tbxCustomerNo",
+          "txtCurrentSituation",
+          "txtPolicy",
+          "txtReason",
+          "txtRemarks"
+        ]
+      },
+      "source": [
+        "aspx",
+        "codebehind"
+      ],
+      "source_basis": [
+        "hidReferenceMode",
+        "js-disable-in-ref",
+        "QueryString hint"
+      ]
     },
     {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "ddlBranchNo は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "tbxCustomerNo は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "btnCustShow は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "btnCustSearch は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "btnClear は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "rblJisyoStatus は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "lnkSaikenNo は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "txtReason は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "txtCurrentSituation は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "txtPolicy は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "txtRemarks は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "btnSummaryClear は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "btnRegister は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
-      "mode_name": "reference_mode_disable_control",
-      "detail": "btnDownload は参照モード時に非活性化対象の可能性あり",
-      "source": "aspx"
-    },
-    {
-      "mode_name": "reference_mode_hint",
-      "detail": "QueryStringを利用した画面モード分岐の可能性あり",
-      "source": "codebehind"
-    },
-    {
-      "mode_name": "disable_control_hint",
-      "detail": "条件によりコントロール非活性化処理の可能性あり",
-      "source": "codebehind"
-    },
-    {
-      "mode_name": "initial_display_hint",
-      "detail": "初期表示処理あり",
-      "source": "codebehind"
+      "mode_name": "initial_display",
+      "trigger": [
+        "!IsPostBack"
+      ],
+      "effects": {
+        "notes": [
+          "初期表示処理あり"
+        ]
+      },
+      "source": [
+        "codebehind"
+      ],
+      "source_basis": [
+        "!IsPostBack"
+      ]
     }
   ],
   "notes": [
@@ -853,6 +1230,13 @@
     "回収、解消の方針、スケジュール",
     "備考、特記事項",
     "帳票名"
+  ],
+  "title_candidates": [
+    {
+      "tag": "div",
+      "text": "概況",
+      "css_class": "title"
+    }
   ],
   "spec_summary": {
     "sheet_count": 0,

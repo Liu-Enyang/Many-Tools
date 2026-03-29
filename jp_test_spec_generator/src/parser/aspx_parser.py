@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from bs4 import BeautifulSoup
 
@@ -19,6 +19,13 @@ ASP_CONTROL_TYPES = {
     "asp:repeater": "Repeater",
 }
 
+TITLE_CLASS_CANDIDATES = {
+    "title",
+    "page-title",
+    "screen-title",
+    "main-title",
+}
+
 
 def _normalize_attr(value: Any) -> Any:
     if value is None:
@@ -32,7 +39,13 @@ def _tag_name(tag) -> str:
     return getattr(tag, "name", "").lower()
 
 
-def _extract_control(tag) -> Dict[str, Any] | None:
+def _clean_text(value: Any) -> str:
+    if value is None:
+        return ""
+    return str(value).strip()
+
+
+def _extract_control(tag) -> Optional[Dict[str, Any]]:
     name = _tag_name(tag)
 
     if name in ASP_CONTROL_TYPES:
@@ -95,13 +108,65 @@ def _extract_table_headers(soup: BeautifulSoup) -> List[str]:
     return headers
 
 
+def _extract_title_candidates(soup: BeautifulSoup) -> List[Dict[str, str]]:
+    candidates: List[Dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+
+    for tag in soup.find_all(True):
+        tag_name = _tag_name(tag)
+        css_class = _normalize_attr(tag.get("class")) or ""
+        text = tag.get_text(" ", strip=True)
+
+        if not text:
+            continue
+
+        normalized_class = css_class.lower()
+        is_title_tag = tag_name in {"h1", "h2", "h3"}
+        is_title_class = any(cls in normalized_class.split() for cls in TITLE_CLASS_CANDIDATES)
+
+        if not is_title_tag and not is_title_class:
+            continue
+
+        key = (tag_name, text)
+        if key in seen:
+            continue
+        seen.add(key)
+
+        candidates.append({
+            "tag": tag_name,
+            "text": text,
+            "css_class": css_class,
+        })
+
+    return candidates
+
+
+def _attach_nearest_header_labels(controls: List[Dict[str, Any]], soup: BeautifulSoup) -> None:
+    control_by_id = {control.get("id"): control for control in controls if control.get("id")}
+
+    for tr in soup.find_all("tr"):
+        th = tr.find("th")
+        if not th:
+            continue
+
+        header_text = th.get_text(" ", strip=True)
+        if not header_text:
+            continue
+
+        for td in tr.find_all("td"):
+            for tag in td.find_all(True):
+                control_id = tag.get("id")
+                if control_id and control_id in control_by_id:
+                    if not control_by_id[control_id].get("label"):
+                        control_by_id[control_id]["label"] = header_text
+
+
 def parse_aspx(file_path: str | Path) -> Dict[str, Any]:
     path = Path(file_path)
     content = path.read_text(encoding="utf-8", errors="ignore")
 
     soup = BeautifulSoup(content, "lxml-xml")
     if soup is None or not soup.find():
-        # fallback
         soup = BeautifulSoup(content, "lxml")
 
     controls: List[Dict[str, Any]] = []
@@ -124,6 +189,8 @@ def parse_aspx(file_path: str | Path) -> Dict[str, Any]:
     for control in controls:
         control["label"] = label_map.get(control["id"])
 
+    _attach_nearest_header_labels(controls, soup)
+
     page_match = re.search(r'Inherits="([^"]+)"', content, re.IGNORECASE)
     codebehind_match = re.search(r'CodeBehind="([^"]+)"', content, re.IGNORECASE)
 
@@ -133,6 +200,7 @@ def parse_aspx(file_path: str | Path) -> Dict[str, Any]:
         "codebehind": codebehind_match.group(1) if codebehind_match else None,
         "controls": controls,
         "table_headers": _extract_table_headers(soup),
+        "title_candidates": _extract_title_candidates(soup),
         "raw_summary": {
             "control_count": len(controls),
         },
