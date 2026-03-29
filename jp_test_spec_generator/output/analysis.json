@@ -1,0 +1,861 @@
+{
+  "screen_id": "Summary",
+  "screen_name": "画面名称未判定",
+  "sources": {
+    "aspx": "/Users/liuenyang/Documents/GitHub/Many Tools/jp_test_spec_generator/sample_input/Summary.aspx",
+    "codebehind": "/Users/liuenyang/Documents/GitHub/Many Tools/jp_test_spec_generator/sample_input/Summary.aspx.cs",
+    "spec": "/Users/liuenyang/Documents/GitHub/Many Tools/jp_test_spec_generator/sample_input/spec.xlsx"
+  },
+  "controls": [
+    {
+      "id": "Dummy",
+      "type": "LinkButton",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "Dummy",
+        "runat": "server",
+        "cssclass": "js-disable-in-ref"
+      },
+      "label": null
+    },
+    {
+      "id": "hidReferenceMode",
+      "type": "HiddenField",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "hidReferenceMode",
+        "runat": "server",
+        "value": "0"
+      },
+      "label": null
+    },
+    {
+      "id": "ddlBranchNo",
+      "type": "DropDownList",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": "ddlBranchNo_SelectedIndexChanged",
+      "client_id_mode": "Static",
+      "required": false,
+      "raw_attributes": {
+        "id": "ddlBranchNo",
+        "runat": "server",
+        "clientidmode": "Static",
+        "cssclass": "js-disable-in-ref",
+        "autopostback": "True",
+        "onselectedindexchanged": "ddlBranchNo_SelectedIndexChanged"
+      },
+      "label": "店番・店名"
+    },
+    {
+      "id": "tbxCustomerNo",
+      "type": "TextBox",
+      "runat": "server",
+      "text": null,
+      "maxlength": "12",
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": true,
+      "raw_attributes": {
+        "id": "tbxCustomerNo",
+        "runat": "server",
+        "maxlength": "12",
+        "wrap": "False",
+        "cssclass": "js-disable-in-ref",
+        "required": ""
+      },
+      "label": "顧客番号"
+    },
+    {
+      "id": "lblCustomerName",
+      "type": "Label",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": "readonly",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "lblCustomerName",
+        "runat": "server",
+        "cssclass": "readonly",
+        "style": "margin-left: 10px;"
+      },
+      "label": null
+    },
+    {
+      "id": "btnCustShow",
+      "type": "Button",
+      "runat": "server",
+      "text": "表示",
+      "maxlength": null,
+      "css_class": "button-normal js-disable-in-ref",
+      "on_click": "btnCustShow_Click",
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "btnCustShow",
+        "runat": "server",
+        "text": "表示",
+        "cssclass": "button-normal js-disable-in-ref",
+        "onclick": "btnCustShow_Click"
+      },
+      "label": null
+    },
+    {
+      "id": "btnCustSearch",
+      "type": "HtmlButton",
+      "runat": null,
+      "text": "検索",
+      "maxlength": null,
+      "css_class": "button-normal js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "type": "button",
+        "id": "btnCustSearch",
+        "class": "button-normal js-disable-in-ref",
+        "value": "検索"
+      },
+      "label": null
+    },
+    {
+      "id": "btnClear",
+      "type": "HtmlButton",
+      "runat": null,
+      "text": "クリア",
+      "maxlength": null,
+      "css_class": "button-normal js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "type": "button",
+        "id": "btnClear",
+        "class": "button-normal js-disable-in-ref",
+        "value": "クリア"
+      },
+      "label": null
+    },
+    {
+      "id": "rblJisyoStatus",
+      "type": "RadioButtonList",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": "radio-list js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "rblJisyoStatus",
+        "runat": "server",
+        "repeatdirection": "Horizontal",
+        "cssclass": "radio-list js-disable-in-ref"
+      },
+      "label": null
+    },
+    {
+      "id": "rptSaikenMeisai",
+      "type": "Repeater",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "rptSaikenMeisai",
+        "runat": "server",
+        "onitemcommand": "rptSaikenMeisai_ItemCommand"
+      },
+      "label": null
+    },
+    {
+      "id": "lnkSaikenNo",
+      "type": "LinkButton",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "lnkSaikenNo",
+        "runat": "server",
+        "cssclass": "js-disable-in-ref",
+        "commandname": "SaikenNo",
+        "commandargument": "<%# Eval(\"JGskm_ShinseiNo\") %>"
+      },
+      "label": null
+    },
+    {
+      "id": "rptJishoList",
+      "type": "Repeater",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "rptJishoList",
+        "runat": "server"
+      },
+      "label": null
+    },
+    {
+      "id": "lblUpdateDate",
+      "type": "Label",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "lblUpdateDate",
+        "runat": "server"
+      },
+      "label": "最終更新日"
+    },
+    {
+      "id": "lblUpdateUser",
+      "type": "Label",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "lblUpdateUser",
+        "runat": "server"
+      },
+      "label": "最終更新者"
+    },
+    {
+      "id": "hidUpdateDateTime",
+      "type": "HiddenField",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "hidUpdateDateTime",
+        "runat": "server"
+      },
+      "label": null
+    },
+    {
+      "id": "txtReason",
+      "type": "TextBox",
+      "runat": "server",
+      "text": null,
+      "maxlength": "2000",
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "txtReason",
+        "runat": "server",
+        "textmode": "MultiLine",
+        "rows": "3",
+        "data-maxlength": "2000",
+        "width": "100%",
+        "cssclass": "js-disable-in-ref"
+      },
+      "label": "事故及び延滞に至った原因"
+    },
+    {
+      "id": "txtCurrentSituation",
+      "type": "TextBox",
+      "runat": "server",
+      "text": null,
+      "maxlength": "2000",
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "txtCurrentSituation",
+        "runat": "server",
+        "textmode": "MultiLine",
+        "rows": "2",
+        "data-maxlength": "2000",
+        "width": "100%",
+        "cssclass": "js-disable-in-ref"
+      },
+      "label": null
+    },
+    {
+      "id": "txtPolicy",
+      "type": "TextBox",
+      "runat": "server",
+      "text": null,
+      "maxlength": "2000",
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "txtPolicy",
+        "runat": "server",
+        "textmode": "MultiLine",
+        "rows": "1",
+        "data-maxlength": "2000",
+        "width": "100%",
+        "cssclass": "js-disable-in-ref"
+      },
+      "label": null
+    },
+    {
+      "id": "txtRemarks",
+      "type": "TextBox",
+      "runat": "server",
+      "text": null,
+      "maxlength": "2000",
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "txtRemarks",
+        "runat": "server",
+        "textmode": "MultiLine",
+        "rows": "3",
+        "data-maxlength": "2000",
+        "width": "100%",
+        "cssclass": "js-disable-in-ref"
+      },
+      "label": null
+    },
+    {
+      "id": "btnSummaryClear",
+      "type": "HtmlButton",
+      "runat": null,
+      "text": "クリア",
+      "maxlength": null,
+      "css_class": "button-normal js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "type": "button",
+        "id": "btnSummaryClear",
+        "class": "button-normal js-disable-in-ref",
+        "value": "クリア"
+      },
+      "label": null
+    },
+    {
+      "id": "btnRegister",
+      "type": "Button",
+      "runat": "server",
+      "text": "登録",
+      "maxlength": null,
+      "css_class": "button-normal js-disable-in-ref",
+      "on_click": "btnRegister_Click",
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "btnRegister",
+        "runat": "server",
+        "text": "登録",
+        "cssclass": "button-normal js-disable-in-ref",
+        "onclick": "btnRegister_Click"
+      },
+      "label": null
+    },
+    {
+      "id": "chkAllReport",
+      "type": "CheckBox",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "chkAllReport",
+        "runat": "server"
+      },
+      "label": null
+    },
+    {
+      "id": "rptReportList",
+      "type": "Repeater",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "rptReportList",
+        "runat": "server"
+      },
+      "label": null
+    },
+    {
+      "id": "chkReport",
+      "type": "CheckBox",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "chkReport",
+        "runat": "server"
+      },
+      "label": null
+    },
+    {
+      "id": "hidReportName",
+      "type": "HiddenField",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "hidReportName",
+        "runat": "server",
+        "value": "<%# Eval(\"ReportName\") %>"
+      },
+      "label": null
+    },
+    {
+      "id": "hidReportClass",
+      "type": "HiddenField",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "hidReportClass",
+        "runat": "server",
+        "value": "<%# Eval(\"ReportClass\") %>"
+      },
+      "label": null
+    },
+    {
+      "id": "hidElementId",
+      "type": "HiddenField",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "hidElementId",
+        "runat": "server",
+        "value": "<%# Eval(\"ElementId\") %>"
+      },
+      "label": null
+    },
+    {
+      "id": "hidDefinition",
+      "type": "HiddenField",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "hidDefinition",
+        "runat": "server",
+        "value": "<%# Eval(\"Definition\") %>"
+      },
+      "label": null
+    },
+    {
+      "id": "hidKind",
+      "type": "HiddenField",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "hidKind",
+        "runat": "server",
+        "value": "<%# Eval(\"Kind\") %>"
+      },
+      "label": null
+    },
+    {
+      "id": "btnDownload",
+      "type": "Button",
+      "runat": "server",
+      "text": "ダウンロード",
+      "maxlength": null,
+      "css_class": "button-normal js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "btnDownload",
+        "runat": "server",
+        "text": "ダウンロード",
+        "cssclass": "button-normal js-disable-in-ref"
+      },
+      "label": null
+    }
+  ],
+  "events": [
+    {
+      "name": "OnInit",
+      "event_type": "Method",
+      "related_controls": []
+    },
+    {
+      "name": "InitializeComponent",
+      "event_type": "Method",
+      "related_controls": []
+    },
+    {
+      "name": "Page_Load",
+      "event_type": "PageLoad",
+      "related_controls": []
+    },
+    {
+      "name": "LoadJisyoStatus",
+      "event_type": "Method",
+      "related_controls": []
+    },
+    {
+      "name": "SetReferenceMode",
+      "event_type": "Method",
+      "related_controls": []
+    },
+    {
+      "name": "ApplyBranchControlByUserRole",
+      "event_type": "Method",
+      "related_controls": []
+    },
+    {
+      "name": "InitializeBranchDropDown",
+      "event_type": "Method",
+      "related_controls": []
+    },
+    {
+      "name": "ddlBranchNo_SelectedIndexChanged",
+      "event_type": "SelectedIndexChanged",
+      "related_controls": []
+    },
+    {
+      "name": "ClearDisplayArea",
+      "event_type": "Method",
+      "related_controls": []
+    },
+    {
+      "name": "Display",
+      "event_type": "Method",
+      "related_controls": []
+    },
+    {
+      "name": "DisplaySaikenMeisaiList",
+      "event_type": "Method",
+      "related_controls": []
+    },
+    {
+      "name": "DisplayJishoList",
+      "event_type": "Method",
+      "related_controls": []
+    },
+    {
+      "name": "DisplayComment",
+      "event_type": "Method",
+      "related_controls": []
+    },
+    {
+      "name": "ListPaging1_Click",
+      "event_type": "Click",
+      "related_controls": []
+    },
+    {
+      "name": "btnCustShow_Click",
+      "event_type": "Click",
+      "related_controls": []
+    },
+    {
+      "name": "btnRegister_Click",
+      "event_type": "Click",
+      "related_controls": []
+    },
+    {
+      "name": "rptSaikenMeisai_ItemCommand",
+      "event_type": "ItemCommand",
+      "related_controls": []
+    },
+    {
+      "name": "InitReportNameInfo",
+      "event_type": "Method",
+      "related_controls": []
+    },
+    {
+      "name": "SetReportObjectInfo",
+      "event_type": "Method",
+      "related_controls": []
+    }
+  ],
+  "validations": [
+    {
+      "target": "tbxCustomerNo",
+      "check_type": "required",
+      "detail": "顧客番号 は必須入力の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "target": "tbxCustomerNo",
+      "check_type": "maxlength",
+      "detail": "maxlength=12",
+      "source": "aspx"
+    },
+    {
+      "target": "txtReason",
+      "check_type": "maxlength",
+      "detail": "maxlength=2000",
+      "source": "aspx"
+    },
+    {
+      "target": "txtCurrentSituation",
+      "check_type": "maxlength",
+      "detail": "maxlength=2000",
+      "source": "aspx"
+    },
+    {
+      "target": "txtPolicy",
+      "check_type": "maxlength",
+      "detail": "maxlength=2000",
+      "source": "aspx"
+    },
+    {
+      "target": "txtRemarks",
+      "check_type": "maxlength",
+      "detail": "maxlength=2000",
+      "source": "aspx"
+    },
+    {
+      "check_type": "length_check_hint",
+      "target": null,
+      "detail": "コードビハインド内に桁数・長さチェックの可能性あり",
+      "source": "codebehind"
+    },
+    {
+      "check_type": "message_output_hint",
+      "target": null,
+      "detail": "メッセージエリア出力処理の可能性あり",
+      "source": "codebehind"
+    },
+    {
+      "check_type": "concurrency_check_hint",
+      "target": "hidUpdateDateTime",
+      "detail": "排他チェックの可能性あり",
+      "source": "codebehind"
+    }
+  ],
+  "screen_modes": [
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "Dummy は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode",
+      "detail": "画面上に参照モード用HiddenFieldあり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "ddlBranchNo は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "tbxCustomerNo は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "btnCustShow は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "btnCustSearch は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "btnClear は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "rblJisyoStatus は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "lnkSaikenNo は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "txtReason は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "txtCurrentSituation は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "txtPolicy は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "txtRemarks は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "btnSummaryClear は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "btnRegister は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_disable_control",
+      "detail": "btnDownload は参照モード時に非活性化対象の可能性あり",
+      "source": "aspx"
+    },
+    {
+      "mode_name": "reference_mode_hint",
+      "detail": "QueryStringを利用した画面モード分岐の可能性あり",
+      "source": "codebehind"
+    },
+    {
+      "mode_name": "disable_control_hint",
+      "detail": "条件によりコントロール非活性化処理の可能性あり",
+      "source": "codebehind"
+    },
+    {
+      "mode_name": "initial_display_hint",
+      "detail": "初期表示処理あり",
+      "source": "codebehind"
+    }
+  ],
+  "notes": [
+    "定義書は未読込、またはファイルが存在しません。"
+  ],
+  "table_headers": [
+    "店番・店名",
+    "顧客番号",
+    "事象ステータス",
+    "債権番号",
+    "稟議番号",
+    "科目",
+    "期日",
+    "貸付残高",
+    "使途/保証目的",
+    "延滞元本",
+    "延滞期間",
+    "問題債権",
+    "条件変更",
+    "補正",
+    "事象番号",
+    "事象種別",
+    "発生日",
+    "最終更新日",
+    "最終更新者",
+    "事故及び延滞に至った原因",
+    "債務者および保証人の現況",
+    "回収、解消の方針、スケジュール",
+    "備考、特記事項",
+    "帳票名"
+  ],
+  "spec_summary": {
+    "sheet_count": 0,
+    "note": "spec file not found"
+  }
+}
