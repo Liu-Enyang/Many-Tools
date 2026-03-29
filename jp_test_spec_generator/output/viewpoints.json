@@ -351,9 +351,87 @@
       "source_basis": [
         "validations.concurrency_check_hint"
       ]
+    },
+    {
+      "id": "VP-025",
+      "category": "イベント",
+      "title": "JavaScriptイベント処理確認",
+      "details": [
+        "クリックイベントにより想定した処理が実行されること",
+        "対象ボタン押下時に画面項目が正しく更新されること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js"
+      ]
+    },
+    {
+      "id": "VP-026",
+      "category": "画面モード",
+      "title": "参照モード時のJavaScript制御確認",
+      "details": [
+        "参照モード時に入力項目・ボタン・リンクが操作不可となること",
+        "参照モード時に子要素も含めて非活性制御されること"
+      ],
+      "pcl": [
+        "E"
+      ],
+      "source_basis": [
+        "Summary.js"
+      ]
+    },
+    {
+      "id": "VP-027",
+      "category": "入力チェック",
+      "title": "JavaScript入力チェック・エラーメッセージ確認",
+      "details": [
+        "未入力時にエラーメッセージが表示されること",
+        "入力条件不備時に処理が中断されること"
+      ],
+      "pcl": [
+        "E",
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js"
+      ]
+    },
+    {
+      "id": "VP-028",
+      "category": "イベント",
+      "title": "帳票ダウンロード前提チェック確認",
+      "details": [
+        "帳票未選択時にエラーメッセージが表示されること",
+        "顧客番号・店番未設定時にダウンロード実行されないこと"
+      ],
+      "pcl": [
+        "E",
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js"
+      ]
+    },
+    {
+      "id": "VP-029",
+      "category": "一覧表示",
+      "title": "一覧ソート処理確認",
+      "details": [
+        "一覧ヘッダ押下時に昇順・降順が切り替わること",
+        "文字列・数値・日付が指定種別で正しくソートされること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js"
+      ]
     }
   ],
   "summary": {
-    "viewpoint_count": 24
+    "viewpoint_count": 29,
+    "javascript_viewpoint_source_count": 5
   }
 }

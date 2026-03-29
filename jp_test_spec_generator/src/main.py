@@ -12,9 +12,28 @@ from generator.testcase_generator import generate_testcases
 from generator.excel_generator import generate_excel
 
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 SAMPLE_INPUT_DIR = BASE_DIR / "sample_input"
 OUTPUT_DIR = BASE_DIR / "output"
+
+
+def load_javascript_sources(input_dir: Path) -> list[dict]:
+    js_sources: list[dict] = []
+    for path in sorted(input_dir.rglob("*.js")):
+        try:
+            content = path.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            content = path.read_text(encoding="shift_jis", errors="ignore")
+
+        js_sources.append(
+            {
+                "file_name": path.name,
+                "relative_path": str(path.relative_to(input_dir)),
+                "content": content,
+            }
+        )
+    return js_sources
 
 
 def main() -> None:
@@ -25,11 +44,13 @@ def main() -> None:
     aspx_data = parse_aspx(aspx_path)
     codebehind_data = parse_codebehind(codebehind_path)
     spec_data = parse_spec(spec_path)
+    javascript_sources = load_javascript_sources(SAMPLE_INPUT_DIR)
 
     analysis = generate_analysis(
         aspx_data=aspx_data,
         codebehind_data=codebehind_data,
         spec_data=spec_data,
+        javascript_sources=javascript_sources,
     )
 
     viewpoints = generate_viewpoints(analysis)
@@ -62,10 +83,11 @@ def main() -> None:
         output_path=excel_file,
     )
 
-    print(f"analysis.json generated: {analysis_file}")
-    print(f"viewpoints.json generated: {viewpoints_file}")
-    print(f"testcases.json generated: {testcases_file}")
-    print(f"Excel test spec generated: {excel_file}")
+    # print(f"javascript files loaded: {len(javascript_sources)}")
+    # print(f"analysis.json generated: {analysis_file}")
+    # print(f"viewpoints.json generated: {viewpoints_file}")
+    # print(f"testcases.json generated: {testcases_file}")
+    # print(f"Excel test spec generated: {excel_file}")
 
 
 if __name__ == "__main__":

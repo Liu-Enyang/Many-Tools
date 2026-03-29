@@ -112,6 +112,14 @@
       {
         "id": "A-021",
         "text": "更新処理を実行する"
+      },
+      {
+        "id": "A-022",
+        "text": "対象操作を実行する"
+      },
+      {
+        "id": "A-023",
+        "text": "必須条件を満たさない状態で操作する"
       }
     ],
     "confirmations": [
@@ -282,6 +290,54 @@
       {
         "id": "E-042",
         "text": "更新時に排他制御が実施されること"
+      },
+      {
+        "id": "E-043",
+        "text": "クリックイベントにより想定した処理が実行されること"
+      },
+      {
+        "id": "E-044",
+        "text": "対象ボタン押下時に画面項目が正しく更新されること"
+      },
+      {
+        "id": "E-045",
+        "text": "参照モード時に入力項目・ボタン・リンクが操作不可となること"
+      },
+      {
+        "id": "E-046",
+        "text": "参照モード時に子要素も含めて非活性制御されること"
+      },
+      {
+        "id": "E-047",
+        "text": "未入力時にエラーメッセージが表示されること"
+      },
+      {
+        "id": "E-048",
+        "text": "入力条件不備時に処理が中断されること"
+      },
+      {
+        "id": "E-049",
+        "text": "想定した処理結果となること"
+      },
+      {
+        "id": "E-050",
+        "text": "エラーメッセージが表示されること"
+      },
+      {
+        "id": "E-051",
+        "text": "帳票未選択時にエラーメッセージが表示されること"
+      },
+      {
+        "id": "E-052",
+        "text": "顧客番号・店番未設定時にダウンロード実行されないこと"
+      },
+      {
+        "id": "E-053",
+        "text": "一覧ヘッダ押下時に昇順・降順が切り替わること"
+      },
+      {
+        "id": "E-054",
+        "text": "文字列・数値・日付が指定種別で正しくソートされること"
       }
     ]
   },
@@ -1395,15 +1451,261 @@
         "VP-024",
         "validations.concurrency_check_hint"
       ]
+    },
+    {
+      "case_id": "TC-047",
+      "case_no": "0047",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-025",
+      "test_viewpoint": "JavaScriptイベント処理確認",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-019"
+      ],
+      "confirmation_ids": [
+        "E-043",
+        "E-044"
+      ],
+      "source_basis": [
+        "VP-025",
+        "Summary.js"
+      ]
+    },
+    {
+      "case_id": "TC-048",
+      "case_no": "0048",
+      "category": "画面モード",
+      "test_viewpoint_id": "VP-026",
+      "test_viewpoint": "参照モード時のJavaScript制御確認（通常モード）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-045",
+        "E-046"
+      ],
+      "source_basis": [
+        "VP-026",
+        "Summary.js"
+      ]
+    },
+    {
+      "case_id": "TC-049",
+      "case_no": "0049",
+      "category": "画面モード",
+      "test_viewpoint_id": "VP-026",
+      "test_viewpoint": "参照モード時のJavaScript制御確認（参照モード）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-002"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-045",
+        "E-046"
+      ],
+      "source_basis": [
+        "VP-026",
+        "Summary.js"
+      ]
+    },
+    {
+      "case_id": "TC-050",
+      "case_no": "0050",
+      "category": "入力チェック",
+      "test_viewpoint_id": "VP-027",
+      "test_viewpoint": "JavaScript入力チェック・エラーメッセージ確認（正常系）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-022"
+      ],
+      "confirmation_ids": [
+        "E-047",
+        "E-048",
+        "E-049"
+      ],
+      "source_basis": [
+        "VP-027",
+        "Summary.js"
+      ]
+    },
+    {
+      "case_id": "TC-051",
+      "case_no": "0051",
+      "category": "入力チェック",
+      "test_viewpoint_id": "VP-027",
+      "test_viewpoint": "JavaScript入力チェック・エラーメッセージ確認（入力不足）",
+      "pcl": [
+        "E"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-023"
+      ],
+      "confirmation_ids": [
+        "E-047",
+        "E-048",
+        "E-050"
+      ],
+      "source_basis": [
+        "VP-027",
+        "Summary.js"
+      ]
+    },
+    {
+      "case_id": "TC-052",
+      "case_no": "0052",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-028",
+      "test_viewpoint": "帳票ダウンロード前提チェック確認",
+      "pcl": [
+        "E"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-019"
+      ],
+      "confirmation_ids": [
+        "E-051",
+        "E-052"
+      ],
+      "source_basis": [
+        "VP-028",
+        "Summary.js"
+      ]
+    },
+    {
+      "case_id": "TC-053",
+      "case_no": "0053",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-029",
+      "test_viewpoint": "一覧ソート処理確認（0件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-003"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-053",
+        "E-054",
+        "E-036"
+      ],
+      "source_basis": [
+        "VP-029",
+        "Summary.js"
+      ]
+    },
+    {
+      "case_id": "TC-054",
+      "case_no": "0054",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-029",
+      "test_viewpoint": "一覧ソート処理確認（1件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-004"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-053",
+        "E-054",
+        "E-037"
+      ],
+      "source_basis": [
+        "VP-029",
+        "Summary.js"
+      ]
+    },
+    {
+      "case_id": "TC-055",
+      "case_no": "0055",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-029",
+      "test_viewpoint": "一覧ソート処理確認（複数件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-005"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-053",
+        "E-054",
+        "E-038"
+      ],
+      "source_basis": [
+        "VP-029",
+        "Summary.js"
+      ]
+    },
+    {
+      "case_id": "TC-056",
+      "case_no": "0056",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-029",
+      "test_viewpoint": "一覧ソート処理確認（ソート）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-005"
+      ],
+      "action_ids": [
+        "A-020"
+      ],
+      "confirmation_ids": [
+        "E-053",
+        "E-054",
+        "E-039"
+      ],
+      "source_basis": [
+        "VP-029",
+        "Summary.js"
+      ]
     }
   ],
   "summary": {
-    "test_case_count": 46,
-    "source_viewpoint_count": 24,
+    "test_case_count": 56,
+    "source_viewpoint_count": 29,
     "check_condition_count": 6,
-    "action_count": 21,
-    "confirmation_count": 42,
-    "pcl_assigned_case_count": 46,
+    "action_count": 23,
+    "confirmation_count": 54,
+    "pcl_assigned_case_count": 56,
     "analysis_linked_field_count": 30
   }
 }

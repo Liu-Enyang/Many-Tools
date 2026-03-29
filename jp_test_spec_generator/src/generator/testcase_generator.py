@@ -244,6 +244,23 @@ def _build_input_check_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict
     required = bool(field_hint.get("required"))
     charset = str(field_hint.get("charset", "")).lower()
 
+    if label == "対象項目":
+        return [
+            {
+                "name_suffix": "（正常系）",
+                "pcl": ["N"],
+                "actions": ["対象操作を実行する"],
+                "confirmation_suffix": ["想定した処理結果となること"],
+            },
+            {
+                "name_suffix": "（入力不足）",
+                "pcl": ["E"],
+                "actions": ["必須条件を満たさない状態で操作する"],
+                "confirmation_suffix": ["エラーメッセージが表示されること"],
+            },
+        ]
+
+
     rules: List[Dict[str, Any]] = [
         {
             "name_suffix": "（正常値）",

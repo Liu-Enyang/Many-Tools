@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 
 TITLE_CSS_CANDIDATES = {
@@ -230,14 +230,65 @@ def _build_screen_modes(
     return modes
 
 
+def build_javascript_analysis(javascript_sources: List[Dict[str, Any]]) -> Dict[str, List[Dict[str, Any]]]:
+    result: Dict[str, List[Dict[str, Any]]] = {
+        "event_handlers": [],
+        "screen_controls": [],
+        "validation_related": [],
+        "download_related": [],
+        "sort_related": [],
+    }
+
+    for src in javascript_sources:
+        path = _clean_text(src.get("relative_path"))
+        file_name = _clean_text(src.get("file_name"))
+        content = _clean_text(src.get("content"))
+
+        def add(target_key: str, title: str, detail: str) -> None:
+            result[target_key].append(
+                {
+                    "file_name": file_name,
+                    "relative_path": path,
+                    "title": title,
+                    "detail": detail,
+                    "source_basis": [path or file_name or "javascript"],
+                }
+            )
+
+        if "addEventListener('click'" in content or 'addEventListener("click"' in content:
+            add("event_handlers", "クリックイベント制御あり", "ボタン押下時のフロント処理を実装している")
+
+        if (
+            "applyReferenceMode" in content
+            or "disabled = true" in content
+            or "pointerEvents = 'none'" in content
+            or 'pointerEvents = "none"' in content
+        ):
+            add("screen_controls", "参照モード制御あり", "参照モード時に入力・ボタン・リンクを操作不可にする制御がある")
+
+        if "showError(" in content or "alert(" in content:
+            add("validation_related", "前端エラーメッセージ制御あり", "入力不足や選択不足時にエラーメッセージを表示する制御がある")
+
+        if "DownLoadRSheet.aspx" in content or "downloadFrame" in content or "btnDownload" in content:
+            add("download_related", "帳票ダウンロード制御あり", "帳票選択チェック・顧客番号/店番チェック・ダウンロード実行の制御がある")
+
+        if "initSort(" in content or "sortTable(" in content or "data-sort" in content:
+            add("sort_related", "一覧ソート制御あり", "一覧ヘッダクリックによる昇順/降順ソート制御がある")
+
+    return result
+
+
 def generate_analysis(
     aspx_data: Dict[str, Any],
     codebehind_data: Dict[str, Any],
     spec_data: Dict[str, Any],
+    javascript_sources: Optional[List[Dict[str, Any]]] = None,
 ) -> Dict[str, Any]:
     screen_id = _guess_screen_id(aspx_data)
     screen_name = _guess_screen_name(aspx_data, spec_data)
     controls = _decorate_controls(aspx_data)
+    javascript_sources = javascript_sources or []
+    javascript_analysis = build_javascript_analysis(javascript_sources)
 
     notes: List[str] = []
 
@@ -246,6 +297,9 @@ def generate_analysis(
 
     if aspx_data.get("raw_summary", {}).get("control_count", 0) == 0:
         notes.append("ASPXからコントロールを取得できませんでした。")
+
+    if javascript_sources and not any(javascript_analysis.values()):
+        notes.append("JavaScriptファイルは読み込みましたが、テスト観点に使える前端制御は抽出できませんでした。")
 
     return {
         "screen_id": screen_id,
@@ -259,6 +313,8 @@ def generate_analysis(
         "events": _categorize_events(codebehind_data),
         "validations": _build_validation_candidates(controls, codebehind_data),
         "screen_modes": _build_screen_modes(controls, codebehind_data),
+        "javascript_sources": javascript_sources,
+        "javascript_analysis": javascript_analysis,
         "notes": notes,
         "table_headers": aspx_data.get("table_headers", []),
         "title_candidates": aspx_data.get("title_candidates", []),

@@ -252,6 +252,98 @@ def _build_concurrency_viewpoints(
     return counter
 
 
+def _build_javascript_viewpoints(
+    analysis: Dict[str, Any],
+    viewpoints: List[Dict[str, Any]],
+    counter: int,
+) -> int:
+    javascript_analysis = analysis.get("javascript_analysis", {}) or {}
+
+    def _collect_sources(key: str) -> List[str]:
+        sources: List[str] = []
+        for item in javascript_analysis.get(key, []):
+            path = item.get("relative_path") or item.get("file_name") or "javascript"
+            if path not in sources:
+                sources.append(path)
+        return sources
+
+    if javascript_analysis.get("event_handlers"):
+        viewpoints.append(
+            _make_viewpoint(
+                vp_id=f"VP-{counter:03d}",
+                category="イベント",
+                title="JavaScriptイベント処理確認",
+                details=[
+                    "クリックイベントにより想定した処理が実行されること",
+                    "対象ボタン押下時に画面項目が正しく更新されること",
+                ],
+                source_basis=_collect_sources("event_handlers"),
+            )
+        )
+        counter += 1
+
+    if javascript_analysis.get("screen_controls"):
+        viewpoints.append(
+            _make_viewpoint(
+                vp_id=f"VP-{counter:03d}",
+                category="画面モード",
+                title="参照モード時のJavaScript制御確認",
+                details=[
+                    "参照モード時に入力項目・ボタン・リンクが操作不可となること",
+                    "参照モード時に子要素も含めて非活性制御されること",
+                ],
+                source_basis=_collect_sources("screen_controls"),
+            )
+        )
+        counter += 1
+
+    if javascript_analysis.get("validation_related"):
+        viewpoints.append(
+            _make_viewpoint(
+                vp_id=f"VP-{counter:03d}",
+                category="入力チェック",
+                title="JavaScript入力チェック・エラーメッセージ確認",
+                details=[
+                    "未入力時にエラーメッセージが表示されること",
+                    "入力条件不備時に処理が中断されること",
+                ],
+                source_basis=_collect_sources("validation_related"),
+            )
+        )
+        counter += 1
+
+    if javascript_analysis.get("download_related"):
+        viewpoints.append(
+            _make_viewpoint(
+                vp_id=f"VP-{counter:03d}",
+                category="イベント",
+                title="帳票ダウンロード前提チェック確認",
+                details=[
+                    "帳票未選択時にエラーメッセージが表示されること",
+                    "顧客番号・店番未設定時にダウンロード実行されないこと",
+                ],
+                source_basis=_collect_sources("download_related"),
+            )
+        )
+        counter += 1
+
+    if javascript_analysis.get("sort_related"):
+        viewpoints.append(
+            _make_viewpoint(
+                vp_id=f"VP-{counter:03d}",
+                category="一覧表示",
+                title="一覧ソート処理確認",
+                details=[
+                    "一覧ヘッダ押下時に昇順・降順が切り替わること",
+                    "文字列・数値・日付が指定種別で正しくソートされること",
+                ],
+                source_basis=_collect_sources("sort_related"),
+            )
+        )
+        counter += 1
+
+    return counter
+
 def generate_viewpoints(analysis: Dict[str, Any]) -> Dict[str, Any]:
     viewpoints: List[Dict[str, Any]] = []
     counter = 1
@@ -263,6 +355,9 @@ def generate_viewpoints(analysis: Dict[str, Any]) -> Dict[str, Any]:
     counter = _build_list_viewpoints(analysis, viewpoints, counter)
     counter = _build_reference_mode_viewpoints(analysis, viewpoints, counter)
     counter = _build_concurrency_viewpoints(analysis, viewpoints, counter)
+    counter = _build_javascript_viewpoints(analysis, viewpoints, counter)
+
+    javascript_analysis = analysis.get("javascript_analysis", {}) or {}
 
     return {
         "screen_id": analysis.get("screen_id"),
@@ -270,5 +365,6 @@ def generate_viewpoints(analysis: Dict[str, Any]) -> Dict[str, Any]:
         "viewpoints": viewpoints,
         "summary": {
             "viewpoint_count": len(viewpoints),
+            "javascript_viewpoint_source_count": sum(len(v) for v in javascript_analysis.values()) if javascript_analysis else 0,
         },
     }
