@@ -120,7 +120,7 @@
       "category": "入力チェック",
       "title": "顧客番号 の長さ制御確認",
       "details": [
-        "顧客番号 に maxlength=12 のヒントがあること"
+        "顧客番号 に maxlength=12 の入力チェックがあること"
       ],
       "source_basis": [
         "tbxCustomerNo",
@@ -132,7 +132,7 @@
       "category": "入力チェック",
       "title": "事故及び延滞に至った原因 の長さ制御確認",
       "details": [
-        "事故及び延滞に至った原因 に maxlength=2000 のヒントがあること"
+        "事故及び延滞に至った原因 に maxlength=2000 の入力チェックがあること"
       ],
       "source_basis": [
         "txtReason",
@@ -144,7 +144,7 @@
       "category": "入力チェック",
       "title": "債務者および保証人の現況 の長さ制御確認",
       "details": [
-        "債務者および保証人の現況 に maxlength=2000 のヒントがあること"
+        "債務者および保証人の現況 に maxlength=2000 の入力チェックがあること"
       ],
       "source_basis": [
         "txtCurrentSituation",
@@ -156,7 +156,7 @@
       "category": "入力チェック",
       "title": "回収、解消の方針、スケジュール の長さ制御確認",
       "details": [
-        "回収、解消の方針、スケジュール に maxlength=2000 のヒントがあること"
+        "回収、解消の方針、スケジュール に maxlength=2000 の入力チェックがあること"
       ],
       "source_basis": [
         "txtPolicy",
@@ -168,7 +168,7 @@
       "category": "入力チェック",
       "title": "備考、特記事項 の長さ制御確認",
       "details": [
-        "備考、特記事項 に maxlength=2000 のヒントがあること"
+        "備考、特記事項 に maxlength=2000 の入力チェックがあること"
       ],
       "source_basis": [
         "txtRemarks",
@@ -189,17 +189,6 @@
     {
       "id": "VP-017",
       "category": "イベント",
-      "title": "ListPaging1 押下時の処理確認",
-      "details": [
-        "イベント実行後の画面表示・処理結果が正しいこと"
-      ],
-      "source_basis": [
-        "ListPaging1_Click"
-      ]
-    },
-    {
-      "id": "VP-018",
-      "category": "イベント",
       "title": "btnCustShow 押下時の処理確認",
       "details": [
         "イベント実行後の画面表示・処理結果が正しいこと"
@@ -209,7 +198,7 @@
       ]
     },
     {
-      "id": "VP-019",
+      "id": "VP-018",
       "category": "イベント",
       "title": "btnRegister 押下時の処理確認",
       "details": [
@@ -220,7 +209,7 @@
       ]
     },
     {
-      "id": "VP-020",
+      "id": "VP-019",
       "category": "イベント",
       "title": "rptSaikenMeisai 一覧操作時の処理確認",
       "details": [
@@ -231,7 +220,7 @@
       ]
     },
     {
-      "id": "VP-021",
+      "id": "VP-020",
       "category": "一覧表示",
       "title": "rptSaikenMeisai の一覧表示確認",
       "details": [
@@ -242,7 +231,7 @@
       ]
     },
     {
-      "id": "VP-022",
+      "id": "VP-021",
       "category": "一覧表示",
       "title": "rptJishoList の一覧表示確認",
       "details": [
@@ -253,7 +242,7 @@
       ]
     },
     {
-      "id": "VP-023",
+      "id": "VP-022",
       "category": "一覧表示",
       "title": "rptReportList の一覧表示確認",
       "details": [
@@ -264,7 +253,7 @@
       ]
     },
     {
-      "id": "VP-024",
+      "id": "VP-023",
       "category": "画面モード",
       "title": "参照モード時の非活性制御確認",
       "details": [
@@ -276,7 +265,7 @@
       ]
     },
     {
-      "id": "VP-025",
+      "id": "VP-024",
       "category": "排他制御",
       "title": "更新時の排他チェック確認",
       "details": [
@@ -288,6 +277,6 @@
     }
   ],
   "summary": {
-    "viewpoint_count": 25
+    "viewpoint_count": 24
   }
 }

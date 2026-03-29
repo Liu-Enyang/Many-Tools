@@ -916,14 +916,6 @@
         ]
       },
       {
-        "name": "ListPaging1_Click",
-        "event_type": "Click",
-        "related_controls": [],
-        "source_basis": [
-          "codebehind"
-        ]
-      },
-      {
         "name": "btnCustShow_Click",
         "event_type": "Click",
         "related_controls": [],

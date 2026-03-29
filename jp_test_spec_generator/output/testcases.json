@@ -1,21 +1,155 @@
 {
   "screen_id": "Summary",
   "screen_name": "概況",
+  "definitions": {
+    "check_conditions": [
+      {
+        "id": "C-001",
+        "text": "通常モードで画面を起動する"
+      },
+      {
+        "id": "C-002",
+        "text": "一覧表示対象データが存在する状態で画面を起動する"
+      },
+      {
+        "id": "C-003",
+        "text": "参照モードで画面を起動する"
+      },
+      {
+        "id": "C-004",
+        "text": "対象データが更新済みの状態で更新処理を実行する"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A-001",
+        "text": "画面を起動する"
+      },
+      {
+        "id": "A-002",
+        "text": "対象項目を確認する"
+      },
+      {
+        "id": "A-003",
+        "text": "対象項目に規定外の値を入力する"
+      },
+      {
+        "id": "A-004",
+        "text": "対象イベントを実行する"
+      },
+      {
+        "id": "A-005",
+        "text": "更新処理を実行する"
+      }
+    ],
+    "confirmations": [
+      {
+        "id": "E-001",
+        "text": "主要入力項目が初期表示されること"
+      },
+      {
+        "id": "E-002",
+        "text": "主要ボタンが初期表示されること"
+      },
+      {
+        "id": "E-003",
+        "text": "一覧領域が初期状態で表示されること"
+      },
+      {
+        "id": "E-004",
+        "text": "店番・店名 が入力可能であること"
+      },
+      {
+        "id": "E-005",
+        "text": "顧客番号 が入力可能であること"
+      },
+      {
+        "id": "E-006",
+        "text": "事象ステータス が入力可能であること"
+      },
+      {
+        "id": "E-007",
+        "text": "事故及び延滞に至った原因 が入力可能であること"
+      },
+      {
+        "id": "E-008",
+        "text": "債務者および保証人の現況 が入力可能であること"
+      },
+      {
+        "id": "E-009",
+        "text": "回収、解消の方針、スケジュール が入力可能であること"
+      },
+      {
+        "id": "E-010",
+        "text": "備考、特記事項 が入力可能であること"
+      },
+      {
+        "id": "E-011",
+        "text": "chkAllReport が入力可能であること"
+      },
+      {
+        "id": "E-012",
+        "text": "chkReport が入力可能であること"
+      },
+      {
+        "id": "E-013",
+        "text": "顧客番号 に maxlength=12 の入力チェックがあること"
+      },
+      {
+        "id": "E-014",
+        "text": "事故及び延滞に至った原因 に maxlength=2000 の入力チェックがあること"
+      },
+      {
+        "id": "E-015",
+        "text": "債務者および保証人の現況 に maxlength=2000 の入力チェックがあること"
+      },
+      {
+        "id": "E-016",
+        "text": "回収、解消の方針、スケジュール に maxlength=2000 の入力チェックがあること"
+      },
+      {
+        "id": "E-017",
+        "text": "備考、特記事項 に maxlength=2000 の入力チェックがあること"
+      },
+      {
+        "id": "E-018",
+        "text": "イベント実行後の画面表示・処理結果が正しいこと"
+      },
+      {
+        "id": "E-019",
+        "text": "一覧データが正しく表示されること"
+      },
+      {
+        "id": "E-020",
+        "text": "参照モード時に対象コントロールが非活性となること"
+      },
+      {
+        "id": "E-021",
+        "text": "対象コントロール数: 15"
+      },
+      {
+        "id": "E-022",
+        "text": "更新時に排他制御が実施されること"
+      }
+    ]
+  },
   "test_cases": [
     {
       "case_id": "TC-001",
+      "case_no": "0001",
       "category": "初期表示",
       "test_viewpoint_id": "VP-001",
       "test_viewpoint": "通常表示時の初期表示確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "画面を起動する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "主要入力項目が初期表示されること",
-        "主要ボタンが初期表示されること",
-        "一覧領域が初期状態で表示されること"
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-001",
+        "E-002",
+        "E-003"
       ],
       "source_basis": [
         "VP-001",
@@ -25,16 +159,18 @@
     },
     {
       "case_id": "TC-002",
+      "case_no": "0002",
       "category": "入力項目",
       "test_viewpoint_id": "VP-002",
       "test_viewpoint": "店番・店名 の入力確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象項目を確認する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "店番・店名 が入力可能であること"
+      "action_ids": [
+        "A-002"
+      ],
+      "confirmation_ids": [
+        "E-004"
       ],
       "source_basis": [
         "VP-002",
@@ -43,16 +179,18 @@
     },
     {
       "case_id": "TC-003",
+      "case_no": "0003",
       "category": "入力項目",
       "test_viewpoint_id": "VP-003",
       "test_viewpoint": "顧客番号 の入力確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象項目を確認する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "顧客番号 が入力可能であること"
+      "action_ids": [
+        "A-002"
+      ],
+      "confirmation_ids": [
+        "E-005"
       ],
       "source_basis": [
         "VP-003",
@@ -61,16 +199,18 @@
     },
     {
       "case_id": "TC-004",
+      "case_no": "0004",
       "category": "入力項目",
       "test_viewpoint_id": "VP-004",
       "test_viewpoint": "事象ステータス の入力確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象項目を確認する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "事象ステータス が入力可能であること"
+      "action_ids": [
+        "A-002"
+      ],
+      "confirmation_ids": [
+        "E-006"
       ],
       "source_basis": [
         "VP-004",
@@ -79,16 +219,18 @@
     },
     {
       "case_id": "TC-005",
+      "case_no": "0005",
       "category": "入力項目",
       "test_viewpoint_id": "VP-005",
       "test_viewpoint": "事故及び延滞に至った原因 の入力確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象項目を確認する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "事故及び延滞に至った原因 が入力可能であること"
+      "action_ids": [
+        "A-002"
+      ],
+      "confirmation_ids": [
+        "E-007"
       ],
       "source_basis": [
         "VP-005",
@@ -97,16 +239,18 @@
     },
     {
       "case_id": "TC-006",
+      "case_no": "0006",
       "category": "入力項目",
       "test_viewpoint_id": "VP-006",
       "test_viewpoint": "債務者および保証人の現況 の入力確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象項目を確認する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "債務者および保証人の現況 が入力可能であること"
+      "action_ids": [
+        "A-002"
+      ],
+      "confirmation_ids": [
+        "E-008"
       ],
       "source_basis": [
         "VP-006",
@@ -115,16 +259,18 @@
     },
     {
       "case_id": "TC-007",
+      "case_no": "0007",
       "category": "入力項目",
       "test_viewpoint_id": "VP-007",
       "test_viewpoint": "回収、解消の方針、スケジュール の入力確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象項目を確認する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "回収、解消の方針、スケジュール が入力可能であること"
+      "action_ids": [
+        "A-002"
+      ],
+      "confirmation_ids": [
+        "E-009"
       ],
       "source_basis": [
         "VP-007",
@@ -133,16 +279,18 @@
     },
     {
       "case_id": "TC-008",
+      "case_no": "0008",
       "category": "入力項目",
       "test_viewpoint_id": "VP-008",
       "test_viewpoint": "備考、特記事項 の入力確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象項目を確認する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "備考、特記事項 が入力可能であること"
+      "action_ids": [
+        "A-002"
+      ],
+      "confirmation_ids": [
+        "E-010"
       ],
       "source_basis": [
         "VP-008",
@@ -151,16 +299,18 @@
     },
     {
       "case_id": "TC-009",
+      "case_no": "0009",
       "category": "入力項目",
       "test_viewpoint_id": "VP-009",
       "test_viewpoint": "chkAllReport の入力確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象項目を確認する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "chkAllReport が入力可能であること"
+      "action_ids": [
+        "A-002"
+      ],
+      "confirmation_ids": [
+        "E-011"
       ],
       "source_basis": [
         "VP-009",
@@ -169,16 +319,18 @@
     },
     {
       "case_id": "TC-010",
+      "case_no": "0010",
       "category": "入力項目",
       "test_viewpoint_id": "VP-010",
       "test_viewpoint": "chkReport の入力確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象項目を確認する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "chkReport が入力可能であること"
+      "action_ids": [
+        "A-002"
+      ],
+      "confirmation_ids": [
+        "E-012"
       ],
       "source_basis": [
         "VP-010",
@@ -187,16 +339,18 @@
     },
     {
       "case_id": "TC-011",
+      "case_no": "0011",
       "category": "入力チェック",
       "test_viewpoint_id": "VP-011",
       "test_viewpoint": "顧客番号 の長さ制御確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象項目に規定外の値を入力する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "顧客番号 に maxlength=12 のヒントがあること"
+      "action_ids": [
+        "A-003"
+      ],
+      "confirmation_ids": [
+        "E-013"
       ],
       "source_basis": [
         "VP-011",
@@ -206,16 +360,18 @@
     },
     {
       "case_id": "TC-012",
+      "case_no": "0012",
       "category": "入力チェック",
       "test_viewpoint_id": "VP-012",
       "test_viewpoint": "事故及び延滞に至った原因 の長さ制御確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象項目に規定外の値を入力する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "事故及び延滞に至った原因 に maxlength=2000 のヒントがあること"
+      "action_ids": [
+        "A-003"
+      ],
+      "confirmation_ids": [
+        "E-014"
       ],
       "source_basis": [
         "VP-012",
@@ -225,16 +381,18 @@
     },
     {
       "case_id": "TC-013",
+      "case_no": "0013",
       "category": "入力チェック",
       "test_viewpoint_id": "VP-013",
       "test_viewpoint": "債務者および保証人の現況 の長さ制御確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象項目に規定外の値を入力する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "債務者および保証人の現況 に maxlength=2000 のヒントがあること"
+      "action_ids": [
+        "A-003"
+      ],
+      "confirmation_ids": [
+        "E-015"
       ],
       "source_basis": [
         "VP-013",
@@ -244,16 +402,18 @@
     },
     {
       "case_id": "TC-014",
+      "case_no": "0014",
       "category": "入力チェック",
       "test_viewpoint_id": "VP-014",
       "test_viewpoint": "回収、解消の方針、スケジュール の長さ制御確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象項目に規定外の値を入力する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "回収、解消の方針、スケジュール に maxlength=2000 のヒントがあること"
+      "action_ids": [
+        "A-003"
+      ],
+      "confirmation_ids": [
+        "E-016"
       ],
       "source_basis": [
         "VP-014",
@@ -263,16 +423,18 @@
     },
     {
       "case_id": "TC-015",
+      "case_no": "0015",
       "category": "入力チェック",
       "test_viewpoint_id": "VP-015",
       "test_viewpoint": "備考、特記事項 の長さ制御確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象項目に規定外の値を入力する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "備考、特記事項 に maxlength=2000 のヒントがあること"
+      "action_ids": [
+        "A-003"
+      ],
+      "confirmation_ids": [
+        "E-017"
       ],
       "source_basis": [
         "VP-015",
@@ -282,16 +444,18 @@
     },
     {
       "case_id": "TC-016",
+      "case_no": "0016",
       "category": "イベント",
       "test_viewpoint_id": "VP-016",
       "test_viewpoint": "ddlBranchNo 選択変更時の処理確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象イベントを実行する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "イベント実行後の画面表示・処理結果が正しいこと"
+      "action_ids": [
+        "A-004"
+      ],
+      "confirmation_ids": [
+        "E-018"
       ],
       "source_basis": [
         "VP-016",
@@ -300,169 +464,170 @@
     },
     {
       "case_id": "TC-017",
+      "case_no": "0017",
       "category": "イベント",
       "test_viewpoint_id": "VP-017",
-      "test_viewpoint": "ListPaging1 押下時の処理確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象イベントを実行する"
+      "test_viewpoint": "btnCustShow 押下時の処理確認",
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "イベント実行後の画面表示・処理結果が正しいこと"
+      "action_ids": [
+        "A-004"
+      ],
+      "confirmation_ids": [
+        "E-018"
       ],
       "source_basis": [
         "VP-017",
-        "ListPaging1_Click"
-      ]
-    },
-    {
-      "case_id": "TC-018",
-      "category": "イベント",
-      "test_viewpoint_id": "VP-018",
-      "test_viewpoint": "btnCustShow 押下時の処理確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象イベントを実行する"
-      ],
-      "expected_result": [
-        "イベント実行後の画面表示・処理結果が正しいこと"
-      ],
-      "source_basis": [
-        "VP-018",
         "btnCustShow_Click"
       ]
     },
     {
-      "case_id": "TC-019",
+      "case_id": "TC-018",
+      "case_no": "0018",
       "category": "イベント",
-      "test_viewpoint_id": "VP-019",
+      "test_viewpoint_id": "VP-018",
       "test_viewpoint": "btnRegister 押下時の処理確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象イベントを実行する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "イベント実行後の画面表示・処理結果が正しいこと"
+      "action_ids": [
+        "A-004"
+      ],
+      "confirmation_ids": [
+        "E-018"
       ],
       "source_basis": [
-        "VP-019",
+        "VP-018",
         "btnRegister_Click"
       ]
     },
     {
-      "case_id": "TC-020",
+      "case_id": "TC-019",
+      "case_no": "0019",
       "category": "イベント",
-      "test_viewpoint_id": "VP-020",
+      "test_viewpoint_id": "VP-019",
       "test_viewpoint": "rptSaikenMeisai 一覧操作時の処理確認",
-      "precondition": "通常モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "対象イベントを実行する"
+      "check_condition_ids": [
+        "C-001"
       ],
-      "expected_result": [
-        "イベント実行後の画面表示・処理結果が正しいこと"
+      "action_ids": [
+        "A-004"
+      ],
+      "confirmation_ids": [
+        "E-018"
       ],
       "source_basis": [
-        "VP-020",
+        "VP-019",
         "rptSaikenMeisai_ItemCommand"
       ]
     },
     {
-      "case_id": "TC-021",
+      "case_id": "TC-020",
+      "case_no": "0020",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-021",
+      "test_viewpoint_id": "VP-020",
       "test_viewpoint": "rptSaikenMeisai の一覧表示確認",
-      "precondition": "一覧表示対象データが存在する状態で画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "画面を起動する"
+      "check_condition_ids": [
+        "C-002"
       ],
-      "expected_result": [
-        "一覧データが正しく表示されること"
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-019"
       ],
       "source_basis": [
-        "VP-021",
+        "VP-020",
         "rptSaikenMeisai"
       ]
     },
     {
-      "case_id": "TC-022",
+      "case_id": "TC-021",
+      "case_no": "0021",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-022",
+      "test_viewpoint_id": "VP-021",
       "test_viewpoint": "rptJishoList の一覧表示確認",
-      "precondition": "一覧表示対象データが存在する状態で画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "画面を起動する"
+      "check_condition_ids": [
+        "C-002"
       ],
-      "expected_result": [
-        "一覧データが正しく表示されること"
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-019"
       ],
       "source_basis": [
-        "VP-022",
+        "VP-021",
         "rptJishoList"
       ]
     },
     {
-      "case_id": "TC-023",
+      "case_id": "TC-022",
+      "case_no": "0022",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-023",
+      "test_viewpoint_id": "VP-022",
       "test_viewpoint": "rptReportList の一覧表示確認",
-      "precondition": "一覧表示対象データが存在する状態で画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "画面を起動する"
+      "check_condition_ids": [
+        "C-002"
       ],
-      "expected_result": [
-        "一覧データが正しく表示されること"
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-019"
       ],
       "source_basis": [
-        "VP-023",
+        "VP-022",
         "rptReportList"
       ]
     },
     {
-      "case_id": "TC-024",
+      "case_id": "TC-023",
+      "case_no": "0023",
       "category": "画面モード",
-      "test_viewpoint_id": "VP-024",
+      "test_viewpoint_id": "VP-023",
       "test_viewpoint": "参照モード時の非活性制御確認",
-      "precondition": "参照モードで画面を起動する",
-      "input_conditions": [],
-      "operation": [
-        "画面を起動する"
+      "check_condition_ids": [
+        "C-003"
       ],
-      "expected_result": [
-        "参照モード時に対象コントロールが非活性となること",
-        "対象コントロール数: 15"
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-020",
+        "E-021"
       ],
       "source_basis": [
-        "VP-024",
+        "VP-023",
         "screen_modes.reference_mode"
       ]
     },
     {
-      "case_id": "TC-025",
+      "case_id": "TC-024",
+      "case_no": "0024",
       "category": "排他制御",
-      "test_viewpoint_id": "VP-025",
+      "test_viewpoint_id": "VP-024",
       "test_viewpoint": "更新時の排他チェック確認",
-      "precondition": "対象データが更新済みの状態で更新処理を実行する",
-      "input_conditions": [],
-      "operation": [
-        "更新処理を実行する"
+      "check_condition_ids": [
+        "C-004"
       ],
-      "expected_result": [
-        "更新時に排他制御が実施されること"
+      "action_ids": [
+        "A-005"
+      ],
+      "confirmation_ids": [
+        "E-022"
       ],
       "source_basis": [
-        "VP-025",
+        "VP-024",
         "validations.concurrency_check_hint"
       ]
     }
   ],
   "summary": {
-    "test_case_count": 25
+    "test_case_count": 24,
+    "check_condition_count": 4,
+    "action_count": 5,
+    "confirmation_count": 22
   }
 }

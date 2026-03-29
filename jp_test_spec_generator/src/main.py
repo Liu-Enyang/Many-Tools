@@ -9,6 +9,7 @@ from parser.spec_parser import parse_spec
 from generator.analysis_generator import generate_analysis
 from generator.viewpoints_generator import generate_viewpoints
 from generator.testcase_generator import generate_testcases
+from generator.excel_generator import generate_excel
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -54,9 +55,17 @@ def main() -> None:
         encoding="utf-8",
     )
 
+    # ▼ Excel（テスト仕様書）生成
+    excel_file = OUTPUT_DIR / "test_spec.xlsx"
+    generate_excel(
+        json_path=testcases_file,
+        output_path=excel_file,
+    )
+
     print(f"analysis.json generated: {analysis_file}")
     print(f"viewpoints.json generated: {viewpoints_file}")
     print(f"testcases.json generated: {testcases_file}")
+    print(f"Excel test spec generated: {excel_file}")
 
 
 if __name__ == "__main__":

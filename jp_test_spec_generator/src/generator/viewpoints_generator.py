@@ -113,7 +113,7 @@ def _build_length_viewpoints(
                 vp_id=f"VP-{counter:03d}",
                 category="入力チェック",
                 title=f"{label} の長さ制御確認",
-                details=[f"{label} に {detail} のヒントがあること"],
+                details=[f"{label} に {detail} の入力チェックがあること"],
                 source_basis=[target, "validations.maxlength"],
             )
         )
