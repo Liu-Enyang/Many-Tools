@@ -241,6 +241,66 @@ def _is_blur_validation_viewpoint(viewpoint: Dict[str, Any]) -> bool:
     search_text = f"{title} {details_text} {source_basis_text}"
     return "フォーカスアウト時" in search_text or "blur_validation" in search_text or "common_frontend.blur_validation" in search_text
 
+
+# --- Begin: List display helpers ---
+def _resolve_control_label_from_analysis(control_id: str, analysis: Dict[str, Any]) -> str:
+    if not control_id:
+        return ""
+
+    for control in analysis.get("controls", []):
+        cid = str(control.get("id", "")).strip()
+        if cid != control_id:
+            continue
+
+        label = str(
+            control.get("label")
+            or control.get("name")
+            or control.get("title")
+            or ""
+        ).strip()
+        if label:
+            return label
+
+    return ""
+
+
+def _extract_list_label_from_viewpoint(viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> str:
+    title = str(viewpoint.get("title", "")).strip()
+    source_basis = [str(value) for value in viewpoint.get("source_basis", [])]
+
+    if " の一覧表示確認" in title:
+        candidate = title.split(" の一覧表示確認", 1)[0].strip()
+        resolved = _resolve_control_label_from_analysis(candidate, analysis)
+        if resolved:
+            return resolved
+        if candidate:
+            return candidate
+
+    for value in source_basis:
+        if value.startswith("table_headers."):
+            candidate = value.replace("table_headers.", "").strip()
+            resolved = _resolve_control_label_from_analysis(candidate, analysis)
+            if resolved:
+                return resolved
+            if candidate:
+                return candidate
+
+        if value.startswith("controls."):
+            candidate = value.replace("controls.", "").strip()
+            resolved = _resolve_control_label_from_analysis(candidate, analysis)
+            if resolved:
+                return resolved
+            if candidate:
+                return candidate
+
+    for value in source_basis:
+        resolved = _resolve_control_label_from_analysis(value, analysis)
+        if resolved:
+            return resolved
+
+    return "一覧"
+# --- End: List display helpers ---
+
 def _build_blur_validation_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> List[Dict[str, Any]]:
     field_hint = _match_field_hint(viewpoint, _collect_field_hints(analysis))
     label = str(field_hint.get("label", "対象項目")).strip() or "対象項目"
@@ -315,6 +375,45 @@ def _build_blur_validation_expansion_rules(viewpoint: Dict[str, Any], analysis: 
         )
 
     return rules
+
+
+# --- Begin: List display expansion rule builder ---
+def _build_list_display_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> List[Dict[str, Any]]:
+    list_label = _extract_list_label_from_viewpoint(viewpoint, analysis)
+
+    if not list_label.endswith("一覧"):
+        list_label = f"{list_label}一覧"
+
+    return [
+        {
+            "name_suffix": "（0件）",
+            "pcl": ["N"],
+            "check_conditions": [f"{list_label}の表示対象データが存在しない状態で画面を起動する"],
+            "actions": ["画面を起動する"],
+            "confirmation_suffix": [f"{list_label}が0件で表示されること"],
+        },
+        {
+            "name_suffix": "（1件）",
+            "pcl": ["N"],
+            "check_conditions": [f"{list_label}の表示対象データが1件存在する状態で画面を起動する"],
+            "actions": ["画面を起動する"],
+            "confirmation_suffix": [f"{list_label}が1件で正しく表示されること"],
+        },
+        {
+            "name_suffix": "（複数件）",
+            "pcl": ["N"],
+            "check_conditions": [f"{list_label}の表示対象データが複数件存在する状態で画面を起動する"],
+            "actions": ["画面を起動する"],
+            "confirmation_suffix": [f"{list_label}が複数件で正しく表示されること"],
+        },
+        {
+            "name_suffix": "（ソート）",
+            "pcl": ["N"],
+            "check_conditions": [f"{list_label}の表示対象データが複数件存在する状態で画面を起動する"],
+            "actions": [f"{list_label}のソート操作を実行する"],
+            "confirmation_suffix": [f"{list_label}が指定条件でソートされること"],
+        },
+    ]
 
 def _build_input_check_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> List[Dict[str, Any]]:
     field_hint = _match_field_hint(viewpoint, _collect_field_hints(analysis))
@@ -497,6 +596,8 @@ def _expand_viewpoint(viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> Li
         rules = _build_blur_validation_expansion_rules(viewpoint, analysis)
     elif category == "入力チェック":
         rules = _build_input_check_expansion_rules(viewpoint, analysis)
+    elif category == "一覧表示":
+        rules = _build_list_display_expansion_rules(viewpoint, analysis)
     else:
         rules = EXPANSION_RULES.get(category)
 

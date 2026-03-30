@@ -27,7 +27,8 @@
       "control_role": "action",
       "test_target": false,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.Dummy"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -57,7 +58,8 @@
       "control_role": "hidden",
       "test_target": false,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.hidReferenceMode"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -90,7 +92,8 @@
       "control_role": "input",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.ddlBranchNo"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -123,7 +126,8 @@
       "control_role": "input",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.tbxCustomerNo"
       ],
       "required_ui_hint": true,
       "required_business": null,
@@ -166,7 +170,8 @@
       "control_role": "display",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.lblCustomerName"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -198,7 +203,8 @@
       "control_role": "action",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.btnCustShow"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -229,7 +235,8 @@
       "control_role": "action",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.btnCustSearch"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -260,7 +267,8 @@
       "control_role": "action",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.btnClear"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -291,7 +299,8 @@
       "control_role": "input",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.rblJisyoStatus"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -317,11 +326,12 @@
         "runat": "server",
         "onitemcommand": "rptSaikenMeisai_ItemCommand"
       },
-      "label": null,
+      "label": "債権明細",
       "control_role": "list",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.rptSaikenMeisai"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -353,7 +363,8 @@
       "control_role": "action",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.lnkSaikenNo"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -378,11 +389,12 @@
         "id": "rptJishoList",
         "runat": "server"
       },
-      "label": null,
+      "label": "事象一覧",
       "control_role": "list",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.rptJishoList"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -411,7 +423,8 @@
       "control_role": "display",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.lblUpdateDate"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -440,7 +453,8 @@
       "control_role": "display",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.lblUpdateUser"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -469,7 +483,8 @@
       "control_role": "hidden",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.hidUpdateDateTime"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -503,7 +518,8 @@
       "control_role": "input",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.txtReason"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -549,7 +565,8 @@
       "control_role": "input",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.txtCurrentSituation"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -595,7 +612,8 @@
       "control_role": "input",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.txtPolicy"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -641,7 +659,8 @@
       "control_role": "input",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.txtRemarks"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -684,7 +703,8 @@
       "control_role": "action",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.btnSummaryClear"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -716,7 +736,8 @@
       "control_role": "action",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.btnRegister"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -745,7 +766,8 @@
       "control_role": "input",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.chkAllReport"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -770,11 +792,12 @@
         "id": "rptReportList",
         "runat": "server"
       },
-      "label": null,
+      "label": "帳票一覧",
       "control_role": "list",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.rptReportList"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -803,7 +826,8 @@
       "control_role": "input",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.chkReport"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -833,7 +857,8 @@
       "control_role": "hidden",
       "test_target": false,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.hidReportName"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -863,7 +888,8 @@
       "control_role": "hidden",
       "test_target": false,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.hidReportClass"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -893,7 +919,8 @@
       "control_role": "hidden",
       "test_target": false,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.hidElementId"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -923,7 +950,8 @@
       "control_role": "hidden",
       "test_target": false,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.hidDefinition"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -953,7 +981,8 @@
       "control_role": "hidden",
       "test_target": false,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.hidKind"
       ],
       "required_ui_hint": false,
       "required_business": null,
@@ -984,7 +1013,8 @@
       "control_role": "action",
       "test_target": true,
       "source_basis": [
-        "aspx"
+        "aspx",
+        "controls.btnDownload"
       ],
       "required_ui_hint": false,
       "required_business": null,

@@ -374,7 +374,7 @@
     {
       "id": "VP-025",
       "category": "一覧表示",
-      "title": "rptSaikenMeisai の一覧表示確認",
+      "title": "債権明細 の一覧表示確認",
       "details": [
         "一覧データが正しく表示されること"
       ],
@@ -388,7 +388,7 @@
     {
       "id": "VP-026",
       "category": "一覧表示",
-      "title": "rptJishoList の一覧表示確認",
+      "title": "事象一覧 の一覧表示確認",
       "details": [
         "一覧データが正しく表示されること"
       ],
@@ -402,7 +402,7 @@
     {
       "id": "VP-027",
       "category": "一覧表示",
-      "title": "rptReportList の一覧表示確認",
+      "title": "帳票一覧 の一覧表示確認",
       "details": [
         "一覧データが正しく表示されること"
       ],
@@ -507,21 +507,54 @@
     {
       "id": "VP-034",
       "category": "一覧表示",
-      "title": "一覧ソート処理確認",
+      "title": "債権明細 のソート処理確認",
       "details": [
-        "一覧ヘッダ押下時に昇順・降順が切り替わること",
-        "文字列・数値・日付が指定種別で正しくソートされること"
+        "債権明細のヘッダ押下時に昇順・降順が切り替わること",
+        "債権明細で文字列・数値・日付が指定種別で正しくソートされること"
       ],
       "pcl": [
         "N"
       ],
       "source_basis": [
-        "Summary.js"
+        "Summary.js",
+        "controls.rptSaikenMeisai"
+      ]
+    },
+    {
+      "id": "VP-035",
+      "category": "一覧表示",
+      "title": "事象一覧 のソート処理確認",
+      "details": [
+        "事象一覧のヘッダ押下時に昇順・降順が切り替わること",
+        "事象一覧で文字列・数値・日付が指定種別で正しくソートされること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js",
+        "controls.rptJishoList"
+      ]
+    },
+    {
+      "id": "VP-036",
+      "category": "一覧表示",
+      "title": "帳票一覧 のソート処理確認",
+      "details": [
+        "帳票一覧のヘッダ押下時に昇順・降順が切り替わること",
+        "帳票一覧で文字列・数値・日付が指定種別で正しくソートされること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js",
+        "controls.rptReportList"
       ]
     }
   ],
   "summary": {
-    "viewpoint_count": 34,
+    "viewpoint_count": 36,
     "javascript_viewpoint_source_count": 5,
     "blur_validation_viewpoint_source_count": 5
   }

@@ -96,6 +96,52 @@ def _infer_test_target(control: Dict[str, Any], control_role: str) -> bool:
     return control_role in {"input", "action", "display", "list"}
 
 
+def _guess_list_label(control: Dict[str, Any], aspx_data: Dict[str, Any]) -> str:
+    control_id = _clean_text(control.get("id"))
+    if not control_id:
+        return ""
+
+    # 1) control 自身に業務名があれば優先
+    for key in ["label", "text", "name", "title"]:
+        value = _clean_text(control.get(key))
+        if value:
+            return value
+
+    # 2) テーブルヘッダ情報から推定
+    for header in aspx_data.get("table_headers", []):
+        if isinstance(header, dict):
+            owner_id = _clean_text(header.get("control_id"))
+            owner_name = _clean_text(header.get("table_id"))
+            header_text = _clean_text(header.get("text"))
+
+            if owner_id == control_id and header_text:
+                return f"{header_text}一覧"
+            if owner_name == control_id and header_text:
+                return f"{header_text}一覧"
+        else:
+            header_text = _clean_text(header)
+            if header_text:
+                if "saiken" in control_id.lower() and "債権" in header_text:
+                    return "債権明細"
+                if "jisho" in control_id.lower() and ("事象" in header_text or "延滞" in header_text or "悪化" in header_text):
+                    return "事象一覧"
+                if "report" in control_id.lower() and "帳票" in header_text:
+                    return "帳票一覧"
+
+    # 3) コントロールIDの命名規則から推定
+    lower_id = control_id.lower()
+    if "saiken" in lower_id and "meisai" in lower_id:
+        return "債権明細"
+    if "jisho" in lower_id:
+        return "事象一覧"
+    if "report" in lower_id:
+        return "帳票一覧"
+    if "list" in lower_id:
+        return "一覧"
+
+    return ""
+
+
 def _decorate_controls(aspx_data: Dict[str, Any]) -> List[Dict[str, Any]]:
     decorated: List[Dict[str, Any]] = []
 
@@ -104,10 +150,15 @@ def _decorate_controls(aspx_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         control_role = _infer_control_role(copied)
         copied["control_role"] = control_role
         copied["test_target"] = _infer_test_target(copied, control_role)
-        copied["source_basis"] = ["aspx"]
+        copied["source_basis"] = ["aspx", f'controls.{_clean_text(copied.get("id"))}']
 
         copied["required_ui_hint"] = bool(copied.get("required"))
         copied["required_business"] = None
+
+        if control_role == "list":
+            list_label = _guess_list_label(copied, aspx_data)
+            if list_label:
+                copied["label"] = list_label
 
         maxlength = copied.get("maxlength")
         blur_validation_rules: List[Dict[str, Any]] = []

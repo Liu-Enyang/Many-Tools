@@ -282,6 +282,19 @@ def _build_concurrency_viewpoints(
 
     return counter
 
+def _collect_sort_target_lists(analysis: Dict[str, Any]) -> List[Dict[str, Any]]:
+    list_controls = _find_controls_by_role(analysis, "list")
+    results: List[Dict[str, Any]] = []
+    seen_ids: set[str] = set()
+
+    for control in list_controls:
+        control_id = str(control.get("id") or "").strip()
+        if not control_id or control_id in seen_ids:
+            continue
+        seen_ids.add(control_id)
+        results.append(control)
+
+    return results
 
 def _build_javascript_viewpoints(
     analysis: Dict[str, Any],
@@ -359,19 +372,40 @@ def _build_javascript_viewpoints(
         counter += 1
 
     if javascript_analysis.get("sort_related"):
-        viewpoints.append(
-            _make_viewpoint(
-                vp_id=f"VP-{counter:03d}",
-                category="一覧表示",
-                title="一覧ソート処理確認",
-                details=[
-                    "一覧ヘッダ押下時に昇順・降順が切り替わること",
-                    "文字列・数値・日付が指定種別で正しくソートされること",
-                ],
-                source_basis=_collect_sources("sort_related"),
+        sort_sources = _collect_sources("sort_related")
+        sort_target_lists = _collect_sort_target_lists(analysis)
+
+        if sort_target_lists:
+            for control in sort_target_lists:
+                label = control.get("label") or control.get("id") or "一覧"
+                control_id = control.get("id") or "list"
+                viewpoints.append(
+                    _make_viewpoint(
+                        vp_id=f"VP-{counter:03d}",
+                        category="一覧表示",
+                        title=f"{label} のソート処理確認",
+                        details=[
+                            f"{label}のヘッダ押下時に昇順・降順が切り替わること",
+                            f"{label}で文字列・数値・日付が指定種別で正しくソートされること",
+                        ],
+                        source_basis=sort_sources + [f"controls.{control_id}"],
+                    )
+                )
+                counter += 1
+        else:
+            viewpoints.append(
+                _make_viewpoint(
+                    vp_id=f"VP-{counter:03d}",
+                    category="一覧表示",
+                    title="一覧ソート処理確認",
+                    details=[
+                        "一覧ヘッダ押下時に昇順・降順が切り替わること",
+                        "文字列・数値・日付が指定種別で正しくソートされること",
+                    ],
+                    source_basis=sort_sources,
+                )
             )
-        )
-        counter += 1
+            counter += 1
 
     return counter
 

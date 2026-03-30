@@ -13,18 +13,42 @@
       },
       {
         "id": "C-003",
-        "text": "一覧表示対象データが存在しない状態で画面を起動する"
+        "text": "債権明細一覧の表示対象データが存在しない状態で画面を起動する"
       },
       {
         "id": "C-004",
-        "text": "一覧表示対象データが1件存在する状態で画面を起動する"
+        "text": "債権明細一覧の表示対象データが1件存在する状態で画面を起動する"
       },
       {
         "id": "C-005",
-        "text": "一覧表示対象データが複数件存在する状態で画面を起動する"
+        "text": "債権明細一覧の表示対象データが複数件存在する状態で画面を起動する"
       },
       {
         "id": "C-006",
+        "text": "事象一覧の表示対象データが存在しない状態で画面を起動する"
+      },
+      {
+        "id": "C-007",
+        "text": "事象一覧の表示対象データが1件存在する状態で画面を起動する"
+      },
+      {
+        "id": "C-008",
+        "text": "事象一覧の表示対象データが複数件存在する状態で画面を起動する"
+      },
+      {
+        "id": "C-009",
+        "text": "帳票一覧の表示対象データが存在しない状態で画面を起動する"
+      },
+      {
+        "id": "C-010",
+        "text": "帳票一覧の表示対象データが1件存在する状態で画面を起動する"
+      },
+      {
+        "id": "C-011",
+        "text": "帳票一覧の表示対象データが複数件存在する状態で画面を起動する"
+      },
+      {
+        "id": "C-012",
         "text": "対象データが更新済みの状態で更新処理を実行する"
       }
     ],
@@ -107,18 +131,26 @@
       },
       {
         "id": "A-020",
-        "text": "一覧のソート操作を実行する"
+        "text": "債権明細一覧のソート操作を実行する"
       },
       {
         "id": "A-021",
-        "text": "更新処理を実行する"
+        "text": "事象一覧のソート操作を実行する"
       },
       {
         "id": "A-022",
-        "text": "対象操作を実行する"
+        "text": "帳票一覧のソート操作を実行する"
       },
       {
         "id": "A-023",
+        "text": "更新処理を実行する"
+      },
+      {
+        "id": "A-024",
+        "text": "対象操作を実行する"
+      },
+      {
+        "id": "A-025",
         "text": "必須条件を満たさない状態で操作する"
       }
     ],
@@ -301,79 +333,127 @@
       },
       {
         "id": "E-045",
-        "text": "一覧が0件で表示されること"
+        "text": "債権明細一覧が0件で表示されること"
       },
       {
         "id": "E-046",
-        "text": "一覧が1件で正しく表示されること"
+        "text": "債権明細一覧が1件で正しく表示されること"
       },
       {
         "id": "E-047",
-        "text": "一覧が複数件で正しく表示されること"
+        "text": "債権明細一覧が複数件で正しく表示されること"
       },
       {
         "id": "E-048",
-        "text": "一覧が指定条件でソートされること"
+        "text": "債権明細一覧が指定条件でソートされること"
       },
       {
         "id": "E-049",
-        "text": "参照モード時に対象コントロールが非活性となること"
+        "text": "事象一覧が0件で表示されること"
       },
       {
         "id": "E-050",
-        "text": "対象コントロール数: 15"
+        "text": "事象一覧が1件で正しく表示されること"
       },
       {
         "id": "E-051",
-        "text": "更新時に排他制御が実施されること"
+        "text": "事象一覧が複数件で正しく表示されること"
       },
       {
         "id": "E-052",
-        "text": "クリックイベントにより想定した処理が実行されること"
+        "text": "事象一覧が指定条件でソートされること"
       },
       {
         "id": "E-053",
-        "text": "対象ボタン押下時に画面項目が正しく更新されること"
+        "text": "帳票一覧が0件で表示されること"
       },
       {
         "id": "E-054",
-        "text": "参照モード時に入力項目・ボタン・リンクが操作不可となること"
+        "text": "帳票一覧が1件で正しく表示されること"
       },
       {
         "id": "E-055",
-        "text": "参照モード時に子要素も含めて非活性制御されること"
+        "text": "帳票一覧が複数件で正しく表示されること"
       },
       {
         "id": "E-056",
-        "text": "未入力時にエラーメッセージが表示されること"
+        "text": "帳票一覧が指定条件でソートされること"
       },
       {
         "id": "E-057",
-        "text": "入力条件不備時に処理が中断されること"
+        "text": "参照モード時に対象コントロールが非活性となること"
       },
       {
         "id": "E-058",
-        "text": "想定した処理結果となること"
+        "text": "対象コントロール数: 15"
       },
       {
         "id": "E-059",
-        "text": "エラーメッセージが表示されること"
+        "text": "更新時に排他制御が実施されること"
       },
       {
         "id": "E-060",
-        "text": "帳票未選択時にエラーメッセージが表示されること"
+        "text": "クリックイベントにより想定した処理が実行されること"
       },
       {
         "id": "E-061",
-        "text": "顧客番号・店番未設定時にダウンロード実行されないこと"
+        "text": "対象ボタン押下時に画面項目が正しく更新されること"
       },
       {
         "id": "E-062",
-        "text": "一覧ヘッダ押下時に昇順・降順が切り替わること"
+        "text": "参照モード時に入力項目・ボタン・リンクが操作不可となること"
       },
       {
         "id": "E-063",
-        "text": "文字列・数値・日付が指定種別で正しくソートされること"
+        "text": "参照モード時に子要素も含めて非活性制御されること"
+      },
+      {
+        "id": "E-064",
+        "text": "未入力時にエラーメッセージが表示されること"
+      },
+      {
+        "id": "E-065",
+        "text": "入力条件不備時に処理が中断されること"
+      },
+      {
+        "id": "E-066",
+        "text": "想定した処理結果となること"
+      },
+      {
+        "id": "E-067",
+        "text": "エラーメッセージが表示されること"
+      },
+      {
+        "id": "E-068",
+        "text": "帳票未選択時にエラーメッセージが表示されること"
+      },
+      {
+        "id": "E-069",
+        "text": "顧客番号・店番未設定時にダウンロード実行されないこと"
+      },
+      {
+        "id": "E-070",
+        "text": "債権明細のヘッダ押下時に昇順・降順が切り替わること"
+      },
+      {
+        "id": "E-071",
+        "text": "債権明細で文字列・数値・日付が指定種別で正しくソートされること"
+      },
+      {
+        "id": "E-072",
+        "text": "事象一覧のヘッダ押下時に昇順・降順が切り替わること"
+      },
+      {
+        "id": "E-073",
+        "text": "事象一覧で文字列・数値・日付が指定種別で正しくソートされること"
+      },
+      {
+        "id": "E-074",
+        "text": "帳票一覧のヘッダ押下時に昇順・降順が切り替わること"
+      },
+      {
+        "id": "E-075",
+        "text": "帳票一覧で文字列・数値・日付が指定種別で正しくソートされること"
       }
     ]
   },
@@ -1529,7 +1609,7 @@
       "case_no": "0046",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-025",
-      "test_viewpoint": "rptSaikenMeisai の一覧表示確認（0件）",
+      "test_viewpoint": "債権明細 の一覧表示確認（0件）",
       "pcl": [
         "N"
       ],
@@ -1553,7 +1633,7 @@
       "case_no": "0047",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-025",
-      "test_viewpoint": "rptSaikenMeisai の一覧表示確認（1件）",
+      "test_viewpoint": "債権明細 の一覧表示確認（1件）",
       "pcl": [
         "N"
       ],
@@ -1577,7 +1657,7 @@
       "case_no": "0048",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-025",
-      "test_viewpoint": "rptSaikenMeisai の一覧表示確認（複数件）",
+      "test_viewpoint": "債権明細 の一覧表示確認（複数件）",
       "pcl": [
         "N"
       ],
@@ -1601,7 +1681,7 @@
       "case_no": "0049",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-025",
-      "test_viewpoint": "rptSaikenMeisai の一覧表示確認（ソート）",
+      "test_viewpoint": "債権明細 の一覧表示確認（ソート）",
       "pcl": [
         "N"
       ],
@@ -1625,19 +1705,19 @@
       "case_no": "0050",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-026",
-      "test_viewpoint": "rptJishoList の一覧表示確認（0件）",
+      "test_viewpoint": "事象一覧 の一覧表示確認（0件）",
       "pcl": [
         "N"
       ],
       "check_condition_ids": [
-        "C-003"
+        "C-006"
       ],
       "action_ids": [
         "A-001"
       ],
       "confirmation_ids": [
         "E-044",
-        "E-045"
+        "E-049"
       ],
       "source_basis": [
         "VP-026",
@@ -1649,19 +1729,19 @@
       "case_no": "0051",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-026",
-      "test_viewpoint": "rptJishoList の一覧表示確認（1件）",
+      "test_viewpoint": "事象一覧 の一覧表示確認（1件）",
       "pcl": [
         "N"
       ],
       "check_condition_ids": [
-        "C-004"
+        "C-007"
       ],
       "action_ids": [
         "A-001"
       ],
       "confirmation_ids": [
         "E-044",
-        "E-046"
+        "E-050"
       ],
       "source_basis": [
         "VP-026",
@@ -1673,19 +1753,19 @@
       "case_no": "0052",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-026",
-      "test_viewpoint": "rptJishoList の一覧表示確認（複数件）",
+      "test_viewpoint": "事象一覧 の一覧表示確認（複数件）",
       "pcl": [
         "N"
       ],
       "check_condition_ids": [
-        "C-005"
+        "C-008"
       ],
       "action_ids": [
         "A-001"
       ],
       "confirmation_ids": [
         "E-044",
-        "E-047"
+        "E-051"
       ],
       "source_basis": [
         "VP-026",
@@ -1697,19 +1777,19 @@
       "case_no": "0053",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-026",
-      "test_viewpoint": "rptJishoList の一覧表示確認（ソート）",
+      "test_viewpoint": "事象一覧 の一覧表示確認（ソート）",
       "pcl": [
         "N"
       ],
       "check_condition_ids": [
-        "C-005"
+        "C-008"
       ],
       "action_ids": [
-        "A-020"
+        "A-021"
       ],
       "confirmation_ids": [
         "E-044",
-        "E-048"
+        "E-052"
       ],
       "source_basis": [
         "VP-026",
@@ -1721,19 +1801,19 @@
       "case_no": "0054",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-027",
-      "test_viewpoint": "rptReportList の一覧表示確認（0件）",
+      "test_viewpoint": "帳票一覧 の一覧表示確認（0件）",
       "pcl": [
         "N"
       ],
       "check_condition_ids": [
-        "C-003"
+        "C-009"
       ],
       "action_ids": [
         "A-001"
       ],
       "confirmation_ids": [
         "E-044",
-        "E-045"
+        "E-053"
       ],
       "source_basis": [
         "VP-027",
@@ -1745,19 +1825,19 @@
       "case_no": "0055",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-027",
-      "test_viewpoint": "rptReportList の一覧表示確認（1件）",
+      "test_viewpoint": "帳票一覧 の一覧表示確認（1件）",
       "pcl": [
         "N"
       ],
       "check_condition_ids": [
-        "C-004"
+        "C-010"
       ],
       "action_ids": [
         "A-001"
       ],
       "confirmation_ids": [
         "E-044",
-        "E-046"
+        "E-054"
       ],
       "source_basis": [
         "VP-027",
@@ -1769,19 +1849,19 @@
       "case_no": "0056",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-027",
-      "test_viewpoint": "rptReportList の一覧表示確認（複数件）",
+      "test_viewpoint": "帳票一覧 の一覧表示確認（複数件）",
       "pcl": [
         "N"
       ],
       "check_condition_ids": [
-        "C-005"
+        "C-011"
       ],
       "action_ids": [
         "A-001"
       ],
       "confirmation_ids": [
         "E-044",
-        "E-047"
+        "E-055"
       ],
       "source_basis": [
         "VP-027",
@@ -1793,19 +1873,19 @@
       "case_no": "0057",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-027",
-      "test_viewpoint": "rptReportList の一覧表示確認（ソート）",
+      "test_viewpoint": "帳票一覧 の一覧表示確認（ソート）",
       "pcl": [
         "N"
       ],
       "check_condition_ids": [
-        "C-005"
+        "C-011"
       ],
       "action_ids": [
-        "A-020"
+        "A-022"
       ],
       "confirmation_ids": [
         "E-044",
-        "E-048"
+        "E-056"
       ],
       "source_basis": [
         "VP-027",
@@ -1828,8 +1908,8 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-049",
-        "E-050"
+        "E-057",
+        "E-058"
       ],
       "source_basis": [
         "VP-028",
@@ -1852,8 +1932,8 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-049",
-        "E-050"
+        "E-057",
+        "E-058"
       ],
       "source_basis": [
         "VP-028",
@@ -1870,13 +1950,13 @@
         "E"
       ],
       "check_condition_ids": [
-        "C-006"
+        "C-012"
       ],
       "action_ids": [
-        "A-021"
+        "A-023"
       ],
       "confirmation_ids": [
-        "E-051"
+        "E-059"
       ],
       "source_basis": [
         "VP-029",
@@ -1899,8 +1979,8 @@
         "A-019"
       ],
       "confirmation_ids": [
-        "E-052",
-        "E-053"
+        "E-060",
+        "E-061"
       ],
       "source_basis": [
         "VP-030",
@@ -1923,8 +2003,8 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-054",
-        "E-055"
+        "E-062",
+        "E-063"
       ],
       "source_basis": [
         "VP-031",
@@ -1947,8 +2027,8 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-054",
-        "E-055"
+        "E-062",
+        "E-063"
       ],
       "source_basis": [
         "VP-031",
@@ -1968,12 +2048,12 @@
         "C-001"
       ],
       "action_ids": [
-        "A-022"
+        "A-024"
       ],
       "confirmation_ids": [
-        "E-056",
-        "E-057",
-        "E-058"
+        "E-064",
+        "E-065",
+        "E-066"
       ],
       "source_basis": [
         "VP-032",
@@ -1993,12 +2073,12 @@
         "C-001"
       ],
       "action_ids": [
-        "A-023"
+        "A-025"
       ],
       "confirmation_ids": [
-        "E-056",
-        "E-057",
-        "E-059"
+        "E-064",
+        "E-065",
+        "E-067"
       ],
       "source_basis": [
         "VP-032",
@@ -2021,8 +2101,8 @@
         "A-019"
       ],
       "confirmation_ids": [
-        "E-060",
-        "E-061"
+        "E-068",
+        "E-069"
       ],
       "source_basis": [
         "VP-033",
@@ -2034,7 +2114,7 @@
       "case_no": "0067",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-034",
-      "test_viewpoint": "一覧ソート処理確認（0件）",
+      "test_viewpoint": "債権明細 のソート処理確認（0件）",
       "pcl": [
         "N"
       ],
@@ -2045,13 +2125,14 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-062",
-        "E-063",
+        "E-070",
+        "E-071",
         "E-045"
       ],
       "source_basis": [
         "VP-034",
-        "Summary.js"
+        "Summary.js",
+        "controls.rptSaikenMeisai"
       ]
     },
     {
@@ -2059,7 +2140,7 @@
       "case_no": "0068",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-034",
-      "test_viewpoint": "一覧ソート処理確認（1件）",
+      "test_viewpoint": "債権明細 のソート処理確認（1件）",
       "pcl": [
         "N"
       ],
@@ -2070,13 +2151,14 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-062",
-        "E-063",
+        "E-070",
+        "E-071",
         "E-046"
       ],
       "source_basis": [
         "VP-034",
-        "Summary.js"
+        "Summary.js",
+        "controls.rptSaikenMeisai"
       ]
     },
     {
@@ -2084,7 +2166,7 @@
       "case_no": "0069",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-034",
-      "test_viewpoint": "一覧ソート処理確認（複数件）",
+      "test_viewpoint": "債権明細 のソート処理確認（複数件）",
       "pcl": [
         "N"
       ],
@@ -2095,13 +2177,14 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-062",
-        "E-063",
+        "E-070",
+        "E-071",
         "E-047"
       ],
       "source_basis": [
         "VP-034",
-        "Summary.js"
+        "Summary.js",
+        "controls.rptSaikenMeisai"
       ]
     },
     {
@@ -2109,7 +2192,7 @@
       "case_no": "0070",
       "category": "一覧表示",
       "test_viewpoint_id": "VP-034",
-      "test_viewpoint": "一覧ソート処理確認（ソート）",
+      "test_viewpoint": "債権明細 のソート処理確認（ソート）",
       "pcl": [
         "N"
       ],
@@ -2120,23 +2203,232 @@
         "A-020"
       ],
       "confirmation_ids": [
-        "E-062",
-        "E-063",
+        "E-070",
+        "E-071",
         "E-048"
       ],
       "source_basis": [
         "VP-034",
-        "Summary.js"
+        "Summary.js",
+        "controls.rptSaikenMeisai"
+      ]
+    },
+    {
+      "case_id": "TC-071",
+      "case_no": "0071",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-035",
+      "test_viewpoint": "事象一覧 のソート処理確認（0件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-006"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-072",
+        "E-073",
+        "E-049"
+      ],
+      "source_basis": [
+        "VP-035",
+        "Summary.js",
+        "controls.rptJishoList"
+      ]
+    },
+    {
+      "case_id": "TC-072",
+      "case_no": "0072",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-035",
+      "test_viewpoint": "事象一覧 のソート処理確認（1件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-007"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-072",
+        "E-073",
+        "E-050"
+      ],
+      "source_basis": [
+        "VP-035",
+        "Summary.js",
+        "controls.rptJishoList"
+      ]
+    },
+    {
+      "case_id": "TC-073",
+      "case_no": "0073",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-035",
+      "test_viewpoint": "事象一覧 のソート処理確認（複数件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-008"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-072",
+        "E-073",
+        "E-051"
+      ],
+      "source_basis": [
+        "VP-035",
+        "Summary.js",
+        "controls.rptJishoList"
+      ]
+    },
+    {
+      "case_id": "TC-074",
+      "case_no": "0074",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-035",
+      "test_viewpoint": "事象一覧 のソート処理確認（ソート）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-008"
+      ],
+      "action_ids": [
+        "A-021"
+      ],
+      "confirmation_ids": [
+        "E-072",
+        "E-073",
+        "E-052"
+      ],
+      "source_basis": [
+        "VP-035",
+        "Summary.js",
+        "controls.rptJishoList"
+      ]
+    },
+    {
+      "case_id": "TC-075",
+      "case_no": "0075",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-036",
+      "test_viewpoint": "帳票一覧 のソート処理確認（0件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-009"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-074",
+        "E-075",
+        "E-053"
+      ],
+      "source_basis": [
+        "VP-036",
+        "Summary.js",
+        "controls.rptReportList"
+      ]
+    },
+    {
+      "case_id": "TC-076",
+      "case_no": "0076",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-036",
+      "test_viewpoint": "帳票一覧 のソート処理確認（1件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-010"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-074",
+        "E-075",
+        "E-054"
+      ],
+      "source_basis": [
+        "VP-036",
+        "Summary.js",
+        "controls.rptReportList"
+      ]
+    },
+    {
+      "case_id": "TC-077",
+      "case_no": "0077",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-036",
+      "test_viewpoint": "帳票一覧 のソート処理確認（複数件）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-011"
+      ],
+      "action_ids": [
+        "A-001"
+      ],
+      "confirmation_ids": [
+        "E-074",
+        "E-075",
+        "E-055"
+      ],
+      "source_basis": [
+        "VP-036",
+        "Summary.js",
+        "controls.rptReportList"
+      ]
+    },
+    {
+      "case_id": "TC-078",
+      "case_no": "0078",
+      "category": "一覧表示",
+      "test_viewpoint_id": "VP-036",
+      "test_viewpoint": "帳票一覧 のソート処理確認（ソート）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-011"
+      ],
+      "action_ids": [
+        "A-022"
+      ],
+      "confirmation_ids": [
+        "E-074",
+        "E-075",
+        "E-056"
+      ],
+      "source_basis": [
+        "VP-036",
+        "Summary.js",
+        "controls.rptReportList"
       ]
     }
   ],
   "summary": {
-    "test_case_count": 70,
-    "source_viewpoint_count": 34,
-    "check_condition_count": 6,
-    "action_count": 23,
-    "confirmation_count": 63,
-    "pcl_assigned_case_count": 70,
+    "test_case_count": 78,
+    "source_viewpoint_count": 36,
+    "check_condition_count": 12,
+    "action_count": 25,
+    "confirmation_count": 75,
+    "pcl_assigned_case_count": 78,
     "analysis_linked_field_count": 30
   }
 }
