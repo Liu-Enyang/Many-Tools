@@ -150,7 +150,7 @@
       "category": "入力チェック",
       "title": "顧客番号 の長さ制御確認",
       "details": [
-        "顧客番号 に maxlength=12 の入力チェックがあること"
+        "顧客番号 に maxlength=12 のため、フォーカスアウト時の桁数チェック対象 の入力チェックがあること"
       ],
       "pcl": [
         "E",
@@ -166,7 +166,7 @@
       "category": "入力チェック",
       "title": "事故及び延滞に至った原因 の長さ制御確認",
       "details": [
-        "事故及び延滞に至った原因 に maxlength=2000 の入力チェックがあること"
+        "事故及び延滞に至った原因 に maxlength=2000 のため、フォーカスアウト時の桁数チェック対象 の入力チェックがあること"
       ],
       "pcl": [
         "E",
@@ -182,7 +182,7 @@
       "category": "入力チェック",
       "title": "債務者および保証人の現況 の長さ制御確認",
       "details": [
-        "債務者および保証人の現況 に maxlength=2000 の入力チェックがあること"
+        "債務者および保証人の現況 に maxlength=2000 のため、フォーカスアウト時の桁数チェック対象 の入力チェックがあること"
       ],
       "pcl": [
         "E",
@@ -198,7 +198,7 @@
       "category": "入力チェック",
       "title": "回収、解消の方針、スケジュール の長さ制御確認",
       "details": [
-        "回収、解消の方針、スケジュール に maxlength=2000 の入力チェックがあること"
+        "回収、解消の方針、スケジュール に maxlength=2000 のため、フォーカスアウト時の桁数チェック対象 の入力チェックがあること"
       ],
       "pcl": [
         "E",
@@ -214,7 +214,7 @@
       "category": "入力チェック",
       "title": "備考、特記事項 の長さ制御確認",
       "details": [
-        "備考、特記事項 に maxlength=2000 の入力チェックがあること"
+        "備考、特記事項 に maxlength=2000 のため、フォーカスアウト時の桁数チェック対象 の入力チェックがあること"
       ],
       "pcl": [
         "E",
@@ -227,6 +227,96 @@
     },
     {
       "id": "VP-016",
+      "category": "入力チェック",
+      "title": "顧客番号 のフォーカスアウト時桁数チェック確認",
+      "details": [
+        "顧客番号 に最大桁数以内の値を入力してフォーカスアウト時にエラーとならないこと",
+        "顧客番号 に最大桁数超過の値を入力してフォーカスアウト時にエラーメッセージが表示されること"
+      ],
+      "pcl": [
+        "E",
+        "L",
+        "N"
+      ],
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "id": "VP-017",
+      "category": "入力チェック",
+      "title": "事故及び延滞に至った原因 のフォーカスアウト時桁数チェック確認",
+      "details": [
+        "事故及び延滞に至った原因 に最大桁数以内の値を入力してフォーカスアウト時にエラーとならないこと",
+        "事故及び延滞に至った原因 に最大桁数超過の値を入力してフォーカスアウト時にエラーメッセージが表示されること"
+      ],
+      "pcl": [
+        "E",
+        "L",
+        "N"
+      ],
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "id": "VP-018",
+      "category": "入力チェック",
+      "title": "債務者および保証人の現況 のフォーカスアウト時桁数チェック確認",
+      "details": [
+        "債務者および保証人の現況 に最大桁数以内の値を入力してフォーカスアウト時にエラーとならないこと",
+        "債務者および保証人の現況 に最大桁数超過の値を入力してフォーカスアウト時にエラーメッセージが表示されること"
+      ],
+      "pcl": [
+        "E",
+        "L",
+        "N"
+      ],
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "id": "VP-019",
+      "category": "入力チェック",
+      "title": "回収、解消の方針、スケジュール のフォーカスアウト時桁数チェック確認",
+      "details": [
+        "回収、解消の方針、スケジュール に最大桁数以内の値を入力してフォーカスアウト時にエラーとならないこと",
+        "回収、解消の方針、スケジュール に最大桁数超過の値を入力してフォーカスアウト時にエラーメッセージが表示されること"
+      ],
+      "pcl": [
+        "E",
+        "L",
+        "N"
+      ],
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "id": "VP-020",
+      "category": "入力チェック",
+      "title": "備考、特記事項 のフォーカスアウト時桁数チェック確認",
+      "details": [
+        "備考、特記事項 に最大桁数以内の値を入力してフォーカスアウト時にエラーとならないこと",
+        "備考、特記事項 に最大桁数超過の値を入力してフォーカスアウト時にエラーメッセージが表示されること"
+      ],
+      "pcl": [
+        "E",
+        "L",
+        "N"
+      ],
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "id": "VP-021",
       "category": "イベント",
       "title": "ddlBranchNo 選択変更時の処理確認",
       "details": [
@@ -240,7 +330,7 @@
       ]
     },
     {
-      "id": "VP-017",
+      "id": "VP-022",
       "category": "イベント",
       "title": "btnCustShow 押下時の処理確認",
       "details": [
@@ -254,7 +344,7 @@
       ]
     },
     {
-      "id": "VP-018",
+      "id": "VP-023",
       "category": "イベント",
       "title": "btnRegister 押下時の処理確認",
       "details": [
@@ -268,7 +358,7 @@
       ]
     },
     {
-      "id": "VP-019",
+      "id": "VP-024",
       "category": "イベント",
       "title": "rptSaikenMeisai 一覧操作時の処理確認",
       "details": [
@@ -282,7 +372,7 @@
       ]
     },
     {
-      "id": "VP-020",
+      "id": "VP-025",
       "category": "一覧表示",
       "title": "rptSaikenMeisai の一覧表示確認",
       "details": [
@@ -296,7 +386,7 @@
       ]
     },
     {
-      "id": "VP-021",
+      "id": "VP-026",
       "category": "一覧表示",
       "title": "rptJishoList の一覧表示確認",
       "details": [
@@ -310,7 +400,7 @@
       ]
     },
     {
-      "id": "VP-022",
+      "id": "VP-027",
       "category": "一覧表示",
       "title": "rptReportList の一覧表示確認",
       "details": [
@@ -324,7 +414,7 @@
       ]
     },
     {
-      "id": "VP-023",
+      "id": "VP-028",
       "category": "画面モード",
       "title": "参照モード時の非活性制御確認",
       "details": [
@@ -339,7 +429,7 @@
       ]
     },
     {
-      "id": "VP-024",
+      "id": "VP-029",
       "category": "排他制御",
       "title": "更新時の排他チェック確認",
       "details": [
@@ -353,7 +443,7 @@
       ]
     },
     {
-      "id": "VP-025",
+      "id": "VP-030",
       "category": "イベント",
       "title": "JavaScriptイベント処理確認",
       "details": [
@@ -368,7 +458,7 @@
       ]
     },
     {
-      "id": "VP-026",
+      "id": "VP-031",
       "category": "画面モード",
       "title": "参照モード時のJavaScript制御確認",
       "details": [
@@ -383,7 +473,7 @@
       ]
     },
     {
-      "id": "VP-027",
+      "id": "VP-032",
       "category": "入力チェック",
       "title": "JavaScript入力チェック・エラーメッセージ確認",
       "details": [
@@ -399,7 +489,7 @@
       ]
     },
     {
-      "id": "VP-028",
+      "id": "VP-033",
       "category": "イベント",
       "title": "帳票ダウンロード前提チェック確認",
       "details": [
@@ -415,7 +505,7 @@
       ]
     },
     {
-      "id": "VP-029",
+      "id": "VP-034",
       "category": "一覧表示",
       "title": "一覧ソート処理確認",
       "details": [
@@ -431,7 +521,8 @@
     }
   ],
   "summary": {
-    "viewpoint_count": 29,
-    "javascript_viewpoint_source_count": 5
+    "viewpoint_count": 34,
+    "javascript_viewpoint_source_count": 5,
+    "blur_validation_viewpoint_source_count": 5
   }
 }

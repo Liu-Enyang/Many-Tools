@@ -234,7 +234,87 @@ def _is_numeric_field(field_hint: Dict[str, Any]) -> bool:
     data_type = str(field_hint.get("data_type", "")).lower()
     return any(keyword in data_type for keyword in ["number", "numeric", "digit", "int", "decimal", "num"])
 
+def _is_blur_validation_viewpoint(viewpoint: Dict[str, Any]) -> bool:
+    title = str(viewpoint.get("title", "")).strip()
+    details_text = " ".join([str(value) for value in viewpoint.get("details", [])])
+    source_basis_text = " ".join([str(value) for value in viewpoint.get("source_basis", [])])
+    search_text = f"{title} {details_text} {source_basis_text}"
+    return "フォーカスアウト時" in search_text or "blur_validation" in search_text or "common_frontend.blur_validation" in search_text
 
+def _build_blur_validation_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> List[Dict[str, Any]]:
+    field_hint = _match_field_hint(viewpoint, _collect_field_hints(analysis))
+    label = str(field_hint.get("label", "対象項目")).strip() or "対象項目"
+    max_length = field_hint.get("max_length")
+
+    if label == "対象項目":
+        return [
+            {
+                "name_suffix": "（最大桁数以内）",
+                "pcl": ["N"],
+                "actions": [
+                    "対象項目に最大桁数以内の値を入力する",
+                    "他項目へフォーカスを移動する",
+                ],
+                "confirmation_suffix": [
+                    "フォーカスアウト時にエラーとならないこと",
+                ],
+            },
+            {
+                "name_suffix": "（最大桁数超過）",
+                "pcl": ["L"],
+                "actions": [
+                    "対象項目に最大桁数超過の値を入力する",
+                    "他項目へフォーカスを移動する",
+                ],
+                "confirmation_suffix": [
+                    "フォーカスアウト時にエラーメッセージが表示されること",
+                ],
+            },
+        ]
+
+    rules: List[Dict[str, Any]] = [
+        {
+            "name_suffix": "（最大桁数以内）",
+            "pcl": ["N"],
+            "actions": [
+                f"{label}に最大桁数以内の値を入力する",
+                "他項目へフォーカスを移動する",
+            ],
+            "confirmation_suffix": [
+                f"{label}に最大桁数以内の値を入力してフォーカスアウト時にエラーとならないこと",
+            ],
+        }
+    ]
+
+    if max_length is not None and max_length > 0:
+        rules.append(
+            {
+                "name_suffix": "（最大桁数ちょうど）",
+                "pcl": ["L"],
+                "actions": [
+                    f"{label}に最大桁数ちょうどの値を入力する",
+                    "他項目へフォーカスを移動する",
+                ],
+                "confirmation_suffix": [
+                    f"{label}に最大桁数ちょうどの値を入力してフォーカスアウト時にエラーとならないこと",
+                ],
+            }
+        )
+        rules.append(
+            {
+                "name_suffix": "（最大桁数超過）",
+                "pcl": ["L"],
+                "actions": [
+                    f"{label}に最大桁数超過の値を入力する",
+                    "他項目へフォーカスを移動する",
+                ],
+                "confirmation_suffix": [
+                    f"{label}に最大桁数超過の値を入力してフォーカスアウト時にエラーメッセージが表示されること",
+                ],
+            }
+        )
+
+    return rules
 
 def _build_input_check_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> List[Dict[str, Any]]:
     field_hint = _match_field_hint(viewpoint, _collect_field_hints(analysis))
@@ -413,7 +493,9 @@ def _expand_viewpoint(viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> Li
     category = str(viewpoint.get("category", "")).strip()
     title = str(viewpoint.get("title", "")).strip()
     viewpoint_pcl = _normalize_pcl([str(value) for value in viewpoint.get("pcl", [])])
-    if category == "入力チェック":
+    if category == "入力チェック" and _is_blur_validation_viewpoint(viewpoint):
+        rules = _build_blur_validation_expansion_rules(viewpoint, analysis)
+    elif category == "入力チェック":
         rules = _build_input_check_expansion_rules(viewpoint, analysis)
     else:
         rules = EXPANSION_RULES.get(category)

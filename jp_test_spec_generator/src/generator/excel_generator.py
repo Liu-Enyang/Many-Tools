@@ -34,8 +34,8 @@ CHECK_END_ROW = 33
 ACTION_START_ROW = 34
 ACTION_END_ROW = 66
 CONFIRM_START_ROW = 67
-CONFIRM_END_ROW = 126
-PCL_ROW = 129
+CONFIRM_END_ROW = 158
+PCL_ROW = 161
 CASE_HEADER_ROW = 3
 CASE_START_COL = 10  # J列
 CASE_TEMPLATE_COPY_COL = 45  # AS列
@@ -45,7 +45,7 @@ TEMPLATE_ITEM_TEXT_COL = 2  # テンプレート主表では B列（結合セル
 SECTION_LABEL_COL = 1  # A列
 CHECK_TEMPLATE_COPY_ROW = 32
 ACTION_TEMPLATE_COPY_ROW = 65
-CONFIRM_TEMPLATE_COPY_ROW = 125
+CONFIRM_TEMPLATE_COPY_ROW = 157
 TEMPLATE_PATH = Path(__file__).resolve().parents[2] / "Sample_input" / "単体テスト仕様書base.xlsx"
 
 
@@ -151,6 +151,7 @@ def _copy_row_merges(ws: Worksheet, source_row: int, target_row: int) -> None:
 
 
 
+
 def _copy_column_style(ws: Worksheet, source_col: int, target_col: int, max_row: int) -> None:
     source_letter = get_column_letter(source_col)
     target_letter = get_column_letter(target_col)
@@ -159,6 +160,21 @@ def _copy_column_style(ws: Worksheet, source_col: int, target_col: int, max_row:
     ws.column_dimensions[target_letter].hidden = ws.column_dimensions[source_letter].hidden
     for row in range(1, max_row + 1):
         _copy_cell_style(ws.cell(row, source_col), ws.cell(row, target_col))
+
+
+# Helper to adjust row height for wrapped text in column B/C.
+def _adjust_wrapped_row_height(ws: Worksheet, row: int, text: str, base_height: float = 18.0) -> None:
+    content = str(text or "")
+    if not content:
+        return
+
+    # B列の結合セル表示を前提に、おおよその文字数で行数を算出する
+    approx_chars_per_line = 28
+    line_count = max(1, (len(content) // approx_chars_per_line) + (1 if len(content) % approx_chars_per_line else 0))
+
+    # テンプレート行高を基準にする
+    template_height = ws.row_dimensions[row].height or base_height
+    ws.row_dimensions[row].height = template_height * line_count
 
 
 
@@ -291,6 +307,7 @@ def _fill_section_rows(
         _set_cell_value_safe(ws, row, ITEM_NO_COL, item_id)
         _set_cell_value_safe(ws, row, ITEM_TEXT_COL, item_text)
         ws.cell(row=row, column=ITEM_TEXT_COL).alignment = LEFT
+        _adjust_wrapped_row_height(ws, row, item_text)
 
         for case_index, test_case in enumerate(test_cases):
             col = CASE_START_COL + case_index
@@ -346,6 +363,7 @@ def _fill_template_section_rows(
                     target_text_cell = ws.cell(merged_range.min_row, merged_range.min_col)
                     break
         target_text_cell.alignment = LEFT
+        _adjust_wrapped_row_height(ws, row, item_text)
 
         for case_index, test_case in enumerate(test_cases):
             col = CASE_START_COL + case_index
@@ -674,6 +692,7 @@ def _generate_simple_matrix(
             ws.cell(row=current_row, column=2).value = item_id
             ws.cell(row=current_row, column=3).value = item_text
             ws.cell(row=current_row, column=3).alignment = LEFT
+            _adjust_wrapped_row_height(ws, current_row, item_text)
             for case_index, test_case in enumerate(test_cases):
                 col = 4 + case_index
                 related_ids = test_case.get(relation_key, [])

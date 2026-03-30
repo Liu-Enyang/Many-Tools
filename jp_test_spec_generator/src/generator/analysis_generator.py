@@ -110,9 +110,21 @@ def _decorate_controls(aspx_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         copied["required_business"] = None
 
         maxlength = copied.get("maxlength")
+        blur_validation_rules: List[Dict[str, Any]] = []
+        if maxlength:
+            blur_validation_rules.append({
+                "rule_type": "maxlength_blur_check",
+                "max_length": maxlength,
+                "trigger": "blur",
+                "implemented_by": "common_frontend",
+                "detail": f"maxlength={maxlength} の項目はフォーカスアウト時に桁数チェック対象とみなす",
+                "source_basis": ["aspx.maxlength", "common_frontend.blur_validation"],
+            })
+
         copied["input_rule"] = {
             "html_maxlength": maxlength,
             "business_rule": None,
+            "blur_validation_rules": blur_validation_rules,
         }
 
         decorated.append(copied)
@@ -140,9 +152,12 @@ def _build_validation_candidates(
             validations.append({
                 "target": control.get("id"),
                 "check_type": "maxlength",
-                "detail": f'maxlength={control.get("maxlength")}',
+                "detail": f'maxlength={control.get("maxlength")} のため、フォーカスアウト時の桁数チェック対象',
                 "source": "aspx",
-                "source_basis": ["aspx.maxlength"],
+                "trigger": "blur",
+                "implemented_by": "common_frontend",
+                "max_length": control.get("maxlength"),
+                "source_basis": ["aspx.maxlength", "common_frontend.blur_validation"],
             })
 
     for hint in codebehind_data.get("validation_hints", []):
@@ -312,6 +327,18 @@ def generate_analysis(
         "controls": controls,
         "events": _categorize_events(codebehind_data),
         "validations": _build_validation_candidates(controls, codebehind_data),
+        "blur_validation_targets": [
+            {
+                "target": control.get("id"),
+                "label": control.get("label") or control.get("id"),
+                "max_length": control.get("maxlength"),
+                "trigger": "blur",
+                "implemented_by": "common_frontend",
+                "source_basis": ["aspx.maxlength", "common_frontend.blur_validation"],
+            }
+            for control in controls
+            if control.get("maxlength")
+        ],
         "screen_modes": _build_screen_modes(controls, codebehind_data),
         "javascript_sources": javascript_sources,
         "javascript_analysis": javascript_analysis,

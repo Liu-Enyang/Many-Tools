@@ -147,6 +147,37 @@ def _build_length_viewpoints(
 
     return counter
 
+def _build_blur_validation_viewpoints(
+    analysis: Dict[str, Any],
+    viewpoints: List[Dict[str, Any]],
+    counter: int,
+) -> int:
+    for target in analysis.get("blur_validation_targets", []):
+        label = target.get("label") or target.get("target") or "対象項目"
+        max_length = target.get("max_length")
+        trigger = target.get("trigger") or "blur"
+
+        if not max_length:
+            continue
+
+        trigger_text = "フォーカスアウト時" if trigger == "blur" else "入力時"
+
+        viewpoints.append(
+            _make_viewpoint(
+                vp_id=f"VP-{counter:03d}",
+                category="入力チェック",
+                title=f"{label} の{trigger_text}桁数チェック確認",
+                details=[
+                    f"{label} に最大桁数以内の値を入力して{trigger_text}にエラーとならないこと",
+                    f"{label} に最大桁数超過の値を入力して{trigger_text}にエラーメッセージが表示されること",
+                ],
+                source_basis=target.get("source_basis", []) or [target.get("target") or "blur_validation"],
+            )
+        )
+        counter += 1
+
+    return counter
+
 
 def _build_action_viewpoints(
     analysis: Dict[str, Any],
@@ -351,6 +382,7 @@ def generate_viewpoints(analysis: Dict[str, Any]) -> Dict[str, Any]:
     counter = _build_initial_display_viewpoints(analysis, viewpoints, counter)
     counter = _build_input_viewpoints(analysis, viewpoints, counter)
     counter = _build_length_viewpoints(analysis, viewpoints, counter)
+    counter = _build_blur_validation_viewpoints(analysis, viewpoints, counter)
     counter = _build_action_viewpoints(analysis, viewpoints, counter)
     counter = _build_list_viewpoints(analysis, viewpoints, counter)
     counter = _build_reference_mode_viewpoints(analysis, viewpoints, counter)
@@ -358,6 +390,7 @@ def generate_viewpoints(analysis: Dict[str, Any]) -> Dict[str, Any]:
     counter = _build_javascript_viewpoints(analysis, viewpoints, counter)
 
     javascript_analysis = analysis.get("javascript_analysis", {}) or {}
+    blur_validation_targets = analysis.get("blur_validation_targets", []) or []
 
     return {
         "screen_id": analysis.get("screen_id"),
@@ -366,5 +399,6 @@ def generate_viewpoints(analysis: Dict[str, Any]) -> Dict[str, Any]:
         "summary": {
             "viewpoint_count": len(viewpoints),
             "javascript_viewpoint_source_count": sum(len(v) for v in javascript_analysis.values()) if javascript_analysis else 0,
+            "blur_validation_viewpoint_source_count": len(blur_validation_targets),
         },
     }
