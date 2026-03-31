@@ -284,24 +284,27 @@ def _find_case_template_capacity(ws: Worksheet) -> int:
 
 def _ensure_case_columns(ws: Worksheet, required_case_count: int) -> None:
     existing_case_count = _find_case_template_capacity(ws)
-    max_row = max(ws.max_row, PCL_ROW)
 
-    case_base_letter = get_column_letter(CASE_START_COL)
-    template_copy_letter = get_column_letter(CASE_TEMPLATE_COPY_COL)
-    ws.column_dimensions[template_copy_letter].width = ws.column_dimensions[case_base_letter].width
+    if existing_case_count <= 0:
+        raise ExcelGenerationError("テンプレートのケース列が見つかりません。")
 
-    additional_count = max(0, required_case_count - existing_case_count)
-    if additional_count > 0:
-        _print_progress(f"ケース列を拡張します: 追加 {additional_count} 列")
+    if required_case_count <= existing_case_count:
+        return
 
-    for offset in range(additional_count):
-        insert_at = CASE_TEMPLATE_COPY_COL + 1 + offset
-        source_col = CASE_TEMPLATE_COPY_COL + offset
-        ws.insert_cols(insert_at, 1)
-        _copy_column_style(ws, source_col, insert_at, max_row)
-        for row in range(1, max_row + 1):
-            _clear_cell_value_keep_style(ws, row, insert_at)
-        _print_case_progress("ケース列作成進捗", offset + 1, additional_count)
+    additional = required_case_count - existing_case_count
+    _print_progress(f"ケース列を追加します: 追加 {additional} 列")
+
+    # 追加列の列幅はテンプレートのケース列（J列）に合わせる
+    base_case_letter = get_column_letter(CASE_START_COL)
+    base_case_width = ws.column_dimensions[base_case_letter].width
+
+    for i in range(additional):
+        new_col = ws.max_column + 1
+        new_letter = get_column_letter(new_col)
+        ws.column_dimensions[new_letter].width = base_case_width
+
+        for row in range(1, ws.max_row + 1):
+            _clear_cell_value_keep_style(ws, row, new_col)
 
 
 
