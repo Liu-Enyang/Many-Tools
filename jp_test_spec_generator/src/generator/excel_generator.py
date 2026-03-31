@@ -98,7 +98,49 @@ def _validate_testcases(data: Dict[str, Any]) -> None:
         if key not in definitions:
             raise ExcelGenerationError(f"Invalid JSON structure: 'definitions.{key}' is required")
 
+def _is_delivery_excluded_confirmation_text(text: str) -> bool:
+    normalized = str(text or "").strip()
+    if not normalized:
+        return False
 
+    excluded_patterns = [
+        "maxlength=",
+        "フォーカスアウト時の桁数チェック対象",
+        "対象コントロール数:",
+    ]
+    return any(pattern in normalized for pattern in excluded_patterns)
+
+
+def _prepare_delivery_view_data(data: Dict[str, Any]) -> Dict[str, Any]:
+    prepared = copy.deepcopy(data)
+    definitions = prepared.get("definitions", {})
+    confirmations = definitions.get("confirmations", [])
+
+    excluded_confirmation_ids = {
+        str(item.get("id", "")).strip()
+        for item in confirmations
+        if _is_delivery_excluded_confirmation_text(str(item.get("text", "")))
+    }
+
+    definitions["confirmations"] = [
+        item
+        for item in confirmations
+        if str(item.get("id", "")).strip() not in excluded_confirmation_ids
+    ]
+
+    for test_case in prepared.get("test_cases", []):
+        test_case["confirmation_ids"] = [
+            cid
+            for cid in test_case.get("confirmation_ids", [])
+            if str(cid).strip() not in excluded_confirmation_ids
+        ]
+
+    summary = prepared.get("summary", {})
+    if isinstance(summary, dict):
+        summary["delivery_excluded_confirmation_count"] = len(excluded_confirmation_ids)
+        summary["confirmation_count"] = len(definitions.get("confirmations", []))
+
+    return prepared
 
 def _apply_border_range(ws, start_row: int, end_row: int, start_col: int, end_col: int) -> None:
     for row in range(start_row, end_row + 1):
@@ -474,7 +516,8 @@ def _write_case_detail_sheet(wb: Workbook, test_cases: List[Dict[str, Any]]) -> 
         ws.cell(row=row_index, column=5).value = test_case.get("test_viewpoint")
         ws.cell(row=row_index, column=6).value = ", ".join(test_case.get("pcl", []))
         ws.cell(row=row_index, column=7).value = ", ".join(test_case.get("check_condition_ids", []))
-        ws.cell(row=row_index, column=8).value = ", ".join(test_case.get("action_ids", []))
+        ws.cell(row=row_index, column=8).value = ", ".join(test_case.get("action_ids", []))        
+        # confirmation_ids は delivery view 用に事前フィルタ済み
         ws.cell(row=row_index, column=9).value = ", ".join(test_case.get("confirmation_ids", []))
         ws.cell(row=row_index, column=10).value = ", ".join(test_case.get("source_basis", []))
 
@@ -548,10 +591,12 @@ def _generate_from_template(
     _print_progress(f"テンプレートを読み込みました: {template}")
     ws = wb[sheet_name] if sheet_name and sheet_name in wb.sheetnames else wb.active
 
-    screen_id = str(data.get("screen_id", "")).strip()
-    screen_name = str(data.get("screen_name", "")).strip()
-    definitions = data["definitions"]
-    test_cases = data.get("test_cases", [])
+    prepared_data = _prepare_delivery_view_data(data)
+
+    screen_id = str(prepared_data.get("screen_id", "")).strip()
+    screen_name = str(prepared_data.get("screen_name", "")).strip()
+    definitions = prepared_data["definitions"]
+    test_cases = prepared_data.get("test_cases", [])
     check_conditions = definitions.get("check_conditions", [])
     actions = definitions.get("actions", [])
     confirmations = definitions.get("confirmations", [])
@@ -625,10 +670,12 @@ def _generate_simple_matrix(
     output_path: str | Path,
     sheet_name: str = "TestSpec",
 ) -> Path:
-    screen_id = str(data.get("screen_id", "")).strip()
-    screen_name = str(data.get("screen_name", "")).strip()
-    definitions = data["definitions"]
-    test_cases = data.get("test_cases", [])
+    prepared_data = _prepare_delivery_view_data(data)
+
+    screen_id = str(prepared_data.get("screen_id", "")).strip()
+    screen_name = str(prepared_data.get("screen_name", "")).strip()
+    definitions = prepared_data["definitions"]
+    test_cases = prepared_data.get("test_cases", [])
 
     check_conditions = definitions.get("check_conditions", [])
     actions = definitions.get("actions", [])

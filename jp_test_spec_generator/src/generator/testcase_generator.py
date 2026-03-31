@@ -242,6 +242,45 @@ def _is_blur_validation_viewpoint(viewpoint: Dict[str, Any]) -> bool:
     return "フォーカスアウト時" in search_text or "blur_validation" in search_text or "common_frontend.blur_validation" in search_text
 
 
+# --- Begin: Duplicate maxlength viewpoint helpers ---
+def _extract_viewpoint_label(viewpoint: Dict[str, Any]) -> str:
+    title = str(viewpoint.get("title", "")).strip()
+    for suffix in [
+        " の長さ制御確認",
+        " のフォーカスアウト時桁数チェック確認",
+        " の一覧表示確認",
+        " のソート処理確認",
+    ]:
+        if suffix in title:
+            return title.split(suffix, 1)[0].strip()
+    return title
+
+
+def _is_generic_length_viewpoint(viewpoint: Dict[str, Any]) -> bool:
+    title = str(viewpoint.get("title", "")).strip()
+    return " の長さ制御確認" in title
+
+
+def _should_skip_duplicate_length_viewpoint(
+    viewpoint: Dict[str, Any],
+    all_viewpoints: List[Dict[str, Any]],
+) -> bool:
+    if not _is_generic_length_viewpoint(viewpoint):
+        return False
+
+    target_label = _extract_viewpoint_label(viewpoint)
+    for other in all_viewpoints:
+        if other is viewpoint:
+            continue
+        if not _is_blur_validation_viewpoint(other):
+            continue
+        if _extract_viewpoint_label(other) == target_label:
+            return True
+
+    return False
+# --- End: Duplicate maxlength viewpoint helpers ---
+
+
 # --- Begin: List display helpers ---
 def _resolve_control_label_from_analysis(control_id: str, analysis: Dict[str, Any]) -> str:
     if not control_id:
@@ -311,24 +350,18 @@ def _build_blur_validation_expansion_rules(viewpoint: Dict[str, Any], analysis: 
             {
                 "name_suffix": "（最大桁数以内）",
                 "pcl": ["N"],
-                "actions": [
-                    "対象項目に最大桁数以内の値を入力する",
-                    "他項目へフォーカスを移動する",
-                ],
-                "confirmation_suffix": [
-                    "フォーカスアウト時にエラーとならないこと",
-                ],
+                "check_conditions": ["対象項目に最大桁数以内の値を入力する"],
+                "actions": ["他項目へフォーカスを移動する"],
+                "confirmation_suffix": ["エラーメッセージが表示されないこと"],
+                "replace_base_confirmations": True,
             },
             {
                 "name_suffix": "（最大桁数超過）",
                 "pcl": ["L"],
-                "actions": [
-                    "対象項目に最大桁数超過の値を入力する",
-                    "他項目へフォーカスを移動する",
-                ],
-                "confirmation_suffix": [
-                    "フォーカスアウト時にエラーメッセージが表示されること",
-                ],
+                "check_conditions": ["対象項目に最大桁数超過の値を入力する"],
+                "actions": ["他項目へフォーカスを移動する"],
+                "confirmation_suffix": ["エラーメッセージが表示されること"],
+                "replace_base_confirmations": True,
             },
         ]
 
@@ -336,13 +369,10 @@ def _build_blur_validation_expansion_rules(viewpoint: Dict[str, Any], analysis: 
         {
             "name_suffix": "（最大桁数以内）",
             "pcl": ["N"],
-            "actions": [
-                f"{label}に最大桁数以内の値を入力する",
-                "他項目へフォーカスを移動する",
-            ],
-            "confirmation_suffix": [
-                f"{label}に最大桁数以内の値を入力してフォーカスアウト時にエラーとならないこと",
-            ],
+            "check_conditions": [f"{label}に最大桁数以内の値を入力する"],
+            "actions": [f"{label}入力欄でフォーカスアウトする"],
+            "confirmation_suffix": ["エラーメッセージが表示されないこと"],
+            "replace_base_confirmations": True,
         }
     ]
 
@@ -351,26 +381,20 @@ def _build_blur_validation_expansion_rules(viewpoint: Dict[str, Any], analysis: 
             {
                 "name_suffix": "（最大桁数ちょうど）",
                 "pcl": ["L"],
-                "actions": [
-                    f"{label}に最大桁数ちょうどの値を入力する",
-                    "他項目へフォーカスを移動する",
-                ],
-                "confirmation_suffix": [
-                    f"{label}に最大桁数ちょうどの値を入力してフォーカスアウト時にエラーとならないこと",
-                ],
+                "check_conditions": [f"{label}に最大桁数ちょうどの値を入力する"],
+                "actions": [f"{label}入力欄でフォーカスアウトする"],
+                "confirmation_suffix": ["エラーメッセージが表示されないこと"],
+                "replace_base_confirmations": True,
             }
         )
         rules.append(
             {
                 "name_suffix": "（最大桁数超過）",
                 "pcl": ["L"],
-                "actions": [
-                    f"{label}に最大桁数超過の値を入力する",
-                    "他項目へフォーカスを移動する",
-                ],
-                "confirmation_suffix": [
-                    f"{label}に最大桁数超過の値を入力してフォーカスアウト時にエラーメッセージが表示されること",
-                ],
+                "check_conditions": [f"{label}に最大桁数超過の値を入力する"],
+                "actions": [f"{label}入力欄でフォーカスアウトする"],
+                "confirmation_suffix": ["エラーメッセージが表示されること"],
+                "replace_base_confirmations": True,
             }
         )
 
@@ -580,10 +604,14 @@ def _build_case_items(
         [str(value) for value in expansion_rule.get("actions", [])],
         [],
     ) or base_actions
-    confirmations = _merge_text_lists(
-        base_confirmations,
-        [str(value) for value in expansion_rule.get("confirmation_suffix", [])],
-    )
+    confirmation_suffixes = [str(value) for value in expansion_rule.get("confirmation_suffix", [])]
+    if expansion_rule.get("replace_base_confirmations"):
+        confirmations = _unique_texts(confirmation_suffixes)
+    else:
+        confirmations = _merge_text_lists(
+            base_confirmations,
+            confirmation_suffixes,
+        )
 
     return check_conditions, actions, confirmations
 
@@ -703,7 +731,11 @@ def generate_testcases(
     confirmation_definitions: List[Dict[str, str]] = []
 
     case_index = 1
-    for viewpoint in viewpoints.get("viewpoints", []):
+    all_viewpoints = viewpoints.get("viewpoints", [])
+    for viewpoint in all_viewpoints:
+        if _should_skip_duplicate_length_viewpoint(viewpoint, all_viewpoints):
+            continue
+
         expanded_cases = _expand_viewpoint(viewpoint, analysis)
         for expanded_case in expanded_cases:
             test_cases.append(
