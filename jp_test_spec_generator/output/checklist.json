@@ -1,0 +1,912 @@
+[
+  {
+    "row_index": 26,
+    "no": "2-1",
+    "category_l1": "画面",
+    "category_l2": "画面構成",
+    "category_l3": "",
+    "text": "画面レイアウト（ラベル文字、一覧表レイアウト、ボタン配置等）、画面サイズ、画面タイトル、Webページダイアログ（画面名を表示）が定義通りであることを確認。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 27,
+    "no": "2-2",
+    "category_l1": "画面",
+    "category_l2": "画面構成",
+    "category_l3": "",
+    "text": "・画面レイアウトが登録時・参照時ともに崩れないことを確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 28,
+    "no": "2-3",
+    "category_l1": "画面",
+    "category_l2": "画面構成",
+    "category_l3": "",
+    "text": "・表示モードの追加・変更時、対象画面にスクロールバーがある場合、最大桁数が表示されることを確認。\n※特に表示モードを「読み取り専用」から「非活性設定」とした場合。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 29,
+    "no": "2-4",
+    "category_l1": "画面",
+    "category_l2": "画面構成",
+    "category_l3": "",
+    "text": "・テキストボックスに設定された最大入力桁数と、実際にテキストボックスに表示可能な桁数（改行やスクロールバーによる制御）が考慮されていること。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 30,
+    "no": "2-5",
+    "category_l1": "画面",
+    "category_l2": "画面構成",
+    "category_l3": "",
+    "text": "・プルダウンメニューに最大桁数の値を設定した場合、設定した値が全桁表示可能なこと。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 31,
+    "no": "2-6",
+    "category_l1": "画面",
+    "category_l2": "画面構成",
+    "category_l3": "",
+    "text": "・項目を追加する場合は、画面サイズを変更しても既存項目と表示が重ならないこと(メニューバー等)。",
+    "note": "RT-RT-66638 京都中央信用金庫 【ITb002】画面サイズによりログイン情報表示が既存項目と重なる\n→リンク、ボタンと表示が重なった場合、押下できなくなる。",
+    "enabled": true
+  },
+  {
+    "row_index": 32,
+    "no": "2-7",
+    "category_l1": "画面",
+    "category_l2": "初期値",
+    "category_l3": "",
+    "text": "・画面初期表示の際、想定データが表示されているかの確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 33,
+    "no": "2-8",
+    "category_l1": "画面",
+    "category_l2": "I/O",
+    "category_l3": "",
+    "text": "項目の入力可否制御（活性、非活性制御）が想定通りか確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 34,
+    "no": "2-9",
+    "category_l1": "画面",
+    "category_l2": "I/O",
+    "category_l3": "",
+    "text": "・想定データが表示されているかの確認\n(取得元テーブル・データ、記号、金額のカンマ、表示単位、日付、%表示、小数点のデータが想定通りに出力されていることも含む）",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 35,
+    "no": "2-10",
+    "category_l1": "画面",
+    "category_l2": "I/O",
+    "category_l3": "",
+    "text": "ユーザ権限や条件による参照モード、更新モードの切り替え制御が想定通りであることの確認（モード毎の入力可否制御、プルダウン表示内容、ボタン表示等）",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 36,
+    "no": "2-11",
+    "category_l1": "画面",
+    "category_l2": "Format",
+    "category_l3": "",
+    "text": "・Format形式正確性の確認（表示状態、編集状態）",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 37,
+    "no": "2-12",
+    "category_l1": "画面",
+    "category_l2": "入力チェック 必須",
+    "category_l3": "",
+    "text": "・必須項目チェックの確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 38,
+    "no": "2-13",
+    "category_l1": "画面",
+    "category_l2": "入力チェック\n英数、日付",
+    "category_l3": "",
+    "text": "・半角英数字項目に対する正確性の確認(半角英数字以外は入力不可)\n・数値、金額項目に対する正確性の確認(数値以外は入力不可)\n・日付項目に対する正確性の確認(日付(数字)以外が入力不可) \n⇒日付項目に対して、先頭、末尾について半角空白が入力不可であること、半角空白を削除してから日付チェックを行っていること。",
+    "note": "日付項目に半角空白が存在すると、表示処理にて日付変換ができずシステムエラーとなる。詳細はRT-RT-37776参照",
+    "enabled": true
+  },
+  {
+    "row_index": 39,
+    "no": "2-14",
+    "category_l1": "画面",
+    "category_l2": "入力チェック\n桁数・範囲",
+    "category_l3": "",
+    "text": "・最小最大数の確認(文字数、バイト数)",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 40,
+    "no": "2-15",
+    "category_l1": "画面",
+    "category_l2": "境界値、端数",
+    "category_l3": "",
+    "text": "・数値最小最大数\n・金額最小最大数\n・境界値の確認(±記号のテスト)<画面の計上>",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 41,
+    "no": "2-16",
+    "category_l1": "画面",
+    "category_l2": "境界値、端数",
+    "category_l3": "",
+    "text": "・端数処理の確認\n計算時に端数処理をしている場合、設計書記載の端数処理方法であることの確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 42,
+    "no": "2-17",
+    "category_l1": "画面",
+    "category_l2": "境界値、端数",
+    "category_l3": "",
+    "text": "・プルダウン項目については、取得元マスタから画面に出力されるか確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 43,
+    "no": "2-18",
+    "category_l1": "画面",
+    "category_l2": "境界値、端数",
+    "category_l3": "",
+    "text": "・抽出データ、処理対象データが０件の場合でもエラーとならないこと\n・NULLの場合でもエラーとならないこと。\n・算出項目が０の場合（分母、分子含む）でもエラーとならないこと。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 44,
+    "no": "2-19",
+    "category_l1": "画面",
+    "category_l2": "Tab順",
+    "category_l3": "",
+    "text": "・Tabキーで、順方向に遷移の確認<新規画面・項目追加画面では確認必須>\n・Shift+Tabキーで、逆順に遷移の確認<新規画面・項目追加画面では確認必須>",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 45,
+    "no": "2-20",
+    "category_l1": "画面",
+    "category_l2": "コントロール状態",
+    "category_l3": "",
+    "text": "全角項目にカーソルを当てた際にIEモードが変更される事象についての確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 46,
+    "no": "2-21",
+    "category_l1": "画面",
+    "category_l2": "メッセージ",
+    "category_l3": "",
+    "text": "・メッセージ内容の確認\n特に画面文言変更部分に関しては、画面文言と整合確認必須\n日本語としておかしくないか確認、記号の使用法が合っているか",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 47,
+    "no": "2-22",
+    "category_l1": "画面",
+    "category_l2": "メッセージ",
+    "category_l3": "",
+    "text": "・メッセージ表示のタイミング(ボタン押下時・フォーカスアウト時等)確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 48,
+    "no": "2-23",
+    "category_l1": "画面",
+    "category_l2": "ページング",
+    "category_l3": "",
+    "text": "・ページング・ソート・検索時に、条件保持がされるか確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 49,
+    "no": "2-24",
+    "category_l1": "画面",
+    "category_l2": "検索",
+    "category_l3": "",
+    "text": "・検索結果が正しいことを確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 50,
+    "no": "2-25",
+    "category_l1": "画面",
+    "category_l2": "検索",
+    "category_l3": "",
+    "text": "・検索後の結果で正しくソートできることを確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 51,
+    "no": "2-26",
+    "category_l1": "画面",
+    "category_l2": "一覧",
+    "category_l3": "",
+    "text": "・一覧への表示条件(検索キーも含む)を変更した場合、関連性のあるポータル件数や帳票、CSVファイルも件数が一致していることを確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 52,
+    "no": "2-27",
+    "category_l1": "画面",
+    "category_l2": "条件網羅",
+    "category_l3": "",
+    "text": "・条件網羅されていることの確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 53,
+    "no": "2-28",
+    "category_l1": "画面",
+    "category_l2": "画面遷移",
+    "category_l3": "",
+    "text": "・画面遷移先が想定の画面であることを確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 54,
+    "no": "2-29",
+    "category_l1": "画面",
+    "category_l2": "DB更新",
+    "category_l3": "",
+    "text": "・画面項目が正しくDBに反映されることの確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 55,
+    "no": "2-30",
+    "category_l1": "画面",
+    "category_l2": "パフォーマンス",
+    "category_l3": "",
+    "text": "・パフォーマンスの確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 56,
+    "no": "2-31",
+    "category_l1": "画面",
+    "category_l2": "ログインユーザ",
+    "category_l3": "",
+    "text": "・ユーザレベルのパターンで登録・変更・削除・参照可否の確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 57,
+    "no": "2-32",
+    "category_l1": "画面",
+    "category_l2": "エラー",
+    "category_l3": "",
+    "text": "・エラーメッセージ表示後、登録/更新オペレーションが実施できないことを確認",
+    "note": "不正値の状態で値の登録が可能となる可能性がある。\n詳細はRT-RT-35535参照",
+    "enabled": true
+  },
+  {
+    "row_index": 58,
+    "no": "2-33",
+    "category_l1": "帳票",
+    "category_l2": "帳票構成",
+    "category_l3": "",
+    "text": "・帳票レイアウトの確認\n・ラベル文字の確認\n・文字位置の確認\n・罫線の確認 \n※編集対象外も含むレイアウト確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 59,
+    "no": "2-34",
+    "category_l1": "帳票",
+    "category_l2": "帳票構成",
+    "category_l3": "",
+    "text": "Rシートレイアウトについて「Rシートルール.xls」をチェックしている\n・帳票レイアウト\n・ラベル文字\n・文字位置\n・罫線の定義（編集対象外も含むレイアウト確認）\n・セル初期フォーカス位置\n※修正前と修正後でレイアウト比較確認を実施し、修正箇所以外は修正前と同様であること確認(印刷も行い確認)\n・印刷した帳票に確認を実施した箇所にチェックを付与し、手書きしたものをPDF化して、テスト結果に含める。",
+    "note": "修正後のテンプレートを保存する際に、エクセルが自動的にHTM形式へ変換を行うため、予期しない修正内容となる可能性ある。そのため罫線が自動的に損失してしまう事象が発生する。（RT-RT-35972）\n\nエクセルの表示上は問題なくても、印刷した場合、文言の一部が切れることがある。（RT-RT-45371）",
+    "enabled": true
+  },
+  {
+    "row_index": 60,
+    "no": "2-35",
+    "category_l1": "帳票",
+    "category_l2": "帳票構成",
+    "category_l3": "",
+    "text": "Rシートレイアウトのセルの保護について、修正前後で保護を行なうセル、保護を行なわないセルに相違がないことを確認する。テスト結果に含める。\n※エクセルの関数（=CELL(\"protect\",A1)=0）によって、保護を行なっていないセルを把握することが可能。操作手順については、セル保護確認方法【参考】シートを参照。",
+    "note": "レイアウトを変更した結果、想定外にセルの保護設定が変更されてしまう。（RT-RT-45603）",
+    "enabled": true
+  },
+  {
+    "row_index": 61,
+    "no": "2-36",
+    "category_l1": "帳票",
+    "category_l2": "I/O",
+    "category_l3": "",
+    "text": "・RSheetの場合、編集できる状態になっているか、編集できない状態の定義",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 62,
+    "no": "2-37",
+    "category_l1": "帳票",
+    "category_l2": "I/O",
+    "category_l3": "",
+    "text": "・RSheetの場合、導入金融機関様本番環境（クライアント環境を含む）を想定した環境におけるダウンロードの確認。\n（特に「RSheet帳票バージョン情報保持ファイル」の状態には注意）",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 63,
+    "no": "2-38",
+    "category_l1": "帳票",
+    "category_l2": "I/O",
+    "category_l3": "",
+    "text": "RSheetのフォーマットを修正した場合は、全ての「$TBLxxx」を抽出した上で、全ての項目に対して出力確認を行なう。\n\nRSHEETのテンプレートを修正した場合は、以下の確認を実施する。\n・レイアウト変更があった場合、新旧テンプレートを使用して全項目値を出力し、修正箇所以外の差分がないことを確\n　認する。\n・上記以外の場合、新旧テンプレートの設定値をテキストに貼り付けて比較し、修正箇所以外の差分がないことを確\n　認する。",
+    "note": "未表示項目の確認が漏れる可能性ある。詳細はRT-RT-40667を参照",
+    "enabled": true
+  },
+  {
+    "row_index": 64,
+    "no": "2-39",
+    "category_l1": "帳票",
+    "category_l2": "I/O",
+    "category_l3": "",
+    "text": "・表示データ内容の確認\n（記号、金額のカンマ、日付、%表示、小数点のデータが想定通りに出力されていることも含む）",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 65,
+    "no": "2-40",
+    "category_l1": "帳票",
+    "category_l2": "I/O",
+    "category_l3": "",
+    "text": "・表示データが該当する画面項目と完全に一致することを確認。\n　※数字項目の場合、正の数、負の数が一致することまで確認。",
+    "note": "画面と帳票で出力内容がずれる可能性がある。（RT-RT-40913）",
+    "enabled": true
+  },
+  {
+    "row_index": 66,
+    "no": "2-41",
+    "category_l1": "帳票",
+    "category_l2": "I/O",
+    "category_l3": "",
+    "text": "・和暦表示データ内容の確認\n西暦2030年以降の値が正しく和暦に変換されることを確認。",
+    "note": "和暦の値が誤って表示される可能性がある（RT-RT-46754）",
+    "enabled": true
+  },
+  {
+    "row_index": 67,
+    "no": "2-42",
+    "category_l1": "帳票",
+    "category_l2": "Format",
+    "category_l3": "",
+    "text": "・Format形式正確性の確認（NULL,フォーマット変換、項目変換など）",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 68,
+    "no": "2-43",
+    "category_l1": "帳票",
+    "category_l2": "境界値、端数",
+    "category_l3": "",
+    "text": "・最小最大数の確認(文字数)",
+    "note": "境界値に関する記載は画面と同じ記載に寄せる\n2-10端数処理の記載を帳票にも追加する",
+    "enabled": true
+  },
+  {
+    "row_index": 69,
+    "no": "2-44",
+    "category_l1": "帳票",
+    "category_l2": "境界値、端数",
+    "category_l3": "",
+    "text": "・数値最小最大数\n・金額最小最大数\n・境界値の確認(±記号のテスト)",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 70,
+    "no": "2-45",
+    "category_l1": "帳票",
+    "category_l2": "境界値、端数",
+    "category_l3": "",
+    "text": "・端数処理の確認\n・少数値が存在する場合は、少数値がゼロ以外の値でも確認する。\n・他の処理から計算ロジックを流用した場合でも、端数処理を確認する。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 71,
+    "no": "2-46",
+    "category_l1": "帳票",
+    "category_l2": "境界値、端数",
+    "category_l3": "",
+    "text": "・抽出データが０件の場合でもエラーとならないこと\n・算出項目がNULLの場合でもエラーとならないこと。\n・算出項目がNULLの場合でもエラーとならないこと。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 72,
+    "no": "2-47",
+    "category_l1": "帳票",
+    "category_l2": "表示",
+    "category_l3": "",
+    "text": "・SPANタグ挿入によるデータ導出タグ &{TBL_xxx}が残っていない事を確認する。（R-Sheet）",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 73,
+    "no": "2-48",
+    "category_l1": "帳票",
+    "category_l2": "印刷",
+    "category_l3": "",
+    "text": "・帳票を印刷して、印刷範囲に問題がない事を確認。\n・文字切れ等も発生してない事を確認。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 74,
+    "no": "2-49",
+    "category_l1": "帳票",
+    "category_l2": "印刷",
+    "category_l3": "",
+    "text": "・修正前後で、帳票を印刷して問題がない事を確認する。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 75,
+    "no": "2-50",
+    "category_l1": "帳票",
+    "category_l2": "その他",
+    "category_l3": "",
+    "text": "・データが存在している場合と存在してない場合で問題がないことを確認する。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 76,
+    "no": "2-51",
+    "category_l1": "帳票",
+    "category_l2": "パフォーマンス",
+    "category_l3": "",
+    "text": "・パフォーマンスを確認する",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 77,
+    "no": "2-52",
+    "category_l1": "バッチ",
+    "category_l2": "DB更新",
+    "category_l3": "",
+    "text": "・パラメータによって、実行結果が正しくDBに反映されることを確認する",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 78,
+    "no": "2-53",
+    "category_l1": "バッチ",
+    "category_l2": "実行方式",
+    "category_l3": "",
+    "text": "・画面から呼び出すバッチの実行結果が想定通りであることを確認する。\n※引数、実行結果、実行結果の画面への表示等",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 79,
+    "no": "2-54",
+    "category_l1": "バッチ",
+    "category_l2": "論理チェック",
+    "category_l3": "",
+    "text": "・不正な日付を取り込まないようにする。(\"00000000\",\"99999999\" etc)",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 80,
+    "no": "2-55",
+    "category_l1": "バッチ",
+    "category_l2": "パフォーマンス",
+    "category_l3": "",
+    "text": "・パフォーマンスの確認（想定時間内にすべての処理が終了すること）",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 81,
+    "no": "2-56",
+    "category_l1": "バッチ",
+    "category_l2": "リカバリー",
+    "category_l3": "",
+    "text": "・エラー時に当該ジョブが終了するのかスキップなのかを確認する。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 82,
+    "no": "2-57",
+    "category_l1": "バッチ",
+    "category_l2": "システムログ出力",
+    "category_l3": "",
+    "text": "・エラー発生時、システムログにエラーメッセージが出力されていることの確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 83,
+    "no": "2-58",
+    "category_l1": "バッチ",
+    "category_l2": "ジョブ",
+    "category_l3": "",
+    "text": "ジョブの追加・変更・削除の確認\n・修正したステップだけでなくすべてのステップについて差分を確認する。\n・削除したステップを参照しているステップがないか確認する。\n・日次バッチ処理、月次バッチ処理、それぞれについて稼動確認を実施する。\n・Agentにステップを追加・削除する場合は、後続ステップの成功時／失敗時の遷移先が修正前と変わらないことを確認する",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 84,
+    "no": "2-59",
+    "category_l1": "バッチ",
+    "category_l2": "ジョブスケジューラー",
+    "category_l3": "",
+    "text": "・ジョブがスケジュール通り起動することを確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 85,
+    "no": "2-60",
+    "category_l1": "バッチ",
+    "category_l2": "ジョブスケジューラー",
+    "category_l3": "",
+    "text": "・同時稼動を避けるべき処理が同じ時間帯に稼動する設定となっていないことを確認\n　（Ex．トランザクションログバックアップと夜間バッチ処理等）",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 86,
+    "no": "2-61",
+    "category_l1": "バッチ",
+    "category_l2": "ユーザデータ取込",
+    "category_l3": "",
+    "text": "・同一ユーザ番号が複数店に存在するパターンでも確認する",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 87,
+    "no": "2-62",
+    "category_l1": "バッチ",
+    "category_l2": "IFデータ取込",
+    "category_l3": "",
+    "text": "・IF取込における設定定義を変更した場合、全項目について正しく取込まれることを確認する。※特に後続項目は要確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 88,
+    "no": "2-63",
+    "category_l1": "バッチ",
+    "category_l2": "ファイルコピー処理",
+    "category_l3": "",
+    "text": "・ファイルコピー処理を含む場合は、コピー先ディレクトリに同一ファイルが存在した場合のケースについても確認する",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 89,
+    "no": "2-64",
+    "category_l1": "CSV",
+    "category_l2": "出力値",
+    "category_l3": "",
+    "text": "・CSVファイル出力時、カンマが含まれる可能性のある項目の場合、”ダブルコーテーション”区切りとし、カンマごと出力できているか確認する",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 90,
+    "no": "2-65",
+    "category_l1": "CSV",
+    "category_l2": "Format",
+    "category_l3": "",
+    "text": "・Format形式正確性の確認（NULL,フォーマット、項目変換など）",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 91,
+    "no": "2-66",
+    "category_l1": "CSV",
+    "category_l2": "テストデータ",
+    "category_l3": "",
+    "text": "・CSVファイル出力時、",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 92,
+    "no": "2-67",
+    "category_l1": "CSV",
+    "category_l2": "その他",
+    "category_l3": "",
+    "text": "・抽出データが０件の場合でもエラーとならないこと",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 93,
+    "no": "2-68",
+    "category_l1": "CSV",
+    "category_l2": "その他",
+    "category_l3": "",
+    "text": "・算出項目がNULLの場合でもエラーとならないこと。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 94,
+    "no": "2-69",
+    "category_l1": "CSV",
+    "category_l2": "その他",
+    "category_l3": "",
+    "text": "・算出項目が０の場合（分母、分子含む）でもエラーとならないこと。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 95,
+    "no": "2-70",
+    "category_l1": "エラー",
+    "category_l2": "設定",
+    "category_l3": "",
+    "text": "・設定が存在しない場合に対応しているか確認する\n・設定値が不正な場合に対応しているか確認する",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 96,
+    "no": "2-71",
+    "category_l1": "エラー",
+    "category_l2": "DB",
+    "category_l3": "",
+    "text": "・マスターデータ等のDB内容の異常に対応しているか確認する",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 97,
+    "no": "2-72",
+    "category_l1": "エラー",
+    "category_l2": "I/O",
+    "category_l3": "",
+    "text": "・ファイルシステムの異常に対応しているか確認する",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 98,
+    "no": "2-73",
+    "category_l1": "エラー",
+    "category_l2": "外部システム連携",
+    "category_l3": "",
+    "text": "・外部システム連携がある場合、デバイス等の接続異常（アクセス不可）の場合にチェック処理があることを確認する",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 99,
+    "no": "2-74",
+    "category_l1": "エラー",
+    "category_l2": "追加ロジック",
+    "category_l3": "",
+    "text": "・障害修正等対応時の追加ロジックについてエラーケースを想定しているか確認する。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 100,
+    "no": "2-75",
+    "category_l1": "SQL",
+    "category_l2": "UNION",
+    "category_l3": "",
+    "text": "・UNION もしくは UNION ALL で同一レコードのテストが存在していることを確認する",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 101,
+    "no": "2-76",
+    "category_l1": "SQL",
+    "category_l2": "テストデータ",
+    "category_l3": "",
+    "text": "・参照しているテーブルの主キーフルパターンについてテストデータを用意して確認する",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 102,
+    "no": "2-77",
+    "category_l1": "SQL",
+    "category_l2": "テーブル変数",
+    "category_l3": "",
+    "text": "・テーブル変数を使用している場合は、想定される最大行での確認をする",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 103,
+    "no": "2-78",
+    "category_l1": "RSHEET",
+    "category_l2": "Excel2007",
+    "category_l3": "",
+    "text": "・Excel2007（開発時使用）およびその他のバージョン（対象行）のExcelの両方にて正常に表示されることを確認する",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 104,
+    "no": "2-79",
+    "category_l1": "ログ",
+    "category_l2": "アプリケーションログ",
+    "category_l3": "",
+    "text": "・修正プログラムから出力されるログに想定外のエラーがないか確認する。\n画面であればweb.log、夜間バッチ処理であればexe.log、ファイル作成であればdtsログなど",
+    "note": "テスト結果を確認する際、ログの確認が漏れる可能性がある",
+    "enabled": true
+  },
+  {
+    "row_index": 105,
+    "no": "2-80",
+    "category_l1": "ログ",
+    "category_l2": "セキュリティログ",
+    "category_l3": "",
+    "text": "・セキュリティログに反映されることを確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 106,
+    "no": "2-81",
+    "category_l1": "その他",
+    "category_l2": "ファイル読み込み処理",
+    "category_l3": "",
+    "text": "・ファイル読み込み処理が含まれており、複数同時にファイルアクセスの可能性がある場合は、同時アクセスについて確認を実施する。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 107,
+    "no": "2-82",
+    "category_l1": "その他",
+    "category_l2": "購入モジュール間連携",
+    "category_l3": "",
+    "text": "・パッケージモジュールを修正する場合、モジュール間での連携に関わる処理があれば、購入フラグが考慮されていることを確認する。\n（例）営業支援のネタ情報と電子稟議の融資申込受付の連携時など。",
+    "note": "連携先のモジュールが未購入の場合、連携先のテーブルを呼び出した際にエラーが発生する。",
+    "enabled": true
+  },
+  {
+    "row_index": 108,
+    "no": "2-83",
+    "category_l1": "その他",
+    "category_l2": "抽出条件",
+    "category_l3": "",
+    "text": "・データ抽出を行う際、取得元のデータ構造を理解したうえで、抽出を行っていること。",
+    "note": "想定外の抽出結果となってしまう場合がある。本来1レコード取得すべきものが複数レコード取得されるなど。\nRT-RT-45754：【不動産担保】取引事例一覧に同じ事例番号が２個表示される",
+    "enabled": true
+  },
+  {
+    "row_index": 109,
+    "no": "2-84",
+    "category_l1": "業務",
+    "category_l2": "自己査定",
+    "category_l3": "",
+    "text": "・該当データを検索する際に、基準年月が「該当基準年月」か「最大基準年月」が考慮されていることを確認する",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 110,
+    "no": "2-85",
+    "category_l1": "業務",
+    "category_l2": "ホスト更改\n（番号体系・コード体系変更）",
+    "category_l3": "",
+    "text": "・各データ間（顧客情報、債権明細、担保明細等）の紐付けは正常にされているかを確認する。\n※紐付キーとなる店番、顧客番号の先頭0埋めまたは先頭0削除のロジックが統一されているかの確認",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 111,
+    "no": "2-86",
+    "category_l1": "業務",
+    "category_l2": "格付",
+    "category_l3": "",
+    "text": "格付ワークフローに関わる検証を実施する場合、格付ステータス、作業者ロール、差戻しフラグを考慮したケースとなっていることを確認する。\n例1）承認に関する仕様を変更した場合\n1次承認者のみテストするのではなく、各権限による差異を考慮する\n例2）差戻しに関する仕様を変更した場合\n送付・承認時に差戻フラグに寄る差異を考慮する。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 112,
+    "no": "2-87",
+    "category_l1": "データ",
+    "category_l2": "テストデータ作成",
+    "category_l3": "",
+    "text": "・画面や帳票、還元データに債権などの合計金額を出力する仕様がある場合、対象のテストデータが複数用意されていることを確認する。\n（例）未収利息債権の合計金額を出力している項目がある場合\n　　⇒同一顧客の同一基準年月における未収利息債権データを複数レコード準備すること。",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 113,
+    "no": "2-88",
+    "category_l1": "データ",
+    "category_l2": "限界値確認\n（計量化のみ）",
+    "category_l3": "",
+    "text": "BatchControlAgentのテストを行う場合、最大メモリを確保するケースのテストを実施している。\n（シミュレーションパス回数：50万回、データ数（債務者50万、債権50万）で実施すること）",
+    "note": "",
+    "enabled": true
+  },
+  {
+    "row_index": 114,
+    "no": "2-89",
+    "category_l1": "データ",
+    "category_l2": "IIS再起動",
+    "category_l3": "",
+    "text": "汎用コードや画面項目定義を修正した場合、DB反映後にIISの再起動を実施している。",
+    "note": "誤修正が発見できない。",
+    "enabled": true
+  },
+  {
+    "row_index": 115,
+    "no": "2-90",
+    "category_l1": "データ",
+    "category_l2": "対応漏れ確認",
+    "category_l3": "",
+    "text": "・設計書からテスト仕様書が完了した時点で、成果物とテスト仕様書を突合し 、抜け漏れが無いことを確認する。\n・UT実施前に1項目の確認を作業者・再鑑者の2名以上の体制で必ず実施し、完了させること。",
+    "note": "対応漏れを検知できない可能性がある。",
+    "enabled": true
+  },
+  {
+    "row_index": 116,
+    "no": "2-91",
+    "category_l1": "セキュリティログ",
+    "category_l2": "セキュリティログ追加の有無について",
+    "category_l3": "",
+    "text": "新規機能を追加する場合、セキュリティログの追加を検討していること。",
+    "note": "",
+    "enabled": false
+  }
+]

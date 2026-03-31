@@ -28,6 +28,9 @@ PCL_COLOR_MAP = {
     "I": PatternFill("solid", fgColor="BDD7EE"),  # blue
 }
 
+# Missing checklist highlight (yellow)
+MISSING_CHECKLIST_FILL = PatternFill("solid", fgColor="FFFF00")
+
 # Template layout
 CHECK_START_ROW = 4
 CHECK_END_ROW = 33
@@ -39,6 +42,7 @@ PCL_ROW = 161
 CASE_HEADER_ROW = 3
 CASE_START_COL = 10  # J列
 CASE_TEMPLATE_COPY_COL = 45  # AS列
+CHECKLIST_NO_COL = 9  # I列
 ITEM_NO_COL = 2      # B列
 ITEM_TEXT_COL = 3    # C列
 TEMPLATE_ITEM_TEXT_COL = 2  # テンプレート主表では B列（結合セルの左上）に説明文を書く
@@ -141,6 +145,15 @@ def _prepare_delivery_view_data(data: Dict[str, Any]) -> Dict[str, Any]:
         summary["confirmation_count"] = len(definitions.get("confirmations", []))
 
     return prepared
+
+
+# Helper to format checklist numbers for output in Excel
+def _format_checklist_nos(item: Dict[str, Any]) -> str:
+    checklist_nos = item.get("checklist_nos", []) or []
+    values = [str(value).strip() for value in checklist_nos if str(value).strip()]
+    if not values:
+        return "2-1"
+    return ",".join(values)
 
 def _apply_border_range(ws, start_row: int, end_row: int, start_col: int, end_col: int) -> None:
     for row in range(start_row, end_row + 1):
@@ -351,6 +364,22 @@ def _fill_section_rows(
         ws.cell(row=row, column=ITEM_TEXT_COL).alignment = LEFT
         _adjust_wrapped_row_height(ws, row, item_text)
 
+        is_confirmation = section_label == "確認内容"
+        checklist_nos = item.get("checklist_nos", []) or []
+        has_values = any(str(v).strip() for v in checklist_nos)
+
+        checklist_text = _format_checklist_nos(item) if is_confirmation else ""
+        _set_cell_value_safe(ws, row, CHECKLIST_NO_COL, checklist_text if checklist_text else None)
+
+        checklist_cell = ws.cell(row=row, column=CHECKLIST_NO_COL)
+        if checklist_cell.__class__.__name__ != "MergedCell":
+            # 取消自动换行
+            checklist_cell.alignment = Alignment(horizontal="left", vertical="center", wrap_text=False)
+
+            # 未填则标黄
+            if is_confirmation and not has_values:
+                checklist_cell.fill = MISSING_CHECKLIST_FILL
+
         for case_index, test_case in enumerate(test_cases):
             col = CASE_START_COL + case_index
             related_ids = test_case.get(relation_key, [])
@@ -397,6 +426,22 @@ def _fill_template_section_rows(
         _set_cell_value_safe(ws, row, TEMPLATE_ITEM_TEXT_COL, item_text)
         if ITEM_TEXT_COL != TEMPLATE_ITEM_TEXT_COL:
             _clear_cell_value_keep_style(ws, row, ITEM_TEXT_COL)
+
+        is_confirmation = section_label == "確認内容"
+        checklist_nos = item.get("checklist_nos", []) or []
+        has_values = any(str(v).strip() for v in checklist_nos)
+
+        checklist_text = _format_checklist_nos(item) if is_confirmation else ""
+        _set_cell_value_safe(ws, row, CHECKLIST_NO_COL, checklist_text if checklist_text else None)
+
+        checklist_cell = ws.cell(row=row, column=CHECKLIST_NO_COL)
+        if checklist_cell.__class__.__name__ != "MergedCell":
+            # 取消自动换行
+            checklist_cell.alignment = Alignment(horizontal="left", vertical="center", wrap_text=False)
+
+            # 未填则标黄
+            if is_confirmation and not has_values:
+                checklist_cell.fill = MISSING_CHECKLIST_FILL
 
         target_text_cell = ws.cell(row=row, column=TEMPLATE_ITEM_TEXT_COL)
         if target_text_cell.__class__.__name__ == "MergedCell":
@@ -688,10 +733,10 @@ def _generate_simple_matrix(
     wb = Workbook()
     ws = wb.active
     ws.title = sheet_name
-    ws.freeze_panes = "D8"
+    ws.freeze_panes = "E8"
     ws.sheet_view.showGridLines = False
 
-    ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=max(4, 3 + len(test_cases)))
+    ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=max(5, 4 + len(test_cases)))
     title_cell = ws.cell(row=1, column=1)
     title_cell.value = f"単体テスト仕様書マトリクス - {screen_id} {screen_name}".strip()
     title_cell.font = Font(bold=True, size=14)
@@ -702,8 +747,11 @@ def _generate_simple_matrix(
     ws.cell(row=row, column=1).value = "区分"
     ws.cell(row=row, column=2).value = "項番"
     ws.cell(row=row, column=3).value = "内容"
+    ws.cell(row=row, column=4).value = "チェックリストNo."
+    ws.cell(row=row, column=4).alignment = CENTER
+    ws.cell(row=row, column=4).fill = HEADER_FILL
     for case_index, test_case in enumerate(test_cases):
-        col = 4 + case_index
+        col = 5 + case_index
         ws.cell(row=row, column=col).value = test_case.get("case_no") or test_case.get("case_id")
         ws.cell(row=row, column=col).alignment = CENTER
         ws.cell(row=row, column=col).fill = HEADER_FILL
@@ -711,7 +759,7 @@ def _generate_simple_matrix(
 
     ws.cell(row=row, column=1).value = "PCL"
     for case_index, test_case in enumerate(test_cases):
-        col = 4 + case_index
+        col = 5 + case_index
         pcl_value = (test_case.get("pcl") or ["N"])[0]
         ws.cell(row=row, column=col).value = pcl_value
         ws.cell(row=row, column=col).alignment = CENTER
@@ -740,8 +788,24 @@ def _generate_simple_matrix(
             ws.cell(row=current_row, column=3).value = item_text
             ws.cell(row=current_row, column=3).alignment = LEFT
             _adjust_wrapped_row_height(ws, current_row, item_text)
+
+            is_confirmation = section_title == "確認内容"
+            checklist_nos = item.get("checklist_nos", []) or []
+            has_values = any(str(v).strip() for v in checklist_nos)
+
+            checklist_text = _format_checklist_nos(item) if is_confirmation else ""
+            cell = ws.cell(row=current_row, column=4)
+            cell.value = checklist_text if checklist_text else None
+
+            # 取消自动换行
+            cell.alignment = Alignment(horizontal="left", vertical="center", wrap_text=False)
+
+            # 未填则标黄
+            if is_confirmation and not has_values:
+                cell.fill = MISSING_CHECKLIST_FILL
+
             for case_index, test_case in enumerate(test_cases):
-                col = 4 + case_index
+                col = 5 + case_index
                 related_ids = test_case.get(relation_key, [])
                 circle_value = "○" if item_id in related_ids else None
                 ws.cell(row=current_row, column=col).value = circle_value

@@ -10,6 +10,7 @@ from generator.analysis_generator import generate_analysis
 from generator.viewpoints_generator import generate_viewpoints
 from generator.testcase_generator import generate_testcases
 from generator.excel_generator import generate_excel
+from generator.checklist_mapper import load_checklist_items, save_checklist_json, attach_checklist_nos_to_confirmations
 
 
 
@@ -36,6 +37,22 @@ def load_javascript_sources(input_dir: Path) -> list[dict]:
     return js_sources
 
 
+def load_or_create_checklist() -> list[dict]:
+    checklist_json_path = OUTPUT_DIR / "checklist.json"
+    checklist_excel_path = SAMPLE_INPUT_DIR / "BR_チェックリスト.xlsx"
+
+    if checklist_json_path.exists():
+        with open(checklist_json_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+
+    if not checklist_excel_path.exists():
+        return []
+
+    items = load_checklist_items(checklist_excel_path)
+    save_checklist_json(items, checklist_json_path)
+    return items
+
+
 def main() -> None:
     # ▼ 自動検出：ASPX / CS / Excel
     aspx_files = list(SAMPLE_INPUT_DIR.glob("*.aspx"))
@@ -57,6 +74,7 @@ def main() -> None:
     codebehind_data = parse_codebehind(codebehind_path)
     spec_data = parse_spec(spec_path)
     javascript_sources = load_javascript_sources(SAMPLE_INPUT_DIR)
+    checklist_items = load_or_create_checklist()
 
     analysis = generate_analysis(
         aspx_data=aspx_data,
@@ -67,6 +85,8 @@ def main() -> None:
 
     viewpoints = generate_viewpoints(analysis)
     testcases = generate_testcases(analysis, viewpoints)
+    if checklist_items:
+        testcases = attach_checklist_nos_to_confirmations(testcases)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -99,6 +119,7 @@ def main() -> None:
     )
 
     # print(f"javascript files loaded: {len(javascript_sources)}")
+    # print(f"checklist items loaded: {len(checklist_items)}")
     # print(f"analysis.json generated: {analysis_file}")
     # print(f"viewpoints.json generated: {viewpoints_file}")
     # print(f"testcases.json generated: {testcases_file}")
