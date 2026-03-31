@@ -304,41 +304,84 @@ def _resolve_control_label_from_analysis(control_id: str, analysis: Dict[str, An
 
 
 # --- Begin: Button/action normalization helpers ---
-def _collect_button_labels(analysis: Dict[str, Any]) -> List[str]:
-    labels: List[str] = []
+def _collect_buttons(analysis: Dict[str, Any]) -> List[Dict[str, str]]:
+    buttons: List[Dict[str, str]] = []
+    seen_ids: set[str] = set()
+
     for control in analysis.get("controls", []):
         control_role = str(control.get("control_role", "")).strip()
         control_type = str(control.get("control_type") or control.get("type") or "").strip().lower()
         if control_role != "action" and control_type not in {"button", "linkbutton", "imagebutton"}:
             continue
 
+        control_id = str(control.get("id") or "").strip()
+        if control_id and control_id in seen_ids:
+            continue
+        if control_id:
+            seen_ids.add(control_id)
+
         label = str(
             control.get("label")
             or control.get("text")
             or control.get("name")
             or control.get("title")
+            or control_id
             or ""
         ).strip()
-        if label and label not in labels:
-            labels.append(label)
 
-    return labels
+        if label:
+            buttons.append(
+                {
+                    "id": control_id,
+                    "label": label,
+                }
+            )
+
+    return buttons
+def _build_business_button_action(button_id: str, button_label: str, viewpoint: Dict[str, Any]) -> str:
+    source_basis_text = " ".join([str(value) for value in viewpoint.get("source_basis", [])])
+    title = str(viewpoint.get("title", "")).strip()
+    details_text = " ".join([str(value) for value in viewpoint.get("details", [])])
+    search_text = f"{title} {details_text} {source_basis_text}"
+
+    if button_id == "btnClear" or "clear_customer_fields" in search_text or "顧客番号がクリア" in search_text:
+        return "顧客クリアボタンを押下する"
+
+    if button_id == "btnSummaryClear" or "clear_summary_fields" in search_text or "テキストエリアクリア" in title:
+        return "概況クリアボタンを押下する"
+
+    if button_id == "btnCustSearch" or "customer_search" in search_text or "顧客検索" in search_text:
+        return "顧客検索ボタンを押下する"
+
+    if button_id == "btnDownload" or "js.click.download" in search_text or "ダウンロード" in search_text:
+        return "帳票ダウンロードボタンを押下する"
+
+    return f"{button_label}ボタンを押下する"
 
 
 
-def _select_button_label_for_action(
+def _select_button_for_action(
     action_text: str,
     viewpoint: Dict[str, Any],
     analysis: Dict[str, Any],
-) -> str:
-    button_labels = _collect_button_labels(analysis)
-    if not button_labels:
-        return ""
+) -> Dict[str, str]:
+    buttons = _collect_buttons(analysis)
+    if not buttons:
+        return {}
 
     title = str(viewpoint.get("title", "")).strip()
     details_text = " ".join([str(value) for value in viewpoint.get("details", [])])
-    source_basis_text = " ".join([str(value) for value in viewpoint.get("source_basis", [])])
+    source_basis_values = [str(value) for value in viewpoint.get("source_basis", [])]
+    source_basis_text = " ".join(source_basis_values)
     search_text = f"{action_text} {title} {details_text} {source_basis_text}"
+
+    # 1) source_basis に controls.<id> があれば最優先
+    for source in source_basis_values:
+        if source.startswith("controls."):
+            target_id = source.replace("controls.", "").strip()
+            for button in buttons:
+                if button.get("id") == target_id:
+                    return button
 
     keyword_priority: List[Tuple[str, List[str]]] = [
         ("登録", ["登録", "更新", "保存", "確定"]),
@@ -356,23 +399,25 @@ def _select_button_label_for_action(
             matched_keywords.extend(candidates)
 
     for keyword in matched_keywords:
-        for label in button_labels:
-            if keyword in label:
-                return label
+        for button in buttons:
+            if keyword in button.get("label", ""):
+                return button
 
-    for label in button_labels:
-        if label in search_text:
-            return label
+    for button in buttons:
+        if button.get("label", "") in search_text:
+            return button
+        if button.get("id", "") and button.get("id", "") in search_text:
+            return button
 
-    if len(button_labels) == 1:
-        return button_labels[0]
+    if len(buttons) == 1:
+        return buttons[0]
 
     for fallback in ["登録", "更新", "保存", "検索", "クリア", "ダウンロード"]:
-        for label in button_labels:
-            if fallback in label:
-                return label
+        for button in buttons:
+            if fallback in button.get("label", ""):
+                return button
 
-    return ""
+    return {}
 
 
 
@@ -394,9 +439,13 @@ def _normalize_action_text(action_text: str, viewpoint: Dict[str, Any], analysis
     if not any(marker in text for marker in generic_action_markers):
         return text
 
-    button_label = _select_button_label_for_action(text, viewpoint, analysis)
-    if button_label:
-        return f"{button_label}ボタンを押下する"
+    button = _select_button_for_action(text, viewpoint, analysis)
+    if button:
+        return _build_business_button_action(
+            button.get("id", ""),
+            button.get("label", ""),
+            viewpoint,
+        )
 
     return text
 # --- End: Button/action normalization helpers ---
@@ -501,6 +550,7 @@ def _build_blur_validation_expansion_rules(viewpoint: Dict[str, Any], analysis: 
 
 
 # --- Begin: List display expansion rule builder ---
+# --- Begin: List display expansion rule builder ---
 def _build_list_display_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> List[Dict[str, Any]]:
     list_label = _extract_list_label_from_viewpoint(viewpoint, analysis)
 
@@ -537,6 +587,121 @@ def _build_list_display_expansion_rules(viewpoint: Dict[str, Any], analysis: Dic
             "confirmation_suffix": [f"{list_label}が指定条件でソートされること"],
         },
     ]
+
+
+def _build_javascript_event_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> List[Dict[str, Any]]:
+    title = str(viewpoint.get("title", "")).strip()
+    source_basis_text = " ".join([str(value) for value in viewpoint.get("source_basis", [])])
+    search_text = f"{title} {source_basis_text}"
+
+    if "顧客クリアボタン押下時の項目クリア確認" in title or "controls.btnClear" in search_text:
+        return [
+            {
+                "name_suffix": "（顧客番号）",
+                "pcl": ["N"],
+                "actions": ["顧客クリアボタンを押下する"],
+                "confirmation_suffix": ["顧客番号がクリアされること"],
+                "replace_base_confirmations": True,
+            },
+            {
+                "name_suffix": "（顧客名）",
+                "pcl": ["N"],
+                "actions": ["顧客クリアボタンを押下する"],
+                "confirmation_suffix": ["顧客名がクリアされること"],
+                "replace_base_confirmations": True,
+            },
+        ]
+
+    if "概況クリアボタン押下時のテキストエリアクリア確認" in title or "controls.btnSummaryClear" in search_text:
+        return [
+            {
+                "name_suffix": "（事故原因）",
+                "pcl": ["N"],
+                "actions": ["概況クリアボタンを押下する"],
+                "confirmation_suffix": ["事故及び延滞に至った原因がクリアされること"],
+                "replace_base_confirmations": True,
+            },
+            {
+                "name_suffix": "（現況）",
+                "pcl": ["N"],
+                "actions": ["概況クリアボタンを押下する"],
+                "confirmation_suffix": ["債務者および保証人の現況がクリアされること"],
+                "replace_base_confirmations": True,
+            },
+            {
+                "name_suffix": "（方針）",
+                "pcl": ["N"],
+                "actions": ["概況クリアボタンを押下する"],
+                "confirmation_suffix": ["回収、解消の方針、スケジュールがクリアされること"],
+                "replace_base_confirmations": True,
+            },
+            {
+                "name_suffix": "（備考）",
+                "pcl": ["N"],
+                "actions": ["概況クリアボタンを押下する"],
+                "confirmation_suffix": ["備考、特記事項がクリアされること"],
+                "replace_base_confirmations": True,
+            },
+        ]
+
+    if "顧客検索ボタン押下時の前提条件・検索結果反映確認" in title or "controls.btnCustSearch" in search_text:
+        return [
+            {
+                "name_suffix": "（店番未選択）",
+                "pcl": ["E"],
+                "actions": ["顧客検索ボタンを押下する"],
+                "confirmation_suffix": ["店番未選択の場合はエラーメッセージが表示されること"],
+                "replace_base_confirmations": True,
+            },
+            {
+                "name_suffix": "（正常起動）",
+                "pcl": ["N"],
+                "actions": ["顧客検索ボタンを押下する"],
+                "confirmation_suffix": ["顧客検索ダイアログが起動すること"],
+                "replace_base_confirmations": True,
+            },
+            {
+                "name_suffix": "（反映）",
+                "pcl": ["N"],
+                "actions": ["顧客検索ボタンを押下し、顧客を選択する"],
+                "confirmation_suffix": ["顧客番号および顧客名が画面へ反映されること"],
+                "replace_base_confirmations": True,
+            },
+        ]
+
+    if "帳票ダウンロードボタン押下時の前提条件確認" in title or "controls.btnDownload" in search_text:
+        return [
+            {
+                "name_suffix": "（顧客番号未入力）",
+                "pcl": ["E"],
+                "actions": ["帳票ダウンロードボタンを押下する"],
+                "confirmation_suffix": ["顧客番号未入力の場合はエラーメッセージが表示されること"],
+                "replace_base_confirmations": True,
+            },
+            {
+                "name_suffix": "（店番未選択）",
+                "pcl": ["E"],
+                "actions": ["帳票ダウンロードボタンを押下する"],
+                "confirmation_suffix": ["店番未選択の場合はエラーメッセージが表示されること"],
+                "replace_base_confirmations": True,
+            },
+            {
+                "name_suffix": "（帳票未選択）",
+                "pcl": ["E"],
+                "actions": ["帳票ダウンロードボタンを押下する"],
+                "confirmation_suffix": ["帳票未選択の場合はエラーメッセージが表示されること"],
+                "replace_base_confirmations": True,
+            },
+            {
+                "name_suffix": "（正常）",
+                "pcl": ["N"],
+                "actions": ["帳票ダウンロードボタンを押下する"],
+                "confirmation_suffix": ["正常時はダウンロード処理が実行されること"],
+                "replace_base_confirmations": True,
+            },
+        ]
+
+    return []
 
 def _build_input_check_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> List[Dict[str, Any]]:
     field_hint = _match_field_hint(viewpoint, _collect_field_hints(analysis))
@@ -726,6 +891,8 @@ def _expand_viewpoint(viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> Li
         rules = _build_input_check_expansion_rules(viewpoint, analysis)
     elif category == "一覧表示":
         rules = _build_list_display_expansion_rules(viewpoint, analysis)
+    elif category == "イベント":
+        rules = _build_javascript_event_expansion_rules(viewpoint, analysis) or EXPANSION_RULES.get(category)
     else:
         rules = EXPANSION_RULES.get(category)
 

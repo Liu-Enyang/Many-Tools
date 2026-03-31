@@ -445,10 +445,84 @@
     {
       "id": "VP-030",
       "category": "イベント",
-      "title": "JavaScriptイベント処理確認",
+      "title": "顧客クリアボタン押下時の項目クリア確認",
       "details": [
-        "クリックイベントにより想定した処理が実行されること",
-        "対象ボタン押下時に画面項目が正しく更新されること"
+        "顧客クリアボタン押下時に顧客番号がクリアされること",
+        "顧客クリアボタン押下時に顧客名がクリアされること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js",
+        "controls.btnClear",
+        "js.click.clear_customer_fields"
+      ]
+    },
+    {
+      "id": "VP-031",
+      "category": "イベント",
+      "title": "概況クリアボタン押下時のテキストエリアクリア確認",
+      "details": [
+        "概況クリアボタン押下時に事故及び延滞に至った原因がクリアされること",
+        "概況クリアボタン押下時に債務者および保証人の現況がクリアされること",
+        "概況クリアボタン押下時に回収、解消の方針、スケジュールがクリアされること",
+        "概況クリアボタン押下時に備考、特記事項がクリアされること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js",
+        "controls.btnSummaryClear",
+        "js.click.clear_summary_fields"
+      ]
+    },
+    {
+      "id": "VP-032",
+      "category": "イベント",
+      "title": "顧客検索ボタン押下時の前提条件・検索結果反映確認",
+      "details": [
+        "顧客検索ボタン押下時に店番未選択の場合はエラーメッセージが表示されること",
+        "顧客検索ボタン押下時に正常時は顧客検索ダイアログが起動すること",
+        "顧客選択後に顧客番号および顧客名が画面へ反映されること"
+      ],
+      "pcl": [
+        "E",
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js",
+        "controls.btnCustSearch",
+        "js.click.customer_search"
+      ]
+    },
+    {
+      "id": "VP-033",
+      "category": "イベント",
+      "title": "帳票ダウンロードボタン押下時の前提条件確認",
+      "details": [
+        "帳票ダウンロードボタン押下時に顧客番号未入力の場合はエラーメッセージが表示されること",
+        "帳票ダウンロードボタン押下時に店番未選択の場合はエラーメッセージが表示されること",
+        "帳票ダウンロードボタン押下時に帳票未選択の場合はエラーメッセージが表示されること",
+        "帳票ダウンロードボタン押下時に正常時はダウンロード処理が実行されること"
+      ],
+      "pcl": [
+        "E",
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js",
+        "controls.btnDownload",
+        "js.click.download"
+      ]
+    },
+    {
+      "id": "VP-034",
+      "category": "イベント",
+      "title": "クリックイベント確認",
+      "details": [
+        "ボタン押下時のフロント処理を実装している"
       ],
       "pcl": [
         "N"
@@ -458,7 +532,7 @@
       ]
     },
     {
-      "id": "VP-031",
+      "id": "VP-035",
       "category": "画面モード",
       "title": "参照モード時のJavaScript制御確認",
       "details": [
@@ -473,7 +547,7 @@
       ]
     },
     {
-      "id": "VP-032",
+      "id": "VP-036",
       "category": "入力チェック",
       "title": "JavaScript入力チェック・エラーメッセージ確認",
       "details": [
@@ -489,7 +563,7 @@
       ]
     },
     {
-      "id": "VP-033",
+      "id": "VP-037",
       "category": "イベント",
       "title": "帳票ダウンロード前提チェック確認",
       "details": [
@@ -505,7 +579,7 @@
       ]
     },
     {
-      "id": "VP-034",
+      "id": "VP-038",
       "category": "一覧表示",
       "title": "債権明細 のソート処理確認",
       "details": [
@@ -521,7 +595,7 @@
       ]
     },
     {
-      "id": "VP-035",
+      "id": "VP-039",
       "category": "一覧表示",
       "title": "事象一覧 のソート処理確認",
       "details": [
@@ -537,7 +611,7 @@
       ]
     },
     {
-      "id": "VP-036",
+      "id": "VP-040",
       "category": "一覧表示",
       "title": "帳票一覧 のソート処理確認",
       "details": [
@@ -554,8 +628,8 @@
     }
   ],
   "summary": {
-    "viewpoint_count": 36,
-    "javascript_viewpoint_source_count": 5,
+    "viewpoint_count": 40,
+    "javascript_viewpoint_source_count": 9,
     "blur_validation_viewpoint_source_count": 5
   }
 }

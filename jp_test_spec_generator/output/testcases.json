@@ -147,27 +147,47 @@
       },
       {
         "id": "A-009",
-        "text": "債権明細一覧のソート操作を実行する"
+        "text": "顧客番号ボタンを押下する"
       },
       {
         "id": "A-010",
-        "text": "事象一覧のソート操作を実行する"
+        "text": "債権明細一覧のソート操作を実行する"
       },
       {
         "id": "A-011",
-        "text": "帳票一覧のソート操作を実行する"
+        "text": "事象一覧のソート操作を実行する"
       },
       {
         "id": "A-012",
-        "text": "対象操作を実行する"
+        "text": "帳票一覧のソート操作を実行する"
       },
       {
         "id": "A-013",
-        "text": "必須条件を満たさない状態で操作する"
+        "text": "顧客クリアボタンを押下する"
       },
       {
         "id": "A-014",
-        "text": "ダウンロードボタンを押下する"
+        "text": "概況クリアボタンを押下する"
+      },
+      {
+        "id": "A-015",
+        "text": "顧客検索ボタンを押下する"
+      },
+      {
+        "id": "A-016",
+        "text": "顧客検索ボタンを押下し、顧客を選択する"
+      },
+      {
+        "id": "A-017",
+        "text": "帳票ダウンロードボタンを押下する"
+      },
+      {
+        "id": "A-018",
+        "text": "対象操作を実行する"
+      },
+      {
+        "id": "A-019",
+        "text": "必須条件を満たさない状態で操作する"
       }
     ],
     "confirmations": [
@@ -297,62 +317,106 @@
       },
       {
         "id": "E-032",
-        "text": "クリックイベントにより想定した処理が実行されること"
+        "text": "顧客番号がクリアされること"
       },
       {
         "id": "E-033",
-        "text": "対象ボタン押下時に画面項目が正しく更新されること"
+        "text": "顧客名がクリアされること"
       },
       {
         "id": "E-034",
-        "text": "参照モード時に入力項目・ボタン・リンクが操作不可となること"
+        "text": "事故及び延滞に至った原因がクリアされること"
       },
       {
         "id": "E-035",
-        "text": "参照モード時に子要素も含めて非活性制御されること"
+        "text": "債務者および保証人の現況がクリアされること"
       },
       {
         "id": "E-036",
-        "text": "未入力時にエラーメッセージが表示されること"
+        "text": "回収、解消の方針、スケジュールがクリアされること"
       },
       {
         "id": "E-037",
-        "text": "入力条件不備時に処理が中断されること"
+        "text": "備考、特記事項がクリアされること"
       },
       {
         "id": "E-038",
-        "text": "想定した処理結果となること"
+        "text": "店番未選択の場合はエラーメッセージが表示されること"
       },
       {
         "id": "E-039",
-        "text": "帳票未選択時にエラーメッセージが表示されること"
+        "text": "顧客検索ダイアログが起動すること"
       },
       {
         "id": "E-040",
-        "text": "顧客番号・店番未設定時にダウンロード実行されないこと"
+        "text": "顧客番号および顧客名が画面へ反映されること"
       },
       {
         "id": "E-041",
-        "text": "債権明細のヘッダ押下時に昇順・降順が切り替わること"
+        "text": "顧客番号未入力の場合はエラーメッセージが表示されること"
       },
       {
         "id": "E-042",
-        "text": "債権明細で文字列・数値・日付が指定種別で正しくソートされること"
+        "text": "帳票未選択の場合はエラーメッセージが表示されること"
       },
       {
         "id": "E-043",
-        "text": "事象一覧のヘッダ押下時に昇順・降順が切り替わること"
+        "text": "正常時はダウンロード処理が実行されること"
       },
       {
         "id": "E-044",
-        "text": "事象一覧で文字列・数値・日付が指定種別で正しくソートされること"
+        "text": "ボタン押下時のフロント処理を実装している"
       },
       {
         "id": "E-045",
-        "text": "帳票一覧のヘッダ押下時に昇順・降順が切り替わること"
+        "text": "参照モード時に入力項目・ボタン・リンクが操作不可となること"
       },
       {
         "id": "E-046",
+        "text": "参照モード時に子要素も含めて非活性制御されること"
+      },
+      {
+        "id": "E-047",
+        "text": "未入力時にエラーメッセージが表示されること"
+      },
+      {
+        "id": "E-048",
+        "text": "入力条件不備時に処理が中断されること"
+      },
+      {
+        "id": "E-049",
+        "text": "想定した処理結果となること"
+      },
+      {
+        "id": "E-050",
+        "text": "帳票未選択時にエラーメッセージが表示されること"
+      },
+      {
+        "id": "E-051",
+        "text": "顧客番号・店番未設定時にダウンロード実行されないこと"
+      },
+      {
+        "id": "E-052",
+        "text": "債権明細のヘッダ押下時に昇順・降順が切り替わること"
+      },
+      {
+        "id": "E-053",
+        "text": "債権明細で文字列・数値・日付が指定種別で正しくソートされること"
+      },
+      {
+        "id": "E-054",
+        "text": "事象一覧のヘッダ押下時に昇順・降順が切り替わること"
+      },
+      {
+        "id": "E-055",
+        "text": "事象一覧で文字列・数値・日付が指定種別で正しくソートされること"
+      },
+      {
+        "id": "E-056",
+        "text": "帳票一覧のヘッダ押下時に昇順・降順が切り替わること"
+      },
+      {
+        "id": "E-057",
         "text": "帳票一覧で文字列・数値・日付が指定種別で正しくソートされること"
       }
     ]
@@ -1013,7 +1077,7 @@
         "C-001"
       ],
       "action_ids": [
-        "A-008"
+        "A-009"
       ],
       "confirmation_ids": [
         "E-015"
@@ -1154,7 +1218,7 @@
         "C-020"
       ],
       "action_ids": [
-        "A-009"
+        "A-010"
       ],
       "confirmation_ids": [
         "E-016",
@@ -1250,7 +1314,7 @@
         "C-023"
       ],
       "action_ids": [
-        "A-010"
+        "A-011"
       ],
       "confirmation_ids": [
         "E-016",
@@ -1346,7 +1410,7 @@
         "C-026"
       ],
       "action_ids": [
-        "A-011"
+        "A-012"
       ],
       "confirmation_ids": [
         "E-016",
@@ -1433,7 +1497,332 @@
       "case_no": "0046",
       "category": "イベント",
       "test_viewpoint_id": "VP-030",
-      "test_viewpoint": "JavaScriptイベント処理確認",
+      "test_viewpoint": "顧客クリアボタン押下時の項目クリア確認（顧客番号）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-013"
+      ],
+      "confirmation_ids": [
+        "E-032"
+      ],
+      "source_basis": [
+        "VP-030",
+        "Summary.js",
+        "controls.btnClear",
+        "js.click.clear_customer_fields"
+      ]
+    },
+    {
+      "case_id": "TC-047",
+      "case_no": "0047",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-030",
+      "test_viewpoint": "顧客クリアボタン押下時の項目クリア確認（顧客名）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-013"
+      ],
+      "confirmation_ids": [
+        "E-033"
+      ],
+      "source_basis": [
+        "VP-030",
+        "Summary.js",
+        "controls.btnClear",
+        "js.click.clear_customer_fields"
+      ]
+    },
+    {
+      "case_id": "TC-048",
+      "case_no": "0048",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-031",
+      "test_viewpoint": "概況クリアボタン押下時のテキストエリアクリア確認（事故原因）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-014"
+      ],
+      "confirmation_ids": [
+        "E-034"
+      ],
+      "source_basis": [
+        "VP-031",
+        "Summary.js",
+        "controls.btnSummaryClear",
+        "js.click.clear_summary_fields"
+      ]
+    },
+    {
+      "case_id": "TC-049",
+      "case_no": "0049",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-031",
+      "test_viewpoint": "概況クリアボタン押下時のテキストエリアクリア確認（現況）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-014"
+      ],
+      "confirmation_ids": [
+        "E-035"
+      ],
+      "source_basis": [
+        "VP-031",
+        "Summary.js",
+        "controls.btnSummaryClear",
+        "js.click.clear_summary_fields"
+      ]
+    },
+    {
+      "case_id": "TC-050",
+      "case_no": "0050",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-031",
+      "test_viewpoint": "概況クリアボタン押下時のテキストエリアクリア確認（方針）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-014"
+      ],
+      "confirmation_ids": [
+        "E-036"
+      ],
+      "source_basis": [
+        "VP-031",
+        "Summary.js",
+        "controls.btnSummaryClear",
+        "js.click.clear_summary_fields"
+      ]
+    },
+    {
+      "case_id": "TC-051",
+      "case_no": "0051",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-031",
+      "test_viewpoint": "概況クリアボタン押下時のテキストエリアクリア確認（備考）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-014"
+      ],
+      "confirmation_ids": [
+        "E-037"
+      ],
+      "source_basis": [
+        "VP-031",
+        "Summary.js",
+        "controls.btnSummaryClear",
+        "js.click.clear_summary_fields"
+      ]
+    },
+    {
+      "case_id": "TC-052",
+      "case_no": "0052",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-032",
+      "test_viewpoint": "顧客検索ボタン押下時の前提条件・検索結果反映確認（店番未選択）",
+      "pcl": [
+        "E"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-015"
+      ],
+      "confirmation_ids": [
+        "E-038"
+      ],
+      "source_basis": [
+        "VP-032",
+        "Summary.js",
+        "controls.btnCustSearch",
+        "js.click.customer_search"
+      ]
+    },
+    {
+      "case_id": "TC-053",
+      "case_no": "0053",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-032",
+      "test_viewpoint": "顧客検索ボタン押下時の前提条件・検索結果反映確認（正常起動）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-015"
+      ],
+      "confirmation_ids": [
+        "E-039"
+      ],
+      "source_basis": [
+        "VP-032",
+        "Summary.js",
+        "controls.btnCustSearch",
+        "js.click.customer_search"
+      ]
+    },
+    {
+      "case_id": "TC-054",
+      "case_no": "0054",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-032",
+      "test_viewpoint": "顧客検索ボタン押下時の前提条件・検索結果反映確認（反映）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-016"
+      ],
+      "confirmation_ids": [
+        "E-040"
+      ],
+      "source_basis": [
+        "VP-032",
+        "Summary.js",
+        "controls.btnCustSearch",
+        "js.click.customer_search"
+      ]
+    },
+    {
+      "case_id": "TC-055",
+      "case_no": "0055",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-033",
+      "test_viewpoint": "帳票ダウンロードボタン押下時の前提条件確認（顧客番号未入力）",
+      "pcl": [
+        "E"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-017"
+      ],
+      "confirmation_ids": [
+        "E-041"
+      ],
+      "source_basis": [
+        "VP-033",
+        "Summary.js",
+        "controls.btnDownload",
+        "js.click.download"
+      ]
+    },
+    {
+      "case_id": "TC-056",
+      "case_no": "0056",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-033",
+      "test_viewpoint": "帳票ダウンロードボタン押下時の前提条件確認（店番未選択）",
+      "pcl": [
+        "E"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-017"
+      ],
+      "confirmation_ids": [
+        "E-038"
+      ],
+      "source_basis": [
+        "VP-033",
+        "Summary.js",
+        "controls.btnDownload",
+        "js.click.download"
+      ]
+    },
+    {
+      "case_id": "TC-057",
+      "case_no": "0057",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-033",
+      "test_viewpoint": "帳票ダウンロードボタン押下時の前提条件確認（帳票未選択）",
+      "pcl": [
+        "E"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-017"
+      ],
+      "confirmation_ids": [
+        "E-042"
+      ],
+      "source_basis": [
+        "VP-033",
+        "Summary.js",
+        "controls.btnDownload",
+        "js.click.download"
+      ]
+    },
+    {
+      "case_id": "TC-058",
+      "case_no": "0058",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-033",
+      "test_viewpoint": "帳票ダウンロードボタン押下時の前提条件確認（正常）",
+      "pcl": [
+        "N"
+      ],
+      "check_condition_ids": [
+        "C-001"
+      ],
+      "action_ids": [
+        "A-017"
+      ],
+      "confirmation_ids": [
+        "E-043"
+      ],
+      "source_basis": [
+        "VP-033",
+        "Summary.js",
+        "controls.btnDownload",
+        "js.click.download"
+      ]
+    },
+    {
+      "case_id": "TC-059",
+      "case_no": "0059",
+      "category": "イベント",
+      "test_viewpoint_id": "VP-034",
+      "test_viewpoint": "クリックイベント確認",
       "pcl": [
         "N"
       ],
@@ -1444,19 +1833,18 @@
         "A-008"
       ],
       "confirmation_ids": [
-        "E-032",
-        "E-033"
+        "E-044"
       ],
       "source_basis": [
-        "VP-030",
+        "VP-034",
         "Summary.js"
       ]
     },
     {
-      "case_id": "TC-047",
-      "case_no": "0047",
+      "case_id": "TC-060",
+      "case_no": "0060",
       "category": "画面モード",
-      "test_viewpoint_id": "VP-031",
+      "test_viewpoint_id": "VP-035",
       "test_viewpoint": "参照モード時のJavaScript制御確認（通常モード）",
       "pcl": [
         "N"
@@ -1468,19 +1856,19 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-034",
-        "E-035"
+        "E-045",
+        "E-046"
       ],
       "source_basis": [
-        "VP-031",
+        "VP-035",
         "Summary.js"
       ]
     },
     {
-      "case_id": "TC-048",
-      "case_no": "0048",
+      "case_id": "TC-061",
+      "case_no": "0061",
       "category": "画面モード",
-      "test_viewpoint_id": "VP-031",
+      "test_viewpoint_id": "VP-035",
       "test_viewpoint": "参照モード時のJavaScript制御確認（参照モード）",
       "pcl": [
         "N"
@@ -1492,19 +1880,19 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-034",
-        "E-035"
+        "E-045",
+        "E-046"
       ],
       "source_basis": [
-        "VP-031",
+        "VP-035",
         "Summary.js"
       ]
     },
     {
-      "case_id": "TC-049",
-      "case_no": "0049",
+      "case_id": "TC-062",
+      "case_no": "0062",
       "category": "入力チェック",
-      "test_viewpoint_id": "VP-032",
+      "test_viewpoint_id": "VP-036",
       "test_viewpoint": "JavaScript入力チェック・エラーメッセージ確認（正常系）",
       "pcl": [
         "N"
@@ -1513,23 +1901,23 @@
         "C-001"
       ],
       "action_ids": [
-        "A-012"
+        "A-018"
       ],
       "confirmation_ids": [
-        "E-036",
-        "E-037",
-        "E-038"
+        "E-047",
+        "E-048",
+        "E-049"
       ],
       "source_basis": [
-        "VP-032",
+        "VP-036",
         "Summary.js"
       ]
     },
     {
-      "case_id": "TC-050",
-      "case_no": "0050",
+      "case_id": "TC-063",
+      "case_no": "0063",
       "category": "入力チェック",
-      "test_viewpoint_id": "VP-032",
+      "test_viewpoint_id": "VP-036",
       "test_viewpoint": "JavaScript入力チェック・エラーメッセージ確認（入力不足）",
       "pcl": [
         "E"
@@ -1538,23 +1926,23 @@
         "C-001"
       ],
       "action_ids": [
-        "A-013"
+        "A-019"
       ],
       "confirmation_ids": [
-        "E-036",
-        "E-037",
+        "E-047",
+        "E-048",
         "E-014"
       ],
       "source_basis": [
-        "VP-032",
+        "VP-036",
         "Summary.js"
       ]
     },
     {
-      "case_id": "TC-051",
-      "case_no": "0051",
+      "case_id": "TC-064",
+      "case_no": "0064",
       "category": "イベント",
-      "test_viewpoint_id": "VP-033",
+      "test_viewpoint_id": "VP-037",
       "test_viewpoint": "帳票ダウンロード前提チェック確認",
       "pcl": [
         "E"
@@ -1563,22 +1951,22 @@
         "C-001"
       ],
       "action_ids": [
-        "A-014"
+        "A-017"
       ],
       "confirmation_ids": [
-        "E-039",
-        "E-040"
+        "E-050",
+        "E-051"
       ],
       "source_basis": [
-        "VP-033",
+        "VP-037",
         "Summary.js"
       ]
     },
     {
-      "case_id": "TC-052",
-      "case_no": "0052",
+      "case_id": "TC-065",
+      "case_no": "0065",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-034",
+      "test_viewpoint_id": "VP-038",
       "test_viewpoint": "債権明細 のソート処理確認（0件）",
       "pcl": [
         "N"
@@ -1590,21 +1978,21 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-041",
-        "E-042",
+        "E-052",
+        "E-053",
         "E-017"
       ],
       "source_basis": [
-        "VP-034",
+        "VP-038",
         "Summary.js",
         "controls.rptSaikenMeisai"
       ]
     },
     {
-      "case_id": "TC-053",
-      "case_no": "0053",
+      "case_id": "TC-066",
+      "case_no": "0066",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-034",
+      "test_viewpoint_id": "VP-038",
       "test_viewpoint": "債権明細 のソート処理確認（1件）",
       "pcl": [
         "N"
@@ -1616,21 +2004,21 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-041",
-        "E-042",
+        "E-052",
+        "E-053",
         "E-018"
       ],
       "source_basis": [
-        "VP-034",
+        "VP-038",
         "Summary.js",
         "controls.rptSaikenMeisai"
       ]
     },
     {
-      "case_id": "TC-054",
-      "case_no": "0054",
+      "case_id": "TC-067",
+      "case_no": "0067",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-034",
+      "test_viewpoint_id": "VP-038",
       "test_viewpoint": "債権明細 のソート処理確認（複数件）",
       "pcl": [
         "N"
@@ -1642,21 +2030,21 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-041",
-        "E-042",
+        "E-052",
+        "E-053",
         "E-019"
       ],
       "source_basis": [
-        "VP-034",
+        "VP-038",
         "Summary.js",
         "controls.rptSaikenMeisai"
       ]
     },
     {
-      "case_id": "TC-055",
-      "case_no": "0055",
+      "case_id": "TC-068",
+      "case_no": "0068",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-034",
+      "test_viewpoint_id": "VP-038",
       "test_viewpoint": "債権明細 のソート処理確認（ソート）",
       "pcl": [
         "N"
@@ -1665,24 +2053,24 @@
         "C-020"
       ],
       "action_ids": [
-        "A-009"
+        "A-010"
       ],
       "confirmation_ids": [
-        "E-041",
-        "E-042",
+        "E-052",
+        "E-053",
         "E-020"
       ],
       "source_basis": [
-        "VP-034",
+        "VP-038",
         "Summary.js",
         "controls.rptSaikenMeisai"
       ]
     },
     {
-      "case_id": "TC-056",
-      "case_no": "0056",
+      "case_id": "TC-069",
+      "case_no": "0069",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-035",
+      "test_viewpoint_id": "VP-039",
       "test_viewpoint": "事象一覧 のソート処理確認（0件）",
       "pcl": [
         "N"
@@ -1694,21 +2082,21 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-043",
-        "E-044",
+        "E-054",
+        "E-055",
         "E-021"
       ],
       "source_basis": [
-        "VP-035",
+        "VP-039",
         "Summary.js",
         "controls.rptJishoList"
       ]
     },
     {
-      "case_id": "TC-057",
-      "case_no": "0057",
+      "case_id": "TC-070",
+      "case_no": "0070",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-035",
+      "test_viewpoint_id": "VP-039",
       "test_viewpoint": "事象一覧 のソート処理確認（1件）",
       "pcl": [
         "N"
@@ -1720,21 +2108,21 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-043",
-        "E-044",
+        "E-054",
+        "E-055",
         "E-022"
       ],
       "source_basis": [
-        "VP-035",
+        "VP-039",
         "Summary.js",
         "controls.rptJishoList"
       ]
     },
     {
-      "case_id": "TC-058",
-      "case_no": "0058",
+      "case_id": "TC-071",
+      "case_no": "0071",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-035",
+      "test_viewpoint_id": "VP-039",
       "test_viewpoint": "事象一覧 のソート処理確認（複数件）",
       "pcl": [
         "N"
@@ -1746,21 +2134,21 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-043",
-        "E-044",
+        "E-054",
+        "E-055",
         "E-023"
       ],
       "source_basis": [
-        "VP-035",
+        "VP-039",
         "Summary.js",
         "controls.rptJishoList"
       ]
     },
     {
-      "case_id": "TC-059",
-      "case_no": "0059",
+      "case_id": "TC-072",
+      "case_no": "0072",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-035",
+      "test_viewpoint_id": "VP-039",
       "test_viewpoint": "事象一覧 のソート処理確認（ソート）",
       "pcl": [
         "N"
@@ -1769,24 +2157,24 @@
         "C-023"
       ],
       "action_ids": [
-        "A-010"
+        "A-011"
       ],
       "confirmation_ids": [
-        "E-043",
-        "E-044",
+        "E-054",
+        "E-055",
         "E-024"
       ],
       "source_basis": [
-        "VP-035",
+        "VP-039",
         "Summary.js",
         "controls.rptJishoList"
       ]
     },
     {
-      "case_id": "TC-060",
-      "case_no": "0060",
+      "case_id": "TC-073",
+      "case_no": "0073",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-036",
+      "test_viewpoint_id": "VP-040",
       "test_viewpoint": "帳票一覧 のソート処理確認（0件）",
       "pcl": [
         "N"
@@ -1798,21 +2186,21 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-045",
-        "E-046",
+        "E-056",
+        "E-057",
         "E-025"
       ],
       "source_basis": [
-        "VP-036",
+        "VP-040",
         "Summary.js",
         "controls.rptReportList"
       ]
     },
     {
-      "case_id": "TC-061",
-      "case_no": "0061",
+      "case_id": "TC-074",
+      "case_no": "0074",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-036",
+      "test_viewpoint_id": "VP-040",
       "test_viewpoint": "帳票一覧 のソート処理確認（1件）",
       "pcl": [
         "N"
@@ -1824,21 +2212,21 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-045",
-        "E-046",
+        "E-056",
+        "E-057",
         "E-026"
       ],
       "source_basis": [
-        "VP-036",
+        "VP-040",
         "Summary.js",
         "controls.rptReportList"
       ]
     },
     {
-      "case_id": "TC-062",
-      "case_no": "0062",
+      "case_id": "TC-075",
+      "case_no": "0075",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-036",
+      "test_viewpoint_id": "VP-040",
       "test_viewpoint": "帳票一覧 のソート処理確認（複数件）",
       "pcl": [
         "N"
@@ -1850,21 +2238,21 @@
         "A-001"
       ],
       "confirmation_ids": [
-        "E-045",
-        "E-046",
+        "E-056",
+        "E-057",
         "E-027"
       ],
       "source_basis": [
-        "VP-036",
+        "VP-040",
         "Summary.js",
         "controls.rptReportList"
       ]
     },
     {
-      "case_id": "TC-063",
-      "case_no": "0063",
+      "case_id": "TC-076",
+      "case_no": "0076",
       "category": "一覧表示",
-      "test_viewpoint_id": "VP-036",
+      "test_viewpoint_id": "VP-040",
       "test_viewpoint": "帳票一覧 のソート処理確認（ソート）",
       "pcl": [
         "N"
@@ -1873,27 +2261,27 @@
         "C-026"
       ],
       "action_ids": [
-        "A-011"
+        "A-012"
       ],
       "confirmation_ids": [
-        "E-045",
-        "E-046",
+        "E-056",
+        "E-057",
         "E-028"
       ],
       "source_basis": [
-        "VP-036",
+        "VP-040",
         "Summary.js",
         "controls.rptReportList"
       ]
     }
   ],
   "summary": {
-    "test_case_count": 63,
-    "source_viewpoint_count": 36,
+    "test_case_count": 76,
+    "source_viewpoint_count": 40,
     "check_condition_count": 27,
-    "action_count": 14,
-    "confirmation_count": 46,
-    "pcl_assigned_case_count": 63,
+    "action_count": 19,
+    "confirmation_count": 57,
+    "pcl_assigned_case_count": 76,
     "analysis_linked_field_count": 30
   }
 }

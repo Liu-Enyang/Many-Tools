@@ -296,6 +296,102 @@ def _collect_sort_target_lists(analysis: Dict[str, Any]) -> List[Dict[str, Any]]
 
     return results
 
+def _build_javascript_event_handler_viewpoints(
+    analysis: Dict[str, Any],
+    viewpoints: List[Dict[str, Any]],
+    counter: int,
+) -> int:
+    javascript_analysis = analysis.get("javascript_analysis", {}) or {}
+
+    for item in javascript_analysis.get("event_handlers", []):
+        title = str(item.get("title") or "").strip()
+        detail = str(item.get("detail") or "").strip()
+        source_basis = list(item.get("source_basis", []) or [])
+
+        if "顧客クリアボタン押下時制御あり" in title:
+            viewpoints.append(
+                _make_viewpoint(
+                    vp_id=f"VP-{counter:03d}",
+                    category="イベント",
+                    title="顧客クリアボタン押下時の項目クリア確認",
+                    details=[
+                        "顧客クリアボタン押下時に顧客番号がクリアされること",
+                        "顧客クリアボタン押下時に顧客名がクリアされること",
+                    ],
+                    source_basis=source_basis or ["controls.btnClear", "js.click.clear_customer_fields"],
+                )
+            )
+            counter += 1
+            continue
+
+        if "概況クリアボタン押下時制御あり" in title:
+            viewpoints.append(
+                _make_viewpoint(
+                    vp_id=f"VP-{counter:03d}",
+                    category="イベント",
+                    title="概況クリアボタン押下時のテキストエリアクリア確認",
+                    details=[
+                        "概況クリアボタン押下時に事故及び延滞に至った原因がクリアされること",
+                        "概況クリアボタン押下時に債務者および保証人の現況がクリアされること",
+                        "概況クリアボタン押下時に回収、解消の方針、スケジュールがクリアされること",
+                        "概況クリアボタン押下時に備考、特記事項がクリアされること",
+                    ],
+                    source_basis=source_basis or ["controls.btnSummaryClear", "js.click.clear_summary_fields"],
+                )
+            )
+            counter += 1
+            continue
+
+        if "顧客検索ボタン押下時制御あり" in title:
+            viewpoints.append(
+                _make_viewpoint(
+                    vp_id=f"VP-{counter:03d}",
+                    category="イベント",
+                    title="顧客検索ボタン押下時の前提条件・検索結果反映確認",
+                    details=[
+                        "顧客検索ボタン押下時に店番未選択の場合はエラーメッセージが表示されること",
+                        "顧客検索ボタン押下時に正常時は顧客検索ダイアログが起動すること",
+                        "顧客選択後に顧客番号および顧客名が画面へ反映されること",
+                    ],
+                    source_basis=source_basis or ["controls.btnCustSearch", "js.click.customer_search"],
+                )
+            )
+            counter += 1
+            continue
+
+        if "帳票ダウンロードボタン押下時制御あり" in title:
+            viewpoints.append(
+                _make_viewpoint(
+                    vp_id=f"VP-{counter:03d}",
+                    category="イベント",
+                    title="帳票ダウンロードボタン押下時の前提条件確認",
+                    details=[
+                        "帳票ダウンロードボタン押下時に顧客番号未入力の場合はエラーメッセージが表示されること",
+                        "帳票ダウンロードボタン押下時に店番未選択の場合はエラーメッセージが表示されること",
+                        "帳票ダウンロードボタン押下時に帳票未選択の場合はエラーメッセージが表示されること",
+                        "帳票ダウンロードボタン押下時に正常時はダウンロード処理が実行されること",
+                    ],
+                    source_basis=source_basis or ["controls.btnDownload", "js.click.download"],
+                )
+            )
+            counter += 1
+            continue
+
+        if title:
+            viewpoints.append(
+                _make_viewpoint(
+                    vp_id=f"VP-{counter:03d}",
+                    category="イベント",
+                    title=title.replace("制御あり", "確認") if "制御あり" in title else f"{title}確認",
+                    details=[detail or "JavaScriptイベント処理結果が正しいこと"],
+                    source_basis=source_basis or ["javascript.event_handlers"],
+                )
+            )
+            counter += 1
+
+    return counter
+
+
 def _build_javascript_viewpoints(
     analysis: Dict[str, Any],
     viewpoints: List[Dict[str, Any]],
@@ -311,20 +407,7 @@ def _build_javascript_viewpoints(
                 sources.append(path)
         return sources
 
-    if javascript_analysis.get("event_handlers"):
-        viewpoints.append(
-            _make_viewpoint(
-                vp_id=f"VP-{counter:03d}",
-                category="イベント",
-                title="JavaScriptイベント処理確認",
-                details=[
-                    "クリックイベントにより想定した処理が実行されること",
-                    "対象ボタン押下時に画面項目が正しく更新されること",
-                ],
-                source_basis=_collect_sources("event_handlers"),
-            )
-        )
-        counter += 1
+    counter = _build_javascript_event_handler_viewpoints(analysis, viewpoints, counter)
 
     if javascript_analysis.get("screen_controls"):
         viewpoints.append(

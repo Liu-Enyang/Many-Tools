@@ -342,36 +342,102 @@ def build_javascript_analysis(javascript_sources: List[Dict[str, Any]]) -> Dict[
         file_name = _clean_text(src.get("file_name"))
         content = _clean_text(src.get("content"))
 
-        def add(target_key: str, title: str, detail: str) -> None:
+        def add(target_key: str, title: str, detail: str, source_basis: Optional[List[str]] = None) -> None:
             result[target_key].append(
                 {
                     "file_name": file_name,
                     "relative_path": path,
                     "title": title,
                     "detail": detail,
-                    "source_basis": [path or file_name or "javascript"],
+                    "source_basis": source_basis or [path or file_name or "javascript"],
                 }
             )
 
-        if "addEventListener('click'" in content or 'addEventListener("click"' in content:
-            add("event_handlers", "クリックイベント制御あり", "ボタン押下時のフロント処理を実装している")
+        # ▼ 個別ボタンイベントの抽出（同名ボタンを control_id で区別する）
+        if "#btnClear" in content and "addEventListener('click'" in content:
+            add(
+                "event_handlers",
+                "顧客クリアボタン押下時制御あり",
+                "顧客番号・顧客名をクリアする制御がある",
+                [path or file_name or "javascript", "controls.btnClear", "js.click.clear_customer_fields"],
+            )
 
+        if "#btnSummaryClear" in content and "addEventListener('click'" in content:
+            add(
+                "event_handlers",
+                "概況クリアボタン押下時制御あり",
+                "事故原因・現況・方針・備考をクリアする制御がある",
+                [path or file_name or "javascript", "controls.btnSummaryClear", "js.click.clear_summary_fields"],
+            )
+
+        if "#btnCustSearch" in content and "addEventListener('click'" in content:
+            add(
+                "event_handlers",
+                "顧客検索ボタン押下時制御あり",
+                "店番チェック後に顧客検索ダイアログを起動し、戻り値を画面へ反映する制御がある",
+                [path or file_name or "javascript", "controls.btnCustSearch", "js.click.customer_search"],
+            )
+
+        if (
+            "btnDownload" in content
+            or "DownLoadRSheet.aspx" in content
+            or "downloadFrame" in content
+        ):
+            add(
+                "event_handlers",
+                "帳票ダウンロードボタン押下時制御あり",
+                "帳票選択・顧客番号・店番のチェック後にダウンロードを実行する制御がある",
+                [path or file_name or "javascript", "controls.btnDownload", "js.click.download"],
+            )
+
+        # ▼ 既存の汎用 click 制御検出（個別検出の補助として残す）
+        if "addEventListener('click'" in content or 'addEventListener("click"' in content:
+            add(
+                "event_handlers",
+                "クリックイベント制御あり",
+                "ボタン押下時のフロント処理を実装している",
+            )
+
+        # ▼ 参照モード制御
         if (
             "applyReferenceMode" in content
             or "disabled = true" in content
             or "pointerEvents = 'none'" in content
             or 'pointerEvents = "none"' in content
         ):
-            add("screen_controls", "参照モード制御あり", "参照モード時に入力・ボタン・リンクを操作不可にする制御がある")
+            add(
+                "screen_controls",
+                "参照モード制御あり",
+                "参照モード時に入力・ボタン・リンクを操作不可にする制御がある",
+                [path or file_name or "javascript", "js.reference_mode"],
+            )
 
+        # ▼ 前端エラーメッセージ制御
         if "showError(" in content or "alert(" in content:
-            add("validation_related", "前端エラーメッセージ制御あり", "入力不足や選択不足時にエラーメッセージを表示する制御がある")
+            add(
+                "validation_related",
+                "前端エラーメッセージ制御あり",
+                "入力不足や選択不足時にエラーメッセージを表示する制御がある",
+                [path or file_name or "javascript", "js.frontend_validation"],
+            )
 
+        # ▼ 帳票ダウンロード前提チェック
         if "DownLoadRSheet.aspx" in content or "downloadFrame" in content or "btnDownload" in content:
-            add("download_related", "帳票ダウンロード制御あり", "帳票選択チェック・顧客番号/店番チェック・ダウンロード実行の制御がある")
+            add(
+                "download_related",
+                "帳票ダウンロード制御あり",
+                "帳票選択チェック・顧客番号/店番チェック・ダウンロード実行の制御がある",
+                [path or file_name or "javascript", "js.download"],
+            )
 
+        # ▼ ソート制御
         if "initSort(" in content or "sortTable(" in content or "data-sort" in content:
-            add("sort_related", "一覧ソート制御あり", "一覧ヘッダクリックによる昇順/降順ソート制御がある")
+            add(
+                "sort_related",
+                "一覧ソート制御あり",
+                "一覧ヘッダクリックによる昇順/降順ソート制御がある",
+                [path or file_name or "javascript", "js.sort"],
+            )
 
     return result
 
@@ -425,6 +491,7 @@ def generate_analysis(
         "screen_modes": _build_screen_modes(controls, codebehind_data),
         "javascript_sources": javascript_sources,
         "javascript_analysis": javascript_analysis,
+        "javascript_event_handler_count": len(javascript_analysis.get("event_handlers", [])),
         "notes": notes,
         "table_headers": aspx_data.get("table_headers", []),
         "title_candidates": aspx_data.get("title_candidates", []),

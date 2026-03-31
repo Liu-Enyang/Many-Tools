@@ -1403,6 +1403,50 @@
       {
         "file_name": "Summary.js",
         "relative_path": "Summary.js",
+        "title": "顧客クリアボタン押下時制御あり",
+        "detail": "顧客番号・顧客名をクリアする制御がある",
+        "source_basis": [
+          "Summary.js",
+          "controls.btnClear",
+          "js.click.clear_customer_fields"
+        ]
+      },
+      {
+        "file_name": "Summary.js",
+        "relative_path": "Summary.js",
+        "title": "概況クリアボタン押下時制御あり",
+        "detail": "事故原因・現況・方針・備考をクリアする制御がある",
+        "source_basis": [
+          "Summary.js",
+          "controls.btnSummaryClear",
+          "js.click.clear_summary_fields"
+        ]
+      },
+      {
+        "file_name": "Summary.js",
+        "relative_path": "Summary.js",
+        "title": "顧客検索ボタン押下時制御あり",
+        "detail": "店番チェック後に顧客検索ダイアログを起動し、戻り値を画面へ反映する制御がある",
+        "source_basis": [
+          "Summary.js",
+          "controls.btnCustSearch",
+          "js.click.customer_search"
+        ]
+      },
+      {
+        "file_name": "Summary.js",
+        "relative_path": "Summary.js",
+        "title": "帳票ダウンロードボタン押下時制御あり",
+        "detail": "帳票選択・顧客番号・店番のチェック後にダウンロードを実行する制御がある",
+        "source_basis": [
+          "Summary.js",
+          "controls.btnDownload",
+          "js.click.download"
+        ]
+      },
+      {
+        "file_name": "Summary.js",
+        "relative_path": "Summary.js",
         "title": "クリックイベント制御あり",
         "detail": "ボタン押下時のフロント処理を実装している",
         "source_basis": [
@@ -1417,7 +1461,8 @@
         "title": "参照モード制御あり",
         "detail": "参照モード時に入力・ボタン・リンクを操作不可にする制御がある",
         "source_basis": [
-          "Summary.js"
+          "Summary.js",
+          "js.reference_mode"
         ]
       }
     ],
@@ -1428,7 +1473,8 @@
         "title": "前端エラーメッセージ制御あり",
         "detail": "入力不足や選択不足時にエラーメッセージを表示する制御がある",
         "source_basis": [
-          "Summary.js"
+          "Summary.js",
+          "js.frontend_validation"
         ]
       }
     ],
@@ -1439,7 +1485,8 @@
         "title": "帳票ダウンロード制御あり",
         "detail": "帳票選択チェック・顧客番号/店番チェック・ダウンロード実行の制御がある",
         "source_basis": [
-          "Summary.js"
+          "Summary.js",
+          "js.download"
         ]
       }
     ],
@@ -1450,11 +1497,13 @@
         "title": "一覧ソート制御あり",
         "detail": "一覧ヘッダクリックによる昇順/降順ソート制御がある",
         "source_basis": [
-          "Summary.js"
+          "Summary.js",
+          "js.sort"
         ]
       }
     ]
   },
+  "javascript_event_handler_count": 5,
   "notes": [],
   "table_headers": [
     "店番・店名",
