@@ -96,15 +96,45 @@ def _infer_test_target(control: Dict[str, Any], control_role: str) -> bool:
     return control_role in {"input", "action", "display", "list"}
 
 
+def _is_technical_control_name(value: str, control_id: str) -> bool:
+    normalized = _clean_text(value)
+    cid = _clean_text(control_id)
+    if not normalized:
+        return False
+
+    lower_value = normalized.lower()
+    lower_id = cid.lower()
+
+    if lower_value == lower_id:
+        return True
+
+    technical_prefixes = (
+        "rpt",
+        "grd",
+        "gv",
+        "tbl",
+        "lst",
+        "ctl",
+        "uc",
+    )
+    if lower_value.startswith(technical_prefixes):
+        return True
+
+    if normalized.isidentifier() and "一覧" not in normalized and "明細" not in normalized and "事象" not in normalized and "帳票" not in normalized:
+        return True
+
+    return False
+
+
 def _guess_list_label(control: Dict[str, Any], aspx_data: Dict[str, Any]) -> str:
     control_id = _clean_text(control.get("id"))
     if not control_id:
         return ""
 
-    # 1) control 自身に業務名があれば優先
+    # 1) control 自身に業務名があれば優先（技術名は除外）
     for key in ["label", "text", "name", "title"]:
         value = _clean_text(control.get(key))
-        if value:
+        if value and not _is_technical_control_name(value, control_id):
             return value
 
     # 2) テーブルヘッダ情報から推定
@@ -132,10 +162,12 @@ def _guess_list_label(control: Dict[str, Any], aspx_data: Dict[str, Any]) -> str
     lower_id = control_id.lower()
     if "saiken" in lower_id and "meisai" in lower_id:
         return "債権明細"
-    if "jisho" in lower_id:
+    if "jisho" in lower_id or ("incident" in lower_id and "list" in lower_id):
         return "事象一覧"
     if "report" in lower_id:
         return "帳票一覧"
+    if "meisai" in lower_id:
+        return "明細一覧"
     if "list" in lower_id:
         return "一覧"
 

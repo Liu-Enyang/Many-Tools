@@ -303,6 +303,105 @@ def _resolve_control_label_from_analysis(control_id: str, analysis: Dict[str, An
     return ""
 
 
+# --- Begin: Button/action normalization helpers ---
+def _collect_button_labels(analysis: Dict[str, Any]) -> List[str]:
+    labels: List[str] = []
+    for control in analysis.get("controls", []):
+        control_role = str(control.get("control_role", "")).strip()
+        control_type = str(control.get("control_type") or control.get("type") or "").strip().lower()
+        if control_role != "action" and control_type not in {"button", "linkbutton", "imagebutton"}:
+            continue
+
+        label = str(
+            control.get("label")
+            or control.get("text")
+            or control.get("name")
+            or control.get("title")
+            or ""
+        ).strip()
+        if label and label not in labels:
+            labels.append(label)
+
+    return labels
+
+
+
+def _select_button_label_for_action(
+    action_text: str,
+    viewpoint: Dict[str, Any],
+    analysis: Dict[str, Any],
+) -> str:
+    button_labels = _collect_button_labels(analysis)
+    if not button_labels:
+        return ""
+
+    title = str(viewpoint.get("title", "")).strip()
+    details_text = " ".join([str(value) for value in viewpoint.get("details", [])])
+    source_basis_text = " ".join([str(value) for value in viewpoint.get("source_basis", [])])
+    search_text = f"{action_text} {title} {details_text} {source_basis_text}"
+
+    keyword_priority: List[Tuple[str, List[str]]] = [
+        ("登録", ["登録", "更新", "保存", "確定"]),
+        ("更新", ["更新", "保存", "登録"]),
+        ("検索", ["検索", "顧客表示", "表示"]),
+        ("削除", ["削除"]),
+        ("クリア", ["クリア"]),
+        ("ダウンロード", ["ダウンロード", "出力", "印刷"]),
+        ("追加", ["追加", "新規"]),
+    ]
+
+    matched_keywords: List[str] = []
+    for trigger_word, candidates in keyword_priority:
+        if trigger_word in search_text:
+            matched_keywords.extend(candidates)
+
+    for keyword in matched_keywords:
+        for label in button_labels:
+            if keyword in label:
+                return label
+
+    for label in button_labels:
+        if label in search_text:
+            return label
+
+    if len(button_labels) == 1:
+        return button_labels[0]
+
+    for fallback in ["登録", "更新", "保存", "検索", "クリア", "ダウンロード"]:
+        for label in button_labels:
+            if fallback in label:
+                return label
+
+    return ""
+
+
+
+def _normalize_action_text(action_text: str, viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> str:
+    text = str(action_text).strip()
+    if not text:
+        return text
+
+    generic_action_markers = [
+        "更新処理を実行する",
+        "登録処理を実行する",
+        "検索処理を実行する",
+        "削除処理を実行する",
+        "クリア処理を実行する",
+        "ダウンロード処理を実行する",
+        "対象イベントを実行する",
+    ]
+
+    if not any(marker in text for marker in generic_action_markers):
+        return text
+
+    button_label = _select_button_label_for_action(text, viewpoint, analysis)
+    if button_label:
+        return f"{button_label}ボタンを押下する"
+
+    return text
+# --- End: Button/action normalization helpers ---
+
+
 def _extract_list_label_from_viewpoint(viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> str:
     title = str(viewpoint.get("title", "")).strip()
     source_basis = [str(value) for value in viewpoint.get("source_basis", [])]
@@ -577,6 +676,7 @@ def _register_definition(
 
 def _build_case_items(
     viewpoint: Dict[str, Any],
+    analysis: Dict[str, Any],
     expansion_rule: Optional[Dict[str, Any]] = None,
 ) -> Tuple[List[str], List[str], List[str]]:
     category = str(viewpoint.get("category", "")).strip()
@@ -587,7 +687,7 @@ def _build_case_items(
         [str(value) for value in DEFAULT_CHECK_CONDITIONS.get(category, ["画面を起動する"])]
     )
     base_actions = _unique_texts(
-        [str(value) for value in DEFAULT_ACTIONS.get(category, ["対象処理を実行する"])]
+        [_normalize_action_text(str(value), viewpoint, analysis) for value in DEFAULT_ACTIONS.get(category, ["対象処理を実行する"])]
     )
     base_confirmations = _unique_texts(
         detail_texts or DEFAULT_CONFIRMATIONS.get(category, ["期待結果が正しいこと"])
@@ -601,7 +701,7 @@ def _build_case_items(
         [],
     ) or base_check_conditions
     actions = _merge_text_lists(
-        [str(value) for value in expansion_rule.get("actions", [])],
+        [_normalize_action_text(str(value), viewpoint, analysis) for value in expansion_rule.get("actions", [])],
         [],
     ) or base_actions
     confirmation_suffixes = [str(value) for value in expansion_rule.get("confirmation_suffix", [])]
@@ -654,6 +754,7 @@ def _expand_viewpoint(viewpoint: Dict[str, Any], analysis: Dict[str, Any]) -> Li
 def _build_testcase_from_viewpoint(
     viewpoint: Dict[str, Any],
     expanded_case: Dict[str, Any],
+    analysis: Dict[str, Any],
     index: int,
     check_condition_registry: Dict[str, str],
     check_condition_definitions: List[Dict[str, str]],
@@ -672,6 +773,7 @@ def _build_testcase_from_viewpoint(
 
     check_conditions, actions, confirmations = _build_case_items(
         viewpoint,
+        analysis,
         expansion_rule=expanded_case.get("rule"),
     )
 
@@ -742,6 +844,7 @@ def generate_testcases(
                 _build_testcase_from_viewpoint(
                     viewpoint=viewpoint,
                     expanded_case=expanded_case,
+                    analysis=analysis,
                     index=case_index,
                     check_condition_registry=check_condition_registry,
                     check_condition_definitions=check_condition_definitions,
