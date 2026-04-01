@@ -1,6 +1,8 @@
 import io
 import os
+import re
 import time
+import copy
 import hashlib
 import threading
 import tkinter as tk
@@ -10,7 +12,7 @@ from datetime import datetime
 from typing import List, Optional
 
 from PIL import ImageGrab, Image
-from openpyxl import Workbook
+from openpyxl import Workbook, load_workbook
 from openpyxl.drawing.image import Image as XLImage
 from pynput import keyboard
 
@@ -53,7 +55,7 @@ class TestCaptureApp:
         self.ui_callback = ui_callback
 
         # Excel 输出配置
-        self.excel_title = "【カスタマイズ】　XXXの対応"
+        self.excel_title = "【カスタマイズ】　概要画面の対応"
         self.sheet_name = "0001"
         self.output_dir = self.base_output_dir
 
@@ -63,6 +65,51 @@ class TestCaptureApp:
     def _notify_ui(self) -> None:
         if self.ui_callback:
             self.ui_callback()
+
+    # -------------------------
+    # 工具方法
+    # -------------------------
+    @staticmethod
+    def _safe_sheet_name(name: str) -> str:
+        invalid_chars = [":", "\\", "/", "?", "*", "[", "]"]
+        safe_name = name
+        for ch in invalid_chars:
+            safe_name = safe_name.replace(ch, "_")
+        safe_name = safe_name.strip() or "Sheet1"
+        return safe_name[:31]
+
+    @staticmethod
+    def _safe_file_name(name: str) -> str:
+        safe_name = re.sub(r'[<>:"/\\\\|?*]', "_", name)
+        safe_name = safe_name.strip().rstrip(".")
+        return safe_name or "sheet"
+
+    @staticmethod
+    def _calculate_image_hash(image: Image.Image) -> str:
+        buffer = io.BytesIO()
+        image.save(buffer, format="PNG")
+        return hashlib.md5(buffer.getvalue()).hexdigest()
+
+    @staticmethod
+    def _get_resized_size(width: int, height: int, max_width: int) -> tuple[int, int]:
+        if width <= max_width:
+            return width, height
+
+        ratio = max_width / width
+        return int(width * ratio), int(height * ratio)
+
+    def _create_resized_excel_image(self, image_path: str, max_width: int = 800) -> XLImage:
+        pil_img = Image.open(image_path)
+        new_width, new_height = self._get_resized_size(
+            pil_img.width,
+            pil_img.height,
+            max_width=max_width
+        )
+
+        xl_img = XLImage(image_path)
+        xl_img.width = new_width
+        xl_img.height = new_height
+        return xl_img
 
     # -------------------------
     # 会话管理
@@ -76,7 +123,11 @@ class TestCaptureApp:
         session_dir = os.path.join(self.output_dir, session_id)
         os.makedirs(session_dir, exist_ok=True)
 
-        excel_path = os.path.join(session_dir, f"{session_id}_screenshots.xlsx")
+        safe_sheet_name_for_file = self._safe_file_name(self.sheet_name)
+        excel_path = os.path.join(
+            session_dir,
+            f"{session_id}_screenshots_{safe_sheet_name_for_file}.xlsx"
+        )
 
         self.session = CaptureSession(
             session_id=session_id,
@@ -199,11 +250,49 @@ class TestCaptureApp:
         print(f"[已保存] 第 {index} 张 -> {image_path}")
         self._notify_ui()
 
-    @staticmethod
-    def _calculate_image_hash(image: Image.Image) -> str:
-        buffer = io.BytesIO()
-        image.save(buffer, format="PNG")
-        return hashlib.md5(buffer.getvalue()).hexdigest()
+    # -------------------------
+    # Excel 写入通用
+    # -------------------------
+    def _write_sheet_content(
+        self,
+        ws,
+        excel_title: str,
+        image_paths: List[str],
+        zoom_scale: int = 80
+    ) -> None:
+        ws.sheet_view.zoomScale = zoom_scale
+
+        ws["A1"] = excel_title
+        ws["A2"] = "＜前提＞"
+        ws["A45"] = "＜操作＞"
+        ws["A85"] = "＜結果＞"
+
+        # 图片从 C3 开始
+        current_row = 3
+        image_col = "C"
+
+        for image_path in image_paths:
+            if not os.path.exists(image_path):
+                continue
+
+            img_for_excel = self._create_resized_excel_image(image_path, max_width=800)
+            anchor_cell = f"{image_col}{current_row}"
+            ws.add_image(img_for_excel, anchor_cell)
+
+            pil_img = Image.open(image_path)
+            _, display_height = self._get_resized_size(
+                pil_img.width,
+                pil_img.height,
+                max_width=800
+            )
+
+            estimated_rows = max(18, int(display_height / 20))
+
+            for r in range(current_row, current_row + estimated_rows):
+                ws.row_dimensions[r].height = 20
+
+            # 例如：3~20，下一张从23开始
+            current_row += estimated_rows + 2
 
     # -------------------------
     # Excel 导出
@@ -216,74 +305,105 @@ class TestCaptureApp:
         ws = wb.active
         ws.title = self._safe_sheet_name(self.sheet_name)
 
-        # 缩放
-        ws.sheet_view.zoomScale = 80
-
-        # 标题
-        ws["A1"] = self.excel_title
-
-        # 固定标签
-        ws["A2"] = "＜前提＞"
-        ws["A45"] = "＜操作＞"
-        ws["A85"] = "＜結果＞"
-
-        # 图片从第3行开始（列改为 C）
-        current_row = 3
-        image_col = "C"
-
-        for item in self.session.captures:
-            # 插图（从C列开始）
-            img_for_excel = self._create_resized_excel_image(item.image_path, max_width=800)
-            anchor_cell = f"{image_col}{current_row}"
-            ws.add_image(img_for_excel, anchor_cell)
-
-            # 计算图片高度占用
-            pil_img = Image.open(item.image_path)
-            _, display_height = self._get_resized_size(
-                pil_img.width,
-                pil_img.height,
-                max_width=800
-            )
-
-            estimated_rows = max(18, int(display_height / 20))
-
-            for r in range(current_row, current_row + estimated_rows):
-                ws.row_dimensions[r].height = 20
-
-            # 间隔3行（实际控制为+2）
-            current_row += estimated_rows + 2
+        image_paths = [item.image_path for item in self.session.captures]
+        self._write_sheet_content(
+            ws=ws,
+            excel_title=self.excel_title,
+            image_paths=image_paths,
+            zoom_scale=80
+        )
 
         wb.save(self.session.excel_path)
 
-    def _create_resized_excel_image(self, image_path: str, max_width: int = 800) -> XLImage:
-        pil_img = Image.open(image_path)
-        new_width, new_height = self._get_resized_size(
-            pil_img.width,
-            pil_img.height,
-            max_width=max_width
-        )
+    def merge_all_excels(self) -> Optional[str]:
+        """
+        把当前 output_dir 下所有会话目录中的 Excel 整合到一个 Excel 文件中。
+        顺序按 sheet 名升顺。
+        """
+        if not os.path.exists(self.output_dir):
+            return None
 
-        xl_img = XLImage(image_path)
-        xl_img.width = new_width
-        xl_img.height = new_height
-        return xl_img
+        merge_items = []
 
-    @staticmethod
-    def _get_resized_size(width: int, height: int, max_width: int) -> tuple[int, int]:
-        if width <= max_width:
-            return width, height
+        for entry in os.scandir(self.output_dir):
+            if not entry.is_dir():
+                continue
 
-        ratio = max_width / width
-        return int(width * ratio), int(height * ratio)
+            session_dir = entry.path
 
-    @staticmethod
-    def _safe_sheet_name(name: str) -> str:
-        invalid_chars = [":", "\\", "/", "?", "*", "[", "]"]
-        safe_name = name
-        for ch in invalid_chars:
-            safe_name = safe_name.replace(ch, "_")
-        safe_name = safe_name.strip() or "Sheet1"
-        return safe_name[:31]
+            excel_files = [
+                f.path for f in os.scandir(session_dir)
+                if f.is_file()
+                and f.name.lower().endswith(".xlsx")
+                and not f.name.startswith("~$")
+            ]
+
+            if not excel_files:
+                continue
+
+            # 每个会话目录通常只有一个 xlsx，取第一个即可
+            excel_files.sort()
+            source_excel = excel_files[0]
+
+            try:
+                wb = load_workbook(source_excel)
+                ws = wb.active
+
+                source_sheet_name = ws.title
+                source_title = ws["A1"].value or ""
+
+                image_paths = [
+                    f.path for f in os.scandir(session_dir)
+                    if f.is_file() and f.name.lower().endswith(".png")
+                ]
+                image_paths.sort()
+
+                merge_items.append({
+                    "sheet_name": source_sheet_name,
+                    "excel_title": source_title,
+                    "image_paths": image_paths,
+                })
+            except Exception as e:
+                print(f"[整合跳过] 读取失败: {source_excel}, {e}")
+
+        if not merge_items:
+            return None
+
+        # 按 sheet 名升顺
+        merge_items.sort(key=lambda x: x["sheet_name"])
+
+        merged_wb = Workbook()
+        default_ws = merged_wb.active
+        merged_wb.remove(default_ws)
+
+        used_names = set()
+
+        for item in merge_items:
+            base_sheet_name = self._safe_sheet_name(item["sheet_name"])
+            final_sheet_name = base_sheet_name
+            seq = 2
+
+            while final_sheet_name in used_names:
+                suffix = f"_{seq}"
+                trimmed = base_sheet_name[:31 - len(suffix)]
+                final_sheet_name = f"{trimmed}{suffix}"
+                seq += 1
+
+            used_names.add(final_sheet_name)
+
+            new_ws = merged_wb.create_sheet(title=final_sheet_name)
+            self._write_sheet_content(
+                ws=new_ws,
+                excel_title=item["excel_title"],
+                image_paths=item["image_paths"],
+                zoom_scale=80
+            )
+
+        merged_file_name = f"merged_sheets_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+        merged_excel_path = os.path.join(self.output_dir, merged_file_name)
+        merged_wb.save(merged_excel_path)
+
+        return merged_excel_path
 
 
 # =========================
@@ -293,8 +413,8 @@ class TestCaptureGUI:
     def __init__(self, root: tk.Tk) -> None:
         self.root = root
         self.root.title("辅助测试截图工具")
-        self.root.geometry("800x770")
-        self.root.minsize(760, 500)
+        self.root.geometry("860x500")
+        self.root.minsize(800, 460)
 
         self.app = TestCaptureApp(ui_callback=self._refresh_ui_safe)
         self.hotkey_listener = None
@@ -318,6 +438,9 @@ class TestCaptureGUI:
 
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
 
+    # -------------------------
+    # 菜单
+    # -------------------------
     def _create_menu(self) -> None:
         menubar = tk.Menu(self.root)
 
@@ -390,10 +513,10 @@ class TestCaptureGUI:
         ttk.Label(status_frame, textvariable=self.capture_count_var).grid(row=1, column=1, sticky="w", pady=6)
 
         ttk.Label(status_frame, text="会话目录").grid(row=2, column=0, sticky="nw", padx=(0, 12), pady=6)
-        ttk.Label(status_frame, textvariable=self.session_dir_var, wraplength=560).grid(row=2, column=1, sticky="w", pady=6)
+        ttk.Label(status_frame, textvariable=self.session_dir_var, wraplength=620).grid(row=2, column=1, sticky="w", pady=6)
 
         ttk.Label(status_frame, text="Excel 文件").grid(row=3, column=0, sticky="nw", padx=(0, 12), pady=6)
-        ttk.Label(status_frame, textvariable=self.excel_path_var, wraplength=560).grid(row=3, column=1, sticky="w", pady=6)
+        ttk.Label(status_frame, textvariable=self.excel_path_var, wraplength=620).grid(row=3, column=1, sticky="w", pady=6)
 
         # 按钮区域
         button_frame = ttk.Frame(main)
@@ -406,6 +529,7 @@ class TestCaptureGUI:
         self.stop_button.pack(side="left", padx=(0, 8))
 
         ttk.Button(button_frame, text="打开输出目录", command=self.open_output_dir).pack(side="left", padx=(0, 8))
+        ttk.Button(button_frame, text="整合文件", command=self.merge_files).pack(side="left", padx=(0, 8))
 
         self.reset_button = ttk.Button(button_frame, text="清空状态", command=self.reset_session)
         self.reset_button.pack(side="left")
@@ -434,7 +558,7 @@ class TestCaptureGUI:
     # -------------------------
     def apply_settings(self) -> None:
         self.app.excel_title = self.title_var.get().strip() or "截图结果"
-        self.app.sheet_name = self.sheet_name_var.get().strip() or "ScreenShots"
+        self.app.sheet_name = self.sheet_name_var.get().strip() or "0001"
         self.app.output_dir = self.output_dir_var.get().strip() or self.app.base_output_dir
         os.makedirs(self.app.output_dir, exist_ok=True)
 
@@ -490,6 +614,25 @@ class TestCaptureGUI:
             os.startfile(path)
         except Exception as e:
             messagebox.showerror("错误", f"打开目录失败：\n{e}")
+
+    def merge_files(self) -> None:
+        try:
+            self.apply_settings()
+            merged_excel_path = self.app.merge_all_excels()
+
+            if not merged_excel_path:
+                messagebox.showinfo("提示", "当前输出目录下没有可整合的 Excel 文件。")
+                return
+
+            try:
+                os.startfile(merged_excel_path)
+            except Exception as open_err:
+                messagebox.showwarning(
+                    "提示",
+                    f"整合文件已生成，但自动打开失败：\n{open_err}\n\n文件位置：\n{merged_excel_path}"
+                )
+        except Exception as e:
+            messagebox.showerror("错误", f"整合文件失败：\n{e}")
 
     def reset_session(self) -> None:
         if self.app.session and self.app.session.is_recording:
