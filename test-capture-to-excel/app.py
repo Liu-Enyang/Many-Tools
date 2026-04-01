@@ -120,10 +120,11 @@ class TestCaptureApp:
             return False
 
         session_id = datetime.now().strftime("%Y%m%d_%H%M%S")
-        session_dir = os.path.join(self.output_dir, session_id)
+        safe_sheet_name_for_file = self._safe_file_name(self.sheet_name)
+        session_folder_name = f"{session_id}_{safe_sheet_name_for_file}"
+        session_dir = os.path.join(self.output_dir, session_folder_name)
         os.makedirs(session_dir, exist_ok=True)
 
-        safe_sheet_name_for_file = self._safe_file_name(self.sheet_name)
         excel_path = os.path.join(
             session_dir,
             f"{session_id}_screenshots_{safe_sheet_name_for_file}.xlsx"
