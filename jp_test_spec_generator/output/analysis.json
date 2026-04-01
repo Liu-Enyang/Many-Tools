@@ -1,0 +1,1544 @@
+{
+  "screen_id": "Summary",
+  "screen_name": "概況",
+  "sources": {
+    "aspx": "/Users/liuenyang/Documents/GitHub/Many Tools/jp_test_spec_generator/sample_input/Summary.aspx",
+    "codebehind": "/Users/liuenyang/Documents/GitHub/Many Tools/jp_test_spec_generator/sample_input/Summary.aspx.cs",
+    "spec": "/Users/liuenyang/Documents/GitHub/Many Tools/jp_test_spec_generator/sample_input/単体テスト仕様書base.xlsx"
+  },
+  "controls": [
+    {
+      "id": "Dummy",
+      "type": "LinkButton",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "Dummy",
+        "runat": "server",
+        "cssclass": "js-disable-in-ref"
+      },
+      "label": null,
+      "control_role": "action",
+      "test_target": false,
+      "source_basis": [
+        "aspx",
+        "controls.Dummy"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "hidReferenceMode",
+      "type": "HiddenField",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "hidReferenceMode",
+        "runat": "server",
+        "value": "0"
+      },
+      "label": null,
+      "control_role": "hidden",
+      "test_target": false,
+      "source_basis": [
+        "aspx",
+        "controls.hidReferenceMode"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "ddlBranchNo",
+      "type": "DropDownList",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": "ddlBranchNo_SelectedIndexChanged",
+      "client_id_mode": "Static",
+      "required": false,
+      "raw_attributes": {
+        "id": "ddlBranchNo",
+        "runat": "server",
+        "clientidmode": "Static",
+        "cssclass": "js-disable-in-ref",
+        "autopostback": "True",
+        "onselectedindexchanged": "ddlBranchNo_SelectedIndexChanged"
+      },
+      "label": "店番・店名",
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.ddlBranchNo"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "tbxCustomerNo",
+      "type": "TextBox",
+      "runat": "server",
+      "text": null,
+      "maxlength": "12",
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": true,
+      "raw_attributes": {
+        "id": "tbxCustomerNo",
+        "runat": "server",
+        "maxlength": "12",
+        "wrap": "False",
+        "cssclass": "js-disable-in-ref",
+        "required": ""
+      },
+      "label": "顧客番号",
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.tbxCustomerNo"
+      ],
+      "required_ui_hint": true,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": "12",
+        "business_rule": null,
+        "blur_validation_rules": [
+          {
+            "rule_type": "maxlength_blur_check",
+            "max_length": "12",
+            "trigger": "blur",
+            "implemented_by": "common_frontend",
+            "detail": "maxlength=12 の項目はフォーカスアウト時に桁数チェック対象とみなす",
+            "source_basis": [
+              "aspx.maxlength",
+              "common_frontend.blur_validation"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "lblCustomerName",
+      "type": "Label",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": "readonly",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "lblCustomerName",
+        "runat": "server",
+        "cssclass": "readonly",
+        "style": "margin-left: 10px;"
+      },
+      "label": "顧客番号",
+      "control_role": "display",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.lblCustomerName"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "btnCustShow",
+      "type": "Button",
+      "runat": "server",
+      "text": "表示",
+      "maxlength": null,
+      "css_class": "button-normal js-disable-in-ref",
+      "on_click": "btnCustShow_Click",
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "btnCustShow",
+        "runat": "server",
+        "text": "表示",
+        "cssclass": "button-normal js-disable-in-ref",
+        "onclick": "btnCustShow_Click"
+      },
+      "label": "顧客番号",
+      "control_role": "action",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.btnCustShow"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "btnCustSearch",
+      "type": "HtmlButton",
+      "runat": null,
+      "text": "検索",
+      "maxlength": null,
+      "css_class": "button-normal js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "type": "button",
+        "id": "btnCustSearch",
+        "class": "button-normal js-disable-in-ref",
+        "value": "検索"
+      },
+      "label": "顧客番号",
+      "control_role": "action",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.btnCustSearch"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "btnClear",
+      "type": "HtmlButton",
+      "runat": null,
+      "text": "クリア",
+      "maxlength": null,
+      "css_class": "button-normal js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "type": "button",
+        "id": "btnClear",
+        "class": "button-normal js-disable-in-ref",
+        "value": "クリア"
+      },
+      "label": "顧客番号",
+      "control_role": "action",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.btnClear"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "rblJisyoStatus",
+      "type": "RadioButtonList",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": "radio-list js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "rblJisyoStatus",
+        "runat": "server",
+        "repeatdirection": "Horizontal",
+        "cssclass": "radio-list js-disable-in-ref"
+      },
+      "label": "事象ステータス",
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.rblJisyoStatus"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "rptSaikenMeisai",
+      "type": "Repeater",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "rptSaikenMeisai",
+        "runat": "server",
+        "onitemcommand": "rptSaikenMeisai_ItemCommand"
+      },
+      "label": "債権明細",
+      "control_role": "list",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.rptSaikenMeisai"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "lnkSaikenNo",
+      "type": "LinkButton",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "lnkSaikenNo",
+        "runat": "server",
+        "cssclass": "js-disable-in-ref",
+        "commandname": "SaikenNo",
+        "commandargument": "<%# Eval(\"JGskm_ShinseiNo\") %>"
+      },
+      "label": null,
+      "control_role": "action",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.lnkSaikenNo"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "rptJishoList",
+      "type": "Repeater",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "rptJishoList",
+        "runat": "server"
+      },
+      "label": "事象一覧",
+      "control_role": "list",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.rptJishoList"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "lblUpdateDate",
+      "type": "Label",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "lblUpdateDate",
+        "runat": "server"
+      },
+      "label": "最終更新日",
+      "control_role": "display",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.lblUpdateDate"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "lblUpdateUser",
+      "type": "Label",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "lblUpdateUser",
+        "runat": "server"
+      },
+      "label": "最終更新者",
+      "control_role": "display",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.lblUpdateUser"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "hidUpdateDateTime",
+      "type": "HiddenField",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "hidUpdateDateTime",
+        "runat": "server"
+      },
+      "label": null,
+      "control_role": "hidden",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.hidUpdateDateTime"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "txtReason",
+      "type": "TextBox",
+      "runat": "server",
+      "text": null,
+      "maxlength": "2000",
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "txtReason",
+        "runat": "server",
+        "textmode": "MultiLine",
+        "rows": "3",
+        "data-maxlength": "2000",
+        "width": "100%",
+        "cssclass": "js-disable-in-ref"
+      },
+      "label": "事故及び延滞に至った原因",
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.txtReason"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": "2000",
+        "business_rule": null,
+        "blur_validation_rules": [
+          {
+            "rule_type": "maxlength_blur_check",
+            "max_length": "2000",
+            "trigger": "blur",
+            "implemented_by": "common_frontend",
+            "detail": "maxlength=2000 の項目はフォーカスアウト時に桁数チェック対象とみなす",
+            "source_basis": [
+              "aspx.maxlength",
+              "common_frontend.blur_validation"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "txtCurrentSituation",
+      "type": "TextBox",
+      "runat": "server",
+      "text": null,
+      "maxlength": "2000",
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "txtCurrentSituation",
+        "runat": "server",
+        "textmode": "MultiLine",
+        "rows": "2",
+        "data-maxlength": "2000",
+        "width": "100%",
+        "cssclass": "js-disable-in-ref"
+      },
+      "label": "債務者および保証人の現況",
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.txtCurrentSituation"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": "2000",
+        "business_rule": null,
+        "blur_validation_rules": [
+          {
+            "rule_type": "maxlength_blur_check",
+            "max_length": "2000",
+            "trigger": "blur",
+            "implemented_by": "common_frontend",
+            "detail": "maxlength=2000 の項目はフォーカスアウト時に桁数チェック対象とみなす",
+            "source_basis": [
+              "aspx.maxlength",
+              "common_frontend.blur_validation"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "txtPolicy",
+      "type": "TextBox",
+      "runat": "server",
+      "text": null,
+      "maxlength": "2000",
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "txtPolicy",
+        "runat": "server",
+        "textmode": "MultiLine",
+        "rows": "1",
+        "data-maxlength": "2000",
+        "width": "100%",
+        "cssclass": "js-disable-in-ref"
+      },
+      "label": "回収、解消の方針、スケジュール",
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.txtPolicy"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": "2000",
+        "business_rule": null,
+        "blur_validation_rules": [
+          {
+            "rule_type": "maxlength_blur_check",
+            "max_length": "2000",
+            "trigger": "blur",
+            "implemented_by": "common_frontend",
+            "detail": "maxlength=2000 の項目はフォーカスアウト時に桁数チェック対象とみなす",
+            "source_basis": [
+              "aspx.maxlength",
+              "common_frontend.blur_validation"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "txtRemarks",
+      "type": "TextBox",
+      "runat": "server",
+      "text": null,
+      "maxlength": "2000",
+      "css_class": "js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "txtRemarks",
+        "runat": "server",
+        "textmode": "MultiLine",
+        "rows": "3",
+        "data-maxlength": "2000",
+        "width": "100%",
+        "cssclass": "js-disable-in-ref"
+      },
+      "label": "備考、特記事項",
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.txtRemarks"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": "2000",
+        "business_rule": null,
+        "blur_validation_rules": [
+          {
+            "rule_type": "maxlength_blur_check",
+            "max_length": "2000",
+            "trigger": "blur",
+            "implemented_by": "common_frontend",
+            "detail": "maxlength=2000 の項目はフォーカスアウト時に桁数チェック対象とみなす",
+            "source_basis": [
+              "aspx.maxlength",
+              "common_frontend.blur_validation"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "btnSummaryClear",
+      "type": "HtmlButton",
+      "runat": null,
+      "text": "クリア",
+      "maxlength": null,
+      "css_class": "button-normal js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "type": "button",
+        "id": "btnSummaryClear",
+        "class": "button-normal js-disable-in-ref",
+        "value": "クリア"
+      },
+      "label": null,
+      "control_role": "action",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.btnSummaryClear"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "btnRegister",
+      "type": "Button",
+      "runat": "server",
+      "text": "登録",
+      "maxlength": null,
+      "css_class": "button-normal js-disable-in-ref",
+      "on_click": "btnRegister_Click",
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "btnRegister",
+        "runat": "server",
+        "text": "登録",
+        "cssclass": "button-normal js-disable-in-ref",
+        "onclick": "btnRegister_Click"
+      },
+      "label": null,
+      "control_role": "action",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.btnRegister"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "chkAllReport",
+      "type": "CheckBox",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "chkAllReport",
+        "runat": "server"
+      },
+      "label": null,
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.chkAllReport"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "rptReportList",
+      "type": "Repeater",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "rptReportList",
+        "runat": "server"
+      },
+      "label": "帳票一覧",
+      "control_role": "list",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.rptReportList"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "chkReport",
+      "type": "CheckBox",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "chkReport",
+        "runat": "server"
+      },
+      "label": null,
+      "control_role": "input",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.chkReport"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "hidReportName",
+      "type": "HiddenField",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "hidReportName",
+        "runat": "server",
+        "value": "<%# Eval(\"ReportName\") %>"
+      },
+      "label": null,
+      "control_role": "hidden",
+      "test_target": false,
+      "source_basis": [
+        "aspx",
+        "controls.hidReportName"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "hidReportClass",
+      "type": "HiddenField",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "hidReportClass",
+        "runat": "server",
+        "value": "<%# Eval(\"ReportClass\") %>"
+      },
+      "label": null,
+      "control_role": "hidden",
+      "test_target": false,
+      "source_basis": [
+        "aspx",
+        "controls.hidReportClass"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "hidElementId",
+      "type": "HiddenField",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "hidElementId",
+        "runat": "server",
+        "value": "<%# Eval(\"ElementId\") %>"
+      },
+      "label": null,
+      "control_role": "hidden",
+      "test_target": false,
+      "source_basis": [
+        "aspx",
+        "controls.hidElementId"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "hidDefinition",
+      "type": "HiddenField",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "hidDefinition",
+        "runat": "server",
+        "value": "<%# Eval(\"Definition\") %>"
+      },
+      "label": null,
+      "control_role": "hidden",
+      "test_target": false,
+      "source_basis": [
+        "aspx",
+        "controls.hidDefinition"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "hidKind",
+      "type": "HiddenField",
+      "runat": "server",
+      "text": null,
+      "maxlength": null,
+      "css_class": null,
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "hidKind",
+        "runat": "server",
+        "value": "<%# Eval(\"Kind\") %>"
+      },
+      "label": null,
+      "control_role": "hidden",
+      "test_target": false,
+      "source_basis": [
+        "aspx",
+        "controls.hidKind"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    },
+    {
+      "id": "btnDownload",
+      "type": "Button",
+      "runat": "server",
+      "text": "ダウンロード",
+      "maxlength": null,
+      "css_class": "button-normal js-disable-in-ref",
+      "on_click": null,
+      "on_selected_index_changed": null,
+      "client_id_mode": null,
+      "required": false,
+      "raw_attributes": {
+        "id": "btnDownload",
+        "runat": "server",
+        "text": "ダウンロード",
+        "cssclass": "button-normal js-disable-in-ref"
+      },
+      "label": null,
+      "control_role": "action",
+      "test_target": true,
+      "source_basis": [
+        "aspx",
+        "controls.btnDownload"
+      ],
+      "required_ui_hint": false,
+      "required_business": null,
+      "input_rule": {
+        "html_maxlength": null,
+        "business_rule": null,
+        "blur_validation_rules": []
+      }
+    }
+  ],
+  "events": {
+    "user_actions": [
+      {
+        "name": "ddlBranchNo_SelectedIndexChanged",
+        "event_type": "SelectedIndexChanged",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "btnCustShow_Click",
+        "event_type": "Click",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "btnRegister_Click",
+        "event_type": "Click",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "rptSaikenMeisai_ItemCommand",
+        "event_type": "ItemCommand",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      }
+    ],
+    "lifecycle": [
+      {
+        "name": "OnInit",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "InitializeComponent",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "Page_Load",
+        "event_type": "PageLoad",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      }
+    ],
+    "internal_methods": [
+      {
+        "name": "LoadJisyoStatus",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "SetReferenceMode",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "ApplyBranchControlByUserRole",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "InitializeBranchDropDown",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "ClearDisplayArea",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "Display",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "DisplaySaikenMeisaiList",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "DisplayJishoList",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "DisplayComment",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "InitReportNameInfo",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      },
+      {
+        "name": "SetReportObjectInfo",
+        "event_type": "Method",
+        "related_controls": [],
+        "source_basis": [
+          "codebehind"
+        ]
+      }
+    ]
+  },
+  "validations": [
+    {
+      "target": "tbxCustomerNo",
+      "check_type": "required_ui_hint",
+      "detail": "顧客番号 に required 属性あり",
+      "source": "aspx",
+      "source_basis": [
+        "aspx.required"
+      ]
+    },
+    {
+      "target": "tbxCustomerNo",
+      "check_type": "maxlength",
+      "detail": "maxlength=12 のため、フォーカスアウト時の桁数チェック対象",
+      "source": "aspx",
+      "trigger": "blur",
+      "implemented_by": "common_frontend",
+      "max_length": "12",
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "target": "txtReason",
+      "check_type": "maxlength",
+      "detail": "maxlength=2000 のため、フォーカスアウト時の桁数チェック対象",
+      "source": "aspx",
+      "trigger": "blur",
+      "implemented_by": "common_frontend",
+      "max_length": "2000",
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "target": "txtCurrentSituation",
+      "check_type": "maxlength",
+      "detail": "maxlength=2000 のため、フォーカスアウト時の桁数チェック対象",
+      "source": "aspx",
+      "trigger": "blur",
+      "implemented_by": "common_frontend",
+      "max_length": "2000",
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "target": "txtPolicy",
+      "check_type": "maxlength",
+      "detail": "maxlength=2000 のため、フォーカスアウト時の桁数チェック対象",
+      "source": "aspx",
+      "trigger": "blur",
+      "implemented_by": "common_frontend",
+      "max_length": "2000",
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "target": "txtRemarks",
+      "check_type": "maxlength",
+      "detail": "maxlength=2000 のため、フォーカスアウト時の桁数チェック対象",
+      "source": "aspx",
+      "trigger": "blur",
+      "implemented_by": "common_frontend",
+      "max_length": "2000",
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "check_type": "length_check_hint",
+      "target": null,
+      "detail": "コードビハインド内に桁数・長さチェックの可能性あり",
+      "source": "codebehind",
+      "source_basis": [
+        "codebehind"
+      ]
+    },
+    {
+      "check_type": "message_output_hint",
+      "target": null,
+      "detail": "メッセージエリア出力処理の可能性あり",
+      "source": "codebehind",
+      "source_basis": [
+        "codebehind"
+      ]
+    },
+    {
+      "check_type": "concurrency_check_hint",
+      "target": "hidUpdateDateTime",
+      "detail": "排他チェックの可能性あり",
+      "source": "codebehind",
+      "source_basis": [
+        "codebehind"
+      ]
+    }
+  ],
+  "blur_validation_targets": [
+    {
+      "target": "tbxCustomerNo",
+      "label": "顧客番号",
+      "max_length": "12",
+      "trigger": "blur",
+      "implemented_by": "common_frontend",
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "target": "txtReason",
+      "label": "事故及び延滞に至った原因",
+      "max_length": "2000",
+      "trigger": "blur",
+      "implemented_by": "common_frontend",
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "target": "txtCurrentSituation",
+      "label": "債務者および保証人の現況",
+      "max_length": "2000",
+      "trigger": "blur",
+      "implemented_by": "common_frontend",
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "target": "txtPolicy",
+      "label": "回収、解消の方針、スケジュール",
+      "max_length": "2000",
+      "trigger": "blur",
+      "implemented_by": "common_frontend",
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "target": "txtRemarks",
+      "label": "備考、特記事項",
+      "max_length": "2000",
+      "trigger": "blur",
+      "implemented_by": "common_frontend",
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    }
+  ],
+  "screen_modes": [
+    {
+      "mode_name": "reference_mode",
+      "trigger": [
+        "hidReferenceMode",
+        "QueryString"
+      ],
+      "effects": {
+        "disable_controls": [
+          "Dummy",
+          "btnClear",
+          "btnCustSearch",
+          "btnCustShow",
+          "btnDownload",
+          "btnRegister",
+          "btnSummaryClear",
+          "ddlBranchNo",
+          "lnkSaikenNo",
+          "rblJisyoStatus",
+          "tbxCustomerNo",
+          "txtCurrentSituation",
+          "txtPolicy",
+          "txtReason",
+          "txtRemarks"
+        ]
+      },
+      "source": [
+        "aspx",
+        "codebehind"
+      ],
+      "source_basis": [
+        "hidReferenceMode",
+        "js-disable-in-ref",
+        "QueryString hint"
+      ]
+    },
+    {
+      "mode_name": "initial_display",
+      "trigger": [
+        "!IsPostBack"
+      ],
+      "effects": {
+        "notes": [
+          "初期表示処理あり"
+        ]
+      },
+      "source": [
+        "codebehind"
+      ],
+      "source_basis": [
+        "!IsPostBack"
+      ]
+    }
+  ],
+  "javascript_sources": [
+    {
+      "file_name": "Summary.js",
+      "relative_path": "Summary.js",
+      "content": "﻿'use strict';\n\n(function () {\n\n    const init = function () {\n\n        /**\n         * クリアボタン押下時処理\n         * ・顧客番号クリア\n         * ・顧客名クリア\n         */\n        let btnClear = document.querySelector('#btnClear');\n        if (btnClear) {\n            btnClear.addEventListener('click', function () {\n\n                // 顧客番号クリア\n                let customerNo = document.querySelector('#tbxCustomerNo');\n                if (customerNo) customerNo.value = '';\n\n                // 顧客名クリア\n                let customerName = document.querySelector('#lblCustomerName');\n                if (customerName) customerName.textContent = '';\n\n            });\n        }\n\n        /**\n         * 概況クリアボタン押下時処理\n         * ・事故原因\n         * ・現況\n         * ・方針\n         * ・備考\n         */\n        let btnSummaryClear = document.querySelector('#btnSummaryClear');\n        if (btnSummaryClear) {\n            btnSummaryClear.addEventListener('click', function () {\n\n                // 事故および延滞に至った原因 クリア\n                let txtReason = document.querySelector('#txtReason');\n                if (txtReason) txtReason.value = '';\n\n                // 債務者および保証人の現況 クリア\n                let txtCurrentSituation = document.querySelector('#txtCurrentSituation');\n                if (txtCurrentSituation) txtCurrentSituation.value = '';\n\n                // 回収、解消の方針、スケジュール クリア\n                let txtPolicy = document.querySelector('#txtPolicy');\n                if (txtPolicy) txtPolicy.value = '';\n\n                // 備考、特記事項 クリア\n                let txtRemarks = document.querySelector('#txtRemarks');\n                if (txtRemarks) txtRemarks.value = '';\n            });\n        }\n\n        /**\n         * 顧客検索ボタン押下時処理\n         * ・顧客検索ダイアログ起動\n         * ・選択した顧客番号／顧客名を画面へ反映\n         */\n        let btnCustSearch = document.querySelector('#btnCustSearch');\n        if (btnCustSearch) {\n            btnCustSearch.addEventListener('click', handleBtnCustSearchClick);\n        }\n\n        /**\n         * 参照モード時の画面制御\n         * ・リンク、ボタン、入力項目を操作不可にする\n         */\n        applyReferenceMode();\n\n        // 帳票チェックボックス初期化\n        initReportCheckBox();\n\n        // 帳票ダウンロード初期化\n        initReportDownload();\n\n        // テーブルソート初期化\n        initSort();\n    };\n\n    /**\n     * 参照モード時の画面制御\n     */\n    const applyReferenceMode = function () {\n\n        let hidReferenceMode = document.querySelector('#hidReferenceMode');\n        if (!hidReferenceMode || hidReferenceMode.value !== '1') {\n            return;\n        }\n\n        const elements = document.querySelectorAll('.js-disable-in-ref');\n\n        elements.forEach(function (el) {\n            const tag = el.tagName.toLowerCase();\n\n            if (tag === 'input' || tag === 'button' || tag === 'select' || tag === 'textarea') {\n                el.disabled = true;\n            } else if (tag === 'a') {\n                el.style.pointerEvents = 'none';\n                el.style.color = '#999';\n                el.addEventListener('click', function (e) {\n                    e.preventDefault();\n                    return false;\n                });\n            } else {\n                el.style.pointerEvents = 'none';\n            }\n        });\n\n        const childInputs = document.querySelectorAll('.js-disable-in-ref input, .js-disable-in-ref select, .js-disable-in-ref textarea, .js-disable-in-ref button');\n        childInputs.forEach(function (el) {\n            el.disabled = true;\n        });\n\n        const childLinks = document.querySelectorAll('.js-disable-in-ref a');\n        childLinks.forEach(function (el) {\n            el.style.pointerEvents = 'none';\n            el.style.color = '#999';\n            el.addEventListener('click', function (e) {\n                e.preventDefault();\n                return false;\n            });\n        });\n    };\n\n    /**\n * 帳票チェックボックス初期化\n * ・全選択 → 明細連動\n * ・明細全部選択 → 全選択自動ON\n * ・参照モード時は操作不可\n */\n    const initReportCheckBox = function () {\n\n        // ▼ WebForms の client id を考慮して suffix / contains で取得\n        let chkAllReport =\n            document.querySelector('input[id$=\"chkAllReport\"]') ||\n            document.querySelector('input[id*=\"chkAllReport\"]');\n\n        let reportChecks = Array.from(\n            document.querySelectorAll('input[id*=\"chkReport_\"]')\n        );\n\n        let hidReferenceMode = document.querySelector('#hidReferenceMode');\n        let isReferenceMode = hidReferenceMode && hidReferenceMode.value === '1';\n\n        if (!chkAllReport || reportChecks.length === 0) {\n            return;\n        }\n\n        // ▼ 参照モード時は全て操作不可\n        if (isReferenceMode) {\n            chkAllReport.disabled = true;\n            reportChecks.forEach(function (chk) {\n                chk.disabled = true;\n            });\n            return;\n        }\n\n        // ▼ 全選択 → 明細連動\n        chkAllReport.addEventListener('change', function () {\n            reportChecks.forEach(function (chk) {\n                chk.checked = chkAllReport.checked;\n            });\n        });\n\n        // ▼ 明細全部選択 → 全選択自動ON / 一部解除でOFF\n        reportChecks.forEach(function (chk) {\n            chk.addEventListener('change', function () {\n                let isAllChecked = reportChecks.every(function (item) {\n                    return item.checked;\n                });\n\n                chkAllReport.checked = isAllChecked;\n            });\n        });\n\n        // ▼ 初期表示時も状態同期\n        chkAllReport.checked = reportChecks.every(function (item) {\n            return item.checked;\n        });\n    };\n\n    /**\n     * 顧客検索ボタン押下時処理\n     */\n    const handleBtnCustSearchClick = function (e) {\n\n        e.preventDefault();\n\n        let hidReferenceMode = document.querySelector('#hidReferenceMode');\n        if (hidReferenceMode && hidReferenceMode.value === '1') {\n            return false;\n        }\n\n        let branch = document.querySelector('#ddlBranchNo');\n        let customerNo = document.querySelector('#tbxCustomerNo');\n        let customerName = document.querySelector('#lblCustomerName');\n\n        if (!branch || !customerNo) {\n            return;\n        }\n\n        let branchNo = branch.value || '';\n        if (!branchNo) {\n            if (typeof bankr !== 'undefined' && bankr.dialog && bankr.dialog.showError) {\n                bankr.dialog.showError('店番・店名を選択してください。');\n            } else {\n                alert('店番・店名を選択してください。');\n            }\n            return;\n        }\n\n        let params = new URLSearchParams({\n            Opener: 'COMMON',\n            BranchNo: branchNo,\n            Kijyunbi: ''\n        });\n\n        let url = '/RiskTaker/common/CustomerSelect.aspx?' + params.toString();\n\n        bankr.dialog.open(url, function (returnValue) {\n            if (!returnValue) {\n                return;\n            }\n\n            let ret = returnValue;\n            if (typeof returnValue === 'string') {\n                try {\n                    ret = JSON.parse(returnValue);\n                } catch (err) {\n                    return;\n                }\n            }\n\n            if (!ret) {\n                return;\n            }\n\n            if (ret.CustomerNo) {\n                customerNo.value = ret.CustomerNo;\n            }\n\n            if (customerName) {\n                customerName.textContent = ret.CustomerShortName || ret.CustomerName || '';\n            }\n        });\n    };\n\n    /**\n     * 帳票ダウンロード初期化\n     */\n    const initReportDownload = function () {\n\n        let btnDownload =\n            document.querySelector('input[id$=\"btnDownload\"]') ||\n            document.querySelector('input[id*=\"btnDownload\"]') ||\n            document.querySelector('#btnDownload');\n        if (!btnDownload) return;\n\n        btnDownload.addEventListener('click', function (e) {\n\n            e.preventDefault();\n\n            // ▼ 顧客番号と店番を取得\n            let customerNo = document.querySelector('#tbxCustomerNo');\n            let branchNo = document.querySelector('#ddlBranchNo');\n\n            // ▼ 顧客番号チェック\n            if (!customerNo || !customerNo.value.trim()) {\n                if (typeof bankr !== 'undefined' && bankr.dialog && bankr.dialog.showError) {\n                    bankr.dialog.showError('顧客番号を入力してください。');\n                } else {\n                    alert('顧客番号を入力してください。');\n                }\n                return;\n            }\n\n            // ▼ 店番チェック\n            if (!branchNo || !branchNo.value) {\n                if (typeof bankr !== 'undefined' && bankr.dialog && bankr.dialog.showError) {\n                    bankr.dialog.showError('店番・店名を選択してください。');\n                } else {\n                    alert('店番・店名を選択してください。');\n                }\n                return;\n            }\n\n            let form = document.forms[0];\n            let checkedList = document.querySelectorAll('input[id*=\"chkReport\"]:checked');\n            let elementIds = [];\n            let fileNames = [];\n            let definitions = [];\n            let count = 0;\n\n            if (!checkedList || checkedList.length === 0) {\n                if (typeof bankr !== 'undefined' && bankr.dialog && bankr.dialog.showError) {\n                    bankr.dialog.showError('帳票を選択してください。');\n                } else {\n                    alert('帳票を選択してください。');\n                }\n                return;\n            }\n\n            checkedList.forEach(function (chk) {\n\n                // ▼ 同一行取得\n                let row = chk.closest('tr');\n                if (!row) return;\n\n                let elementIdNode = row.querySelector('input[id*=\"hidElementId\"]');\n                let fileNameNode = row.querySelector('input[id*=\"hidReportName\"]');\n                let definitionNode = row.querySelector('input[id*=\"hidDefinition\"]');\n\n                let elementId = elementIdNode ? elementIdNode.value : '';\n                let fileName = fileNameNode ? fileNameNode.value : '';\n                let definition = definitionNode ? definitionNode.value : '';\n\n                if (!elementId || !fileName) {\n                    return;\n                }\n\n                count++;\n                elementIds.push(elementId);\n                fileNames.push(encodeURIComponent(fileName));\n                definitions.push(definition);\n            });\n\n            if (count === 0) {\n                if (typeof bankr !== 'undefined' && bankr.dialog && bankr.dialog.showError) {\n                    bankr.dialog.showError('帳票を選択してください。');\n                } else {\n                    alert('帳票を選択してください。');\n                }\n                return;\n            }\n\n            for (let j = 0; j < count; j++) {\n                console.log('handleDownload: elementIds', elementIds[j]);\n                console.log('handleDownload: fileNames', fileNames[j]);\n                console.log('handleDownload: definitions', definitions[j]);\n            }\n\n            // ▼ 顧客番号・店番を画面から取得\n            let url = '../common/DownLoadRSheet.aspx?elementId=' + elementIds.join('|')\n                + '&fileName=' + fileNames.join('|')\n                + '&Kind=RSHEET&Definition=' + definitions.join('|')\n                + \"&BranchNo=\" + encodeURIComponent(branchNo.value.trim())\n                + \"&CustomerNo=\" + encodeURIComponent(customerNo.value.trim());\n\n            let down =\n                document.querySelector('#downloadFrame');\n\n            if (down) {\n                down.src = url;\n            } \n\n            return;\n        });\n    };\n\n    /**\n     * ソート初期化処理\n     * ・data-sortable 属性を持つテーブルを対象にする\n     * ・各列ヘッダクリックで昇順／降順を切り替える\n     */\n    const initSort = function () {\n\n        // ▼ テーブル毎にソート状態を保持\n        let sortState = {};\n\n        // ▼ ソート対象テーブル取得\n        const tables = document.querySelectorAll('table[data-sortable]');\n\n        tables.forEach(table => {\n\n            const tableId = table.id;\n            sortState[tableId] = {};\n\n            // ▼ ヘッダ取得\n            const headers = table.querySelectorAll('thead th');\n\n            headers.forEach((th, index) => {\n\n                // ▼ data-sort が無い列は対象外\n                if (!th.dataset.sort) return;\n\n                th.style.cursor = 'pointer';\n\n                th.addEventListener('click', function () {\n\n                    // ▼ 列インデックス（data-col 優先）\n                    let colIndex = th.dataset.col ? parseInt(th.dataset.col) : index;\n\n                    // ▼ ソート種別（string / number / date）\n                    let type = th.dataset.sort;\n\n                    // ▼ 昇順／降順切替\n                    let order = sortState[tableId][colIndex] === 'ASC' ? 'DESC' : 'ASC';\n                    sortState[tableId][colIndex] = order;\n\n                    sortTable(table, colIndex, type, order);\n                });\n            });\n        });\n    };\n\n    /**\n     * テーブルソート処理\n     */\n    const sortTable = function (table, colIndex, type, order) {\n\n        const tbody = table.querySelector('tbody');\n        const rows = Array.from(tbody.querySelectorAll('tr'));\n\n        rows.sort((a, b) => {\n\n            let valA = getValue(a, colIndex, type);\n            let valB = getValue(b, colIndex, type);\n\n            if (valA < valB) return order === 'ASC' ? -1 : 1;\n            if (valA > valB) return order === 'ASC' ? 1 : -1;\n            return 0;\n        });\n\n        // ▼ 並び替え後、DOM再構築\n        tbody.innerHTML = '';\n        rows.forEach(r => tbody.appendChild(r));\n    };\n\n    /**\n     * セル値取得処理\n     * ・data-value があれば優先使用\n     * ・日付は char(8)（yyyyMMdd）も対応\n     */\n    const getValue = function (row, index, type) {\n\n        let cell = row.children[index];\n\n        // ▼ data-value（生データ）があれば優先\n        let raw = cell.getAttribute('data-value');\n\n        switch (type) {\n\n            /**\n             * 数値\n             */\n            case 'number': {\n                let text = raw || cell.innerText.trim();\n                return parseFloat(text.replace(/,/g, '')) || 0;\n            }\n\n            /**\n             * 日付\n             */\n            case 'date': {\n\n                // ▼ char(8)（yyyyMMdd）優先\n                if (raw && raw.length === 8) {\n                    return parseDateRaw(raw);\n                }\n\n                // ▼ 表示文字列（yyyy/MM/dd）\n                let text = cell.innerText.trim();\n                return parseDateText(text);\n            }\n\n            /**\n             * 文字列\n             */\n            default:\n                return (raw || cell.innerText.trim());\n        }\n    };\n\n    /**\n     * yyyyMMdd → Date 変換\n     */\n    const parseDateRaw = function (text) {\n\n        let y = parseInt(text.substring(0, 4));\n        let m = parseInt(text.substring(4, 6)) - 1;\n        let d = parseInt(text.substring(6, 8));\n\n        return new Date(y, m, d);\n    };\n\n    /**\n     * yyyy/MM/dd → Date 変換\n     */\n    const parseDateText = function (text) {\n\n        if (!text) return new Date(0);\n\n        let parts = text.split('/');\n\n        if (parts.length !== 3) return new Date(0);\n\n        let y = parseInt(parts[0]);\n        let m = parseInt(parts[1]) - 1;\n        let d = parseInt(parts[2]);\n\n        return new Date(y, m, d);\n    };\n\n    document.addEventListener('DOMContentLoaded', init);\n\n})();"
+    }
+  ],
+  "javascript_analysis": {
+    "event_handlers": [
+      {
+        "file_name": "Summary.js",
+        "relative_path": "Summary.js",
+        "title": "顧客クリアボタン押下時制御あり",
+        "detail": "顧客番号・顧客名をクリアする制御がある",
+        "source_basis": [
+          "Summary.js",
+          "controls.btnClear",
+          "js.click.clear_customer_fields"
+        ]
+      },
+      {
+        "file_name": "Summary.js",
+        "relative_path": "Summary.js",
+        "title": "概況クリアボタン押下時制御あり",
+        "detail": "事故原因・現況・方針・備考をクリアする制御がある",
+        "source_basis": [
+          "Summary.js",
+          "controls.btnSummaryClear",
+          "js.click.clear_summary_fields"
+        ]
+      },
+      {
+        "file_name": "Summary.js",
+        "relative_path": "Summary.js",
+        "title": "顧客検索ボタン押下時制御あり",
+        "detail": "店番チェック後に顧客検索ダイアログを起動し、戻り値を画面へ反映する制御がある",
+        "source_basis": [
+          "Summary.js",
+          "controls.btnCustSearch",
+          "js.click.customer_search"
+        ]
+      },
+      {
+        "file_name": "Summary.js",
+        "relative_path": "Summary.js",
+        "title": "帳票ダウンロードボタン押下時制御あり",
+        "detail": "帳票選択・顧客番号・店番のチェック後にダウンロードを実行する制御がある",
+        "source_basis": [
+          "Summary.js",
+          "controls.btnDownload",
+          "js.click.download"
+        ]
+      },
+      {
+        "file_name": "Summary.js",
+        "relative_path": "Summary.js",
+        "title": "クリックイベント制御あり",
+        "detail": "ボタン押下時のフロント処理を実装している",
+        "source_basis": [
+          "Summary.js"
+        ]
+      }
+    ],
+    "screen_controls": [
+      {
+        "file_name": "Summary.js",
+        "relative_path": "Summary.js",
+        "title": "参照モード制御あり",
+        "detail": "参照モード時に入力・ボタン・リンクを操作不可にする制御がある",
+        "source_basis": [
+          "Summary.js",
+          "js.reference_mode"
+        ]
+      }
+    ],
+    "validation_related": [
+      {
+        "file_name": "Summary.js",
+        "relative_path": "Summary.js",
+        "title": "前端エラーメッセージ制御あり",
+        "detail": "入力不足や選択不足時にエラーメッセージを表示する制御がある",
+        "source_basis": [
+          "Summary.js",
+          "js.frontend_validation"
+        ]
+      }
+    ],
+    "download_related": [
+      {
+        "file_name": "Summary.js",
+        "relative_path": "Summary.js",
+        "title": "帳票ダウンロード制御あり",
+        "detail": "帳票選択チェック・顧客番号/店番チェック・ダウンロード実行の制御がある",
+        "source_basis": [
+          "Summary.js",
+          "js.download"
+        ]
+      }
+    ],
+    "sort_related": [
+      {
+        "file_name": "Summary.js",
+        "relative_path": "Summary.js",
+        "title": "一覧ソート制御あり",
+        "detail": "一覧ヘッダクリックによる昇順/降順ソート制御がある",
+        "source_basis": [
+          "Summary.js",
+          "js.sort"
+        ]
+      }
+    ]
+  },
+  "javascript_event_handler_count": 5,
+  "notes": [],
+  "table_headers": [
+    "店番・店名",
+    "顧客番号",
+    "事象ステータス",
+    "債権番号",
+    "稟議番号",
+    "科目",
+    "期日",
+    "貸付残高",
+    "使途/保証目的",
+    "延滞元本",
+    "延滞期間",
+    "問題債権",
+    "条件変更",
+    "補正",
+    "事象番号",
+    "事象種別",
+    "発生日",
+    "最終更新日",
+    "最終更新者",
+    "事故及び延滞に至った原因",
+    "債務者および保証人の現況",
+    "回収、解消の方針、スケジュール",
+    "備考、特記事項",
+    "帳票名"
+  ],
+  "title_candidates": [
+    {
+      "tag": "div",
+      "text": "概況",
+      "css_class": "title"
+    }
+  ],
+  "spec_summary": {
+    "sheet_count": 3
+  }
+}

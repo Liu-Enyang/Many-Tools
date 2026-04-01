@@ -1,0 +1,635 @@
+{
+  "screen_id": "Summary",
+  "screen_name": "概況",
+  "viewpoints": [
+    {
+      "id": "VP-001",
+      "category": "初期表示",
+      "title": "通常表示時の初期表示確認",
+      "details": [
+        "主要入力項目が初期表示されること",
+        "主要ボタンが初期表示されること",
+        "一覧領域が初期状態で表示されること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "screen_modes.initial_display",
+        "controls"
+      ]
+    },
+    {
+      "id": "VP-002",
+      "category": "入力項目",
+      "title": "店番・店名 の入力確認",
+      "details": [
+        "店番・店名 が入力可能であること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "ddlBranchNo"
+      ]
+    },
+    {
+      "id": "VP-003",
+      "category": "入力項目",
+      "title": "顧客番号 の入力確認",
+      "details": [
+        "顧客番号 が入力可能であること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "tbxCustomerNo"
+      ]
+    },
+    {
+      "id": "VP-004",
+      "category": "入力項目",
+      "title": "事象ステータス の入力確認",
+      "details": [
+        "事象ステータス が入力可能であること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "rblJisyoStatus"
+      ]
+    },
+    {
+      "id": "VP-005",
+      "category": "入力項目",
+      "title": "事故及び延滞に至った原因 の入力確認",
+      "details": [
+        "事故及び延滞に至った原因 が入力可能であること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "txtReason"
+      ]
+    },
+    {
+      "id": "VP-006",
+      "category": "入力項目",
+      "title": "債務者および保証人の現況 の入力確認",
+      "details": [
+        "債務者および保証人の現況 が入力可能であること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "txtCurrentSituation"
+      ]
+    },
+    {
+      "id": "VP-007",
+      "category": "入力項目",
+      "title": "回収、解消の方針、スケジュール の入力確認",
+      "details": [
+        "回収、解消の方針、スケジュール が入力可能であること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "txtPolicy"
+      ]
+    },
+    {
+      "id": "VP-008",
+      "category": "入力項目",
+      "title": "備考、特記事項 の入力確認",
+      "details": [
+        "備考、特記事項 が入力可能であること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "txtRemarks"
+      ]
+    },
+    {
+      "id": "VP-009",
+      "category": "入力項目",
+      "title": "chkAllReport の入力確認",
+      "details": [
+        "chkAllReport が入力可能であること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "chkAllReport"
+      ]
+    },
+    {
+      "id": "VP-010",
+      "category": "入力項目",
+      "title": "chkReport の入力確認",
+      "details": [
+        "chkReport が入力可能であること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "chkReport"
+      ]
+    },
+    {
+      "id": "VP-011",
+      "category": "入力チェック",
+      "title": "顧客番号 の長さ制御確認",
+      "details": [
+        "顧客番号 に maxlength=12 のため、フォーカスアウト時の桁数チェック対象 の入力チェックがあること"
+      ],
+      "pcl": [
+        "E",
+        "L"
+      ],
+      "source_basis": [
+        "tbxCustomerNo",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "id": "VP-012",
+      "category": "入力チェック",
+      "title": "事故及び延滞に至った原因 の長さ制御確認",
+      "details": [
+        "事故及び延滞に至った原因 に maxlength=2000 のため、フォーカスアウト時の桁数チェック対象 の入力チェックがあること"
+      ],
+      "pcl": [
+        "E",
+        "L"
+      ],
+      "source_basis": [
+        "txtReason",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "id": "VP-013",
+      "category": "入力チェック",
+      "title": "債務者および保証人の現況 の長さ制御確認",
+      "details": [
+        "債務者および保証人の現況 に maxlength=2000 のため、フォーカスアウト時の桁数チェック対象 の入力チェックがあること"
+      ],
+      "pcl": [
+        "E",
+        "L"
+      ],
+      "source_basis": [
+        "txtCurrentSituation",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "id": "VP-014",
+      "category": "入力チェック",
+      "title": "回収、解消の方針、スケジュール の長さ制御確認",
+      "details": [
+        "回収、解消の方針、スケジュール に maxlength=2000 のため、フォーカスアウト時の桁数チェック対象 の入力チェックがあること"
+      ],
+      "pcl": [
+        "E",
+        "L"
+      ],
+      "source_basis": [
+        "txtPolicy",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "id": "VP-015",
+      "category": "入力チェック",
+      "title": "備考、特記事項 の長さ制御確認",
+      "details": [
+        "備考、特記事項 に maxlength=2000 のため、フォーカスアウト時の桁数チェック対象 の入力チェックがあること"
+      ],
+      "pcl": [
+        "E",
+        "L"
+      ],
+      "source_basis": [
+        "txtRemarks",
+        "validations.maxlength"
+      ]
+    },
+    {
+      "id": "VP-016",
+      "category": "入力チェック",
+      "title": "顧客番号 のフォーカスアウト時桁数チェック確認",
+      "details": [
+        "顧客番号 に最大桁数以内の値を入力してフォーカスアウト時にエラーとならないこと",
+        "顧客番号 に最大桁数超過の値を入力してフォーカスアウト時にエラーメッセージが表示されること"
+      ],
+      "pcl": [
+        "E",
+        "L",
+        "N"
+      ],
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "id": "VP-017",
+      "category": "入力チェック",
+      "title": "事故及び延滞に至った原因 のフォーカスアウト時桁数チェック確認",
+      "details": [
+        "事故及び延滞に至った原因 に最大桁数以内の値を入力してフォーカスアウト時にエラーとならないこと",
+        "事故及び延滞に至った原因 に最大桁数超過の値を入力してフォーカスアウト時にエラーメッセージが表示されること"
+      ],
+      "pcl": [
+        "E",
+        "L",
+        "N"
+      ],
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "id": "VP-018",
+      "category": "入力チェック",
+      "title": "債務者および保証人の現況 のフォーカスアウト時桁数チェック確認",
+      "details": [
+        "債務者および保証人の現況 に最大桁数以内の値を入力してフォーカスアウト時にエラーとならないこと",
+        "債務者および保証人の現況 に最大桁数超過の値を入力してフォーカスアウト時にエラーメッセージが表示されること"
+      ],
+      "pcl": [
+        "E",
+        "L",
+        "N"
+      ],
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "id": "VP-019",
+      "category": "入力チェック",
+      "title": "回収、解消の方針、スケジュール のフォーカスアウト時桁数チェック確認",
+      "details": [
+        "回収、解消の方針、スケジュール に最大桁数以内の値を入力してフォーカスアウト時にエラーとならないこと",
+        "回収、解消の方針、スケジュール に最大桁数超過の値を入力してフォーカスアウト時にエラーメッセージが表示されること"
+      ],
+      "pcl": [
+        "E",
+        "L",
+        "N"
+      ],
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "id": "VP-020",
+      "category": "入力チェック",
+      "title": "備考、特記事項 のフォーカスアウト時桁数チェック確認",
+      "details": [
+        "備考、特記事項 に最大桁数以内の値を入力してフォーカスアウト時にエラーとならないこと",
+        "備考、特記事項 に最大桁数超過の値を入力してフォーカスアウト時にエラーメッセージが表示されること"
+      ],
+      "pcl": [
+        "E",
+        "L",
+        "N"
+      ],
+      "source_basis": [
+        "aspx.maxlength",
+        "common_frontend.blur_validation"
+      ]
+    },
+    {
+      "id": "VP-021",
+      "category": "イベント",
+      "title": "ddlBranchNo 選択変更時の処理確認",
+      "details": [
+        "イベント実行後の画面表示・処理結果が正しいこと"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "ddlBranchNo_SelectedIndexChanged"
+      ]
+    },
+    {
+      "id": "VP-022",
+      "category": "イベント",
+      "title": "btnCustShow 押下時の処理確認",
+      "details": [
+        "イベント実行後の画面表示・処理結果が正しいこと"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "btnCustShow_Click"
+      ]
+    },
+    {
+      "id": "VP-023",
+      "category": "イベント",
+      "title": "btnRegister 押下時の処理確認",
+      "details": [
+        "イベント実行後の画面表示・処理結果が正しいこと"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "btnRegister_Click"
+      ]
+    },
+    {
+      "id": "VP-024",
+      "category": "イベント",
+      "title": "rptSaikenMeisai 一覧操作時の処理確認",
+      "details": [
+        "イベント実行後の画面表示・処理結果が正しいこと"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "rptSaikenMeisai_ItemCommand"
+      ]
+    },
+    {
+      "id": "VP-025",
+      "category": "一覧表示",
+      "title": "債権明細 の一覧表示確認",
+      "details": [
+        "一覧データが正しく表示されること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "rptSaikenMeisai"
+      ]
+    },
+    {
+      "id": "VP-026",
+      "category": "一覧表示",
+      "title": "事象一覧 の一覧表示確認",
+      "details": [
+        "一覧データが正しく表示されること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "rptJishoList"
+      ]
+    },
+    {
+      "id": "VP-027",
+      "category": "一覧表示",
+      "title": "帳票一覧 の一覧表示確認",
+      "details": [
+        "一覧データが正しく表示されること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "rptReportList"
+      ]
+    },
+    {
+      "id": "VP-028",
+      "category": "画面モード",
+      "title": "参照モード時の非活性制御確認",
+      "details": [
+        "参照モード時に対象コントロールが非活性となること",
+        "対象コントロール数: 15"
+      ],
+      "pcl": [
+        "E"
+      ],
+      "source_basis": [
+        "screen_modes.reference_mode"
+      ]
+    },
+    {
+      "id": "VP-029",
+      "category": "排他制御",
+      "title": "更新時の排他チェック確認",
+      "details": [
+        "更新時に排他制御が実施されること"
+      ],
+      "pcl": [
+        "E"
+      ],
+      "source_basis": [
+        "validations.concurrency_check_hint"
+      ]
+    },
+    {
+      "id": "VP-030",
+      "category": "イベント",
+      "title": "顧客クリアボタン押下時の項目クリア確認",
+      "details": [
+        "顧客クリアボタン押下時に顧客番号がクリアされること",
+        "顧客クリアボタン押下時に顧客名がクリアされること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js",
+        "controls.btnClear",
+        "js.click.clear_customer_fields"
+      ]
+    },
+    {
+      "id": "VP-031",
+      "category": "イベント",
+      "title": "概況クリアボタン押下時のテキストエリアクリア確認",
+      "details": [
+        "概況クリアボタン押下時に事故及び延滞に至った原因がクリアされること",
+        "概況クリアボタン押下時に債務者および保証人の現況がクリアされること",
+        "概況クリアボタン押下時に回収、解消の方針、スケジュールがクリアされること",
+        "概況クリアボタン押下時に備考、特記事項がクリアされること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js",
+        "controls.btnSummaryClear",
+        "js.click.clear_summary_fields"
+      ]
+    },
+    {
+      "id": "VP-032",
+      "category": "イベント",
+      "title": "顧客検索ボタン押下時の前提条件・検索結果反映確認",
+      "details": [
+        "顧客検索ボタン押下時に店番未選択の場合はエラーメッセージが表示されること",
+        "顧客検索ボタン押下時に正常時は顧客検索ダイアログが起動すること",
+        "顧客選択後に顧客番号および顧客名が画面へ反映されること"
+      ],
+      "pcl": [
+        "E",
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js",
+        "controls.btnCustSearch",
+        "js.click.customer_search"
+      ]
+    },
+    {
+      "id": "VP-033",
+      "category": "イベント",
+      "title": "帳票ダウンロードボタン押下時の前提条件確認",
+      "details": [
+        "帳票ダウンロードボタン押下時に顧客番号未入力の場合はエラーメッセージが表示されること",
+        "帳票ダウンロードボタン押下時に店番未選択の場合はエラーメッセージが表示されること",
+        "帳票ダウンロードボタン押下時に帳票未選択の場合はエラーメッセージが表示されること",
+        "帳票ダウンロードボタン押下時に正常時はダウンロード処理が実行されること"
+      ],
+      "pcl": [
+        "E",
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js",
+        "controls.btnDownload",
+        "js.click.download"
+      ]
+    },
+    {
+      "id": "VP-034",
+      "category": "イベント",
+      "title": "クリックイベント確認",
+      "details": [
+        "ボタン押下時のフロント処理を実装している"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js"
+      ]
+    },
+    {
+      "id": "VP-035",
+      "category": "画面モード",
+      "title": "参照モード時のJavaScript制御確認",
+      "details": [
+        "参照モード時に入力項目・ボタン・リンクが操作不可となること",
+        "参照モード時に子要素も含めて非活性制御されること"
+      ],
+      "pcl": [
+        "E"
+      ],
+      "source_basis": [
+        "Summary.js"
+      ]
+    },
+    {
+      "id": "VP-036",
+      "category": "入力チェック",
+      "title": "JavaScript入力チェック・エラーメッセージ確認",
+      "details": [
+        "未入力時にエラーメッセージが表示されること",
+        "入力条件不備時に処理が中断されること"
+      ],
+      "pcl": [
+        "E",
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js"
+      ]
+    },
+    {
+      "id": "VP-037",
+      "category": "イベント",
+      "title": "帳票ダウンロード前提チェック確認",
+      "details": [
+        "帳票未選択時にエラーメッセージが表示されること",
+        "顧客番号・店番未設定時にダウンロード実行されないこと"
+      ],
+      "pcl": [
+        "E",
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js"
+      ]
+    },
+    {
+      "id": "VP-038",
+      "category": "一覧表示",
+      "title": "債権明細 のソート処理確認",
+      "details": [
+        "債権明細のヘッダ押下時に昇順・降順が切り替わること",
+        "債権明細で文字列・数値・日付が指定種別で正しくソートされること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js",
+        "controls.rptSaikenMeisai"
+      ]
+    },
+    {
+      "id": "VP-039",
+      "category": "一覧表示",
+      "title": "事象一覧 のソート処理確認",
+      "details": [
+        "事象一覧のヘッダ押下時に昇順・降順が切り替わること",
+        "事象一覧で文字列・数値・日付が指定種別で正しくソートされること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js",
+        "controls.rptJishoList"
+      ]
+    },
+    {
+      "id": "VP-040",
+      "category": "一覧表示",
+      "title": "帳票一覧 のソート処理確認",
+      "details": [
+        "帳票一覧のヘッダ押下時に昇順・降順が切り替わること",
+        "帳票一覧で文字列・数値・日付が指定種別で正しくソートされること"
+      ],
+      "pcl": [
+        "N"
+      ],
+      "source_basis": [
+        "Summary.js",
+        "controls.rptReportList"
+      ]
+    }
+  ],
+  "summary": {
+    "viewpoint_count": 40,
+    "javascript_viewpoint_source_count": 9,
+    "blur_validation_viewpoint_source_count": 5
+  }
+}
