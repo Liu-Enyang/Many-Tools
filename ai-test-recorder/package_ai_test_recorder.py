@@ -16,7 +16,7 @@ if os.path.exists(BUILD_DIR):
 
 # 2. 确保 Playwright 浏览器已经下载
 print("正在安装 Playwright 浏览器...")
-subprocess.run(['python', '-m', 'playwright', 'install'], check=True)
+# subprocess.run(['python', '-m', 'playwright', 'install'], check=True)
 
 # 3. PyInstaller 打包命令
 pyinstaller_cmd = [

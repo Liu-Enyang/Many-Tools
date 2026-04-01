@@ -8,9 +8,9 @@ def run(playwright: Playwright) -> None:
     page = context.new_page()
     page.goto("http://localhost:8000/demo/testpage.html")
     page.locator("#username").click()
-    page.locator("#username").fill("wang")
+    page.locator("#username").fill("123")
     page.locator("#password").click()
-    page.locator("#password").fill("234")
+    page.locator("#password").fill("456")
     page.get_by_role("button", name="Login").click()
     page.close()
 

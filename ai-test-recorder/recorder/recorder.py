@@ -11,7 +11,8 @@ print("Starting browser recorder...")
 print("Close the browser window when finished recording.")
 
 subprocess.run([
-    "npx",
+    sys.executable,
+    "-m",
     "playwright",
     "codegen",
     url,

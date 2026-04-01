@@ -2,3 +2,4 @@ playwright
 pyyaml
 jinja2
 imageio
+pyinstaller
