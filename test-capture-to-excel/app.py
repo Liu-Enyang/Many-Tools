@@ -222,14 +222,22 @@ class TestCaptureApp:
         # 标题
         ws["A1"] = self.excel_title
 
-        # 图片从第3行开始
+        # 固定标签
+        ws["A2"] = "＜前提＞"
+        ws["A45"] = "＜操作＞"
+        ws["A85"] = "＜結果＞"
+
+        # 图片从第3行开始（列改为 C）
         current_row = 3
+        image_col = "C"
 
         for item in self.session.captures:
+            # 插图（从C列开始）
             img_for_excel = self._create_resized_excel_image(item.image_path, max_width=800)
-            anchor_cell = f"A{current_row}"
+            anchor_cell = f"{image_col}{current_row}"
             ws.add_image(img_for_excel, anchor_cell)
 
+            # 计算图片高度占用
             pil_img = Image.open(item.image_path)
             _, display_height = self._get_resized_size(
                 pil_img.width,
@@ -242,7 +250,7 @@ class TestCaptureApp:
             for r in range(current_row, current_row + estimated_rows):
                 ws.row_dimensions[r].height = 20
 
-            # 下一张图从“结束行 + 3”开始
+            # 间隔3行（实际控制为+2）
             current_row += estimated_rows + 2
 
         wb.save(self.session.excel_path)
