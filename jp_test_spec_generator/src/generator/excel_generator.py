@@ -494,7 +494,7 @@ def _fill_case_header(ws: Worksheet, test_cases: List[Dict[str, Any]], pcl_row: 
                 if merged_range.min_row <= CASE_HEADER_ROW <= merged_range.max_row and merged_range.min_col <= col <= merged_range.max_col:
                     header_cell = ws.cell(merged_range.min_row, merged_range.min_col)
                     break
-        header_cell.alignment = CENTER
+        # Do not override template formatting for header cell
 
         pcl_list = test_case.get("pcl", [])
         pcl_text = pcl_list[0] if pcl_list else "N"
