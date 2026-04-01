@@ -4,6 +4,7 @@ import re
 import time
 import copy
 import hashlib
+import sys
 import threading
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
@@ -11,10 +12,14 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import List, Optional
 
-from PIL import ImageGrab, Image
+from PIL import ImageGrab, Image, ImageDraw
 from openpyxl import Workbook, load_workbook
 from openpyxl.drawing.image import Image as XLImage
 from pynput import keyboard
+try:
+    import pystray
+except ImportError:
+    pystray = None
 
 
 # =========================
@@ -251,6 +256,12 @@ class TestCaptureApp:
         print(f"[已保存] 第 {index} 张 -> {image_path}")
         self._notify_ui()
 
+        if self.ui_callback:
+            try:
+                self.ui_callback("capture_saved", item)
+            except TypeError:
+                self.ui_callback()
+
     # -------------------------
     # Excel 写入通用
     # -------------------------
@@ -431,6 +442,11 @@ class TestCaptureGUI:
         self.start_button: Optional[ttk.Button] = None
         self.stop_button: Optional[ttk.Button] = None
         self.reset_button: Optional[ttk.Button] = None
+        self.tray_icon = None
+        self.tray_thread = None
+        self.is_in_tray = False
+        self.toast_window = None
+        self.toast_after_id = None
 
         self._build_ui()
         self._create_menu()
@@ -438,6 +454,7 @@ class TestCaptureGUI:
         self.start_hotkeys()
 
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
+        self.root.bind("<Unmap>", self.on_minimize)
 
     # -------------------------
     # 菜单
@@ -646,8 +663,166 @@ class TestCaptureGUI:
     # -------------------------
     # 刷新UI
     # -------------------------
-    def _refresh_ui_safe(self) -> None:
+    def _refresh_ui_safe(self, event_name=None, payload=None) -> None:
+        if event_name == "capture_saved":
+            self.root.after(0, lambda: self.on_capture_saved(payload))
+            return
+
         self.root.after(0, self.refresh_ui)
+
+    def on_capture_saved(self, item: Optional[CaptureItem]) -> None:
+        self.refresh_ui()
+
+        if item is None:
+            return
+
+        message = f"第 {item.index} 张截图已保存"
+
+        if self.is_in_tray and self.tray_icon:
+            try:
+                self.tray_icon.notify(message, "Test Capture Tool")
+                return
+            except Exception:
+                pass
+
+        self.show_toast(message)
+
+    def show_toast(self, message: str, duration_ms: int = 1800) -> None:
+        try:
+            if self.toast_after_id is not None:
+                self.root.after_cancel(self.toast_after_id)
+                self.toast_after_id = None
+        except Exception:
+            self.toast_after_id = None
+
+        try:
+            if self.toast_window is not None and self.toast_window.winfo_exists():
+                self.toast_window.destroy()
+        except Exception:
+            pass
+
+        toast = tk.Toplevel(self.root)
+        self.toast_window = toast
+        toast.overrideredirect(True)
+        toast.attributes("-topmost", True)
+        toast.configure(bg="#2b2b2b")
+
+        frame = tk.Frame(toast, bg="#2b2b2b", bd=1, relief="solid")
+        frame.pack(fill="both", expand=True)
+
+        title_label = tk.Label(
+            frame,
+            text="Test Capture Tool",
+            font=("Yu Gothic UI", 10, "bold"),
+            fg="white",
+            bg="#2b2b2b",
+            anchor="w"
+        )
+        title_label.pack(fill="x", padx=12, pady=(10, 2))
+
+        message_label = tk.Label(
+            frame,
+            text=message,
+            font=("Yu Gothic UI", 10),
+            fg="white",
+            bg="#2b2b2b",
+            justify="left",
+            anchor="w"
+        )
+        message_label.pack(fill="x", padx=12, pady=(0, 10))
+
+        toast.update_idletasks()
+
+        toast_width = max(260, toast.winfo_reqwidth())
+        toast_height = max(80, toast.winfo_reqheight())
+
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+
+        x = screen_width - toast_width - 20
+        y = screen_height - toast_height - 60
+        toast.geometry(f"{toast_width}x{toast_height}+{x}+{y}")
+
+        def close_toast() -> None:
+            try:
+                if self.toast_window is not None and self.toast_window.winfo_exists():
+                    self.toast_window.destroy()
+            except Exception:
+                pass
+            finally:
+                self.toast_window = None
+                self.toast_after_id = None
+
+        self.toast_after_id = self.root.after(duration_ms, close_toast)
+
+    def create_tray_image(self) -> Image.Image:
+        size = 64
+        image = Image.new("RGBA", (size, size), (52, 120, 246, 255))
+        draw = ImageDraw.Draw(image)
+        draw.rectangle((16, 14, 48, 50), fill=(255, 255, 255, 255))
+        draw.rectangle((21, 10, 43, 18), fill=(255, 255, 255, 255))
+        draw.rectangle((22, 23, 42, 27), fill=(52, 120, 246, 255))
+        draw.rectangle((22, 31, 42, 35), fill=(52, 120, 246, 255))
+        draw.rectangle((22, 39, 34, 43), fill=(52, 120, 246, 255))
+        return image
+
+    def show_window_from_tray(self, icon=None, item=None) -> None:
+        self.root.after(0, self.restore_from_tray)
+
+    def restore_from_tray(self) -> None:
+        if self.tray_icon:
+            try:
+                self.tray_icon.stop()
+            except Exception:
+                pass
+            self.tray_icon = None
+
+        self.is_in_tray = False
+        try:
+            self.root.iconify()
+            self.root.deiconify()
+        except Exception:
+            pass
+        self.root.deiconify()
+        self.root.after(0, self.root.lift)
+        self.root.after(0, self.root.focus_force)
+
+    def quit_from_tray(self, icon=None, item=None) -> None:
+        self.root.after(0, self.on_close)
+
+    def _run_tray_icon(self) -> None:
+        if pystray is None:
+            return
+
+        menu = pystray.Menu(
+            pystray.MenuItem("打开", self.show_window_from_tray, default=True),
+            pystray.MenuItem("退出", self.quit_from_tray)
+        )
+
+        self.tray_icon = pystray.Icon(
+            "test_capture_to_excel",
+            self.create_tray_image(),
+            "Test Capture Tool",
+            menu
+        )
+        self.tray_icon.run()
+
+    def minimize_to_tray(self) -> None:
+        if pystray is None or self.is_in_tray:
+            return
+
+        self.is_in_tray = True
+        self.root.withdraw()
+
+        self.tray_thread = threading.Thread(target=self._run_tray_icon, daemon=True)
+        self.tray_thread.start()
+
+    def on_minimize(self, event=None) -> None:
+        try:
+            if self.root.state() == "iconic":
+                self.minimize_to_tray()
+        except Exception:
+            pass
 
     def refresh_ui(self) -> None:
         session = self.app.session
@@ -685,8 +860,30 @@ class TestCaptureGUI:
         try:
             self.app.stop_event.set()
             self.stop_hotkeys()
+            if self.tray_icon:
+                try:
+                    self.tray_icon.stop()
+                except Exception:
+                    pass
+                self.tray_icon = None
         finally:
+            try:
+                if self.toast_after_id is not None:
+                    self.root.after_cancel(self.toast_after_id)
+                    self.toast_after_id = None
+            except Exception:
+                self.toast_after_id = None
+
+            try:
+                if self.toast_window is not None and self.toast_window.winfo_exists():
+                    self.toast_window.destroy()
+            except Exception:
+                pass
+            finally:
+                self.toast_window = None
+
             self.root.destroy()
+            sys.exit(0)
 
 
 if __name__ == "__main__":
