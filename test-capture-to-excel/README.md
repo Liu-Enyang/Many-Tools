@@ -13,10 +13,13 @@ Mysoft Liu
 ## 功能
 
 - GUI 操作
-- 快捷键开始/结束
-- Alt + PrintScreen 自动截图
-- 自动导出 Excel
+- 快捷键开始/结束（Ctrl + Alt + F9 / F10）
+- Alt + PrintScreen 自动截图，自动去重
+- 自动导出 Excel（截图按顺序排列，80% 比例缩放）
 - 自动打开 Excel
+- 支持自定义 Excel 标题、Sheet 名称、输出目录
+- **整合功能**：将输出目录下所有会话的 Excel 合并为一个文件（按 Sheet 名升序排列）
+- 最小化后自动缩到系统托盘，截图时弹出气泡提示
 
 ---
 
@@ -91,6 +94,16 @@ dist\TestCaptureToExcel\TestCaptureToExcel.exe
 
 ## 说明
 
-- 录制开始后，每次使用 `Alt + PrintScreen` 截图，程序会自动保存图片
-- 点击“结束并导出 Excel”后，会生成 Excel 并自动打开
-- 支持通过 GUI 自定义 Excel 标题和 Sheet 名称
+- 录制开始后，每次使用 `Alt + PrintScreen` 截图，程序会自动保存图片并弹出气泡通知
+- 点击”结束并导出 Excel”后，会生成 Excel 并自动打开
+- 支持通过 GUI 自定义 Excel 标题、Sheet 名称和输出目录
+- 点击”整合文件”可将当前输出目录下所有会话的截图合并到一个 Excel（每个会话对应一个 Sheet）
+- 最小化窗口后程序缩到系统托盘，双击图标可恢复窗口
+
+## 快捷键
+
+| 快捷键 | 功能 |
+|---|---|
+| `Ctrl + Alt + F9` | 开始录制 |
+| `Ctrl + Alt + F10` | 结束录制并导出 Excel |
+| `Alt + PrintScreen` | 截取当前活动窗口 |
