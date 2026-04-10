@@ -103,13 +103,10 @@ class TestCaptureApp:
         ratio = max_width / width
         return int(width * ratio), int(height * ratio)
 
-    def _create_resized_excel_image(self, image_path: str, max_width: int = 800) -> XLImage:
+    def _create_resized_excel_image(self, image_path: str, scale: float = 0.8) -> XLImage:
         pil_img = Image.open(image_path)
-        new_width, new_height = self._get_resized_size(
-            pil_img.width,
-            pil_img.height,
-            max_width=max_width
-        )
+        new_width = int(pil_img.width * scale)
+        new_height = int(pil_img.height * scale)
 
         xl_img = XLImage(image_path)
         xl_img.width = new_width
@@ -283,20 +280,17 @@ class TestCaptureApp:
         current_row = 3
         image_col = "C"
 
+        image_scale = 0.8
         for image_path in image_paths:
             if not os.path.exists(image_path):
                 continue
 
-            img_for_excel = self._create_resized_excel_image(image_path, max_width=800)
+            img_for_excel = self._create_resized_excel_image(image_path, scale=image_scale)
             anchor_cell = f"{image_col}{current_row}"
             ws.add_image(img_for_excel, anchor_cell)
 
             pil_img = Image.open(image_path)
-            _, display_height = self._get_resized_size(
-                pil_img.width,
-                pil_img.height,
-                max_width=800
-            )
+            display_height = int(pil_img.height * image_scale)
 
             estimated_rows = max(18, int(display_height / 20))
 
