@@ -68,9 +68,9 @@ def _guess_screen_name(aspx_data: Dict[str, Any], spec_data: Dict[str, Any]) -> 
 def _infer_control_role(control: Dict[str, Any]) -> str:
     control_type = _clean_text(control.get("type"))
 
-    if control_type in {"TextBox", "DropDownList", "RadioButtonList", "CheckBox"}:
+    if control_type in {"TextBox", "DropDownList", "RadioButtonList", "RadioButton", "CheckBox"}:
         return "input"
-    if control_type in {"Button", "LinkButton", "HtmlButton"}:
+    if control_type in {"Button", "LinkButton", "HtmlButton", "ConfirmButton"}:
         return "action"
     if control_type == "Label":
         return "display"

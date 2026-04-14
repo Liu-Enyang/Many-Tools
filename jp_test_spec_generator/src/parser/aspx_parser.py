@@ -13,6 +13,7 @@ ASP_CONTROL_TYPES = {
     "asp:label": "Label",
     "asp:dropdownlist": "DropDownList",
     "asp:radiobuttonlist": "RadioButtonList",
+    "asp:radiobutton": "RadioButton",
     "asp:hiddenfield": "HiddenField",
     "asp:linkbutton": "LinkButton",
     "asp:checkbox": "CheckBox",
@@ -65,6 +66,11 @@ def _extract_control(tag) -> Optional[Dict[str, Any]]:
             "on_selected_index_changed": attrs.get("onselectedindexchanged"),
             "client_id_mode": attrs.get("clientidmode"),
             "required": "required" in tag.attrs,
+            "data_type": attrs.get("data-type"),
+            "input_min": attrs.get("min"),
+            "input_max": attrs.get("max"),
+            "data_scale": attrs.get("data-scale"),
+            "group_name": attrs.get("groupname"),
             "raw_attributes": attrs,
         }
 
@@ -83,8 +89,38 @@ def _extract_control(tag) -> Optional[Dict[str, Any]]:
                 "on_selected_index_changed": None,
                 "client_id_mode": None,
                 "required": "required" in tag.attrs,
+                "data_type": None,
+                "input_min": None,
+                "input_max": None,
+                "data_scale": None,
+                "group_name": None,
                 "raw_attributes": attrs,
             }
+
+    # カスタム名前空間のConfirmButton（cc1:ConfirmButton, cc3:ConfirmButton など）
+    if re.match(r'^cc\d+:confirmbutton$', name) or re.match(r'^cc\d+:\w*button$', name):
+        attrs = {k: _normalize_attr(v) for k, v in tag.attrs.items()}
+        control_id = attrs.get("id")
+        if not control_id:
+            return None
+        return {
+            "id": control_id,
+            "type": "ConfirmButton",
+            "runat": attrs.get("runat"),
+            "text": attrs.get("text") or attrs.get("value"),
+            "maxlength": None,
+            "css_class": attrs.get("cssclass") or attrs.get("class"),
+            "on_click": attrs.get("onclick"),
+            "on_selected_index_changed": None,
+            "client_id_mode": attrs.get("clientidmode"),
+            "required": False,
+            "data_type": None,
+            "input_min": None,
+            "input_max": None,
+            "data_scale": None,
+            "group_name": None,
+            "raw_attributes": attrs,
+        }
 
     return None
 
@@ -97,6 +133,17 @@ def _extract_labels(soup: BeautifulSoup) -> Dict[str, str]:
         if target and text:
             result[target] = text
     return result
+
+
+def _extract_required_from_labels(soup: BeautifulSoup) -> set:
+    """<label for="..." data-required> を持つ control_id を返す"""
+    required_ids: set = set()
+    for label in soup.find_all("label"):
+        if "data-required" in label.attrs:
+            target = label.get("for")
+            if target:
+                required_ids.add(target)
+    return required_ids
 
 
 def _extract_table_headers(soup: BeautifulSoup) -> List[str]:
@@ -145,20 +192,20 @@ def _attach_nearest_header_labels(controls: List[Dict[str, Any]], soup: Beautifu
     control_by_id = {control.get("id"): control for control in controls if control.get("id")}
 
     for tr in soup.find_all("tr"):
-        th = tr.find("th")
-        if not th:
-            continue
-
-        header_text = th.get_text(" ", strip=True)
-        if not header_text:
-            continue
-
-        for td in tr.find_all("td"):
-            for tag in td.find_all(True):
-                control_id = tag.get("id")
-                if control_id and control_id in control_by_id:
-                    if not control_by_id[control_id].get("label"):
-                        control_by_id[control_id]["label"] = header_text
+        current_header: Optional[str] = None
+        for cell in tr.children:
+            cell_name = getattr(cell, "name", None)
+            if cell_name is None:
+                continue
+            if cell_name == "th":
+                header_text = cell.get_text(" ", strip=True)
+                current_header = header_text if header_text else current_header
+            elif cell_name == "td" and current_header:
+                for tag in cell.find_all(True):
+                    control_id = tag.get("id")
+                    if control_id and control_id in control_by_id:
+                        if not control_by_id[control_id].get("label"):
+                            control_by_id[control_id]["label"] = current_header
 
 
 def parse_aspx(file_path: str | Path) -> Dict[str, Any]:
@@ -185,9 +232,12 @@ def parse_aspx(file_path: str | Path) -> Dict[str, Any]:
         controls.append(control)
 
     label_map = _extract_labels(soup)
+    required_ids = _extract_required_from_labels(soup)
 
     for control in controls:
         control["label"] = label_map.get(control["id"])
+        if not control.get("required") and control["id"] in required_ids:
+            control["required"] = True
 
     _attach_nearest_header_labels(controls, soup)
 

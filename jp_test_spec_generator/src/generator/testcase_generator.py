@@ -188,6 +188,9 @@ def _collect_field_hints(analysis: Dict[str, Any]) -> List[Dict[str, Any]]:
                 or ""
             ).strip().lower()
 
+            value_min = str(item.get("input_min") or item.get("value_min") or "").strip() or None
+            value_max = str(item.get("input_max") or item.get("value_max") or "").strip() or None
+
             hints.append(
                 {
                     "label": label,
@@ -197,6 +200,8 @@ def _collect_field_hints(analysis: Dict[str, Any]) -> List[Dict[str, Any]]:
                     "min_length": min_length,
                     "data_type": data_type,
                     "charset": charset,
+                    "value_min": value_min,
+                    "value_max": value_max,
                 }
             )
 
@@ -232,7 +237,7 @@ def _match_field_hint(viewpoint: Dict[str, Any], field_hints: List[Dict[str, Any
 
 def _is_numeric_field(field_hint: Dict[str, Any]) -> bool:
     data_type = str(field_hint.get("data_type", "")).lower()
-    return any(keyword in data_type for keyword in ["number", "numeric", "digit", "int", "decimal", "num"])
+    return any(keyword in data_type for keyword in ["number", "numeric", "digit", "int", "decimal", "num", "money"])
 
 def _is_blur_validation_viewpoint(viewpoint: Dict[str, Any]) -> bool:
     title = str(viewpoint.get("title", "")).strip()
@@ -732,8 +737,13 @@ def _build_input_check_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict
         {
             "name_suffix": "（正常値）",
             "pcl": ["N"],
-            "actions": [f"{label}に正常値を入力する"],
+            "check_conditions": [
+                "通常モードで画面を起動する",
+                f"{label}に正常値を入力する",
+            ],
+            "actions": ["対象イベントを実行する"],
             "confirmation_suffix": [f"{label}に正常値を入力した場合、エラーとならないこと"],
+            "replace_base_confirmations": True,
         }
     ]
 
@@ -742,8 +752,13 @@ def _build_input_check_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict
             {
                 "name_suffix": "（空白）",
                 "pcl": ["E"],
-                "actions": [f"{label}を空白で入力する"],
-                "confirmation_suffix": [f"{label}を空白で入力した場合、エラーメッセージが表示されること"],
+                "check_conditions": [
+                    "通常モードで画面を起動する",
+                    f"{label}を空白のままにする",
+                ],
+                "actions": ["対象イベントを実行する"],
+                "confirmation_suffix": [f"{label}を空白にした場合、エラーメッセージが表示されること"],
+                "replace_base_confirmations": True,
             }
         )
 
@@ -752,8 +767,13 @@ def _build_input_check_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict
             {
                 "name_suffix": "（下限未満）",
                 "pcl": ["L"],
-                "actions": [f"{label}に下限未満の値を入力する"],
+                "check_conditions": [
+                    "通常モードで画面を起動する",
+                    f"{label}に下限未満の値を入力する",
+                ],
+                "actions": ["対象イベントを実行する"],
                 "confirmation_suffix": [f"{label}に下限未満の値を入力した場合、境界値チェック結果が正しいこと"],
+                "replace_base_confirmations": True,
             }
         )
 
@@ -762,16 +782,26 @@ def _build_input_check_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict
             {
                 "name_suffix": "（上限値）",
                 "pcl": ["L"],
-                "actions": [f"{label}に上限値を入力する"],
+                "check_conditions": [
+                    "通常モードで画面を起動する",
+                    f"{label}に上限値を入力する",
+                ],
+                "actions": ["対象イベントを実行する"],
                 "confirmation_suffix": [f"{label}に上限値を入力した場合、境界値チェック結果が正しいこと"],
+                "replace_base_confirmations": True,
             }
         )
         rules.append(
             {
                 "name_suffix": "（上限超過）",
                 "pcl": ["L"],
-                "actions": [f"{label}に上限超過の値を入力する"],
+                "check_conditions": [
+                    "通常モードで画面を起動する",
+                    f"{label}に上限超過の値を入力する",
+                ],
+                "actions": ["対象イベントを実行する"],
                 "confirmation_suffix": [f"{label}に上限超過の値を入力した場合、境界値チェック結果が正しいこと"],
+                "replace_base_confirmations": True,
             }
         )
 
@@ -780,8 +810,72 @@ def _build_input_check_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict
             {
                 "name_suffix": "（数字以外）",
                 "pcl": ["E"],
-                "actions": [f"{label}に数字以外の値を入力する"],
+                "check_conditions": [
+                    "通常モードで画面を起動する",
+                    f"{label}に数字以外の文字を入力する",
+                ],
+                "actions": ["対象イベントを実行する"],
                 "confirmation_suffix": [f"{label}に数字以外の値を入力した場合、エラーメッセージが表示されること"],
+                "replace_base_confirmations": True,
+            }
+        )
+
+    value_min = str(field_hint.get("value_min") or "").strip() or None
+    value_max = str(field_hint.get("value_max") or "").strip() or None
+
+    if value_min is not None:
+        rules.append(
+            {
+                "name_suffix": "（最小値未満）",
+                "pcl": ["L"],
+                "check_conditions": [
+                    "通常モードで画面を起動する",
+                    f"{label}に{value_min}未満の値を入力する",
+                ],
+                "actions": ["対象イベントを実行する"],
+                "confirmation_suffix": [f"{label}に最小値({value_min})未満の値を入力した場合、エラーメッセージが表示されること"],
+                "replace_base_confirmations": True,
+            }
+        )
+        rules.append(
+            {
+                "name_suffix": f"（最小値={value_min}）",
+                "pcl": ["L"],
+                "check_conditions": [
+                    "通常モードで画面を起動する",
+                    f"{label}に{value_min}を入力する",
+                ],
+                "actions": ["対象イベントを実行する"],
+                "confirmation_suffix": [f"{label}に最小値({value_min})を入力した場合、エラーとならないこと"],
+                "replace_base_confirmations": True,
+            }
+        )
+
+    if value_max is not None:
+        rules.append(
+            {
+                "name_suffix": f"（最大値={value_max}）",
+                "pcl": ["L"],
+                "check_conditions": [
+                    "通常モードで画面を起動する",
+                    f"{label}に{value_max}を入力する",
+                ],
+                "actions": ["対象イベントを実行する"],
+                "confirmation_suffix": [f"{label}に最大値({value_max})を入力した場合、エラーとならないこと"],
+                "replace_base_confirmations": True,
+            }
+        )
+        rules.append(
+            {
+                "name_suffix": "（最大値超過）",
+                "pcl": ["L"],
+                "check_conditions": [
+                    "通常モードで画面を起動する",
+                    f"{label}に{value_max}を超える値を入力する",
+                ],
+                "actions": ["対象イベントを実行する"],
+                "confirmation_suffix": [f"{label}に最大値({value_max})を超える値を入力した場合、エラーメッセージが表示されること"],
+                "replace_base_confirmations": True,
             }
         )
 
@@ -790,8 +884,13 @@ def _build_input_check_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict
             {
                 "name_suffix": "（半角入力）",
                 "pcl": ["E"],
-                "actions": [f"{label}に半角で入力する"],
+                "check_conditions": [
+                    "通常モードで画面を起動する",
+                    f"{label}に半角で入力する",
+                ],
+                "actions": ["対象イベントを実行する"],
                 "confirmation_suffix": [f"{label}に半角で入力した場合、入力チェック結果が正しいこと"],
+                "replace_base_confirmations": True,
             }
         )
     elif "han" in charset or "half" in charset or "半角" in charset:
@@ -799,8 +898,13 @@ def _build_input_check_expansion_rules(viewpoint: Dict[str, Any], analysis: Dict
             {
                 "name_suffix": "（全角入力）",
                 "pcl": ["E"],
-                "actions": [f"{label}に全角で入力する"],
+                "check_conditions": [
+                    "通常モードで画面を起動する",
+                    f"{label}に全角で入力する",
+                ],
+                "actions": ["対象イベントを実行する"],
                 "confirmation_suffix": [f"{label}に全角で入力した場合、入力チェック結果が正しいこと"],
+                "replace_base_confirmations": True,
             }
         )
 

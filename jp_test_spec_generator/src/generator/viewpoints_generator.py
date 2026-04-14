@@ -258,6 +258,58 @@ def _build_reference_mode_viewpoints(
     return counter
 
 
+def _build_range_validation_viewpoints(
+    analysis: Dict[str, Any],
+    viewpoints: List[Dict[str, Any]],
+    counter: int,
+) -> int:
+    for control in analysis.get("controls", []):
+        if control.get("control_role") != "input" or not control.get("test_target"):
+            continue
+
+        data_type = (control.get("data_type") or "").strip()
+        input_min = control.get("input_min")
+        input_max = control.get("input_max")
+
+        if not data_type and input_min is None and input_max is None:
+            continue
+
+        label = control.get("label") or control.get("id")
+        control_id = control.get("id")
+        details = []
+
+        TYPE_LABELS = {
+            "money": "金額（数値）",
+            "decimal": "数値",
+            "numeric": "数値",
+        }
+        if data_type:
+            type_label = TYPE_LABELS.get(data_type, data_type)
+            details.append(f"{label} は{type_label}形式で入力すること")
+        if input_min is not None and input_max is not None:
+            details.append(f"{label} の入力範囲は {input_min} ～ {input_max} であること")
+        elif input_min is not None:
+            details.append(f"{label} の最小値は {input_min} であること")
+        elif input_max is not None:
+            details.append(f"{label} の最大値は {input_max} であること")
+
+        if not details:
+            continue
+
+        viewpoints.append(
+            _make_viewpoint(
+                vp_id=f"VP-{counter:03d}",
+                category="入力チェック",
+                title=f"{label} の入力値チェック確認",
+                details=details,
+                source_basis=[control_id, "aspx.data-type", "aspx.min", "aspx.max"],
+            )
+        )
+        counter += 1
+
+    return counter
+
+
 def _build_concurrency_viewpoints(
     analysis: Dict[str, Any],
     viewpoints: List[Dict[str, Any]],
@@ -498,6 +550,7 @@ def generate_viewpoints(analysis: Dict[str, Any]) -> Dict[str, Any]:
 
     counter = _build_initial_display_viewpoints(analysis, viewpoints, counter)
     counter = _build_input_viewpoints(analysis, viewpoints, counter)
+    counter = _build_range_validation_viewpoints(analysis, viewpoints, counter)
     counter = _build_length_viewpoints(analysis, viewpoints, counter)
     counter = _build_blur_validation_viewpoints(analysis, viewpoints, counter)
     counter = _build_action_viewpoints(analysis, viewpoints, counter)

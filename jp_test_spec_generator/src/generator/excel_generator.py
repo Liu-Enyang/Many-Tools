@@ -33,12 +33,12 @@ MISSING_CHECKLIST_FILL = PatternFill("solid", fgColor="FFFF00")
 
 # Template layout
 CHECK_START_ROW = 4
-CHECK_END_ROW = 33
-ACTION_START_ROW = 34
-ACTION_END_ROW = 66
-CONFIRM_START_ROW = 67
-CONFIRM_END_ROW = 158
-PCL_ROW = 161
+CHECK_END_ROW = 70
+ACTION_START_ROW = 71
+ACTION_END_ROW = 103
+CONFIRM_START_ROW = 104
+CONFIRM_END_ROW = 218
+PCL_ROW = 221
 CASE_HEADER_ROW = 3
 CASE_START_COL = 10  # J列
 CASE_TEMPLATE_COPY_COL = 45  # AS列
@@ -47,10 +47,10 @@ ITEM_NO_COL = 2      # B列
 ITEM_TEXT_COL = 3    # C列
 TEMPLATE_ITEM_TEXT_COL = 2  # テンプレート主表では B列（結合セルの左上）に説明文を書く
 SECTION_LABEL_COL = 1  # A列
-CHECK_TEMPLATE_COPY_ROW = 32
-ACTION_TEMPLATE_COPY_ROW = 65
-CONFIRM_TEMPLATE_COPY_ROW = 157
-TEMPLATE_PATH = Path(__file__).resolve().parents[2] / "Sample_input" / "単体テスト仕様書base.xlsx"
+CHECK_TEMPLATE_COPY_ROW = 69
+ACTION_TEMPLATE_COPY_ROW = 102
+CONFIRM_TEMPLATE_COPY_ROW = 217
+TEMPLATE_PATH = Path(__file__).resolve().parents[2] / "sample_input" / "単体テスト仕様書base.xlsx"
 
 
 
@@ -195,8 +195,9 @@ def _copy_row_style(ws: Worksheet, source_row: int, target_row: int, max_col: in
 
 
 # Helper to copy merged-cell structure for a single row.
-def _copy_row_merges(ws: Worksheet, source_row: int, target_row: int) -> None:
-    existing_ranges = {str(rng) for rng in ws.merged_cells.ranges}
+def _copy_row_merges(ws: Worksheet, source_row: int, target_row: int, existing_ranges: set | None = None) -> None:
+    if existing_ranges is None:
+        existing_ranges = {str(rng) for rng in ws.merged_cells.ranges}
     for merged_range in list(ws.merged_cells.ranges):
         if merged_range.min_row == source_row and merged_range.max_row == source_row:
             new_range = f"{get_column_letter(merged_range.min_col)}{target_row}:{get_column_letter(merged_range.max_col)}{target_row}"
@@ -239,6 +240,22 @@ def _clear_cell_value_keep_style(ws: Worksheet, row: int, col: int) -> None:
     if cell.__class__.__name__ == "MergedCell":
         return
     cell.value = None
+
+
+def _ensure_cell_writable(ws: Worksheet, row: int, col: int) -> None:
+    """(row, col) がアンカー列と異なる列をまたぐ結合セルに含まれる場合、結合を解除する。
+    テンプレート内のセパレータ行（A:E や A:H の横結合）がデータ行に重なるケースを防ぐ。"""
+    cell = ws.cell(row=row, column=col)
+    if cell.__class__.__name__ != "MergedCell":
+        return
+    to_unmerge = [
+        str(mr) for mr in list(ws.merged_cells.ranges)
+        if mr.min_row <= row <= mr.max_row
+        and mr.min_col <= col <= mr.max_col
+        and mr.min_col != col
+    ]
+    for range_str in to_unmerge:
+        ws.unmerge_cells(range_str)
 
 
 # Helper to safely set cell value, handling merged cells.
@@ -298,13 +315,12 @@ def _ensure_case_columns(ws: Worksheet, required_case_count: int) -> None:
     base_case_letter = get_column_letter(CASE_START_COL)
     base_case_width = ws.column_dimensions[base_case_letter].width
 
+    base_col = existing_case_count + CASE_START_COL  # 既存ケース列の末尾
     for i in range(additional):
-        new_col = ws.max_column + 1
+        new_col = base_col + i
         new_letter = get_column_letter(new_col)
         ws.column_dimensions[new_letter].width = base_case_width
-
-        for row in range(1, ws.max_row + 1):
-            _clear_cell_value_keep_style(ws, row, new_col)
+        _print_case_progress("ケース列追加進捗", i + 1, additional)
 
 
 
@@ -317,21 +333,25 @@ def _ensure_section_rows(
 ) -> int:
     reserved_count = reserved_end_row - section_start_row + 1
     extra = max(0, required_count - reserved_count)
-    if extra > 0:
-        _print_progress(f"行を拡張します: 開始行={section_start_row}, 追加 {extra} 行")
     if extra <= 0:
         return 0
 
+    _print_progress(f"行を拡張します: 開始行={section_start_row}, 追加 {extra} 行")
     max_col = max(ws.max_column, CASE_START_COL)
 
+    # 一括挿入（ループ挿入の O(n²) → O(n) に改善）
+    insert_at = template_copy_row + 1
+    ws.insert_rows(insert_at, extra)
+
+    # 挿入後のマージキャッシュを一度だけ構築
+    existing_ranges = {str(rng) for rng in ws.merged_cells.ranges}
+
     for offset in range(extra):
-        source_row = template_copy_row + offset
-        insert_at = source_row + 1
-        ws.insert_rows(insert_at, 1)
-        _copy_row_style(ws, source_row, insert_at, max_col)
-        _copy_row_merges(ws, source_row, insert_at)
+        target_row = insert_at + offset
+        _copy_row_style(ws, template_copy_row, target_row, max_col)
+        _copy_row_merges(ws, template_copy_row, target_row, existing_ranges)
         for col in range(1, max_col + 1):
-            _clear_cell_value_keep_style(ws, insert_at, col)
+            _clear_cell_value_keep_style(ws, target_row, col)
         _print_case_progress("行作成進捗", offset + 1, extra)
 
     return extra
@@ -417,6 +437,10 @@ def _fill_template_section_rows(
         row = start_row + index
         item_id = str(item.get("id", "")).strip()
         item_text = str(item.get("text", "")).strip()
+
+        # テンプレート内のセパレータ行（列A起点の横結合など）がデータ行に重なる場合に解除
+        _ensure_cell_writable(ws, row, TEMPLATE_ITEM_TEXT_COL)
+        _ensure_cell_writable(ws, row, SECTION_LABEL_COL)
 
         if index == 0:
             _set_cell_value_safe(ws, row, SECTION_LABEL_COL, section_label)
