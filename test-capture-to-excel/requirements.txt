@@ -1,0 +1,6 @@
+pillow
+openpyxl
+pynput
+pywin32
+pyinstaller
+pystray
