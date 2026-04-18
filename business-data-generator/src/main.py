@@ -5,6 +5,7 @@ from .scenario_loader import load_scenario, load_table
 from .value_resolver import build_row
 from .sql_builder import build_insert_sql
 from .rollback_builder import build_delete_sql
+from .schema_to_yaml import process_ddl_folder
 
 
 def run(base_dir: Path, scenario_id: str, input_file: Path):
@@ -57,3 +58,7 @@ def run(base_dir: Path, scenario_id: str, input_file: Path):
 
     print(f"Generated: {setup_path}")
     print(f"Generated: {rollback_path}")
+
+def run_generate_base_yaml(base_dir: Path, ddl_dir: Path):
+    output_dir = base_dir / "config" / "tables" / "base"
+    process_ddl_folder(ddl_dir, output_dir)

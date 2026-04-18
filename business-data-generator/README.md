@@ -1,5 +1,3 @@
-
-
 # Business Data Generator（业务测试数据生成工具）
 
 ## 📌 项目简介
@@ -25,6 +23,7 @@ Business Data Generator 是 Many-Tools 中的一个模块，用于 **快速生�
 - ✅ 支持生成多条明细数据
 - ✅ 自动生成 rollback SQL
 - ✅ 配置驱动（YAML），可扩展性强
+- ✅ 支持从 DDL 自动生成表结构 YAML（Base YAML）
 
 ---
 
@@ -36,7 +35,9 @@ business-data-generator/
   
   config/
     scenarios/            # 业务场景定义
-    tables/               # 表结构规则定义
+    tables/
+      base/               # 从DDL自动生成（结构定义）
+      rules/              # 业务规则定义（后续补充）
   
   src/
     main.py               # 主流程
@@ -44,6 +45,8 @@ business-data-generator/
     value_resolver.py     # 字段值解析
     sql_builder.py        # 生成 INSERT SQL
     rollback_builder.py   # 生成 DELETE SQL
+    schema_parser.py      # 解析DDL
+    schema_to_yaml.py     # DDL转Base YAML
   
   templates/
     *.json                # 输入参数示例
@@ -72,6 +75,20 @@ python app.py --scenario summary_normal --input templates/summary_input.json
 
 ---
 
+### 2️⃣（新）从DDL生成表结构 YAML
+
+```
+python app.py --ddl-dir ddl/
+```
+
+输出：
+```
+config/tables/base/
+  *.yaml
+```
+
+---
+
 ### 3️⃣ 输出结果
 
 ```
@@ -83,6 +100,27 @@ output/
 ---
 
 ## 🧩 核心概念
+
+### 0️⃣ Base YAML（结构定义）
+
+从数据库 DDL 自动生成，描述表结构。
+
+示例：
+
+```yaml
+table_name: PJG_saikenmeisai
+
+primary_key:
+- JGskm_SyoriId
+- JGskm_ShinseiNo
+- JGskm_KasitukeNo
+
+required_fields:
+- JGskm_BranchNo
+- JGskm_CustomerNo
+```
+
+---
 
 ### 1️⃣ Scenario（场景）
 
@@ -172,8 +210,9 @@ generated_fields:
 
 ## 📈 后续计划
 
+- [ ] Base YAML → Rule YAML 自动生成
 - [ ] 自动解析 SP → 生成 YAML
-- [ ] 自动读取数据库表结构
+- [ ] 自动读取数据库数据生成默认值
 - [ ] Master 表自动 lookup
 - [ ] Web UI（Streamlit）
 - [ ] AI 输入（自然语言 → 场景）
@@ -191,14 +230,13 @@ generated_fields:
 
 ## 🧠 使用建议
 
-开发新场景时建议流程：
+开发流程建议：
 
-1. 分析 SP（最重要）
-2. 找出主表和 WHERE 条件
-3. 确定最小数据集
-4. 编写 table YAML
-5. 编写 scenario YAML
-6. 生成 SQL 并验证
+1. 从DDL生成 Base YAML
+2. 分析现有数据补充 Rule YAML
+3. 确定最小业务数据结构
+4. 编写 scenario YAML
+5. 生成 SQL 并验证
 
 ---
 
@@ -222,4 +260,4 @@ generated_fields:
 
 > 用配置替代重复 SQL，用工具替代人工造数。
 
----
+---</file>

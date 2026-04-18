@@ -1,0 +1,67 @@
+table_name: PRM_incidentlistmapping
+primary_key:
+- RGoam_IncidcentNo
+columns:
+- name: RGoam_IncidcentNo
+  type: char
+  length: '15'
+  nullable: false
+- name: RGoam_SaikenNo
+  type: varchar
+  length: '15'
+  nullable: true
+- name: RGoam_BranchNo
+  type: char
+  length: '4'
+  nullable: false
+- name: RGoam_BranchName
+  type: varchar
+  length: '30'
+  nullable: true
+- name: RGoam_CustomerNo
+  type: char
+  length: '12'
+  nullable: false
+- name: RGoam_CustomerName
+  type: varchar
+  length: '70'
+  nullable: true
+- name: RGoam_IncidentKBN
+  type: varchar
+  length: '15'
+  nullable: true
+- name: RGoam_IncidentDate
+  type: char
+  length: '8'
+  nullable: true
+- name: RGoam_Nissuu
+  type: smallint
+  length: null
+  nullable: true
+- name: RGoam_IncidentStutusKBN
+  type: varchar
+  length: '15'
+  nullable: true
+- name: InsertDateTime
+  type: datetime
+  length: null
+  nullable: true
+- name: InsertUserNo
+  type: char
+  length: '12'
+  nullable: true
+- name: UpdateDateTime
+  type: datetime
+  length: null
+  nullable: false
+- name: UpdateUserNo
+  type: char
+  length: '12'
+  nullable: false
+required_fields:
+- RGoam_IncidcentNo
+- RGoam_BranchNo
+- RGoam_CustomerNo
+- UpdateDateTime
+- UpdateUserNo
+primary_key_count: 1
