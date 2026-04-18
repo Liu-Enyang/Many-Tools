@@ -1,0 +1,32 @@
+table_name: PJG_saikenmeisai
+
+primary_key:
+  - JGskm_SyoriId
+  - JGskm_ShinseiNo
+  - JGskm_KasitukeNo
+
+required_fields:
+  - JGskm_SyoriId
+  - JGskm_BranchNo
+  - JGskm_CustomerNo
+  - JGskm_KijyunNengetu
+  - JGskm_ShinseiNo
+  - JGskm_KasitukeNo
+  - JGskm_Kamoku
+  - UpdateDateTime
+  - UpdateUserNo
+
+field_sources:
+  JGskm_BranchNo: input.BranchNo
+  JGskm_CustomerNo: input.CustomerNo
+  UpdateUserNo: input.UpdateUserNo
+
+default_values:
+  JGskm_SyoriId: "TESTSUMMARY000001"
+  JGskm_KijyunNengetu: "202604"
+  JGskm_Kamoku: "KAMOKU01"
+  UpdateDateTime: "@@now"
+
+generated_fields:
+  JGskm_ShinseiNo: sequence
+  JGskm_KasitukeNo: row_number

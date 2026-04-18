@@ -1,0 +1,27 @@
+table_name: PRM_CustomerComment
+
+primary_key:
+  - RGoam_BranchNo
+  - RGoam_CustomerNo
+
+required_fields:
+  - RGoam_BranchNo
+  - RGoam_CustomerNo
+  - RGoam_IncidentReason
+  - RGoam_CurrentSituation
+  - RGoam_Policy
+  - RGoam_Remarks
+  - UpdateDateTime
+  - UpdateUserNo
+
+field_sources:
+  RGoam_BranchNo: input.BranchNo
+  RGoam_CustomerNo: input.CustomerNo
+  UpdateUserNo: input.UpdateUserNo
+
+default_values:
+  RGoam_IncidentReason: "テスト用の事故理由"
+  RGoam_CurrentSituation: "テスト用の現況"
+  RGoam_Policy: "テスト用の回収方針"
+  RGoam_Remarks: "テスト用備考"
+  UpdateDateTime: "@@now"

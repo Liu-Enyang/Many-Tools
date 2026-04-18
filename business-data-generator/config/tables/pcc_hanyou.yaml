@@ -1,0 +1,5 @@
+table_name: PCC_hanyou
+
+mode: reference_only
+
+description: 汎用コードマスタ。第一版では INSERT 対象外。

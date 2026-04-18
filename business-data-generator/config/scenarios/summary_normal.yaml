@@ -1,0 +1,20 @@
+scenario_id: summary_normal
+name: Summary画面_正常表示
+
+inputs:
+  - BranchNo
+  - CustomerNo
+  - SaikenCount
+  - HasComment
+  - UpdateUserNo
+
+tables:
+  - table: PJG_saikenmeisai
+    rows_from: input.SaikenCount
+
+  - table: PRM_CustomerComment
+    include_if: input.HasComment
+    rows: 1
+
+  - table: PCC_hanyou
+    mode: reference_only
