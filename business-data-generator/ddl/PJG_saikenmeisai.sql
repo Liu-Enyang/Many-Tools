@@ -1,7 +1,7 @@
 USE [RiskTaker]
 GO
 
-/****** Object:  Table [dbo].[PJG_saikenmeisai]    Script Date: 2026/04/03 8:59:46 ******/
+/****** Object:  Table [dbo].[PJG_saikenmeisai]    Script Date: 2026/04/20 8:47:51 ******/
 SET ANSI_NULLS OFF
 GO
 

@@ -1,0 +1,139 @@
+table_name: PCC_hanyou
+metadata:
+  rule_source:
+  - ddl_inference
+  - csv_analysis
+  has_csv: true
+field_sources: {}
+generated_fields: {}
+default_values:
+  CChny_Sort:
+    value: 0
+    source: inferred_from_type
+value_candidates: {}
+analysis:
+  CChny_HanyouUniqueKey:
+    distinct_count: 2647
+    null_ratio: 0.0
+    sample_values:
+    - '0100'
+    - '0200'
+    - '0300'
+    - '0400'
+    - '0500'
+    top_values:
+    - '0100'
+    - '0200'
+    - '0300'
+    - '0400'
+    - '0500'
+    - '0600'
+    - '0700'
+    - 0900
+    - '1000'
+    - '1100'
+  CChny_HanyouCodeKey:
+    distinct_count: 248
+    null_ratio: 0.0
+    sample_values:
+    - CASTER
+    - 2GYOSYU
+    - 3GYOSYU
+    - ENTAISYURUI
+    - DEFINITION
+    top_values:
+    - R_POLICY
+    - R_AUTHRSN
+    - CASTER
+    - GKAKUDUKE
+    - R_PARTNERNAME
+    - R_SUBTITLE
+    - HOSYOMOKUTEKI
+    - TANPOSYURUI
+    - R_SIKINSITOM
+    - SIKINSITO
+  CChny_Sort:
+    distinct_count: 317
+    null_ratio: 0.0
+    sample_values:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    top_values:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    - '99'
+    - '6'
+    - '7'
+    - '9'
+    - '8'
+  CChny_HanyouCodeValue:
+    distinct_count: 948
+    null_ratio: 0.0
+    sample_values:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    top_values:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    - '01'
+    - '02'
+    - '6'
+    - '03'
+    - '04'
+  CChny_HanyouCodeNaiyou:
+    distinct_count: 2129
+    null_ratio: 0.0
+    sample_values:
+    - 食料品
+    - 繊維品
+    - 木材・木製品
+    - パルプ・紙加工品等
+    - 製造/出版・印刷関連
+    top_values:
+    - その他
+    - CCC+
+    - 該当なし
+    - AAA+
+    - AAA
+    - AAA-
+    - AA+
+    - AA
+    - AA-
+    - A+
+  CChny_HanyouCodeSetumei:
+    distinct_count: 2292
+    null_ratio: 0.0
+    sample_values:
+    - 製造業／食料品
+    - 製造業／繊維品
+    - 製造業／木材・木製品
+    - 製造業／パルプ・紙・紙加工品
+    - 製造業／出版・印刷・同関連
+    top_values:
+    - その他
+    - 預金科目(日次I/F受信)
+    - 一覧検索時にステータスを選択するためのドロップダウンリスト用
+    - 預貸金明細照会票-期間コード-I/F受信＆出力用
+    - 預貸金明細照会票-定期預金区分-I/F受信＆出力用
+    - ユーザ登録関連で利用
+    - 預貸金明細照会票-課税コード-I/F受信＆出力用
+    - 案件利率　府市制度利率
+    - 商工組合中央金庫
+    - テンプレート取得関連
+warnings:
+- 'Required field has no inferred rule: CChny_HanyouUniqueKey'
+- 'Required field has no inferred rule: CChny_HanyouCodeKey'
+- 'Required field has no inferred rule: CChny_HanyouCodeValue'
+- 'Required field has no inferred rule: CChny_HanyouCodeNaiyou'

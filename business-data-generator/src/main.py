@@ -1,7 +1,7 @@
 from pathlib import Path
 import json
 
-from .scenario_loader import load_scenario, load_table
+from .scenario_loader import load_scenario, load_table_definition
 from .value_resolver import build_row
 from .sql_builder import build_insert_sql
 from .rollback_builder import build_delete_sql
@@ -25,15 +25,11 @@ def run(base_dir: Path, scenario_id: str, input_file: Path):
 
         include_if = table_item.get("include_if")
         if include_if:
-            # only support input.xxx for MVP
             include_key = include_if.split(".", 1)[1]
             if not input_data.get(include_key):
                 continue
 
-        table_def = load_table(base_dir, table_name)
-
-        if table_def.get("mode") == "reference_only":
-            continue
+        table_def = load_table_definition(base_dir, table_name)
 
         if "rows_from" in table_item:
             rows_count = input_data[table_item["rows_from"].split(".", 1)[1]]
@@ -58,6 +54,7 @@ def run(base_dir: Path, scenario_id: str, input_file: Path):
 
     print(f"Generated: {setup_path}")
     print(f"Generated: {rollback_path}")
+
 
 def run_generate_base_yaml(base_dir: Path, ddl_dir: Path):
     output_dir = base_dir / "config" / "tables" / "base"

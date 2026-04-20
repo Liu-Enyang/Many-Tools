@@ -1,0 +1,1347 @@
+table_name: PJG_saikenmeisai
+metadata:
+  rule_source:
+  - ddl_inference
+  - csv_analysis
+  has_csv: true
+field_sources:
+  JGskm_SyoriId:
+    value: input.SyoriId
+    source: inferred_from_name
+  JGskm_BranchNo:
+    value: input.BranchNo
+    source: inferred_from_name
+  JGskm_CustomerNo:
+    value: input.CustomerNo
+    source: inferred_from_name
+  JGskm_KijyunNengetu:
+    value: input.KijyunNengetu
+    source: inferred_from_name
+generated_fields:
+  JGskm_ShinseiNo:
+    value: sequence
+    source: inferred_from_name
+  JGskm_KasitukeNo:
+    value: row_number
+    source: inferred_from_name
+default_values:
+  JGskm_Kamoku:
+    value: KAMOKU01
+    source: csv_top_value
+  JGskm_Riritu:
+    value: '10.00000'
+    source: csv_top_value
+  JGskm_ShinseiDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  JGskm_ShinseiKigen:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  JGskm_TousyoJikkouDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  JGskm_Kijitu:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  JGskm_SyoninKigen:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  JGskm_TousyoJikkouKingaku:
+    value: '0'
+    source: csv_top_value
+  JGskm_SikinSito:
+    value: SITO02
+    source: csv_top_value
+  JGskm_HosyoMokuteki:
+    value: HOSYO02
+    source: csv_top_value
+  JGskm_HensaiHouhou:
+    value: HENSAIHOUHOU1
+    source: csv_top_value
+  JGskm_SyokaiHensaiDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  JGskm_SyokaiHensaigaku:
+    value: '0'
+    source: csv_top_value
+  JGskm_TotyukaiHensaigaku:
+    value: '0'
+    source: csv_top_value
+  JGskm_SaisyukaiHensaigaku:
+    value: '0'
+    source: csv_top_value
+  JGskm_HensaiSyuki:
+    value: '0'
+    source: csv_top_value
+  JGskm_EntaiGanpon:
+    value: '0'
+    source: csv_top_value
+  JGskm_EntaiKikan:
+    value: 0
+    source: inferred_from_type
+  JGskm_MondaiSaikenTokutei:
+    value: '0'
+    source: csv_top_value
+  JGskm_JoukenHenkou:
+    value: JOUKEN02
+    source: csv_top_value
+  JGskm_KjkKanwaSaiken:
+    value: '0'
+    source: csv_top_value
+  JGskm_KengenKubun:
+    value: KENGEN1
+    source: csv_top_value
+  JGskm_HimotukiTanpo:
+    value: UMU2
+    source: csv_top_value
+  JGskm_HimotukiHosyo:
+    value: UMU2
+    source: csv_top_value
+  JGskm_Bikou:
+    value: '0'
+    source: csv_top_value
+  JGskm_Tokukasi1HendouKingaku:
+    value: '0'
+    source: csv_top_value
+  JGskm_Tokukasi1HendouJiyu:
+    value: TOKUTEIHENDOU11
+    source: csv_top_value
+  JGskm_Tokukasi1HendouComment:
+    value: '0'
+    source: csv_top_value
+  JGskm_Tokukasi2HendouKingaku:
+    value: '0'
+    source: csv_top_value
+  JGskm_Tokukasi2HendouJiyu:
+    value: '0'
+    source: csv_top_value
+  JGskm_Tokukasi2HendouComment:
+    value: '0'
+    source: csv_top_value
+  JGskm_Tokukasi3HendouKingaku:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi3HendouJiyu:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi3HendouComment:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi4HendouKingaku:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi4HendouJiyu:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi4HendouComment:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi1KoteiKingaku:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi1KoteiJiyu:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi1KoteiComment:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi2KoteiKingaku:
+    value: '0'
+    source: csv_top_value
+  JGskm_Tokukasi2KoteiJiyu:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi2KoteiComment:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi3KoteiKingaku:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi3KoteiJiyu:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi3KoteiComment:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi4KoteiKingaku:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi4KoteiJiyu:
+    value: '0'
+    source: csv_single_value
+  JGskm_Tokukasi4KoteiComment:
+    value: '0'
+    source: csv_single_value
+  JGskm_Hosei:
+    value: '1'
+    source: csv_top_value
+  JGskm_LoanFlg:
+    value: '1'
+    source: csv_top_value
+  JGskm_SyohinCode:
+    value: '10912'
+    source: csv_top_value
+  JGskm_TanpoCode:
+    value: '1'
+    source: csv_top_value
+  JGskm_RisokuDate:
+    value: '0'
+    source: csv_single_value
+  JGskm_KyokudoFlg:
+    value: '0'
+    source: csv_single_value
+  JGskm_SinkiTourokuDate:
+    value: '@@now'
+    source: inferred_from_type
+  JGskm_SinkiTourokuUserNo:
+    value: TESTUSER
+    source: inferred_from_name
+  JGskm_LastUpdate:
+    value: '@@now'
+    source: inferred_from_type
+  JGskm_UpdateUserNo:
+    value: TESTUSER
+    source: inferred_from_name
+value_candidates:
+  JGskm_KijyunNengetu:
+    type: sampled
+    values:
+    - '202603'
+    - '202002'
+    - '201803'
+    - '202003'
+    - '201812'
+    - '201712'
+    - '201903'
+    - '202307'
+    - '201809'
+    - '201702'
+    source: csv_top_values
+    note: distinct_count=21
+  JGskm_Kamoku:
+    type: enum
+    values:
+    - KAMOKU01
+    - KAMOKU03
+    - KAMOKU02
+    - KAMOKU21
+    - K_GAIKAYKAMOK01
+    - KAMOKU05
+    - KAMOKU92
+    - KAMOKU42
+    - KAMOKU89
+    source: csv_all_values
+  JGskm_ShinseiKigen:
+    type: enum
+    values:
+    - '20160101'
+    - '0'
+    - '20190901'
+    - '20190902'
+    source: csv_all_values
+  JGskm_SyoninKigen:
+    type: enum
+    values:
+    - '20170823'
+    - '0'
+    - '20190901'
+    - '20191201'
+    source: csv_all_values
+  JGskm_SikinSito:
+    type: enum
+    values:
+    - SIKINSITO101
+    - SIKINSITO239
+    - SIKINSITO107
+    - SIKINSITO244
+    - SIKINSITO360
+    - SIKINSITO499
+    - '0'
+    - SIKINSITO354
+    - SIKINSITO106
+    - SIKINSITO42
+    - SIKINSITO104
+    - SIKINSITO12
+    - SIKINSITO13
+    - SIKINSITO14
+    - SIKINSITO103
+    - SIKINSITO112
+    - SITO02
+    - SITO01
+    source: csv_all_values
+  JGskm_HosyoMokuteki:
+    type: enum
+    values:
+    - HOSYOMOKU520000
+    - HOSYOMOKU300000
+    - HOSYOMOKU100000
+    - HOSYOMOKU710002
+    - '0'
+    - HOSYOMOKUTEKI01
+    - HOSYOMOKUTEKI02
+    - HOSYOMOKU611018
+    - HOSYOMOKU611023
+    - HOSYO02
+    - HOSYO01
+    source: csv_all_values
+  JGskm_HensaiHouhou:
+    type: enum
+    values:
+    - HENSAIHOUHOU4
+    - HENSAIHOUHOU1
+    - '0'
+    - HENSAIHOUHOU2
+    source: csv_all_values
+  JGskm_SyokaiHensaigaku:
+    type: enum
+    values:
+    - '281776'
+    - '0'
+    - '8000'
+    - '30000'
+    source: csv_all_values
+  JGskm_TotyukaiHensaigaku:
+    type: enum
+    values:
+    - '0'
+    - '9000'
+    - '40000'
+    source: csv_all_values
+  JGskm_SaisyukaiHensaigaku:
+    type: enum
+    values:
+    - '0'
+    - '5000'
+    - '50000'
+    source: csv_all_values
+  JGskm_HensaiSyuki:
+    type: enum
+    values:
+    - '1'
+    - '0'
+    - '12'
+    - '10'
+    source: csv_all_values
+  JGskm_EntaiGanpon:
+    type: enum
+    values:
+    - '0'
+    - '12000'
+    - '730000'
+    - '10000'
+    source: csv_all_values
+  JGskm_EntaiKikan:
+    type: sampled
+    values:
+    - '0'
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    - '6'
+    - '7'
+    - '8'
+    - '9'
+    source: csv_top_values
+    note: distinct_count=32
+  JGskm_MondaiSaikenTokutei:
+    type: enum
+    values:
+    - '0'
+    - '1'
+    source: csv_all_values
+  JGskm_JoukenHenkou:
+    type: enum
+    values:
+    - JYOUKEN1
+    - '0'
+    - JOUKEN02
+    - JOUKEN01
+    source: csv_all_values
+  JGskm_KjkKanwaSaiken:
+    type: enum
+    values:
+    - '0'
+    - KASIDASIJYOKE01
+    - KASIDASIJYOKE03
+    - KASIDASIJYOKE02
+    source: csv_all_values
+  JGskm_KengenKubun:
+    type: enum
+    values:
+    - KENGEN2
+    - KENGEN1
+    - '0'
+    - KENGEN0
+    source: csv_all_values
+  JGskm_HimotukiTanpo:
+    type: enum
+    values:
+    - UMU2
+    - '0'
+    - UMU1
+    source: csv_all_values
+  JGskm_HimotukiHosyo:
+    type: enum
+    values:
+    - UMU2
+    - '0'
+    - UMU1
+    source: csv_all_values
+  JGskm_Bikou:
+    type: enum
+    values:
+    - 備考
+    - '0'
+    - 備考1
+    - 備考2
+    - テスト
+    source: csv_all_values
+  JGskm_Tokukasi1HendouJiyu:
+    type: enum
+    values:
+    - '0'
+    - TOKUTEIHENDOU11
+    source: csv_all_values
+  JGskm_Tokukasi1HendouComment:
+    type: enum
+    values:
+    - '0'
+    - コメント1
+    - コメント01
+    source: csv_all_values
+  JGskm_Tokukasi2HendouJiyu:
+    type: enum
+    values:
+    - '0'
+    - TOKUTEIHENDOU24
+    source: csv_all_values
+  JGskm_Tokukasi2HendouComment:
+    type: enum
+    values:
+    - '0'
+    - コメント02
+    source: csv_all_values
+  JGskm_Tokukasi3HendouJiyu:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  JGskm_Tokukasi3HendouComment:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  JGskm_Tokukasi4HendouJiyu:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  JGskm_Tokukasi4HendouComment:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  JGskm_Tokukasi1KoteiJiyu:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  JGskm_Tokukasi1KoteiComment:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  JGskm_Tokukasi2KoteiJiyu:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  JGskm_Tokukasi2KoteiComment:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  JGskm_Tokukasi3KoteiJiyu:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  JGskm_Tokukasi3KoteiComment:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  JGskm_Tokukasi4KoteiJiyu:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  JGskm_Tokukasi4KoteiComment:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  JGskm_Hosei:
+    type: enum
+    values:
+    - '0'
+    - '1'
+    source: csv_all_values
+  JGskm_LoanFlg:
+    type: enum
+    values:
+    - '0'
+    - '1'
+    source: csv_all_values
+  JGskm_SyohinCode:
+    type: enum
+    values:
+    - '14725'
+    - '10912'
+    - '0'
+    source: csv_all_values
+  JGskm_TanpoCode:
+    type: enum
+    values:
+    - '520000'
+    - '1'
+    - '0'
+    source: csv_all_values
+  JGskm_KyokudoFlg:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+analysis:
+  JGskm_SyoriId:
+    distinct_count: 55
+    null_ratio: 0.0
+    sample_values:
+    - '3000000000000024'
+    - '3000000000000025'
+    - '3000000000000026'
+    - '3000000000000027'
+    - '3000000000000029'
+    top_values:
+    - TEST000000000200
+    - '3000000000000412'
+    - '3000000000000196'
+    - '3000000000000195'
+    - '3000000000000197'
+    - '3000000000000198'
+    - '3000000000000199'
+    - '3000000000000448'
+    - '3000000000000033'
+    - '3000000000000093'
+  JGskm_BranchNo:
+    distinct_count: 7
+    null_ratio: 0.0
+    sample_values:
+    - '001'
+    - '014'
+    - '020'
+    - '010'
+    - '002'
+    top_values:
+    - '001'
+    - '010'
+    - '002'
+    - '020'
+    - '310'
+    - '014'
+    - '511'
+  JGskm_CustomerNo:
+    distinct_count: 31
+    null_ratio: 0.0
+    sample_values:
+    - '0010001'
+    - '0010002'
+    - '0011234'
+    - '0010003'
+    - '0015555'
+    top_values:
+    - '0010006'
+    - '0010002'
+    - '0010001'
+    - '0105001'
+    - '0010003'
+    - '0010010'
+    - 0010009
+    - 0010008
+    - '0010007'
+    - '0140001'
+  JGskm_KijyunNengetu:
+    distinct_count: 21
+    null_ratio: 0.0
+    sample_values:
+    - '201712'
+    - '201803'
+    - '201809'
+    - '201810'
+    - '201811'
+    top_values:
+    - '202603'
+    - '202002'
+    - '201803'
+    - '202003'
+    - '201812'
+    - '201712'
+    - '201903'
+    - '202307'
+    - '201809'
+    - '201702'
+  JGskm_ShinseiNo:
+    distinct_count: 235
+    null_ratio: 0.0
+    sample_values:
+    - '2001'
+    - '2002'
+    - '13300003003'
+    - '3001'
+    - '3002'
+    top_values:
+    - '900000000009001'
+    - '2001'
+    - '1001'
+    - '1005'
+    - '1002'
+    - '3001'
+    - '2002'
+    - '1004'
+    - '3002'
+    - '1003'
+  JGskm_KasitukeNo:
+    distinct_count: 217
+    null_ratio: 0.0
+    sample_values:
+    - '2001'
+    - '20022'
+    - '17323523'
+    - '301'
+    - '5555'
+    top_values:
+    - '1'
+    - '2001'
+    - '301'
+    - '19300001'
+    - '19300005'
+    - '19300002'
+    - '20022'
+    - '19300004'
+    - '2'
+    - '1930003'
+  JGskm_Kamoku:
+    distinct_count: 9
+    null_ratio: 0.0
+    sample_values:
+    - KAMOKU01
+    - KAMOKU03
+    - KAMOKU02
+    - KAMOKU21
+    - K_GAIKAYKAMOK01
+    top_values:
+    - KAMOKU01
+    - KAMOKU03
+    - KAMOKU02
+    - KAMOKU92
+    - K_GAIKAYKAMOK01
+    - KAMOKU42
+    - KAMOKU05
+    - KAMOKU89
+    - KAMOKU21
+  JGskm_Riritu:
+    distinct_count: 8
+    null_ratio: 0.7067
+    sample_values:
+    - '1.00000'
+    - '1.20000'
+    - '10.00000'
+    - '0.00000'
+    - '5.00000'
+    top_values:
+    - '10.00000'
+    - '1.00000'
+    - '0.00000'
+    - '5.00000'
+    - '7.00000'
+    - '1.20000'
+    - '8.00000'
+    - '3.00000'
+  JGskm_ShinseiDate:
+    distinct_count: 6
+    null_ratio: 0.7491
+    sample_values:
+    - '20150101'
+    - '1.20000'
+    - '20170320'
+    - '20180320'
+    - '0'
+    top_values:
+    - '20170320'
+    - '20150101'
+    - '20190801'
+    - '0'
+    - '1.20000'
+    - '20180320'
+  JGskm_ShinseiKigen:
+    distinct_count: 4
+    null_ratio: 0.8869
+    sample_values:
+    - '20160101'
+    - '0'
+    - '20190901'
+    - '20190902'
+    top_values:
+    - '20160101'
+    - '0'
+    - '20190901'
+    - '20190902'
+  JGskm_TousyoJikkouDate:
+    distinct_count: 5
+    null_ratio: 0.8905
+    sample_values:
+    - '20170721'
+    - '20170823'
+    - '0'
+    - '20190801'
+    - '20190802'
+    top_values:
+    - '20170823'
+    - '0'
+    - '20190801'
+    - '20190802'
+    - '20170721'
+  JGskm_Kijitu:
+    distinct_count: 206
+    null_ratio: 0.1731
+    sample_values:
+    - '20160101'
+    - '20420731'
+    - '20170823'
+    - '0'
+    - '20190901'
+    top_values:
+    - '20160101'
+    - '20170823'
+    - '0'
+    - '20190901'
+    - '20191001'
+    - '20420731'
+    - '20260403'
+    - '20260404'
+    - '20260405'
+    - '20260406'
+  JGskm_SyoninKigen:
+    distinct_count: 4
+    null_ratio: 0.8975
+    sample_values:
+    - '20170823'
+    - '0'
+    - '20190901'
+    - '20191201'
+    top_values:
+    - '20170823'
+    - '0'
+    - '20190901'
+    - '20191201'
+  JGskm_KasitukeZandaka:
+    distinct_count: 212
+    null_ratio: 0.0
+    sample_values:
+    - '1200000'
+    - '100000'
+    - '72163642'
+    - '10000000'
+    - '100000000'
+    top_values:
+    - '10000000'
+    - '1200000'
+    - '0'
+    - '70000'
+    - '745000'
+    - '450000'
+    - '100000'
+    - '253000'
+    - '40000000'
+    - '770000'
+  JGskm_TousyoJikkouKingaku:
+    distinct_count: 6
+    null_ratio: 0.7915
+    sample_values:
+    - '100000'
+    - '73000000'
+    - '0'
+    - '10000000'
+    - '4000'
+    top_values:
+    - '0'
+    - '4000'
+    - '130000'
+    - '100000'
+    - '73000000'
+    - '10000000'
+  JGskm_SikinSito:
+    distinct_count: 18
+    null_ratio: 0.0
+    sample_values:
+    - SIKINSITO101
+    - SIKINSITO239
+    - SIKINSITO107
+    - SIKINSITO244
+    - SIKINSITO360
+    top_values:
+    - SITO02
+    - SITO01
+    - SIKINSITO101
+    - SIKINSITO360
+    - '0'
+    - SIKINSITO14
+    - SIKINSITO107
+    - SIKINSITO12
+    - SIKINSITO13
+    - SIKINSITO42
+  JGskm_HosyoMokuteki:
+    distinct_count: 11
+    null_ratio: 0.1519
+    sample_values:
+    - HOSYOMOKU520000
+    - HOSYOMOKU300000
+    - HOSYOMOKU100000
+    - HOSYOMOKU710002
+    - '0'
+    top_values:
+    - HOSYO02
+    - HOSYO01
+    - HOSYOMOKU300000
+    - HOSYOMOKU611023
+    - '0'
+    - HOSYOMOKU520000
+    - HOSYOMOKUTEKI01
+    - HOSYOMOKUTEKI02
+    - HOSYOMOKU100000
+    - HOSYOMOKU710002
+  JGskm_HensaiHouhou:
+    distinct_count: 4
+    null_ratio: 0.8905
+    sample_values:
+    - HENSAIHOUHOU4
+    - HENSAIHOUHOU1
+    - '0'
+    - HENSAIHOUHOU2
+    top_values:
+    - HENSAIHOUHOU1
+    - '0'
+    - HENSAIHOUHOU2
+    - HENSAIHOUHOU4
+  JGskm_SyokaiHensaiDate:
+    distinct_count: 4
+    null_ratio: 0.8905
+    sample_values:
+    - '20171231'
+    - '0'
+    - '20190808'
+    - '20191003'
+    top_values:
+    - '20171231'
+    - '0'
+    - '20190808'
+    - '20191003'
+  JGskm_SyokaiHensaigaku:
+    distinct_count: 4
+    null_ratio: 0.9258
+    sample_values:
+    - '281776'
+    - '0'
+    - '8000'
+    - '30000'
+    top_values:
+    - '0'
+    - '8000'
+    - '30000'
+    - '281776'
+  JGskm_TotyukaiHensaigaku:
+    distinct_count: 3
+    null_ratio: 0.9399
+    sample_values:
+    - '0'
+    - '9000'
+    - '40000'
+    top_values:
+    - '0'
+    - '9000'
+    - '40000'
+  JGskm_SaisyukaiHensaigaku:
+    distinct_count: 3
+    null_ratio: 0.9258
+    sample_values:
+    - '0'
+    - '5000'
+    - '50000'
+    top_values:
+    - '0'
+    - '5000'
+    - '50000'
+  JGskm_HensaiSyuki:
+    distinct_count: 4
+    null_ratio: 0.9258
+    sample_values:
+    - '1'
+    - '0'
+    - '12'
+    - '10'
+    top_values:
+    - '0'
+    - '12'
+    - '10'
+    - '1'
+  JGskm_EntaiGanpon:
+    distinct_count: 4
+    null_ratio: 0.212
+    sample_values:
+    - '0'
+    - '12000'
+    - '730000'
+    - '10000'
+    top_values:
+    - '0'
+    - '10000'
+    - '12000'
+    - '730000'
+  JGskm_EntaiKikan:
+    distinct_count: 32
+    null_ratio: 0.2332
+    sample_values:
+    - '0'
+    - '60'
+    - '40'
+    - '1'
+    - '2'
+    top_values:
+    - '0'
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    - '6'
+    - '7'
+    - '8'
+    - '9'
+  JGskm_MondaiSaikenTokutei:
+    distinct_count: 2
+    null_ratio: 0.0106
+    sample_values:
+    - '0'
+    - '1'
+    top_values:
+    - '0'
+    - '1'
+  JGskm_JoukenHenkou:
+    distinct_count: 4
+    null_ratio: 0.0106
+    sample_values:
+    - JYOUKEN1
+    - '0'
+    - JOUKEN02
+    - JOUKEN01
+    top_values:
+    - JOUKEN02
+    - JOUKEN01
+    - JYOUKEN1
+    - '0'
+  JGskm_KjkKanwaSaiken:
+    distinct_count: 4
+    null_ratio: 0.9364
+    sample_values:
+    - '0'
+    - KASIDASIJYOKE01
+    - KASIDASIJYOKE03
+    - KASIDASIJYOKE02
+    top_values:
+    - '0'
+    - KASIDASIJYOKE01
+    - KASIDASIJYOKE03
+    - KASIDASIJYOKE02
+  JGskm_KengenKubun:
+    distinct_count: 4
+    null_ratio: 0.7173
+    sample_values:
+    - KENGEN2
+    - KENGEN1
+    - '0'
+    - KENGEN0
+    top_values:
+    - KENGEN1
+    - KENGEN0
+    - KENGEN2
+    - '0'
+  JGskm_HimotukiTanpo:
+    distinct_count: 3
+    null_ratio: 0.7173
+    sample_values:
+    - UMU2
+    - '0'
+    - UMU1
+    top_values:
+    - UMU2
+    - UMU1
+    - '0'
+  JGskm_HimotukiHosyo:
+    distinct_count: 3
+    null_ratio: 0.7173
+    sample_values:
+    - UMU2
+    - '0'
+    - UMU1
+    top_values:
+    - UMU2
+    - '0'
+    - UMU1
+  JGskm_Bikou:
+    distinct_count: 5
+    null_ratio: 0.9329
+    sample_values:
+    - 備考
+    - '0'
+    - 備考1
+    - 備考2
+    - テスト
+    top_values:
+    - '0'
+    - 備考1
+    - 備考2
+    - 備考
+    - テスト
+  JGskm_Tokukasi1HendouKingaku:
+    distinct_count: 3
+    null_ratio: 0.9011
+    sample_values:
+    - '0'
+    - '1000'
+    - '25000'
+    top_values:
+    - '0'
+    - '1000'
+    - '25000'
+  JGskm_Tokukasi1HendouJiyu:
+    distinct_count: 2
+    null_ratio: 0.9541
+    sample_values:
+    - '0'
+    - TOKUTEIHENDOU11
+    top_values:
+    - TOKUTEIHENDOU11
+    - '0'
+  JGskm_Tokukasi1HendouComment:
+    distinct_count: 3
+    null_ratio: 0.9541
+    sample_values:
+    - '0'
+    - コメント1
+    - コメント01
+    top_values:
+    - '0'
+    - コメント1
+    - コメント01
+  JGskm_Tokukasi2HendouKingaku:
+    distinct_count: 2
+    null_ratio: 0.9223
+    sample_values:
+    - '0'
+    - '14000'
+    top_values:
+    - '0'
+    - '14000'
+  JGskm_Tokukasi2HendouJiyu:
+    distinct_count: 2
+    null_ratio: 0.9753
+    sample_values:
+    - '0'
+    - TOKUTEIHENDOU24
+    top_values:
+    - '0'
+    - TOKUTEIHENDOU24
+  JGskm_Tokukasi2HendouComment:
+    distinct_count: 2
+    null_ratio: 0.9753
+    sample_values:
+    - '0'
+    - コメント02
+    top_values:
+    - '0'
+    - コメント02
+  JGskm_Tokukasi3HendouKingaku:
+    distinct_count: 1
+    null_ratio: 0.9258
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi3HendouJiyu:
+    distinct_count: 1
+    null_ratio: 0.9788
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi3HendouComment:
+    distinct_count: 1
+    null_ratio: 0.9788
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi4HendouKingaku:
+    distinct_count: 1
+    null_ratio: 0.9258
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi4HendouJiyu:
+    distinct_count: 1
+    null_ratio: 0.9788
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi4HendouComment:
+    distinct_count: 1
+    null_ratio: 0.9788
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi1KoteiKingaku:
+    distinct_count: 1
+    null_ratio: 0.9258
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi1KoteiJiyu:
+    distinct_count: 1
+    null_ratio: 0.9788
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi1KoteiComment:
+    distinct_count: 1
+    null_ratio: 0.9788
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi2KoteiKingaku:
+    distinct_count: 3
+    null_ratio: 0.8975
+    sample_values:
+    - '0'
+    - '450000'
+    - '745000'
+    top_values:
+    - '0'
+    - '745000'
+    - '450000'
+  JGskm_Tokukasi2KoteiJiyu:
+    distinct_count: 1
+    null_ratio: 0.9788
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi2KoteiComment:
+    distinct_count: 1
+    null_ratio: 0.9788
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi3KoteiKingaku:
+    distinct_count: 1
+    null_ratio: 0.9258
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi3KoteiJiyu:
+    distinct_count: 1
+    null_ratio: 0.9788
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi3KoteiComment:
+    distinct_count: 1
+    null_ratio: 0.9788
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi4KoteiKingaku:
+    distinct_count: 1
+    null_ratio: 0.9258
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi4KoteiJiyu:
+    distinct_count: 1
+    null_ratio: 0.9788
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Tokukasi4KoteiComment:
+    distinct_count: 1
+    null_ratio: 0.9788
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_Hosei:
+    distinct_count: 2
+    null_ratio: 0.0
+    sample_values:
+    - '0'
+    - '1'
+    top_values:
+    - '1'
+    - '0'
+  JGskm_LoanFlg:
+    distinct_count: 2
+    null_ratio: 0.0
+    sample_values:
+    - '0'
+    - '1'
+    top_values:
+    - '1'
+    - '0'
+  JGskm_SyohinCode:
+    distinct_count: 3
+    null_ratio: 0.9293
+    sample_values:
+    - '14725'
+    - '10912'
+    - '0'
+    top_values:
+    - '10912'
+    - '0'
+    - '14725'
+  JGskm_TanpoCode:
+    distinct_count: 3
+    null_ratio: 0.9293
+    sample_values:
+    - '520000'
+    - '1'
+    - '0'
+    top_values:
+    - '1'
+    - '0'
+    - '520000'
+  JGskm_RisokuDate:
+    distinct_count: 1
+    null_ratio: 0.9788
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_KyokudoFlg:
+    distinct_count: 1
+    null_ratio: 0.9364
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  JGskm_BISShikibetsu1:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  JGskm_BISShikibetsu2:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  JGskm_SinkiTourokuDate:
+    distinct_count: 70
+    null_ratio: 0.0
+    sample_values:
+    - 2018/03/05 11:38:58.980
+    - 2018/03/05 11:57:08.457
+    - 2018/03/05 12:02:45.490
+    - 2018/04/04 10:45:04.130
+    - 2018/04/04 12:00:23.720
+    top_values:
+    - 2026/04/02 17:28:13.150
+    - 2026/04/02 17:28:13.160
+    - 2026/04/02 17:28:13.147
+    - 2026/04/02 17:28:13.140
+    - 2026/04/02 17:28:13.130
+    - 2026/04/02 17:28:13.153
+    - 2026/04/02 17:28:13.143
+    - 2026/04/02 17:28:13.120
+    - 2019/12/13 15:02:34
+    - 2026/04/02 17:28:13.133
+  JGskm_SinkiTourokuUserNo:
+    distinct_count: 9
+    null_ratio: 0.0
+    sample_values:
+    - '177001'
+    - 0019999999
+    - '001'
+    - '0000000001'
+    - '20001'
+    top_values:
+    - TESTUSER01
+    - '0000000001'
+    - '0010000001'
+    - '177001'
+    - '0020000001'
+    - '001'
+    - '20001'
+    - '177177'
+    - 0019999999
+  JGskm_LastUpdate:
+    distinct_count: 57
+    null_ratio: 0.7067
+    sample_values:
+    - 2018/03/05 11:38:58.980
+    - 2018/03/05 11:57:08.457
+    - 2018/03/05 12:02:45.490
+    - 2018/04/04 10:45:04.130
+    - 2018/04/04 12:00:23.720
+    top_values:
+    - 2019/12/13 15:02:34
+    - 2020/07/08 16:59:52.920
+    - 2021/06/10 17:00:35.720
+    - 2024/03/22 16:54:55.367
+    - 2020/02/21 11:00:37.887
+    - 2019/12/11 11:19:45
+    - 2020/03/12 13:31:55.227
+    - 2019/12/12 14:40:16
+    - 2019/12/12 14:42:17
+    - 2025/12/16 15:42:53.743
+  JGskm_UpdateUserNo:
+    distinct_count: 9
+    null_ratio: 0.7067
+    sample_values:
+    - '177001'
+    - 0019999999
+    - '001'
+    - '0000000001'
+    - '20001'
+    top_values:
+    - '0000000001'
+    - '0010000001'
+    - '177001'
+    - '0020000001'
+    - '001'
+    - '20001'
+    - TransferTr
+    - '177177'
+    - 0019999999
+warnings: []

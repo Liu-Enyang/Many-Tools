@@ -1,0 +1,2259 @@
+table_name: PRG_changecondition
+metadata:
+  rule_source:
+  - ddl_inference
+  - csv_analysis
+  has_csv: true
+field_sources: {}
+generated_fields: {}
+default_values:
+  RGcgc_ApprovalItemCode:
+    value: R_RINGIKAMOKU33
+    source: csv_top_value
+  RGcgc_ExecScheduledDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_RepaymentLimitDay:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_CommodityCode:
+    value: '10001'
+    source: csv_top_value
+  RGcgc_SecurityCode:
+    value: '1001'
+    source: csv_top_value
+  RGcgc_ExecScheduledMoney:
+    value: '1000000'
+    source: csv_top_value
+  RGcgc_InterestRate:
+    value: '3.00000'
+    source: csv_top_value
+  RGcgc_InterestRateApplyDvsn:
+    value: R_RIRITUTEKI04
+    source: csv_top_value
+  RGcgc_VariableInterestCode:
+    value: R_RIRITUHENDO01
+    source: csv_top_value
+  RGcgc_StandardSpread:
+    value: '0.00000'
+    source: csv_top_value
+  RGcgc_RepaymentWayCode:
+    value: R_HENSAIHOU4
+    source: csv_top_value
+  RGcgc_RepayIntervalCode:
+    value: R_KANKAKU1
+    source: csv_top_value
+  RGcgc_RepaymentInterestCode:
+    value: R_RIBARAIHOU1
+    source: csv_top_value
+  RGcgc_RepayInterestIntrvlCode:
+    value: R_RBRKANKAKU1
+    source: csv_single_value
+  RGcgc_FirstRepayInterestDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_FirstRepayDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_RootManagementNo:
+    value: 0
+    source: inferred_from_type
+  RGcgc_BonusTotalMoney:
+    value: '0'
+    source: csv_top_value
+  RGcgc_FixedContractualRate:
+    value: '-1.80000'
+    source: csv_top_value
+  RGcgc_VariableContractualRate:
+    value: '-1.80000'
+    source: csv_top_value
+  RGcgc_StepRateAppliedDate:
+    value: '@@now'
+    source: inferred_from_name
+  RGcgc_CapitalUseDetailDivision:
+    value: R_SIKINSITOM230
+    source: csv_top_value
+  RGcgc_RepayDay:
+    value: '06'
+    source: csv_top_value
+  RGcgc_FractionDivision:
+    value: R_ADJHASU0
+    source: csv_top_value
+  RGcgc_RepayCount1:
+    value: '20'
+    source: csv_top_value
+  RGcgc_EveryRepayMoney2:
+    value: '51322'
+    source: csv_top_value
+  RGcgc_BonusRepayMoney:
+    value: '0'
+    source: csv_top_value
+  RGcgc_BonusRepayCount:
+    value: '0'
+    source: csv_top_value
+  RGcgc_BonusBeginDate:
+    value: '201906'
+    source: csv_single_value
+  RGcgc_BonusMonth1:
+    value: '03'
+    source: csv_top_value
+  RGcgc_BonusMonth2:
+    value: 09
+    source: csv_top_value
+  RGcgc_StartRepayDate1:
+    value: '201703'
+    source: csv_single_value
+  RGcgc_LastRepayDate1:
+    value: '201703'
+    source: csv_single_value
+  RGcgc_StartRepayDate2:
+    value: '201703'
+    source: csv_single_value
+  RGcgc_LastRepayDate2:
+    value: '201703'
+    source: csv_single_value
+  RGcgc_StartRepayDate3:
+    value: '201703'
+    source: csv_single_value
+  RGcgc_LastRepayDate3:
+    value: '201703'
+    source: csv_single_value
+  RGcgc_StartRepayDate4:
+    value: '201703'
+    source: csv_single_value
+  RGcgc_LastRepayDate4:
+    value: '201703'
+    source: csv_single_value
+  RGcgc_StartRepayDate5:
+    value: '201703'
+    source: csv_single_value
+  RGcgc_LastRepayDate5:
+    value: '201703'
+    source: csv_single_value
+  RGcgc_EveryRepayMoney3:
+    value: '0'
+    source: csv_top_value
+  RGcgc_ApprovalTypeCode:
+    value: R_RINGISYURUI4
+    source: csv_single_value
+  RGcgc_CapitalUseDivision:
+    value: R_SIKINSITO3
+    source: csv_top_value
+  RGcgc_JikkouDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_TanpoKubun:
+    value: '71'
+    source: csv_top_value
+  RGcgc_KyokudoFlg:
+    value: '0'
+    source: csv_top_value
+  RGcgc_AccruedDelayInterest:
+    value: '0'
+    source: csv_single_value
+  RGcgc_BillLimitDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_InterestSettledDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_FixInerestTerm:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_InerestSelectDivision:
+    value: R_KINRIKBN5
+    source: csv_top_value
+  RGcgc_ResponsibilityDivision:
+    value: R_RSPNSBLTY1
+    source: csv_top_value
+  RGcgc_RepaymentDivision:
+    value: '0'
+    source: csv_single_value
+  RGcgc_BNSOldRateInterest:
+    value: '0'
+    source: csv_single_value
+  RGcgc_BNSSumFlag:
+    value: '1'
+    source: csv_single_value
+  RGcgc_BNSAccruedTMoney:
+    value: '0'
+    source: csv_single_value
+  RGcgc_BNSAccruedIMoney:
+    value: '0'
+    source: csv_single_value
+  RGcgc_RegularProfitMargin:
+    value: '0.00000'
+    source: csv_single_value
+  RGcgc_DelayInterestMoney:
+    value: '0'
+    source: csv_single_value
+  RGcgc_DelayInterestCalcEndDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_ManagemntCreditFlag:
+    value: '0'
+    source: csv_single_value
+  RGcgc_InterestApplyStartDiv:
+    value: '02'
+    source: csv_single_value
+  RGcgc_PrincipalCounterItem:
+    value: '1140400'
+    source: csv_single_value
+  RGcgc_InterestCounterItem:
+    value: '7010400'
+    source: csv_single_value
+  RGcgc_PrcpInterestCollDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_NowConditionStartDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_RegularInterestEndDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_AccountStartDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_FinalHolidayRevisedDiv:
+    value: '0'
+    source: csv_single_value
+  RGcgc_NextInterestSelectDiv:
+    value: '00'
+    source: csv_top_value
+  RGcgc_NextInterestMoney:
+    value: '0'
+    source: csv_top_value
+  RGcgc_NextRate:
+    value: '0.00000'
+    source: csv_single_value
+  RGcgc_NextRateApplyDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_SyokaiRibaraiDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_ConsumerLoanFlag:
+    value: '0'
+    source: csv_single_value
+  RGcgc_ConditionChangeDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_ConditionChangeFlag:
+    value: '0'
+    source: csv_single_value
+  RGcgc_LastRepayInterestDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_LastRateEndDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_OverdraftInterestMoney:
+    value: '0'
+    source: csv_single_value
+  RGcgc_PaymentInSubrogationFlag:
+    value: '0'
+    source: csv_single_value
+  RGcgc_AdditionalInterestMoney:
+    value: '0'
+    source: csv_single_value
+  RGcgc_NotFixedFormSumMoney:
+    value: '0'
+    source: csv_single_value
+  RGcgc_InsideAmount:
+    value: '0'
+    source: csv_single_value
+  RGcgc_FloatingLowerRate:
+    value: '0.00000'
+    source: csv_single_value
+  RGcgc_AccruedTMoney:
+    value: '0'
+    source: csv_single_value
+  RGcgc_AccruedIMoney:
+    value: '0'
+    source: csv_single_value
+  RGcgc_ReturnInterestMoney:
+    value: '0'
+    source: csv_single_value
+  RGcgc_TreatProfitMargin:
+    value: '0.00000'
+    source: csv_single_value
+  RGcgc_InterestCollectedEndDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_InterestCollectedDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_InterestCalcDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_LatestCalcMoveDate:
+    value: '@@now'
+    source: inferred_from_name
+  RGcgc_GroupInsuranceDivision:
+    value: R_DANSINKBN1
+    source: csv_single_value
+  RGcgc_FloatingUpperRate:
+    value: '0.00000'
+    source: csv_single_value
+  RGcgc_InstallmentChangeDiv:
+    value: '1'
+    source: csv_single_value
+  RGcgc_InstallmentBaseYears:
+    value: '0'
+    source: csv_single_value
+  RGcgc_RegularInterestCount:
+    value: '0'
+    source: csv_single_value
+  RGcgc_NoFloatingBDivideFlag:
+    value: '1'
+    source: csv_single_value
+  RGcgc_SyokaiHensaiDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_LastLimitDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_FinalDivideExecuteDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGcgc_KyokudonaiZandaka:
+    value: '0'
+    source: csv_top_value
+  RGcgc_KyokudoZandaka:
+    value: '12000000'
+    source: csv_top_value
+  RGcgc_KijituTo:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  InsertDateTime:
+    value: '@@now'
+    source: inferred_from_type
+  InsertUserNo:
+    value: TESTUSER
+    source: inferred_from_name
+  UpdateDateTime:
+    value: '@@now'
+    source: inferred_from_type
+  UpdateUserNo:
+    value: TESTUSER
+    source: inferred_from_name
+value_candidates:
+  RGcgc_ApprovalItemCode:
+    type: enum
+    values:
+    - R_RINGIKAMOKU33
+    - R_RINGIKAMOKU32
+    - R_RINGIKAMOKU38
+    - R_RINGIKAMOKU40
+    source: csv_all_values
+  RGcgc_RepaymentLimitDay:
+    type: sampled
+    values:
+    - '20190706'
+    - '20271101'
+    - '20220731'
+    - '20271230'
+    - '20191030'
+    - '20241206'
+    - '20350708'
+    - '20190401'
+    - '20200214'
+    - '20340731'
+    source: csv_top_values
+    note: distinct_count=35
+  RGcgc_CommodityCode:
+    type: enum
+    values:
+    - '52200'
+    - '10109'
+    - '10001'
+    - '10210'
+    - '10304'
+    - '60615'
+    - '10002'
+    - '99912'
+    - '60231'
+    - '14725'
+    - '50163'
+    - '10800'
+    - '99921'
+    - '10900'
+    - '60233'
+    - '12068'
+    - '50900'
+    - '0010001'
+    - '52131'
+    - '03'
+    source: csv_all_values
+  RGcgc_SecurityCode:
+    type: enum
+    values:
+    - '1001'
+    - '4050'
+    - '14725'
+    - '4007'
+    - '4015'
+    - '4049'
+    - '9999'
+    - '4029'
+    source: csv_all_values
+  RGcgc_ExecScheduledMoney:
+    type: enum
+    values:
+    - '10900000'
+    - '100000'
+    - '1000000'
+    - '3000000'
+    - '12000000'
+    - '2500000'
+    - '20000000'
+    - '30000000'
+    - '13000000'
+    - '139000000'
+    - '37000000'
+    - '500000'
+    - '550000'
+    - '750'
+    - '100000000'
+    - '11111'
+    - '1250000'
+    - '10000'
+    - '1100000'
+    source: csv_all_values
+  RGcgc_InterestRate:
+    type: enum
+    values:
+    - '1.00000'
+    - '10.00000'
+    - '3.00000'
+    - '3.92500'
+    - '0.00000'
+    - '2.50000'
+    - '1.50000'
+    - '0.74000'
+    - '0.60000'
+    - '7.00000'
+    - '1.60000'
+    - '1.30000'
+    - '2.80000'
+    - '0.03000'
+    - '2.00000'
+    - '0.10000'
+    - '3.99900'
+    - '0.80000'
+    source: csv_all_values
+  RGcgc_InterestRateApplyDvsn:
+    type: enum
+    values:
+    - R_RIRITUTEKI04
+    - R_RIRITUTEKI03
+    - R_RIRITUTEKI51
+    source: csv_all_values
+  RGcgc_VariableInterestCode:
+    type: enum
+    values:
+    - R_RIRITUHENDO02
+    - R_RIRITUHENDO01
+    - R_RIRITUHENDO03
+    source: csv_all_values
+  RGcgc_StandardSpread:
+    type: enum
+    values:
+    - '0.30000'
+    - '0.00000'
+    - '1.00000'
+    source: csv_all_values
+  RGcgc_RepaymentWayCode:
+    type: enum
+    values:
+    - R_HENSAIHOU4
+    - R_HENSAIHOU1
+    - R_HENSAIHOU8
+    - R_HENSAIHOU2
+    - R_HENSAIHOU3
+    - R_HENSAIHOU5
+    source: csv_all_values
+  RGcgc_RepayIntervalCode:
+    type: enum
+    values:
+    - R_KANKAKU1
+    - R_KANKAKU0
+    - R_KANKAKU2
+    source: csv_all_values
+  RGcgc_RepaymentInterestCode:
+    type: enum
+    values:
+    - R_RIBARAIHOU1
+    - R_RIBARAIHOU2
+    source: csv_all_values
+  RGcgc_RepayInterestIntrvlCode:
+    type: enum
+    values:
+    - R_RBRKANKAKU1
+    source: csv_all_values
+  RGcgc_BonusTotalMoney:
+    type: enum
+    values:
+    - '0'
+    - '110'
+    - '100'
+    source: csv_all_values
+  RGcgc_FixedContractualRate:
+    type: enum
+    values:
+    - '-1.80000'
+    - '0.00000'
+    - '0.50000'
+    - '0.20000'
+    - '1.00000'
+    source: csv_all_values
+  RGcgc_VariableContractualRate:
+    type: enum
+    values:
+    - '-1.90000'
+    - '0.00000'
+    - '0.30000'
+    - '0.10000'
+    - '1.00000'
+    - '-1.80000'
+    - '-2.10000'
+    source: csv_all_values
+  RGcgc_CapitalUseDetailDivision:
+    type: enum
+    values:
+    - R_SIKINSITOM355
+    - R_SIKINSITOM230
+    - R_SIKINSITOM129
+    - R_SIKINSITOM357
+    - R_SIKINSITOM351
+    - R_SIKINSITOM244
+    - R_SIKINSITOM353
+    - R_SIKINSITOM369
+    - R_SIKINSITOM360
+    - R_SIKINSITOM354
+    - R_SIKINSITOM101
+    source: csv_all_values
+  RGcgc_RepayDay:
+    type: enum
+    values:
+    - '31'
+    - '06'
+    - '01'
+    - '25'
+    - '30'
+    - 08
+    - '04'
+    source: csv_all_values
+  RGcgc_FractionDivision:
+    type: enum
+    values:
+    - R_ADJHASU0
+    - R_ADJHASU2
+    source: csv_all_values
+  RGcgc_RepayCount1:
+    type: enum
+    values:
+    - '120'
+    - '20'
+    - '8'
+    - '240'
+    - '1'
+    - '22'
+    - '24'
+    - '420'
+    source: csv_all_values
+  RGcgc_EveryRepayMoney2:
+    type: enum
+    values:
+    - '95488'
+    - '417000'
+    - '51322'
+    - '144286'
+    - '317752'
+    - '4856'
+    - '25329'
+    - '25327'
+    - '50000'
+    - '5001'
+    - '858'
+    - '8587'
+    - '42102'
+    - '1551320'
+    - '458912'
+    - '4192'
+    - '29763'
+    - '130110'
+    source: csv_all_values
+  RGcgc_BonusRepayMoney:
+    type: enum
+    values:
+    - '0'
+    - '33'
+    source: csv_all_values
+  RGcgc_BonusRepayCount:
+    type: enum
+    values:
+    - '0'
+    - '3'
+    source: csv_all_values
+  RGcgc_BonusMonth1:
+    type: enum
+    values:
+    - '03'
+    - '06'
+    source: csv_all_values
+  RGcgc_BonusMonth2:
+    type: enum
+    values:
+    - 09
+    - '12'
+    source: csv_all_values
+  RGcgc_StartRepayDate1:
+    type: enum
+    values:
+    - '201703'
+    source: csv_all_values
+  RGcgc_LastRepayDate1:
+    type: enum
+    values:
+    - '201703'
+    source: csv_all_values
+  RGcgc_StartRepayDate2:
+    type: enum
+    values:
+    - '201703'
+    source: csv_all_values
+  RGcgc_LastRepayDate2:
+    type: enum
+    values:
+    - '201703'
+    source: csv_all_values
+  RGcgc_StartRepayDate3:
+    type: enum
+    values:
+    - '201703'
+    source: csv_all_values
+  RGcgc_LastRepayDate3:
+    type: enum
+    values:
+    - '201703'
+    source: csv_all_values
+  RGcgc_StartRepayDate4:
+    type: enum
+    values:
+    - '201703'
+    source: csv_all_values
+  RGcgc_LastRepayDate4:
+    type: enum
+    values:
+    - '201703'
+    source: csv_all_values
+  RGcgc_StartRepayDate5:
+    type: enum
+    values:
+    - '201703'
+    source: csv_all_values
+  RGcgc_LastRepayDate5:
+    type: enum
+    values:
+    - '201703'
+    source: csv_all_values
+  RGcgc_EveryRepayMoney3:
+    type: enum
+    values:
+    - '0'
+    - '20'
+    - '8100000'
+    source: csv_all_values
+  RGcgc_ApprovalTypeCode:
+    type: enum
+    values:
+    - R_RINGISYURUI4
+    source: csv_all_values
+  RGcgc_CapitalUseDivision:
+    type: enum
+    values:
+    - R_SIKINSITO3
+    - R_SIKINSITO2
+    - R_SIKINSITO1
+    source: csv_all_values
+  RGcgc_TanpoKubun:
+    type: enum
+    values:
+    - '71'
+    - '51'
+    - '72'
+    - '61'
+    - '10'
+    - '90'
+    - '73'
+    source: csv_all_values
+  RGcgc_KyokudoFlg:
+    type: enum
+    values:
+    - '0'
+    - '1'
+    source: csv_all_values
+  RGcgc_AccruedDelayInterest:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_FixInerestTerm:
+    type: enum
+    values:
+    - '20170330'
+    source: csv_all_values
+  RGcgc_InerestSelectDivision:
+    type: enum
+    values:
+    - R_KINRIKBN10
+    - R_KINRIKBN2
+    - R_KINRIKBN5
+    - R_KINRIKBN7
+    source: csv_all_values
+  RGcgc_ResponsibilityDivision:
+    type: enum
+    values:
+    - R_RSPNSBLTY2
+    - R_RSPNSBLTY1
+    - R_RSPNSBLTY9
+    source: csv_all_values
+  RGcgc_RepaymentDivision:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_BNSOldRateInterest:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_BNSSumFlag:
+    type: enum
+    values:
+    - '1'
+    source: csv_all_values
+  RGcgc_BNSAccruedTMoney:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_BNSAccruedIMoney:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_RegularProfitMargin:
+    type: enum
+    values:
+    - '0.00000'
+    source: csv_all_values
+  RGcgc_DelayInterestMoney:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_ManagemntCreditFlag:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_InterestApplyStartDiv:
+    type: enum
+    values:
+    - '02'
+    source: csv_all_values
+  RGcgc_PrincipalCounterItem:
+    type: enum
+    values:
+    - '1140400'
+    source: csv_all_values
+  RGcgc_InterestCounterItem:
+    type: enum
+    values:
+    - '7010400'
+    source: csv_all_values
+  RGcgc_FinalHolidayRevisedDiv:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_NextInterestSelectDiv:
+    type: enum
+    values:
+    - '00'
+    - '2'
+    - '1'
+    - '7'
+    source: csv_all_values
+  RGcgc_NextInterestMoney:
+    type: enum
+    values:
+    - '0'
+    - '1'
+    source: csv_all_values
+  RGcgc_NextRate:
+    type: enum
+    values:
+    - '0.00000'
+    source: csv_all_values
+  RGcgc_ConsumerLoanFlag:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_ConditionChangeFlag:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_OverdraftInterestMoney:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_PaymentInSubrogationFlag:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_AdditionalInterestMoney:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_NotFixedFormSumMoney:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_InsideAmount:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_FloatingLowerRate:
+    type: enum
+    values:
+    - '0.00000'
+    source: csv_all_values
+  RGcgc_AccruedTMoney:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_AccruedIMoney:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_ReturnInterestMoney:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_TreatProfitMargin:
+    type: enum
+    values:
+    - '0.00000'
+    source: csv_all_values
+  RGcgc_GroupInsuranceDivision:
+    type: enum
+    values:
+    - R_DANSINKBN1
+    source: csv_all_values
+  RGcgc_FloatingUpperRate:
+    type: enum
+    values:
+    - '0.00000'
+    source: csv_all_values
+  RGcgc_InstallmentChangeDiv:
+    type: enum
+    values:
+    - '1'
+    source: csv_all_values
+  RGcgc_InstallmentBaseYears:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_RegularInterestCount:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGcgc_NoFloatingBDivideFlag:
+    type: enum
+    values:
+    - '1'
+    source: csv_all_values
+  RGcgc_KijituTo:
+    type: enum
+    values:
+    - '20191030'
+    - '20260805'
+    source: csv_all_values
+  InsertDateTime:
+    type: sampled
+    values:
+    - 2024/11/18 17:50:04.117
+    - 2017/03/08 11:01:30.220
+    - 2017/10/23 21:34:30.827
+    - 2017/10/24 14:54:40.610
+    - 2017/10/24 15:24:21.003
+    - 2017/10/24 18:59:43.633
+    - 2017/10/24 19:59:18.263
+    - 2017/10/24 20:24:26.393
+    - 2017/10/24 20:31:39.253
+    - 2017/10/24 21:02:24.440
+    source: csv_top_values
+    note: distinct_count=132
+  UpdateDateTime:
+    type: sampled
+    values:
+    - 2024/11/18 17:50:04.117
+    - 2017/03/08 11:01:30.220
+    - 2017/10/23 21:34:30.827
+    - 2017/10/24 14:54:40.610
+    - 2017/10/24 15:24:21.003
+    - 2017/10/24 18:59:43.633
+    - 2017/10/24 19:59:18.263
+    - 2017/10/24 20:24:26.393
+    - 2017/10/24 20:31:39.253
+    - 2017/10/24 21:02:24.440
+    source: csv_top_values
+    note: distinct_count=132
+analysis:
+  RGcgc_ApprovalNo:
+    distinct_count: 132
+    null_ratio: 0.0
+    sample_values:
+    - 00300029
+    - '16300000'
+    - '17300051'
+    - '17300056'
+    - '17300057'
+    top_values:
+    - 00300029
+    - '16300000'
+    - '17300051'
+    - '17300056'
+    - '17300057'
+    - '17300063'
+    - '17300064'
+    - '17300067'
+    - '17300068'
+    - '17300069'
+  RGcgc_PrevApprovalNo:
+    distinct_count: 89
+    null_ratio: 0.0
+    sample_values:
+    - '72470006'
+    - '00000001'
+    - '17300040'
+    - '17300053'
+    - '17300052'
+    top_values:
+    - '18300259'
+    - '17300065'
+    - '20300027'
+    - '52471777'
+    - '20300012'
+    - '18300027'
+    - '17300052'
+    - '19300123'
+    - '17300054'
+    - '17300055'
+  RGcgc_ApprovalItemCode:
+    distinct_count: 4
+    null_ratio: 0.0
+    sample_values:
+    - R_RINGIKAMOKU33
+    - R_RINGIKAMOKU32
+    - R_RINGIKAMOKU38
+    - R_RINGIKAMOKU40
+    top_values:
+    - R_RINGIKAMOKU33
+    - R_RINGIKAMOKU32
+    - R_RINGIKAMOKU38
+    - R_RINGIKAMOKU40
+  RGcgc_ExecScheduledDate:
+    distinct_count: 36
+    null_ratio: 0.0
+    sample_values:
+    - '20240708'
+    - '20170323'
+    - '20171215'
+    - '20171115'
+    - '20171214'
+    top_values:
+    - '20171115'
+    - '20180730'
+    - '20200708'
+    - '20190415'
+    - '20171215'
+    - '20250708'
+    - '20260130'
+    - '20190301'
+    - '20190625'
+    - '20240708'
+  RGcgc_RepaymentLimitDay:
+    distinct_count: 35
+    null_ratio: 0.0
+    sample_values:
+    - '20340731'
+    - '20170330'
+    - '20190806'
+    - '20190706'
+    - '20191030'
+    top_values:
+    - '20190706'
+    - '20271101'
+    - '20220731'
+    - '20271230'
+    - '20191030'
+    - '20241206'
+    - '20350708'
+    - '20190401'
+    - '20200214'
+    - '20340731'
+  RGcgc_CommodityCode:
+    distinct_count: 20
+    null_ratio: 0.1439
+    sample_values:
+    - '52200'
+    - '10109'
+    - '10001'
+    - '10210'
+    - '10304'
+    top_values:
+    - '10001'
+    - '52200'
+    - '60231'
+    - '52131'
+    - '10304'
+    - '99912'
+    - '10210'
+    - '99921'
+    - '10002'
+    - '0010001'
+  RGcgc_SecurityCode:
+    distinct_count: 8
+    null_ratio: 0.3485
+    sample_values:
+    - '1001'
+    - '4050'
+    - '14725'
+    - '4007'
+    - '4015'
+    top_values:
+    - '1001'
+    - '4050'
+    - '4029'
+    - '14725'
+    - '4007'
+    - '4015'
+    - '4049'
+    - '9999'
+  RGcgc_ExecScheduledMoney:
+    distinct_count: 19
+    null_ratio: 0.0
+    sample_values:
+    - '10900000'
+    - '100000'
+    - '1000000'
+    - '3000000'
+    - '12000000'
+    top_values:
+    - '1000000'
+    - '37000000'
+    - '11111'
+    - '10900000'
+    - '500000'
+    - '100000'
+    - '12000000'
+    - '100000000'
+    - '3000000'
+    - '750'
+  RGcgc_InterestRate:
+    distinct_count: 18
+    null_ratio: 0.0
+    sample_values:
+    - '1.00000'
+    - '10.00000'
+    - '3.00000'
+    - '3.92500'
+    - '0.00000'
+    top_values:
+    - '3.00000'
+    - '0.10000'
+    - '0.60000'
+    - '1.50000'
+    - '1.00000'
+    - '3.92500'
+    - '2.50000'
+    - '0.80000'
+    - '0.00000'
+    - '1.60000'
+  RGcgc_InterestRateApplyDvsn:
+    distinct_count: 3
+    null_ratio: 0.7727
+    sample_values:
+    - R_RIRITUTEKI04
+    - R_RIRITUTEKI03
+    - R_RIRITUTEKI51
+    top_values:
+    - R_RIRITUTEKI04
+    - R_RIRITUTEKI03
+    - R_RIRITUTEKI51
+  RGcgc_InterestSupplyRate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_VariableInterestCode:
+    distinct_count: 3
+    null_ratio: 0.197
+    sample_values:
+    - R_RIRITUHENDO02
+    - R_RIRITUHENDO01
+    - R_RIRITUHENDO03
+    top_values:
+    - R_RIRITUHENDO01
+    - R_RIRITUHENDO02
+    - R_RIRITUHENDO03
+  RGcgc_SlideRange:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_StandardSpread:
+    distinct_count: 3
+    null_ratio: 0.7348
+    sample_values:
+    - '0.30000'
+    - '0.00000'
+    - '1.00000'
+    top_values:
+    - '0.00000'
+    - '0.30000'
+    - '1.00000'
+  RGcgc_RepaymentWayCode:
+    distinct_count: 6
+    null_ratio: 0.1894
+    sample_values:
+    - R_HENSAIHOU4
+    - R_HENSAIHOU1
+    - R_HENSAIHOU8
+    - R_HENSAIHOU2
+    - R_HENSAIHOU3
+    top_values:
+    - R_HENSAIHOU4
+    - R_HENSAIHOU2
+    - R_HENSAIHOU1
+    - R_HENSAIHOU5
+    - R_HENSAIHOU8
+    - R_HENSAIHOU3
+  RGcgc_RepayIntervalCode:
+    distinct_count: 3
+    null_ratio: 0.3333
+    sample_values:
+    - R_KANKAKU1
+    - R_KANKAKU0
+    - R_KANKAKU2
+    top_values:
+    - R_KANKAKU1
+    - R_KANKAKU0
+    - R_KANKAKU2
+  RGcgc_RepaymentInterestCode:
+    distinct_count: 2
+    null_ratio: 0.1742
+    sample_values:
+    - R_RIBARAIHOU1
+    - R_RIBARAIHOU2
+    top_values:
+    - R_RIBARAIHOU1
+    - R_RIBARAIHOU2
+  RGcgc_RepayInterestIntrvlCode:
+    distinct_count: 1
+    null_ratio: 0.1818
+    sample_values:
+    - R_RBRKANKAKU1
+    top_values:
+    - R_RBRKANKAKU1
+  RGcgc_FirstRepayInterestDate:
+    distinct_count: 25
+    null_ratio: 0.1894
+    sample_values:
+    - '20240801'
+    - '20170330'
+    - '20180106'
+    - '20171206'
+    - '20181206'
+    top_values:
+    - '20171206'
+    - '20170330'
+    - '20200831'
+    - '20180106'
+    - '20250801'
+    - '20190725'
+    - '20240506'
+    - '20240801'
+    - '20190506'
+    - '20201006'
+  RGcgc_FirstRepayDate:
+    distinct_count: 23
+    null_ratio: 0.2424
+    sample_values:
+    - '20240801'
+    - '20170330'
+    - '20180106'
+    - '20171206'
+    - '20181206'
+    top_values:
+    - '20171206'
+    - '20170330'
+    - '20200831'
+    - '20180106'
+    - '20250801'
+    - '20240506'
+    - '20240801'
+    - '20190506'
+    - '20201006'
+    - '20181206'
+  RGcgc_BeforeExecMoney:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_BeforeInterestRate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_RootManagementNo:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_BonusTotalMoney:
+    distinct_count: 3
+    null_ratio: 0.9394
+    sample_values:
+    - '0'
+    - '110'
+    - '100'
+    top_values:
+    - '0'
+    - '110'
+    - '100'
+  RGcgc_FixedContractualRate:
+    distinct_count: 5
+    null_ratio: 0.5
+    sample_values:
+    - '-1.80000'
+    - '0.00000'
+    - '0.50000'
+    - '0.20000'
+    - '1.00000'
+    top_values:
+    - '-1.80000'
+    - '0.00000'
+    - '0.50000'
+    - '0.20000'
+    - '1.00000'
+  RGcgc_VariableContractualRate:
+    distinct_count: 7
+    null_ratio: 0.5
+    sample_values:
+    - '-1.90000'
+    - '0.00000'
+    - '0.30000'
+    - '0.10000'
+    - '1.00000'
+    top_values:
+    - '-1.80000'
+    - '0.00000'
+    - '0.30000'
+    - '-1.90000'
+    - '-2.10000'
+    - '0.10000'
+    - '1.00000'
+  RGcgc_StepRateAppliedDate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_StepRate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_StepPeriod:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_CapitalUseDetailDivision:
+    distinct_count: 11
+    null_ratio: 0.1894
+    sample_values:
+    - R_SIKINSITOM355
+    - R_SIKINSITOM230
+    - R_SIKINSITOM129
+    - R_SIKINSITOM357
+    - R_SIKINSITOM351
+    top_values:
+    - R_SIKINSITOM230
+    - R_SIKINSITOM357
+    - R_SIKINSITOM353
+    - R_SIKINSITOM101
+    - R_SIKINSITOM355
+    - R_SIKINSITOM129
+    - R_SIKINSITOM354
+    - R_SIKINSITOM351
+    - R_SIKINSITOM244
+    - R_SIKINSITOM369
+  RGcgc_RepayDay:
+    distinct_count: 7
+    null_ratio: 0.197
+    sample_values:
+    - '31'
+    - '06'
+    - '01'
+    - '25'
+    - '30'
+    top_values:
+    - '06'
+    - '31'
+    - '01'
+    - '25'
+    - 08
+    - '30'
+    - '04'
+  RGcgc_FractionDivision:
+    distinct_count: 2
+    null_ratio: 0.3864
+    sample_values:
+    - R_ADJHASU0
+    - R_ADJHASU2
+    top_values:
+    - R_ADJHASU0
+    - R_ADJHASU2
+  RGcgc_DeferInterestIntrvlCode:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_RepayCount1:
+    distinct_count: 8
+    null_ratio: 0.3409
+    sample_values:
+    - '120'
+    - '20'
+    - '8'
+    - '240'
+    - '1'
+    top_values:
+    - '20'
+    - '120'
+    - '24'
+    - '1'
+    - '8'
+    - '420'
+    - '240'
+    - '22'
+  RGcgc_EveryRepayMoney2:
+    distinct_count: 18
+    null_ratio: 0.3939
+    sample_values:
+    - '95488'
+    - '417000'
+    - '51322'
+    - '144286'
+    - '317752'
+    top_values:
+    - '51322'
+    - '317752'
+    - '25329'
+    - '50000'
+    - '417000'
+    - '458912'
+    - '144286'
+    - '29763'
+    - '95488'
+    - '25327'
+  RGcgc_BonusRepayMoney:
+    distinct_count: 2
+    null_ratio: 0.9318
+    sample_values:
+    - '0'
+    - '33'
+    top_values:
+    - '0'
+    - '33'
+  RGcgc_BonusRepayCount:
+    distinct_count: 2
+    null_ratio: 0.9394
+    sample_values:
+    - '0'
+    - '3'
+    top_values:
+    - '0'
+    - '3'
+  RGcgc_BonusBeginDate:
+    distinct_count: 1
+    null_ratio: 0.9848
+    sample_values:
+    - '201906'
+    top_values:
+    - '201906'
+  RGcgc_BonusMonth1:
+    distinct_count: 2
+    null_ratio: 0.9621
+    sample_values:
+    - '03'
+    - '06'
+    top_values:
+    - '03'
+    - '06'
+  RGcgc_BonusMonth2:
+    distinct_count: 2
+    null_ratio: 0.9621
+    sample_values:
+    - 09
+    - '12'
+    top_values:
+    - 09
+    - '12'
+  RGcgc_StartRepayDate1:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '201703'
+    top_values:
+    - '201703'
+  RGcgc_RepayDay1:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_LastRepayDate1:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '201703'
+    top_values:
+    - '201703'
+  RGcgc_RepayIntervalCode1:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_IncreaseDecreaseMoney1:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_StartRepayDate2:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '201703'
+    top_values:
+    - '201703'
+  RGcgc_RepayDay2:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_LastRepayDate2:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '201703'
+    top_values:
+    - '201703'
+  RGcgc_RepayIntervalCode2:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_IncreaseDecreaseMoney2:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_StartRepayDate3:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '201703'
+    top_values:
+    - '201703'
+  RGcgc_RepayDay3:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_LastRepayDate3:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '201703'
+    top_values:
+    - '201703'
+  RGcgc_RepayIntervalCode3:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_IncreaseDecreaseMoney3:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_StartRepayDate4:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '201703'
+    top_values:
+    - '201703'
+  RGcgc_RepayDay4:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_LastRepayDate4:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '201703'
+    top_values:
+    - '201703'
+  RGcgc_RepayIntervalCode4:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_IncreaseDecreaseMoney4:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_StartRepayDate5:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '201703'
+    top_values:
+    - '201703'
+  RGcgc_RepayDay5:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_LastRepayDate5:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '201703'
+    top_values:
+    - '201703'
+  RGcgc_RepayIntervalCode5:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_IncreaseDecreaseMoney5:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_EveryRepayMoney3:
+    distinct_count: 3
+    null_ratio: 0.9394
+    sample_values:
+    - '0'
+    - '20'
+    - '8100000'
+    top_values:
+    - '0'
+    - '20'
+    - '8100000'
+  RGcgc_ApprovalTypeCode:
+    distinct_count: 1
+    null_ratio: 0.0985
+    sample_values:
+    - R_RINGISYURUI4
+    top_values:
+    - R_RINGISYURUI4
+  RGcgc_CapitalUseDivision:
+    distinct_count: 3
+    null_ratio: 0.1894
+    sample_values:
+    - R_SIKINSITO3
+    - R_SIKINSITO2
+    - R_SIKINSITO1
+    top_values:
+    - R_SIKINSITO3
+    - R_SIKINSITO2
+    - R_SIKINSITO1
+  RGcgc_JikkouDate:
+    distinct_count: 15
+    null_ratio: 0.5379
+    sample_values:
+    - '20240708'
+    - '20170323'
+    - '20171215'
+    - '20171115'
+    - '20171214'
+    top_values:
+    - '20171115'
+    - '20180730'
+    - '20171215'
+    - '20190301'
+    - '20181115'
+    - '20240708'
+    - '20181001'
+    - '20181214'
+    - '20170323'
+    - '20171214'
+  RGcgc_TanpoKubun:
+    distinct_count: 7
+    null_ratio: 0.1364
+    sample_values:
+    - '71'
+    - '51'
+    - '72'
+    - '61'
+    - '10'
+    top_values:
+    - '71'
+    - '72'
+    - '10'
+    - '61'
+    - '51'
+    - '90'
+    - '73'
+  RGcgc_KyokudoFlg:
+    distinct_count: 2
+    null_ratio: 0.1136
+    sample_values:
+    - '0'
+    - '1'
+    top_values:
+    - '0'
+    - '1'
+  RGcgc_AccruedDelayInterest:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_BillLimitDate:
+    distinct_count: 3
+    null_ratio: 0.8409
+    sample_values:
+    - '20170410'
+    - '20171129'
+    - '20191129'
+    top_values:
+    - '20170410'
+    - '20171129'
+    - '20191129'
+  RGcgc_InterestSettledDate:
+    distinct_count: 8
+    null_ratio: 0.7652
+    sample_values:
+    - '20170405'
+    - '20171128'
+    - '20171024'
+    - '20171129'
+    - '20180829'
+    top_values:
+    - '20170405'
+    - '20240129'
+    - '20171128'
+    - '20171024'
+    - '20180829'
+    - '20250731'
+    - '20171129'
+    - '20190430'
+  RGcgc_FixInerestTerm:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '20170330'
+    top_values:
+    - '20170330'
+  RGcgc_InerestSelectDivision:
+    distinct_count: 4
+    null_ratio: 0.8182
+    sample_values:
+    - R_KINRIKBN10
+    - R_KINRIKBN2
+    - R_KINRIKBN5
+    - R_KINRIKBN7
+    top_values:
+    - R_KINRIKBN5
+    - R_KINRIKBN2
+    - R_KINRIKBN7
+    - R_KINRIKBN10
+  RGcgc_ResponsibilityDivision:
+    distinct_count: 3
+    null_ratio: 0.9318
+    sample_values:
+    - R_RSPNSBLTY2
+    - R_RSPNSBLTY1
+    - R_RSPNSBLTY9
+    top_values:
+    - R_RSPNSBLTY1
+    - R_RSPNSBLTY9
+    - R_RSPNSBLTY2
+  RGcgc_RepaymentDivision:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_BNSOldRateInterest:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_BNSSumFlag:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '1'
+    top_values:
+    - '1'
+  RGcgc_BNSAccruedTMoney:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_BNSAccruedIMoney:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_RegularProfitMargin:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0.00000'
+    top_values:
+    - '0.00000'
+  RGcgc_DelayInterestMoney:
+    distinct_count: 1
+    null_ratio: 0.9773
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_DelayInterestCalcEndDate:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '20170330'
+    top_values:
+    - '20170330'
+  RGcgc_ManagemntCreditFlag:
+    distinct_count: 1
+    null_ratio: 0.9091
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_TimeLimitExStopFlag:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_InterestApplyStartDiv:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '02'
+    top_values:
+    - '02'
+  RGcgc_PrincipalCounterItem:
+    distinct_count: 1
+    null_ratio: 0.9924
+    sample_values:
+    - '1140400'
+    top_values:
+    - '1140400'
+  RGcgc_InterestCounterItem:
+    distinct_count: 1
+    null_ratio: 0.9924
+    sample_values:
+    - '7010400'
+    top_values:
+    - '7010400'
+  RGcgc_PrcpInterestCollDate:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '20170330'
+    top_values:
+    - '20170330'
+  RGcgc_NowConditionStartDate:
+    distinct_count: 8
+    null_ratio: 0.8258
+    sample_values:
+    - '20170330'
+    - '20171001'
+    - '20171201'
+    - '20180910'
+    - '20181101'
+    top_values:
+    - '20170330'
+    - '20171001'
+    - '20200101'
+    - '20171201'
+    - '20180910'
+    - '20181101'
+    - '20181130'
+    - '20200708'
+  RGcgc_RegularInterestEndDate:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '20170330'
+    top_values:
+    - '20170330'
+  RGcgc_AccountStartDate:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '20170330'
+    top_values:
+    - '20170330'
+  RGcgc_FinalHolidayRevisedDiv:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_NextInterestSelectDiv:
+    distinct_count: 4
+    null_ratio: 0.9167
+    sample_values:
+    - '00'
+    - '2'
+    - '1'
+    - '7'
+    top_values:
+    - '00'
+    - '7'
+    - '2'
+    - '1'
+  RGcgc_NextInterestMoney:
+    distinct_count: 2
+    null_ratio: 0.9773
+    sample_values:
+    - '0'
+    - '1'
+    top_values:
+    - '0'
+    - '1'
+  RGcgc_NextRate:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0.00000'
+    top_values:
+    - '0.00000'
+  RGcgc_NextRateApplyDate:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '20170330'
+    top_values:
+    - '20170330'
+  RGcgc_ExecuteStopFlag:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_SyokaiRibaraiDate:
+    distinct_count: 5
+    null_ratio: 0.8182
+    sample_values:
+    - '20170330'
+    - '20181201'
+    - '20190101'
+    - '20241001'
+    - '20250808'
+    top_values:
+    - '20170330'
+    - '20250808'
+    - '20181201'
+    - '20190101'
+    - '20241001'
+  RGcgc_ConsumerLoanFlag:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_ConditionChangeDate:
+    distinct_count: 2
+    null_ratio: 0.8864
+    sample_values:
+    - '20170330'
+    - '20171025'
+    top_values:
+    - '20170330'
+    - '20171025'
+  RGcgc_ConditionChangeFlag:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_LastRepayInterestDate:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '20170330'
+    top_values:
+    - '20170330'
+  RGcgc_LastRateEndDate:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '20170330'
+    top_values:
+    - '20170330'
+  RGcgc_OverdraftInterestMoney:
+    distinct_count: 1
+    null_ratio: 0.9773
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_PaymentInSubrogationFlag:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_AdditionalInterestMoney:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_NotFixedFormSumMoney:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_InsideAmount:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_FloatingLowerRate:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0.00000'
+    top_values:
+    - '0.00000'
+  RGcgc_AccruedDelayMoney:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_AccruedTMoney:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_AccruedIMoney:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_ReturnInterestMoney:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_TreatProfitMargin:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0.00000'
+    top_values:
+    - '0.00000'
+  RGcgc_InterestCollectedEndDate:
+    distinct_count: 3
+    null_ratio: 0.8788
+    sample_values:
+    - '20170330'
+    - '20181115'
+    - '20280825'
+    top_values:
+    - '20170330'
+    - '20181115'
+    - '20280825'
+  RGcgc_InterestCollectedDate:
+    distinct_count: 2
+    null_ratio: 0.8864
+    sample_values:
+    - '20170330'
+    - '20280825'
+    top_values:
+    - '20170330'
+    - '20280825'
+  RGcgc_InterestCalcDate:
+    distinct_count: 3
+    null_ratio: 0.8712
+    sample_values:
+    - '20170330'
+    - '20171018'
+    - '20180910'
+    top_values:
+    - '20170330'
+    - '20171018'
+    - '20180910'
+  RGcgc_LatestCalcMoveDate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_Rollover:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGcgc_GroupInsuranceDivision:
+    distinct_count: 1
+    null_ratio: 0.9242
+    sample_values:
+    - R_DANSINKBN1
+    top_values:
+    - R_DANSINKBN1
+  RGcgc_FloatingUpperRate:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0.00000'
+    top_values:
+    - '0.00000'
+  RGcgc_InstallmentChangeDiv:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '1'
+    top_values:
+    - '1'
+  RGcgc_InstallmentBaseYears:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_RegularInterestCount:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGcgc_NoFloatingBDivideFlag:
+    distinct_count: 1
+    null_ratio: 0.9545
+    sample_values:
+    - '1'
+    top_values:
+    - '1'
+  RGcgc_SyokaiHensaiDate:
+    distinct_count: 26
+    null_ratio: 0.2348
+    sample_values:
+    - '202408'
+    - '20170330'
+    - '20050930'
+    - '20171206'
+    - '20180106'
+    top_values:
+    - '20171206'
+    - '20200831'
+    - '20190401'
+    - '20190506'
+    - '20050930'
+    - '20181101'
+    - '20250801'
+    - '20201006'
+    - '202408'
+    - '20181206'
+  RGcgc_LastLimitDate:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '20170330'
+    top_values:
+    - '20170330'
+  RGcgc_FinalDivideExecuteDate:
+    distinct_count: 1
+    null_ratio: 0.8939
+    sample_values:
+    - '20170330'
+    top_values:
+    - '20170330'
+  RGcgc_KyokudonaiZandaka:
+    distinct_count: 6
+    null_ratio: 0.9015
+    sample_values:
+    - '2000000'
+    - '12000000'
+    - '0'
+    - '1000000'
+    - '750'
+    top_values:
+    - '0'
+    - '2000000'
+    - '12000000'
+    - '1000000'
+    - '750'
+    - '1250000'
+  RGcgc_KyokudoZandaka:
+    distinct_count: 5
+    null_ratio: 0.9015
+    sample_values:
+    - '12000000'
+    - '13000000'
+    - '1000000'
+    - '750'
+    - '1250000'
+    top_values:
+    - '12000000'
+    - '13000000'
+    - '1000000'
+    - '750'
+    - '1250000'
+  RGcgc_KijituTo:
+    distinct_count: 2
+    null_ratio: 0.9167
+    sample_values:
+    - '20191030'
+    - '20260805'
+    top_values:
+    - '20191030'
+    - '20260805'
+  InsertDateTime:
+    distinct_count: 132
+    null_ratio: 0.0
+    sample_values:
+    - 2024/11/18 17:50:04.117
+    - 2017/03/08 11:01:30.220
+    - 2017/10/23 21:34:30.827
+    - 2017/10/24 14:54:40.610
+    - 2017/10/24 15:24:21.003
+    top_values:
+    - 2024/11/18 17:50:04.117
+    - 2017/03/08 11:01:30.220
+    - 2017/10/23 21:34:30.827
+    - 2017/10/24 14:54:40.610
+    - 2017/10/24 15:24:21.003
+    - 2017/10/24 18:59:43.633
+    - 2017/10/24 19:59:18.263
+    - 2017/10/24 20:24:26.393
+    - 2017/10/24 20:31:39.253
+    - 2017/10/24 21:02:24.440
+  InsertUserNo:
+    distinct_count: 10
+    null_ratio: 0.0
+    sample_values:
+    - '10001'
+    - 0019999999
+    - '31001'
+    - 014999
+    - '014001'
+    top_values:
+    - '31001'
+    - '10001'
+    - '014001'
+    - '9999999999'
+    - '0010000001'
+    - 014999
+    - '001'
+    - '0000001'
+    - 0019999999
+    - '10091'
+  UpdateDateTime:
+    distinct_count: 132
+    null_ratio: 0.0
+    sample_values:
+    - 2024/11/18 17:50:04.117
+    - 2017/03/08 11:01:30.220
+    - 2017/10/23 21:34:30.827
+    - 2017/10/24 14:54:40.610
+    - 2017/10/24 15:24:21.003
+    top_values:
+    - 2024/11/18 17:50:04.117
+    - 2017/03/08 11:01:30.220
+    - 2017/10/23 21:34:30.827
+    - 2017/10/24 14:54:40.610
+    - 2017/10/24 15:24:21.003
+    - 2017/10/24 18:59:43.633
+    - 2017/10/24 19:59:18.263
+    - 2017/10/24 20:24:26.393
+    - 2017/10/24 20:31:39.253
+    - 2017/10/24 21:02:24.440
+  UpdateUserNo:
+    distinct_count: 10
+    null_ratio: 0.0
+    sample_values:
+    - '10001'
+    - 0019999999
+    - '31001'
+    - 014999
+    - '014001'
+    top_values:
+    - '31001'
+    - '10001'
+    - '014001'
+    - '9999999999'
+    - '0010000001'
+    - 014999
+    - '001'
+    - '0000001'
+    - 0019999999
+    - '10091'
+warnings:
+- 'Required field has no inferred rule: RGcgc_ApprovalNo'
+- 'Required field has no inferred rule: RGcgc_PrevApprovalNo'

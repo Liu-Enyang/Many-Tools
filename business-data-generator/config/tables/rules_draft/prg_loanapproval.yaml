@@ -1,0 +1,5082 @@
+table_name: PRG_loanapproval
+metadata:
+  rule_source:
+  - ddl_inference
+  - csv_analysis
+  has_csv: true
+field_sources:
+  RGlap_DraftBranchNo:
+    value: input.BranchNo
+    source: inferred_from_name
+  RGlap_ExecutionBranchNo:
+    value: input.BranchNo
+    source: inferred_from_name
+generated_fields: {}
+default_values:
+  RGlap_ApprovalTypeCode:
+    value: R_RINGISYURUI1
+    source: csv_top_value
+  RGlap_DealingTypeCode:
+    value: R_TORIHIKISYU1
+    source: csv_top_value
+  RGlap_ApprovalItemCode:
+    value: R_RINGIKAMOKU33
+    source: csv_top_value
+  RGlap_LmtMrgCalcBaseDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGlap_LmtStartDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGlap_LmtEndDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGlap_SettAuthorityCode:
+    value: R_KESSAIKENGE2
+    source: csv_top_value
+  RGlap_ExecScheduledDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGlap_RepaymentLimitDay:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGlap_SecurityDivision:
+    value: '71'
+    source: csv_top_value
+  RGlap_InterestRateApplyType:
+    value: R_RIRITUTEKI03
+    source: csv_top_value
+  RGlap_VariableInterestCode:
+    value: R_RIRITUHENDO02
+    source: csv_top_value
+  RGlap_LoanTotal:
+    value: '100'
+    source: csv_single_value
+  RGlap_DepositTotal:
+    value: '1000000000'
+    source: csv_single_value
+  RGlap_LoanInterestTotal:
+    value: '1'
+    source: csv_single_value
+  RGlap_DepositInterestTotal:
+    value: '10000000000'
+    source: csv_single_value
+  RGlap_CapitalUseDivision:
+    value: R_SIKINSITO1
+    source: csv_top_value
+  RGlap_RaiseDetailItem2:
+    value: 自己資金
+    source: csv_top_value
+  RGlap_RaiseDetailItem3:
+    value: テスト１２３
+    source: csv_top_value
+  RGlap_RaiseDetailMoney3:
+    value: '10000000000000'
+    source: csv_top_value
+  RGlap_RepaymentWayCode:
+    value: R_HENSAIHOU4
+    source: csv_top_value
+  RGlap_RepaymentInterestCode:
+    value: R_RIBARAIHOU1
+    source: csv_top_value
+  RGlap_FirstRepayInterestDate:
+    value: '@@now'
+    source: inferred_from_name
+  RGlap_FirstRepayDate:
+    value: '@@now'
+    source: inferred_from_name
+  RGlap_RepayIntervalCode:
+    value: R_KANKAKU1
+    source: csv_top_value
+  RGlap_RepayInterestIntrvlCode:
+    value: R_RBRKANKAKU1
+    source: csv_top_value
+  RGlap_RepayCapital:
+    value: 返済原資
+    source: csv_top_value
+  RGlap_RepayCount1:
+    value: 0
+    source: inferred_from_type
+  RGlap_RepayCount2:
+    value: 0
+    source: inferred_from_type
+  RGlap_RepayCount3:
+    value: 0
+    source: inferred_from_type
+  RGlap_SecurityFloatingExistFlg:
+    value: '0'
+    source: csv_top_value
+  RGlap_SecurityDesc:
+    value: 担保明細
+    source: csv_top_value
+  RGlap_Remarks:
+    value: 特記事項
+    source: csv_top_value
+  RGlap_ConditionExemptDesc:
+    value: 条件緩和補足説明
+    source: csv_single_value
+  RGlap_OldVersionFlag:
+    value: '0'
+    source: csv_top_value
+  RGlap_RegisterFlag:
+    value: '0'
+    source: csv_top_value
+  RGlap_RenovationFlag:
+    value: '0'
+    source: csv_top_value
+  RGlap_DraftDate:
+    value: '@@now'
+    source: inferred_from_type
+  RGlap_TempFlag:
+    value: '0'
+    source: csv_top_value
+  RGlap_InChargeUserNo:
+    value: TESTUSER
+    source: inferred_from_name
+  RGlap_HQInChargeUserNo:
+    value: TESTUSER
+    source: inferred_from_name
+  RGlap_HQInChargeUserName:
+    value: 本部審査担当者名
+    source: csv_top_value
+  RGlap_ChangeStandardDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGlap_BillLimitDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGlap_RootManagementNo:
+    value: 0
+    source: inferred_from_type
+  RGlap_SheetCount:
+    value: 0
+    source: inferred_from_type
+  RGlap_MonetaryUnit:
+    value: R_CURRENCY1
+    source: csv_top_value
+  RGlap_Reservation:
+    value: R_RESERVATION1
+    source: csv_top_value
+  RGlap_RefinanceDivision:
+    value: R_KARIKAEKBN1
+    source: csv_top_value
+  RGlap_RefinanceFirstDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGlap_SelectTypeDivision:
+    value: R_KINRIKBN99
+    source: csv_top_value
+  RGlap_StepRateAppliedDate:
+    value: '@@now'
+    source: inferred_from_name
+  RGlap_OperateDetailItem7:
+    value: 諸費用
+    source: csv_top_value
+  RGlap_OperateDetailItem8:
+    value: 運転資金
+    source: csv_top_value
+  RGlap_OperateDetailItem9:
+    value: テスト１２３
+    source: csv_top_value
+  RGlap_OperateDetailMoney8:
+    value: '10000000000000'
+    source: csv_top_value
+  RGlap_OperateDetailMoney9:
+    value: '10000000000000'
+    source: csv_top_value
+  RGlap_RaiseDetailItem5:
+    value: 夫金融公庫
+    source: csv_top_value
+  RGlap_RaiseDetailItem6:
+    value: 京都信金
+    source: csv_top_value
+  RGlap_RaiseDetailMoney5:
+    value: '10000000'
+    source: csv_top_value
+  RGlap_RaiseDetailMoney6:
+    value: '70000000'
+    source: csv_top_value
+  RGlap_FractionDivision:
+    value: R_ADJHASU0
+    source: csv_top_value
+  RGlap_BonusRepayCount:
+    value: 0
+    source: inferred_from_type
+  RGlap_BonusBeginDate:
+    value: '201807'
+    source: csv_top_value
+  RGlap_BonusMonth1:
+    value: '06'
+    source: csv_top_value
+  RGlap_BonusMonth2:
+    value: '12'
+    source: csv_top_value
+  RGlap_GroupInsuranceDivision:
+    value: R_DANSINKBN1
+    source: csv_top_value
+  RGlap_FireInsuranceFlag:
+    value: UMU1
+    source: csv_top_value
+  RGlap_StartRepayDate1:
+    value: '201806'
+    source: csv_top_value
+  RGlap_RepayDay1:
+    value: '31'
+    source: csv_top_value
+  RGlap_RepayIntervalCode1:
+    value: R_KANKAKU1
+    source: csv_single_value
+  RGlap_RepayDay2:
+    value: '31'
+    source: csv_top_value
+  RGlap_RepayIntervalCode2:
+    value: R_KANKAKU1
+    source: csv_top_value
+  RGlap_RepayDay3:
+    value: '31'
+    source: csv_top_value
+  RGlap_RepayIntervalCode3:
+    value: R_KANKAKU1
+    source: csv_top_value
+  RGlap_StartRepayDate4:
+    value: '201703'
+    source: csv_top_value
+  RGlap_RepayDay4:
+    value: '31'
+    source: csv_top_value
+  RGlap_LastRepayDate4:
+    value: '201703'
+    source: csv_top_value
+  RGlap_RepayIntervalCode4:
+    value: R_KANKAKU4
+    source: csv_top_value
+  RGlap_IncreaseDecreaseMoney4:
+    value: '400000000'
+    source: csv_top_value
+  RGlap_StartRepayDate5:
+    value: '201703'
+    source: csv_top_value
+  RGlap_RepayDay5:
+    value: '05'
+    source: csv_top_value
+  RGlap_LastRepayDate5:
+    value: '201703'
+    source: csv_top_value
+  RGlap_RepayIntervalCode5:
+    value: R_KANKAKU6
+    source: csv_top_value
+  RGlap_IncreaseDecreaseMoney5:
+    value: '50000000000000'
+    source: csv_top_value
+  RGlap_StaffFinanceFlag:
+    value: '0'
+    source: csv_single_value
+  RGlap_AutoJudgeSettAuthority:
+    value: R_KESSAIKENGE2
+    source: csv_top_value
+  RGlap_SettAuthorityJudgeDate:
+    value: '@@now'
+    source: inferred_from_type
+  RGlap_RespShareDivision:
+    value: R_RSPNSBLTY2
+    source: csv_top_value
+  RGlap_FixedIntstRateSelectDate:
+    value: '@@today_yyyymmdd'
+    source: inferred_from_csv_and_name
+  RGlap_AppSlipErrFlag:
+    value: '0'
+    source: csv_top_value
+  RGlap_BasisCondUpdateTime:
+    value: '@@now'
+    source: inferred_from_type
+  RGlap_TempAdmitFlag:
+    value: '0'
+    source: csv_top_value
+  RGlap_ChushinSecurityFlag:
+    value: '0'
+    source: csv_top_value
+  RGlap_ReapplicationCode:
+    value: R_SAISINSEI01
+    source: csv_top_value
+  RGlap_EstablishmentSupport:
+    value: R_SOGYOSHIEN0
+    source: csv_top_value
+  RGlap_BusinessAssessment:
+    value: R_JIGYOHYOKA0
+    source: csv_top_value
+  RGlap_BackinApproval:
+    value: '0'
+    source: csv_top_value
+  RGlap_RateDownCreditNo:
+    value: '330003002'
+    source: csv_top_value
+  RGlap_NowSelectTypeDivision:
+    value: R_KINRIKBN10
+    source: csv_top_value
+  RGlap_SelectTypeDivision1:
+    value: R_KINRIKBN99
+    source: csv_top_value
+  RGlap_SelectTypeDivision2:
+    value: R_KINRIKBN99
+    source: csv_top_value
+  RGlap_SelectTypeDivision3:
+    value: R_KINRIKBN5
+    source: csv_top_value
+  RGlap_SelectTypeRate3:
+    value: '1.00000'
+    source: csv_top_value
+  RGlap_SelectTypeDivision4:
+    value: R_KINRIKBN10
+    source: csv_top_value
+  RGlap_SelectTypeRate4:
+    value: '0.01400'
+    source: csv_top_value
+  RGlap_SelectTypeDivision5:
+    value: R_KINRIKBN15
+    source: csv_top_value
+  RGlap_SelectTypeRate5:
+    value: '0.01500'
+    source: csv_top_value
+  RGlap_SelectTypeDivision6:
+    value: R_KINRIKBN20
+    source: csv_top_value
+  RGlap_SelectTypeRate6:
+    value: '0.01600'
+    source: csv_top_value
+  RGlap_SelectTypeDivision7:
+    value: R_KINRIKBN99
+    source: csv_top_value
+  RGlap_SelectTypeRate7:
+    value: '0.01700'
+    source: csv_top_value
+  RGlap_ConditionApprovalFlag:
+    value: '0'
+    source: csv_top_value
+  InsertDateTime:
+    value: '@@now'
+    source: inferred_from_type
+  InsertUserNo:
+    value: TESTUSER
+    source: inferred_from_name
+  UpdateDateTime:
+    value: '@@now'
+    source: inferred_from_type
+  UpdateUserNo:
+    value: TESTUSER
+    source: inferred_from_name
+value_candidates:
+  RGlap_ApprovalTypeCode:
+    type: enum
+    values:
+    - R_RINGISYURUI4
+    - R_RINGISYURUI1
+    - R_RINGISYURUI3
+    - R_RINGISYURUI2
+    source: csv_all_values
+  RGlap_DealingTypeCode:
+    type: enum
+    values:
+    - R_TORIHIKISYU1
+    - R_TORIHIKISYU2
+    - R_TORIHIKISYU3
+    source: csv_all_values
+  RGlap_ApprovalItemCode:
+    type: enum
+    values:
+    - R_RINGIKAMOKU33
+    - R_RINGIKAMOKU38
+    - R_RINGIKAMOKU32
+    - R_RINGIKAMOKU34
+    - R_RINGIKAMOKU31
+    - R_RINGIKAMOKU53
+    - R_RINGIKAMOKU40
+    - R_RINGIKAMO9932
+    - R_RINGIKAMOKU54
+    - R_RINGIKAMOKU55
+    - R_RINGIKAMOKU59
+    - R_RINGIKAMOKU36
+    source: csv_all_values
+  RGlap_LmtMoney:
+    type: sampled
+    values:
+    - '10000000'
+    - '30000000'
+    - '20000000'
+    - '50000000'
+    - '5000000'
+    - '3000000'
+    - '15000000'
+    - '100000000'
+    - '40000000'
+    - '2000000'
+    source: csv_top_values
+    note: distinct_count=75
+  RGlap_LmtInterestRate:
+    type: sampled
+    values:
+    - '1.50000'
+    - '2.00000'
+    - '1.87500'
+    - '2.50000'
+    - '1.37500'
+    - '1.00000'
+    - '1.20000'
+    - '3.00000'
+    - '1.75000'
+    - '0.72500'
+    source: csv_top_values
+    note: distinct_count=128
+  RGlap_SettAuthorityCode:
+    type: enum
+    values:
+    - R_KESSAIKENGE3
+    - R_KESSAIKENGE2
+    - R_KESSAIKENGE1
+    source: csv_all_values
+  RGlap_RepaymentLimitDay:
+    type: sampled
+    values:
+    - '20220606'
+    - '20260610'
+    - '20271230'
+    - '20271101'
+    - '20260706'
+    - '20270606'
+    - '20261215'
+    - '20290731'
+    - '20260430'
+    - '20260630'
+    source: csv_top_values
+    note: distinct_count=102
+  RGlap_SecurityDivision:
+    type: enum
+    values:
+    - '71'
+    - '61'
+    - '91'
+    - '10'
+    - '52'
+    - '72'
+    - '90'
+    - '20'
+    - '51'
+    - '30'
+    - '92'
+    - '63'
+    source: csv_all_values
+  RGlap_InterestRateApplyType:
+    type: enum
+    values:
+    - R_RIRITUTEKI04
+    - R_RIRITUTEKI03
+    - R_RIRITUTEKI02
+    - R_RIRITUTEKI01
+    - R_RIRITUTEKI51
+    source: csv_all_values
+  RGlap_VariableInterestCode:
+    type: enum
+    values:
+    - R_RIRITUHENDO02
+    - R_RIRITUHENDO01
+    - 'NULL'
+    - R_RIRITUHENDO03
+    source: csv_all_values
+  RGlap_StandardSpread:
+    type: sampled
+    values:
+    - '0.00000'
+    - '-1.42500'
+    - '-2.02500'
+    - '-1.92500'
+    - '-1.72500'
+    - '-1.12500'
+    - '-1.70000'
+    - '-2.12500'
+    - '-0.92500'
+    - '-1.90000'
+    source: csv_top_values
+    note: distinct_count=164
+  RGlap_LoanTotal:
+    type: enum
+    values:
+    - '100'
+    source: csv_all_values
+  RGlap_DepositTotal:
+    type: enum
+    values:
+    - '1000000000'
+    source: csv_all_values
+  RGlap_LoanInterestTotal:
+    type: enum
+    values:
+    - '1'
+    source: csv_all_values
+  RGlap_DepositInterestTotal:
+    type: enum
+    values:
+    - '10000000000'
+    source: csv_all_values
+  RGlap_CapitalUseDivision:
+    type: enum
+    values:
+    - R_SIKINSITO3
+    - R_SIKINSITO2
+    - R_SIKINSITO1
+    - R_SIKINSITO4
+    source: csv_all_values
+  RGlap_CapitalUseDetailDivision:
+    type: sampled
+    values:
+    - R_SIKINSITOM129
+    - R_SIKINSITOM351
+    - R_SIKINSITOM103
+    - R_SIKINSITOM101
+    - R_SIKINSITOM499
+    - R_SIKINSITOM352
+    - R_SIKINSITOM353
+    - R_SIKINSITOM128
+    - R_SIKINSITOM471
+    - R_SIKINSITOM249
+    source: csv_top_values
+    note: distinct_count=65
+  RGlap_CapitalUseDetailDesc:
+    type: sampled
+    values:
+    - 資金使途詳細説明
+    - '---'
+    - テスト
+    - あああ
+    - 1-11元稟議
+    - テストシナリオ1-4
+    - 1-14元稟議
+    - 医療費
+    - テストシナリオ1-3
+    - 1-12元稟議
+    source: csv_top_values
+    note: distinct_count=32
+  RGlap_RaiseDetailItem1:
+    type: sampled
+    values:
+    - 自己資金
+    - 預金
+    - 他行預金
+    - 当庫預金
+    - 預貯金
+    - 現預金
+    - 貯蓄
+    - 預金等
+    - 不動産売却
+    - 当庫
+    source: csv_top_values
+    note: distinct_count=81
+  RGlap_RaiseDetailItem2:
+    type: enum
+    values:
+    - テスト１２３
+    - 親族
+    - 預金
+    - 当金庫預金
+    - 親族より援助
+    - 親族支援
+    - 他行預金
+    - 物件売却
+    - 物件売却資金
+    - 三菱東京UFJ
+    - 手許資金
+    - 運転自己資金
+    - 自己資金
+    - 代物弁済金
+    - 日本政策
+    - 親族より
+    - 援助
+    - 親族援助
+    - 親援助
+    - 別立支援
+    source: csv_all_values
+  RGlap_RaiseDetailItem3:
+    type: enum
+    values:
+    - テスト１２３
+    - その他10行
+    - 自己資金
+    source: csv_all_values
+  RGlap_RaiseDetailMoney2:
+    type: sampled
+    values:
+    - '5300000'
+    - '5601000'
+    - '3000000'
+    - '12340000'
+    - '60000000'
+    - '15000000'
+    - '2000000'
+    - '10000000000000'
+    - '300000'
+    - '9295000'
+    source: csv_top_values
+    note: distinct_count=27
+  RGlap_RaiseDetailMoney3:
+    type: enum
+    values:
+    - '10000000000000'
+    - '4200000000'
+    - '1817000'
+    source: csv_all_values
+  RGlap_RepaymentWayCode:
+    type: enum
+    values:
+    - R_HENSAIHOU4
+    - R_HENSAIHOU2
+    - R_HENSAIHOU8
+    - R_HENSAIHOU1
+    - R_HENSAIHOU9
+    - R_HENSAIHOU7
+    - R_HENSAIHOU5
+    - R_HENSAIHOU3
+    source: csv_all_values
+  RGlap_RepaymentInterestCode:
+    type: enum
+    values:
+    - R_RIBARAIHOU1
+    - R_RIBARAIHOU2
+    - R_RIBARAIHOU3
+    source: csv_all_values
+  RGlap_RepayIntervalCode:
+    type: enum
+    values:
+    - R_KANKAKU1
+    - R_KANKAKU0
+    - R_KANKAKU12
+    - R_KANKAKU2
+    - R_KANKAKU6
+    - R_KANKAKU3
+    source: csv_all_values
+  RGlap_RepayInterestIntrvlCode:
+    type: enum
+    values:
+    - R_RBRKANKAKU1
+    - R_RBRKANKAKU12
+    - R_RBRKANKAKU0
+    - R_RBRKANKAKU2
+    - R_RBRKANKAKU3
+    - R_RBRKANKAKU6
+    source: csv_all_values
+  RGlap_RepayCapital:
+    type: enum
+    values:
+    - テストシナリオ1-2
+    - RT-RT-48541③
+    - ああああ
+    - あああああ
+    - '***'
+    - '---'
+    - '11111'
+    - 給与
+    - '12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890'
+    - ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ
+    - "返済原資テスト\r\n元稟議にはない"
+    - 返済原資
+    source: csv_all_values
+  RGlap_SecurityFloatingExistFlg:
+    type: enum
+    values:
+    - '0'
+    - '1'
+    source: csv_all_values
+  RGlap_SecurityDesc:
+    type: enum
+    values:
+    - 条件付テストシナリオ1-3
+    - テストシナリオ1-3
+    - ああああ
+    - あ
+    - 根抵当権185M新規設定
+    - "1-6-17\r\n1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901231234567890\r\
+      \n2\r\n3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\n10\r\n11\r\n12\r\n13\r\n14\r\n15\r\
+      \n16\r\n17\r\n18\r\n19\r\n20\r\n21\r\n22\r\n23\r\n24\r\n25"
+    - aa
+    - '***'
+    - '---'
+    - aaa
+    - '12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890'
+    - ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ
+    - s
+    - 任意の項目を入力
+    - 入力入力
+    - なし
+    - 担保明細
+    source: csv_all_values
+  RGlap_Remarks:
+    type: enum
+    values:
+    - 条件付テストシナリオ1-3
+    - テストシナリオ1-3
+    - ｘｘｘ
+    - あああああ
+    - あ
+    - '1'
+    - aaaa
+    - aaaaa
+    - '***'
+    - '---'
+    - aaa
+    - '12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890'
+    - あああ
+    - 任意の項目を入力
+    - 事前稟議⇒本稟議起案
+    - 稟議番号Cで再申請
+    - 入力入力
+    - 稟議D
+    - 特記事項
+    source: csv_all_values
+  RGlap_WideUseApprovalDtls:
+    type: sampled
+    values:
+    - 汎用稟議内容
+    - 稟議番号c
+    - '---'
+    - テスト
+    - 稟議番号a
+    - 稟議番号b
+    - 子稟議a
+    - 親稟議A
+    - 本件、代表者変更の申請です。旧代表者　旧代表者A　　→　　新代表者　　新代表者A****
+    - 本件、代表者変更の申請。
+    source: csv_top_values
+    note: distinct_count=74
+  RGlap_SubTitle:
+    type: sampled
+    values:
+    - R_SUBTITLE0101
+    - R_SUBTITLE0501
+    - R_SUBTITLE9999
+    - R_SUBTITLE0103
+    - R_SUBTITLE0116
+    - R_SUBTITLE0503
+    - R_SUBTITLE2301
+    - R_SUBTITLE0117
+    - R_SUBTITLE1101
+    - R_SUBTITLE0115
+    source: csv_top_values
+    note: distinct_count=80
+  RGlap_ConditionExemptDesc:
+    type: enum
+    values:
+    - 条件緩和補足説明
+    source: csv_all_values
+  RGlap_OldVersionFlag:
+    type: enum
+    values:
+    - '0'
+    - '1'
+    source: csv_all_values
+  RGlap_RegisterFlag:
+    type: enum
+    values:
+    - '3'
+    - '0'
+    - '1'
+    - '2'
+    - '4'
+    - '5'
+    source: csv_all_values
+  RGlap_RenovationFlag:
+    type: enum
+    values:
+    - '0'
+    - '1'
+    source: csv_all_values
+  RGlap_DraftUserName:
+    type: sampled
+    values:
+    - 起案者名
+    - 第一営業店申請者A
+    - 本営店支店申請者1
+    - 本部全権限ユーザ
+    - 精華支店申請者A
+    - 十条支店申請者
+    - 百万遍支店申請者A
+    - 百万遍支店申請者AA
+    - システム管理者
+    - 大手筋支店申請者1
+    source: csv_top_values
+    note: distinct_count=40
+  RGlap_SecurityCode:
+    type: sampled
+    values:
+    - '4050'
+    - '1001'
+    - '2001'
+    - '4015'
+    - '4033'
+    - '4032'
+    - '4048'
+    - '1005'
+    - '4029'
+    - '4049'
+    source: csv_top_values
+    note: distinct_count=29
+  RGlap_TempFlag:
+    type: enum
+    values:
+    - '0'
+    - '1'
+    source: csv_all_values
+  RGlap_InChargeUserName:
+    type: sampled
+    values:
+    - 現在の処理担当者名
+    - 第一営業店申請者A
+    - 本部全権限ユーザ
+    - 本営店支店申請者1
+    - 精華支店申請者A
+    - 十条支店申請者
+    - 百万遍支店申請者A
+    - 百万遍支店申請者AA
+    - システム管理者
+    - テストユーザ1
+    source: csv_top_values
+    note: distinct_count=60
+  RGlap_HQInChargeUserName:
+    type: enum
+    values:
+    - 本部次長
+    - 本部全権限ユーザ
+    - 審査部担当者
+    - 中信ローン保証ユーザ
+    - システム管理者
+    - 本部課長
+    - 髙橋　信之
+    - 中信ローン保証
+    - 本部部長
+    - 本部初審（個人）
+    - 本部初審
+    - 本部オールユーザ
+    - 住宅ローンセンター1
+    - 本部審査担当者名
+    source: csv_all_values
+  RGlap_SheetCount:
+    type: sampled
+    values:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    - '6'
+    - '10'
+    - '7'
+    - '8'
+    - '9'
+    source: csv_top_values
+    note: distinct_count=24
+  RGlap_BonusTotalMoney:
+    type: sampled
+    values:
+    - '0'
+    - '6000000'
+    - '7000000'
+    - '5000000'
+    - '600000'
+    - '10000000'
+    - '13500000'
+    - '9000000'
+    - '400000'
+    - '300000'
+    source: csv_top_values
+    note: distinct_count=119
+  RGlap_ForeignMoney:
+    type: sampled
+    values:
+    - '1000000.00'
+    - '100000.00'
+    - '9450000.00'
+    - '5000000.00'
+    - '6000000.00'
+    - '100.00'
+    - '18960000.00'
+    - '59857.93'
+    - '15282000.00'
+    - '1500000.00'
+    source: csv_top_values
+    note: distinct_count=28
+  RGlap_MonetaryUnit:
+    type: enum
+    values:
+    - R_CURRENCY1
+    - R_CURRENCY99
+    source: csv_all_values
+  RGlap_Reservation:
+    type: enum
+    values:
+    - R_RESERVATION1
+    - R_RESERVATION2
+    source: csv_all_values
+  RGlap_RefinanceDivision:
+    type: enum
+    values:
+    - R_KARIKAEKBN1
+    - R_KARIKAEKBN2
+    - R_KARIKAEKBN3
+    - R_KARIKAEKBN4
+    - R_KARIKAEKBN5
+    source: csv_all_values
+  RGlap_RefinanceUseDivision:
+    type: sampled
+    values:
+    - R_SIKINSITOM129
+    - R_SIKINSITOM121
+    - R_SIKINSITOM499
+    - R_SIKINSITOM101
+    - R_SIKINSITOM351
+    - R_SIKINSITOM249
+    - R_SIKINSITOM352
+    - R_SIKINSITOM105
+    - R_SIKINSITOM246
+    - R_SIKINSITOM481
+    source: csv_top_values
+    note: distinct_count=50
+  RGlap_SelectTypeDivision:
+    type: enum
+    values:
+    - R_KINRIKBN10
+    - R_KINRIKBN5
+    - R_KINRIKBN2
+    - R_KINRIKBN99
+    - R_KINRIKBN3
+    - R_KINRIKBN7
+    - R_KINRIKBN15
+    - R_KINRIKBN20
+    source: csv_all_values
+  RGlap_FixedContractualRate:
+    type: sampled
+    values:
+    - '0.00000'
+    - '-1.80000'
+    - '-1.70000'
+    - '-1.60000'
+    - '-1.50000'
+    - '-0.80000'
+    - '-1.30000'
+    - '-0.60000'
+    - '-1.00000'
+    - '1.00000'
+    source: csv_top_values
+    note: distinct_count=64
+  RGlap_VariableContractualRate:
+    type: sampled
+    values:
+    - '0.00000'
+    - '-2.10000'
+    - '-1.80000'
+    - '-1.90000'
+    - '-2.00000'
+    - '-2.05000'
+    - '-0.80000'
+    - '-1.70000'
+    - '-1.95000'
+    - '-2.08000'
+    source: csv_top_values
+    note: distinct_count=92
+  RGlap_OperateDetailItem4:
+    type: sampled
+    values:
+    - 諸費用
+    - 運転資金
+    - 諸経費
+    - 追加工事
+    - 外構
+    - 地盤改良
+    - 登記費用
+    - 解体
+    - 解体費
+    - 水道工事
+    source: csv_top_values
+    note: distinct_count=137
+  RGlap_OperateDetailItem5:
+    type: sampled
+    values:
+    - 諸費用
+    - 諸経費
+    - 運転資金
+    - 経費
+    - 水道工事
+    - 旧建物解体
+    - 登記費用
+    - 外構費
+    - 建築設計
+    - 証3049
+    source: csv_top_values
+    note: distinct_count=74
+  RGlap_OperateDetailItem6:
+    type: sampled
+    values:
+    - 諸費用
+    - 登記費用
+    - 運転資金
+    - 上下水道工事
+    - 真水
+    - 開発申請
+    - 解体工事
+    - 火災保険
+    - 追加工事
+    - 真水運転資金
+    source: csv_top_values
+    note: distinct_count=31
+  RGlap_OperateDetailItem7:
+    type: enum
+    values:
+    - テスト１２３
+    - その他
+    - 取得税
+    - 諸経費
+    - 解体工事
+    - 諸費用
+    - その他費用
+    - 登記費用
+    - 手2079
+    - 運転資金
+    - 仲介手数料
+    - 火災保険料
+    - ﾌｫｰｸﾘﾌﾄ等
+    - 既貸返済
+    - 解体
+    source: csv_all_values
+  RGlap_OperateDetailItem8:
+    type: enum
+    values:
+    - テスト１２３
+    - 登録免許税
+    - 改修工事
+    - 印紙代
+    - 手2080
+    - 運転資金
+    - 水道・ガス費
+    - 諸費用
+    - 仲介手数料
+    - 移転費用
+    source: csv_all_values
+  RGlap_OperateDetailItem9:
+    type: enum
+    values:
+    - テスト１２３
+    - 諸費用
+    - 登記・廃止
+    source: csv_all_values
+  RGlap_OperateDetailMoney5:
+    type: sampled
+    values:
+    - '1500000'
+    - '2000000'
+    - '600000'
+    - '550000'
+    - '1400000'
+    - '18619000'
+    - '500000'
+    - '2430000'
+    - '5829000'
+    - '2100000'
+    source: csv_top_values
+    note: distinct_count=113
+  RGlap_OperateDetailMoney6:
+    type: sampled
+    values:
+    - '3000000'
+    - '2235000'
+    - '321000'
+    - '1500000'
+    - '1800000'
+    - '300000'
+    - '9418000'
+    - '10000000000000'
+    - '104000'
+    - '50000'
+    source: csv_top_values
+    note: distinct_count=47
+  RGlap_OperateDetailMoney7:
+    type: sampled
+    values:
+    - '5526000'
+    - '600000'
+    - '166000'
+    - '10000000000000'
+    - '5629000'
+    - '2031000'
+    - '1199000'
+    - '10550000'
+    - '18400000'
+    - '2008000'
+    source: csv_top_values
+    note: distinct_count=22
+  RGlap_OperateDetailMoney8:
+    type: enum
+    values:
+    - '10000000000000'
+    - '2897000'
+    - '13050000'
+    - '20000'
+    - '1200000'
+    - '775000'
+    - '300000'
+    - '110000'
+    - '1355000'
+    - '867000'
+    - '9000000'
+    source: csv_all_values
+  RGlap_OperateDetailMoney9:
+    type: enum
+    values:
+    - '10000000000000'
+    - '600000'
+    - '3540000'
+    source: csv_all_values
+  RGlap_RaiseDetailItem4:
+    type: sampled
+    values:
+    - 自己資金
+    - 預金
+    - 同時申請
+    - 政策公庫
+    - 手元資金
+    - 当庫借入
+    - 補助金
+    - 住宅ローン
+    - 妻ローン
+    - 夫ローン
+    source: csv_top_values
+    note: distinct_count=60
+  RGlap_RaiseDetailItem5:
+    type: enum
+    values:
+    - テスト１２３
+    - 私学共済
+    - 親の援助
+    - 夫金融公庫
+    - 滋賀銀行借入
+    - 京都銀行
+    - 申請予定解体
+    - 三菱UFJ
+    - 三井住友銀行
+    - ランドリアン
+    - 他行預金
+    source: csv_all_values
+  RGlap_RaiseDetailItem6:
+    type: enum
+    values:
+    - テスト１２３
+    - 京都信金
+    - 京都
+    source: csv_all_values
+  RGlap_RaiseDetailMoney4:
+    type: sampled
+    values:
+    - '10000000'
+    - '25000000'
+    - '50000000'
+    - '15000000'
+    - '35000000'
+    - '16000'
+    - '5000000'
+    - '14000000'
+    - '100000000'
+    - '12000000'
+    source: csv_top_values
+    note: distinct_count=80
+  RGlap_RaiseDetailMoney5:
+    type: enum
+    values:
+    - '10000000000000'
+    - '350000000'
+    - '12318000'
+    - '10000000'
+    - '100000000'
+    - '60000000'
+    - '2000000'
+    - '125000000'
+    - '50000000'
+    - '2100000'
+    source: csv_all_values
+  RGlap_RaiseDetailMoney6:
+    type: enum
+    values:
+    - '10000000000000'
+    - '70000000'
+    - '65000000'
+    source: csv_all_values
+  RGlap_RepayDay:
+    type: sampled
+    values:
+    - '31'
+    - '10'
+    - '06'
+    - '25'
+    - '05'
+    - '27'
+    - '26'
+    - '01'
+    - '15'
+    - '20'
+    source: csv_top_values
+    note: distinct_count=30
+  RGlap_FractionDivision:
+    type: enum
+    values:
+    - R_ADJHASU0
+    - R_ADJHASU2
+    - R_ADJHASU1
+    source: csv_all_values
+  RGlap_BonusRepayMoney:
+    type: sampled
+    values:
+    - '0'
+    - '213814'
+    - '250000'
+    - '102647'
+    - '100000'
+    - '113601'
+    - '25'
+    - '176699'
+    - '17577'
+    - '303581'
+    source: csv_top_values
+    note: distinct_count=188
+  RGlap_BonusRepayCount:
+    type: sampled
+    values:
+    - '0'
+    - '70'
+    - '20'
+    - '40'
+    - '16'
+    - '10'
+    - '6'
+    - '4'
+    - '14'
+    - '48'
+    source: csv_top_values
+    note: distinct_count=57
+  RGlap_BonusMonth1:
+    type: enum
+    values:
+    - '06'
+    - '03'
+    - 08
+    - '12'
+    - 09
+    - '05'
+    - '07'
+    - '01'
+    - '04'
+    - '10'
+    - '02'
+    source: csv_all_values
+  RGlap_BonusMonth2:
+    type: enum
+    values:
+    - '12'
+    - 09
+    - '02'
+    - '06'
+    - '03'
+    - '11'
+    - '01'
+    - '07'
+    - '10'
+    - '04'
+    - 08
+    source: csv_all_values
+  RGlap_GroupInsuranceDivision:
+    type: enum
+    values:
+    - R_DANSINKBN1
+    - R_DANSINKBN3
+    - R_DANSINKBN2
+    source: csv_all_values
+  RGlap_FireInsuranceFlag:
+    type: enum
+    values:
+    - UMU1
+    - UMU2
+    source: csv_all_values
+  RGlap_StartRepayDate1:
+    type: enum
+    values:
+    - '201703'
+    - '201601'
+    - '202204'
+    - '202409'
+    - '202509'
+    - '202711'
+    - '202612'
+    - '201805'
+    - '201806'
+    - '201807'
+    - '201811'
+    - '201907'
+    - '201901'
+    - '201812'
+    - '201808'
+    source: csv_all_values
+  RGlap_RepayDay1:
+    type: enum
+    values:
+    - '01'
+    - 09
+    - '30'
+    - '31'
+    - '10'
+    - '05'
+    - '15'
+    - '25'
+    - '20'
+    - '27'
+    - '16'
+    source: csv_all_values
+  RGlap_LastRepayDate1:
+    type: sampled
+    values:
+    - '201811'
+    - '201812'
+    - '201905'
+    - '201906'
+    - '201807'
+    - '202206'
+    - '201810'
+    - '201809'
+    - '201901'
+    - '202711'
+    source: csv_top_values
+    note: distinct_count=33
+  RGlap_RepayIntervalCode1:
+    type: enum
+    values:
+    - R_KANKAKU1
+    source: csv_all_values
+  RGlap_IncreaseDecreaseMoney1:
+    type: sampled
+    values:
+    - '10000'
+    - '5000'
+    - '50000'
+    - '250'
+    - '16000'
+    - '6000'
+    - '11111'
+    - '40000'
+    - '20000'
+    - '15000'
+    source: csv_top_values
+    note: distinct_count=88
+  RGlap_StartRepayDate2:
+    type: sampled
+    values:
+    - '201812'
+    - '201901'
+    - '201906'
+    - '201907'
+    - '201808'
+    - '201811'
+    - '201810'
+    - '201905'
+    - '201807'
+    - '201809'
+    source: csv_top_values
+    note: distinct_count=31
+  RGlap_RepayDay2:
+    type: enum
+    values:
+    - '02'
+    - 09
+    - '30'
+    - '31'
+    - '10'
+    - '05'
+    - '15'
+    - '25'
+    - '20'
+    - '27'
+    - '16'
+    source: csv_all_values
+  RGlap_LastRepayDate2:
+    type: sampled
+    values:
+    - '202002'
+    - '201905'
+    - '201811'
+    - '202105'
+    - '202312'
+    - '202004'
+    - '201906'
+    - '202005'
+    - '201901'
+    - '202011'
+    source: csv_top_values
+    note: distinct_count=70
+  RGlap_RepayIntervalCode2:
+    type: enum
+    values:
+    - R_KANKAKU2
+    - R_KANKAKU1
+    - R_KANKAKU6
+    source: csv_all_values
+  RGlap_IncreaseDecreaseMoney2:
+    type: sampled
+    values:
+    - '250000'
+    - '50000'
+    - '167000'
+    - '150000'
+    - '67000'
+    - '125000'
+    - '500000'
+    - '400000'
+    - '192000'
+    - '25000'
+    source: csv_top_values
+    note: distinct_count=100
+  RGlap_StartRepayDate3:
+    type: sampled
+    values:
+    - '202003'
+    - '201906'
+    - '202005'
+    - '202006'
+    - '202106'
+    - '202401'
+    - '202103'
+    - '201903'
+    - '201907'
+    - '202602'
+    source: csv_top_values
+    note: distinct_count=61
+  RGlap_RepayDay3:
+    type: enum
+    values:
+    - '03'
+    - 09
+    - '31'
+    - '10'
+    - '30'
+    - '05'
+    - '15'
+    - '25'
+    - '20'
+    - '27'
+    - '16'
+    source: csv_all_values
+  RGlap_LastRepayDate3:
+    type: sampled
+    values:
+    - '202003'
+    - '201906'
+    - '202005'
+    - '202006'
+    - '202012'
+    - '202106'
+    - '202401'
+    - '202103'
+    - '201903'
+    - '201907'
+    source: csv_top_values
+    note: distinct_count=61
+  RGlap_RepayIntervalCode3:
+    type: enum
+    values:
+    - R_KANKAKU3
+    - R_KANKAKU1
+    - R_KANKAKU6
+    source: csv_all_values
+  RGlap_IncreaseDecreaseMoney3:
+    type: sampled
+    values:
+    - '1032000'
+    - '441000'
+    - '490000'
+    - '16200000'
+    - '3000000'
+    - '100'
+    - '28418500'
+    - '10105000'
+    - '3513000'
+    - '150000'
+    source: csv_top_values
+    note: distinct_count=122
+  RGlap_StartRepayDate4:
+    type: enum
+    values:
+    - '201703'
+    - '201904'
+    - '202205'
+    - '202101'
+    - '201907'
+    - '202405'
+    - '202102'
+    source: csv_all_values
+  RGlap_RepayDay4:
+    type: enum
+    values:
+    - '04'
+    - 09
+    - '31'
+    - '25'
+    source: csv_all_values
+  RGlap_LastRepayDate4:
+    type: enum
+    values:
+    - '201703'
+    - '201904'
+    - '202207'
+    - '202101'
+    - '201907'
+    - '202405'
+    - '202102'
+    source: csv_all_values
+  RGlap_RepayIntervalCode4:
+    type: enum
+    values:
+    - R_KANKAKU4
+    - R_KANKAKU1
+    source: csv_all_values
+  RGlap_IncreaseDecreaseMoney4:
+    type: enum
+    values:
+    - '400000000'
+    - '100'
+    - '3150000'
+    - '28418500'
+    - '9480778'
+    - '35739000'
+    source: csv_all_values
+  RGlap_StartRepayDate5:
+    type: enum
+    values:
+    - '201703'
+    - '201905'
+    - '202206'
+    source: csv_all_values
+  RGlap_RepayDay5:
+    type: enum
+    values:
+    - '05'
+    - 09
+    source: csv_all_values
+  RGlap_LastRepayDate5:
+    type: enum
+    values:
+    - '201703'
+    - '201905'
+    - '202208'
+    source: csv_all_values
+  RGlap_RepayIntervalCode5:
+    type: enum
+    values:
+    - R_KANKAKU6
+    - R_KANKAKU1
+    source: csv_all_values
+  RGlap_IncreaseDecreaseMoney5:
+    type: enum
+    values:
+    - '50000000000000'
+    - '100'
+    source: csv_all_values
+  RGlap_DraftBranchName:
+    type: sampled
+    values:
+    - 本店営業部
+    - 百万遍支店
+    - シナリオ第一営業店
+    - 十条支店
+    - 吉祥院支店
+    - 市場支店
+    - 四条支店
+    - 三条支店
+    - 長岡支店
+    - 円町支店
+    source: csv_top_values
+    note: distinct_count=140
+  RGlap_StaffFinanceFlag:
+    type: enum
+    values:
+    - '0'
+    source: csv_all_values
+  RGlap_AutoJudgeSettAuthority:
+    type: enum
+    values:
+    - R_KESSAIKENGE2
+    - R_KESSAIKENGE1
+    - R_KESSAIKENGE3
+    source: csv_all_values
+  RGlap_SettAuthorityJudgeReason:
+    type: sampled
+    values:
+    - 決済権限判定理由
+    - 一括稟議　本部決裁あり
+    - 表債
+    - 一括稟議　本部決裁なし
+    - 本部該当理由なし
+    - 住宅ローン専決
+    - 割引　一般貸
+    - 住宅ローン団信
+    - 割引手形　手形期日240日以上
+    - 極度稟議
+    source: csv_top_values
+    note: distinct_count=62
+  RGlap_RespShareDivision:
+    type: enum
+    values:
+    - R_RSPNSBLTY9
+    - R_RSPNSBLTY2
+    - R_RSPNSBLTY1
+    - R_RSPNSBLTY3
+    source: csv_all_values
+  RGlap_AppSlipErrFlag:
+    type: enum
+    values:
+    - '0'
+    - '1'
+    source: csv_all_values
+  RGlap_AutoCalcBonusRepayMoney:
+    type: sampled
+    values:
+    - '0'
+    - '25'
+    - '176699'
+    - '303581'
+    - '124764'
+    - '206133'
+    - '40997'
+    - '114434'
+    - '137330'
+    - '147932'
+    source: csv_top_values
+    note: distinct_count=63
+  RGlap_TempAdmitFlag:
+    type: enum
+    values:
+    - '0'
+    - '2'
+    - '1'
+    source: csv_all_values
+  RGlap_ChushinSecurityFlag:
+    type: enum
+    values:
+    - '0'
+    - '1'
+    source: csv_all_values
+  RGlap_ReapplicationCode:
+    type: enum
+    values:
+    - R_SAISINSEI02
+    - R_SAISINSEI01
+    - R_SAISINSEI03
+    - R_SAISINSEI04
+    source: csv_all_values
+  RGlap_EstablishmentSupport:
+    type: enum
+    values:
+    - R_SOGYOSHIEN0
+    - R_SOGYOSHIEN1
+    - R_SOGYOSHIEN2
+    source: csv_all_values
+  RGlap_BusinessAssessment:
+    type: enum
+    values:
+    - R_JIGYOHYOKA0
+    - R_JIGYOHYOKA1
+    - R_JIGYOHYOKA2
+    source: csv_all_values
+  RGlap_BackinApproval:
+    type: enum
+    values:
+    - '0'
+    - '1'
+    source: csv_all_values
+  RGlap_NowSelectTypeDivision:
+    type: enum
+    values:
+    - R_KINRIKBN10
+    - R_RIRITUHENDO03
+    - R_KINRIKBN2
+    - R_KINRIKBN7
+    - R_KINRIKBN15
+    - R_KINRIKBN3
+    - R_KINRIKBN99
+    - R_KINRIKBN5
+    - R_KINRIKBN20
+    source: csv_all_values
+  RGlap_NowInterestRate:
+    type: sampled
+    values:
+    - '3.00000'
+    - '1.20000'
+    - '1.10000'
+    - '2.10000'
+    - '1.35000'
+    - '1.40000'
+    - '1.95000'
+    - '2.00000'
+    - '1.60000'
+    - '1.15000'
+    source: csv_top_values
+    note: distinct_count=52
+  RGlap_SelectTypeDivision1:
+    type: enum
+    values:
+    - R_KINRIKBN2
+    - R_KINRIKBN99
+    - R_KINRIKBN5
+    - R_KINRIKBN7
+    - R_KINRIKBN15
+    - R_KINRIKBN10
+    - R_KINRIKBN20
+    - R_KINRIKBN3
+    source: csv_all_values
+  RGlap_SelectTypeRate1:
+    type: sampled
+    values:
+    - '1.00000'
+    - '0.77500'
+    - '0.87500'
+    - '1.10000'
+    - '0.85000'
+    - '0.62500'
+    - '0.97500'
+    - '0.95000'
+    - '1.07500'
+    - '0.72500'
+    source: csv_top_values
+    note: distinct_count=34
+  RGlap_SelectTypeDivision2:
+    type: enum
+    values:
+    - R_KINRIKBN3
+    - R_KINRIKBN99
+    - R_KINRIKBN20
+    - R_KINRIKBN2
+    - R_KINRIKBN10
+    - R_KINRIKBN5
+    - R_KINRIKBN15
+    source: csv_all_values
+  RGlap_SelectTypeRate2:
+    type: sampled
+    values:
+    - '1.00000'
+    - '1.10000'
+    - '0.77500'
+    - '2.00000'
+    - '0.90000'
+    - '0.67500'
+    - '1.15000'
+    - '0.97500'
+    - '0.01200'
+    - '5.50000'
+    source: csv_top_values
+    note: distinct_count=27
+  RGlap_SelectTypeDivision3:
+    type: enum
+    values:
+    - R_KINRIKBN5
+    - R_KINRIKBN15
+    - R_KINRIKBN10
+    - R_KINRIKBN20
+    source: csv_all_values
+  RGlap_SelectTypeRate3:
+    type: enum
+    values:
+    - '0.01300'
+    - '5.00000'
+    - '1.00000'
+    - '4.00000'
+    - '0.95000'
+    - '1.20000'
+    - '1.56500'
+    - '0.80000'
+    source: csv_all_values
+  RGlap_SelectTypeDivision4:
+    type: enum
+    values:
+    - R_KINRIKBN10
+    - R_KINRIKBN7
+    - R_KINRIKBN15
+    - R_KINRIKBN99
+    source: csv_all_values
+  RGlap_SelectTypeRate4:
+    type: enum
+    values:
+    - '0.01400'
+    - '4.50000'
+    - '1.00000'
+    - '6.00000'
+    - '1.15000'
+    - '0.77500'
+    source: csv_all_values
+  RGlap_SelectTypeDivision5:
+    type: enum
+    values:
+    - R_KINRIKBN15
+    - R_KINRIKBN5
+    - R_KINRIKBN10
+    - R_KINRIKBN20
+    source: csv_all_values
+  RGlap_SelectTypeRate5:
+    type: enum
+    values:
+    - '0.01500'
+    - '4.00000'
+    - '1.00000'
+    - '9.00000'
+    - '1.15000'
+    source: csv_all_values
+  RGlap_SelectTypeDivision6:
+    type: enum
+    values:
+    - R_KINRIKBN20
+    - R_KINRIKBN3
+    - R_KINRIKBN15
+    source: csv_all_values
+  RGlap_SelectTypeRate6:
+    type: enum
+    values:
+    - '0.01600'
+    - '3.50000'
+    - '1.00000'
+    - '14.00000'
+    source: csv_all_values
+  RGlap_SelectTypeDivision7:
+    type: enum
+    values:
+    - R_KINRIKBN99
+    - R_KINRIKBN2
+    - R_KINRIKBN20
+    source: csv_all_values
+  RGlap_SelectTypeRate7:
+    type: enum
+    values:
+    - '0.01700'
+    - '3.10000'
+    - '2.00000'
+    - '19.00000'
+    source: csv_all_values
+  RGlap_ConditionApprovalFlag:
+    type: enum
+    values:
+    - '0'
+    - '1'
+    source: csv_all_values
+analysis:
+  RGlap_ApprovalNo:
+    distinct_count: 11497
+    null_ratio: 0.0
+    sample_values:
+    - 00300029
+    - '01400001'
+    - '11111112'
+    - '11111113'
+    - '11111114'
+    top_values:
+    - 00300029
+    - '01400001'
+    - '11111112'
+    - '11111113'
+    - '11111114'
+    - '11111115'
+    - '11111116'
+    - '11111117'
+    - '16300000'
+    - '1730000'
+  RGlap_CustomerId:
+    distinct_count: 6330
+    null_ratio: 0.0
+    sample_values:
+    - '89'
+    - '146'
+    - '31'
+    - '30'
+    - '1'
+    top_values:
+    - '1'
+    - '2'
+    - '116'
+    - '3'
+    - '25'
+    - '30'
+    - '10201'
+    - '87'
+    - '89'
+    - '29'
+  RGlap_ApprovalTypeCode:
+    distinct_count: 4
+    null_ratio: 0.0
+    sample_values:
+    - R_RINGISYURUI4
+    - R_RINGISYURUI1
+    - R_RINGISYURUI3
+    - R_RINGISYURUI2
+    top_values:
+    - R_RINGISYURUI1
+    - R_RINGISYURUI3
+    - R_RINGISYURUI4
+    - R_RINGISYURUI2
+  RGlap_DealingTypeCode:
+    distinct_count: 3
+    null_ratio: 0.2411
+    sample_values:
+    - R_TORIHIKISYU1
+    - R_TORIHIKISYU2
+    - R_TORIHIKISYU3
+    top_values:
+    - R_TORIHIKISYU1
+    - R_TORIHIKISYU2
+    - R_TORIHIKISYU3
+  RGlap_ApprovalItemCode:
+    distinct_count: 12
+    null_ratio: 0.2411
+    sample_values:
+    - R_RINGIKAMOKU33
+    - R_RINGIKAMOKU38
+    - R_RINGIKAMOKU32
+    - R_RINGIKAMOKU34
+    - R_RINGIKAMOKU31
+    top_values:
+    - R_RINGIKAMOKU33
+    - R_RINGIKAMOKU31
+    - R_RINGIKAMOKU32
+    - R_RINGIKAMOKU38
+    - R_RINGIKAMOKU40
+    - R_RINGIKAMOKU36
+    - R_RINGIKAMOKU34
+    - R_RINGIKAMOKU54
+    - R_RINGIKAMOKU53
+    - R_RINGIKAMOKU55
+  RGlap_LmtApprovalNo:
+    distinct_count: 459
+    null_ratio: 0.9424
+    sample_values:
+    - '310005601'
+    - '310005606'
+    - '310005301'
+    - '1'
+    - '310005608'
+    top_values:
+    - '11383451'
+    - '17389854'
+    - 09018141
+    - 08099588
+    - '06045660'
+    - 08112003
+    - '14395855'
+    - 08097397
+    - 08075528
+    - '15314605'
+  RGlap_LmtMoney:
+    distinct_count: 75
+    null_ratio: 0.8891
+    sample_values:
+    - '1000000000'
+    - '12000000'
+    - '13000000'
+    - '1000000'
+    - '750'
+    top_values:
+    - '10000000'
+    - '30000000'
+    - '20000000'
+    - '50000000'
+    - '5000000'
+    - '3000000'
+    - '15000000'
+    - '100000000'
+    - '40000000'
+    - '2000000'
+  RGlap_LmtMrgMoney:
+    distinct_count: 790
+    null_ratio: 0.8905
+    sample_values:
+    - '1000000000'
+    - '10000000'
+    - '950000000'
+    - '12000000'
+    - '13000000'
+    top_values:
+    - '10000000'
+    - '50000000'
+    - '20000000'
+    - '0'
+    - '5000000'
+    - '30000000'
+    - '100000000'
+    - '3000000'
+    - '12000000'
+    - '15000000'
+  RGlap_LmtMrgCalcBaseDate:
+    distinct_count: 177
+    null_ratio: 0.889
+    sample_values:
+    - '20170101'
+    - '20171024'
+    - '20171214'
+    - '20171215'
+    - '20180817'
+    top_values:
+    - '20180531'
+    - '20180620'
+    - '20180611'
+    - '20170630'
+    - '20180702'
+    - '20180625'
+    - '20180605'
+    - '20180525'
+    - '20180528'
+    - '20180615'
+  RGlap_LmtStartDate:
+    distinct_count: 541
+    null_ratio: 0.8894
+    sample_values:
+    - '20171010'
+    - '20000101'
+    - '20181025'
+    - '20241111'
+    - '20210405'
+    top_values:
+    - '20170731'
+    - '20170630'
+    - '20180330'
+    - '20171229'
+    - '20171130'
+    - '20170629'
+    - '20170728'
+    - '20171228'
+    - '20170831'
+    - '20171129'
+  RGlap_LmtEndDate:
+    distinct_count: 44
+    null_ratio: 0.8894
+    sample_values:
+    - '20501231'
+    - '20191030'
+    - '20571231'
+    - '20250706'
+    - '20220405'
+    top_values:
+    - '20180630'
+    - '20180731'
+    - '20190531'
+    - '20190430'
+    - '20190331'
+    - '20181130'
+    - '20181231'
+    - '20181031'
+    - '20180930'
+    - '20180831'
+  RGlap_LmtInterestRate:
+    distinct_count: 128
+    null_ratio: 0.889
+    sample_values:
+    - '1.20000'
+    - '3.92500'
+    - '1.00000'
+    - '3.00000'
+    - '0.00000'
+    top_values:
+    - '1.50000'
+    - '2.00000'
+    - '1.87500'
+    - '2.50000'
+    - '1.37500'
+    - '1.00000'
+    - '1.20000'
+    - '3.00000'
+    - '1.75000'
+    - '0.72500'
+  RGlap_RequestReceiptNo:
+    distinct_count: 7928
+    null_ratio: 0.1863
+    sample_values:
+    - 00000281
+    - '00011112'
+    - '00000001'
+    - '00000002'
+    - '00000010'
+    top_values:
+    - '00000406'
+    - 00000587
+    - '00000367'
+    - '00000631'
+    - '00000263'
+    - 00000582
+    - '00000607'
+    - '00000003'
+    - '00000055'
+    - '00000151'
+  RGlap_PrevApprovalNo:
+    distinct_count: 3363
+    null_ratio: 0.6817
+    sample_values:
+    - '72470006'
+    - '00000001'
+    - '17300013'
+    - '17300020'
+    - '17300049'
+    top_values:
+    - '20300027'
+    - '18300259'
+    - '17300065'
+    - '18300171'
+    - '20300046'
+    - '18300027'
+    - '52471777'
+    - '18300164'
+    - '19300073'
+    - '17300161'
+  RGlap_OriginalApprovalNo:
+    distinct_count: 2006
+    null_ratio: 0.8054
+    sample_values:
+    - '72470006'
+    - '00000001'
+    - '17300040'
+    - '17300053'
+    - '17300052'
+    top_values:
+    - '25300394'
+    - '18300259'
+    - '17300065'
+    - '20300027'
+    - '52471777'
+    - '18300050'
+    - '20300012'
+    - '18300027'
+    - '17300052'
+    - '17300104'
+  RGlap_SettAuthorityCode:
+    distinct_count: 3
+    null_ratio: 0.0
+    sample_values:
+    - R_KESSAIKENGE3
+    - R_KESSAIKENGE2
+    - R_KESSAIKENGE1
+    top_values:
+    - R_KESSAIKENGE2
+    - R_KESSAIKENGE1
+    - R_KESSAIKENGE3
+  RGlap_ExecScheduledDate:
+    distinct_count: 178
+    null_ratio: 0.0001
+    sample_values:
+    - '20250831'
+    - '20201009'
+    - '20170630'
+    - '20251028'
+    - '20251009'
+    top_values:
+    - '20201009'
+    - '20251222'
+    - '20260130'
+    - '20251210'
+    - '20261013'
+    - '20260202'
+    - '20251230'
+    - '20260216'
+    - '20260310'
+    - '20251031'
+  RGlap_RepaymentLimitDay:
+    distinct_count: 102
+    null_ratio: 0.043
+    sample_values:
+    - '20340831'
+    - '20220606'
+    - '20270606'
+    - '20291231'
+    - '20290630'
+    top_values:
+    - '20220606'
+    - '20260610'
+    - '20271230'
+    - '20271101'
+    - '20260706'
+    - '20270606'
+    - '20261215'
+    - '20290731'
+    - '20260430'
+    - '20260630'
+  RGlap_CommodityCode:
+    distinct_count: 349
+    null_ratio: 0.2651
+    sample_values:
+    - '52200'
+    - '12068'
+    - '10210'
+    - '10304'
+    - '60231'
+    top_values:
+    - '00001'
+    - '10900'
+    - '52131'
+    - '10912'
+    - '52200'
+    - '10001'
+    - '76224'
+    - '50257'
+    - '78801'
+    - '14725'
+  RGlap_SecurityDivision:
+    distinct_count: 12
+    null_ratio: 0.2663
+    sample_values:
+    - '71'
+    - '61'
+    - '91'
+    - '10'
+    - '52'
+    top_values:
+    - '71'
+    - '10'
+    - '52'
+    - '61'
+    - '51'
+    - '72'
+    - '20'
+    - '63'
+    - '30'
+    - '92'
+  RGlap_ExecScheduledMoney:
+    distinct_count: 2822
+    null_ratio: 0.241
+    sample_values:
+    - '10900000'
+    - '1000000'
+    - '3000000'
+    - '12000000'
+    - '500000'
+    top_values:
+    - '1000000'
+    - '10000000'
+    - '5000000'
+    - '3000000'
+    - '20000000'
+    - '30000000'
+    - '50000000'
+    - '2000000'
+    - '15000000'
+    - '500000'
+  RGlap_InterestRate:
+    distinct_count: 279
+    null_ratio: 0.2489
+    sample_values:
+    - '1.00000'
+    - '2.99900'
+    - '3.00000'
+    - '1.50000'
+    - '10.00000'
+    top_values:
+    - '1.00000'
+    - '1.80000'
+    - '1.50000'
+    - '0.57500'
+    - '1.20000'
+    - '3.00000'
+    - '1.85000'
+    - '2.00000'
+    - '14.60000'
+    - '0.90000'
+  RGlap_InterestRateApplyType:
+    distinct_count: 5
+    null_ratio: 0.6385
+    sample_values:
+    - R_RIRITUTEKI04
+    - R_RIRITUTEKI03
+    - R_RIRITUTEKI02
+    - R_RIRITUTEKI01
+    - R_RIRITUTEKI51
+    top_values:
+    - R_RIRITUTEKI03
+    - R_RIRITUTEKI04
+    - R_RIRITUTEKI02
+    - R_RIRITUTEKI01
+    - R_RIRITUTEKI51
+  RGlap_InterestSupplyRate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_VariableInterestCode:
+    distinct_count: 4
+    null_ratio: 0.0665
+    sample_values:
+    - R_RIRITUHENDO02
+    - R_RIRITUHENDO01
+    - 'NULL'
+    - R_RIRITUHENDO03
+    top_values:
+    - R_RIRITUHENDO02
+    - R_RIRITUHENDO01
+    - 'NULL'
+    - R_RIRITUHENDO03
+  RGlap_SlideRange:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_StandardSpread:
+    distinct_count: 164
+    null_ratio: 0.7059
+    sample_values:
+    - '0.00000'
+    - '2.00000'
+    - '1.00000'
+    - '0.50000'
+    - '0.30000'
+    top_values:
+    - '0.00000'
+    - '-1.42500'
+    - '-2.02500'
+    - '-1.92500'
+    - '-1.72500'
+    - '-1.12500'
+    - '-1.70000'
+    - '-2.12500'
+    - '-0.92500'
+    - '-1.90000'
+  RGlap_LoanTotal:
+    distinct_count: 1
+    null_ratio: 0.9999
+    sample_values:
+    - '100'
+    top_values:
+    - '100'
+  RGlap_DepositTotal:
+    distinct_count: 1
+    null_ratio: 0.9999
+    sample_values:
+    - '1000000000'
+    top_values:
+    - '1000000000'
+  RGlap_LoanInterestTotal:
+    distinct_count: 1
+    null_ratio: 0.9999
+    sample_values:
+    - '1'
+    top_values:
+    - '1'
+  RGlap_DepositInterestTotal:
+    distinct_count: 1
+    null_ratio: 0.9999
+    sample_values:
+    - '10000000000'
+    top_values:
+    - '10000000000'
+  RGlap_HeadBranchCalcRate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_HeadBranchCalcDebitRate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_HeadBranchCalcCreditRate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_RelatedRealInterestRate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_RelatedDpstFinanceRate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_RelatedAnnualProfits:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_CapitalUseDivision:
+    distinct_count: 4
+    null_ratio: 0.2862
+    sample_values:
+    - R_SIKINSITO3
+    - R_SIKINSITO2
+    - R_SIKINSITO1
+    - R_SIKINSITO4
+    top_values:
+    - R_SIKINSITO1
+    - R_SIKINSITO3
+    - R_SIKINSITO2
+    - R_SIKINSITO4
+  RGlap_CapitalUseDetailDivision:
+    distinct_count: 65
+    null_ratio: 0.2909
+    sample_values:
+    - R_SIKINSITOM355
+    - R_SIKINSITOM230
+    - R_SIKINSITOM129
+    - R_SIKINSITOM357
+    - R_SIKINSITOM101
+    top_values:
+    - R_SIKINSITOM129
+    - R_SIKINSITOM351
+    - R_SIKINSITOM103
+    - R_SIKINSITOM101
+    - R_SIKINSITOM499
+    - R_SIKINSITOM352
+    - R_SIKINSITOM353
+    - R_SIKINSITOM128
+    - R_SIKINSITOM471
+    - R_SIKINSITOM249
+  RGlap_CapitalUseDetailDesc:
+    distinct_count: 32
+    null_ratio: 0.1258
+    sample_values:
+    - aaa
+    - あああ
+    - テスト
+    - テストシナリオ1-2　資金使途
+    - テストシナリオ1-2　再トライ
+    top_values:
+    - 資金使途詳細説明
+    - '---'
+    - テスト
+    - あああ
+    - 1-11元稟議
+    - テストシナリオ1-4
+    - 1-14元稟議
+    - 医療費
+    - テストシナリオ1-3
+    - 1-12元稟議
+  RGlap_RaiseDetailItem1:
+    distinct_count: 81
+    null_ratio: 0.8865
+    sample_values:
+    - 自己資金
+    - 預金
+    - '1'
+    - あ
+    - テスト１２３
+    top_values:
+    - 自己資金
+    - 預金
+    - 他行預金
+    - 当庫預金
+    - 預貯金
+    - 現預金
+    - 貯蓄
+    - 預金等
+    - 不動産売却
+    - 当庫
+  RGlap_RaiseDetailItem2:
+    distinct_count: 20
+    null_ratio: 0.997
+    sample_values:
+    - テスト１２３
+    - 親族
+    - 預金
+    - 当金庫預金
+    - 親族より援助
+    top_values:
+    - 自己資金
+    - 他行預金
+    - 親族
+    - 親族支援
+    - 預金
+    - 運転自己資金
+    - 親族援助
+    - テスト１２３
+    - 当金庫預金
+    - 親族より援助
+  RGlap_RaiseDetailItem3:
+    distinct_count: 3
+    null_ratio: 0.9997
+    sample_values:
+    - テスト１２３
+    - その他10行
+    - 自己資金
+    top_values:
+    - テスト１２３
+    - その他10行
+    - 自己資金
+  RGlap_RaiseDetailMoney1:
+    distinct_count: 720
+    null_ratio: 0.8841
+    sample_values:
+    - '1000000'
+    - '5720000'
+    - '100000'
+    - '10000'
+    - '1000'
+    top_values:
+    - '3000000'
+    - '1000000'
+    - '800000'
+    - '5000000'
+    - '2000000'
+    - '4000000'
+    - '500000'
+    - '10000000'
+    - '100000'
+    - '300000'
+  RGlap_RaiseDetailMoney2:
+    distinct_count: 27
+    null_ratio: 0.9969
+    sample_values:
+    - '10000000000000'
+    - '300000'
+    - '5300000'
+    - '9295000'
+    - '3000000'
+    top_values:
+    - '5300000'
+    - '5601000'
+    - '3000000'
+    - '12340000'
+    - '60000000'
+    - '15000000'
+    - '2000000'
+    - '10000000000000'
+    - '300000'
+    - '9295000'
+  RGlap_RaiseDetailMoney3:
+    distinct_count: 3
+    null_ratio: 0.9997
+    sample_values:
+    - '10000000000000'
+    - '4200000000'
+    - '1817000'
+    top_values:
+    - '10000000000000'
+    - '4200000000'
+    - '1817000'
+  RGlap_FundsOnHandMoney:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_RepaymentWayCode:
+    distinct_count: 8
+    null_ratio: 0.3828
+    sample_values:
+    - R_HENSAIHOU4
+    - R_HENSAIHOU2
+    - R_HENSAIHOU8
+    - R_HENSAIHOU1
+    - R_HENSAIHOU9
+    top_values:
+    - R_HENSAIHOU4
+    - R_HENSAIHOU2
+    - R_HENSAIHOU1
+    - R_HENSAIHOU9
+    - R_HENSAIHOU8
+    - R_HENSAIHOU5
+    - R_HENSAIHOU7
+    - R_HENSAIHOU3
+  RGlap_RepaymentInterestCode:
+    distinct_count: 3
+    null_ratio: 0.3851
+    sample_values:
+    - R_RIBARAIHOU1
+    - R_RIBARAIHOU2
+    - R_RIBARAIHOU3
+    top_values:
+    - R_RIBARAIHOU1
+    - R_RIBARAIHOU2
+    - R_RIBARAIHOU3
+  RGlap_FirstRepayInterestDate:
+    distinct_count: 23
+    null_ratio: 0.0542
+    sample_values:
+    - '202508'
+    - '202011'
+    - '202511'
+    - '201901'
+    - '201907'
+    top_values:
+    - '202011'
+    - '202601'
+    - '202511'
+    - '202512'
+    - '202612'
+    - '202602'
+    - '201907'
+    - '202508'
+    - '202510'
+    - '201901'
+  RGlap_FirstRepayDate:
+    distinct_count: 23
+    null_ratio: 0.0554
+    sample_values:
+    - '202508'
+    - '202011'
+    - '202511'
+    - '201901'
+    - '201907'
+    top_values:
+    - '202011'
+    - '202601'
+    - '202511'
+    - '202512'
+    - '202612'
+    - '202508'
+    - '201907'
+    - '202510'
+    - '201901'
+    - '202509'
+  RGlap_RepayIntervalCode:
+    distinct_count: 6
+    null_ratio: 0.4863
+    sample_values:
+    - R_KANKAKU1
+    - R_KANKAKU0
+    - R_KANKAKU12
+    - R_KANKAKU2
+    - R_KANKAKU6
+    top_values:
+    - R_KANKAKU1
+    - R_KANKAKU0
+    - R_KANKAKU6
+    - R_KANKAKU12
+    - R_KANKAKU3
+    - R_KANKAKU2
+  RGlap_RepayInterestIntrvlCode:
+    distinct_count: 6
+    null_ratio: 0.3852
+    sample_values:
+    - R_RBRKANKAKU1
+    - R_RBRKANKAKU12
+    - R_RBRKANKAKU0
+    - R_RBRKANKAKU2
+    - R_RBRKANKAKU3
+    top_values:
+    - R_RBRKANKAKU1
+    - R_RBRKANKAKU0
+    - R_RBRKANKAKU6
+    - R_RBRKANKAKU12
+    - R_RBRKANKAKU3
+    - R_RBRKANKAKU2
+  RGlap_RepayCapital:
+    distinct_count: 12
+    null_ratio: 0.1297
+    sample_values:
+    - テストシナリオ1-2
+    - RT-RT-48541③
+    - ああああ
+    - あああああ
+    - '***'
+    top_values:
+    - 返済原資
+    - '---'
+    - RT-RT-48541③
+    - テストシナリオ1-2
+    - ああああ
+    - あああああ
+    - '***'
+    - '11111'
+    - 給与
+    - '12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890'
+  RGlap_RepayCount1:
+    distinct_count: 388
+    null_ratio: 0.448
+    sample_values:
+    - '120'
+    - '20'
+    - '1'
+    - '240'
+    - '4'
+    top_values:
+    - '1'
+    - '120'
+    - '420'
+    - '60'
+    - '84'
+    - '20'
+    - '240'
+    - '180'
+    - '13'
+    - '360'
+  RGlap_RepayCount2:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_RepayCount3:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_EveryRepayMoney1:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_EveryRepayMoney2:
+    distinct_count: 3010
+    null_ratio: 0.4677
+    sample_values:
+    - '95488'
+    - '50000'
+    - '417000'
+    - '51322'
+    - '25327'
+    top_values:
+    - '0'
+    - '50000'
+    - '167000'
+    - '51322'
+    - '84000'
+    - '250000'
+    - '10000'
+    - '334000'
+    - '100000'
+    - '417000'
+  RGlap_EveryRepayMoney3:
+    distinct_count: 850
+    null_ratio: 0.7427
+    sample_values:
+    - '0'
+    - '8050000'
+    - '6840537'
+    - '2024882'
+    - '10000'
+    top_values:
+    - '0'
+    - '147000'
+    - '127000'
+    - '44000'
+    - '4000'
+    - '40000'
+    - '294000'
+    - '123000'
+    - '254000'
+    - '27000'
+  RGlap_SecurityFloatingExistFlg:
+    distinct_count: 2
+    null_ratio: 0.241
+    sample_values:
+    - '0'
+    - '1'
+    top_values:
+    - '0'
+    - '1'
+  RGlap_SecurityDesc:
+    distinct_count: 17
+    null_ratio: 0.1293
+    sample_values:
+    - 条件付テストシナリオ1-3
+    - テストシナリオ1-3
+    - ああああ
+    - あ
+    - 根抵当権185M新規設定
+    top_values:
+    - 担保明細
+    - '---'
+    - ああああ
+    - 条件付テストシナリオ1-3
+    - テストシナリオ1-3
+    - あ
+    - 根抵当権185M新規設定
+    - "1-6-17\r\n1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901231234567890\r\
+      \n2\r\n3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\n10\r\n11\r\n12\r\n13\r\n14\r\n15\r\
+      \n16\r\n17\r\n18\r\n19\r\n20\r\n21\r\n22\r\n23\r\n24\r\n25"
+    - aa
+    - '***'
+  RGlap_Remarks:
+    distinct_count: 19
+    null_ratio: 0.129
+    sample_values:
+    - 条件付テストシナリオ1-3
+    - テストシナリオ1-3
+    - ｘｘｘ
+    - あああああ
+    - あ
+    top_values:
+    - 特記事項
+    - '---'
+    - あああああ
+    - 任意の項目を入力
+    - 条件付テストシナリオ1-3
+    - テストシナリオ1-3
+    - ｘｘｘ
+    - あ
+    - '1'
+    - aaaa
+  RGlap_WideUseApprovalDtls:
+    distinct_count: 74
+    null_ratio: 0.1231
+    sample_values:
+    - 本件、代表者変更の申請です。旧代表者　旧代表者A　　→　　新代表者　　新代表者A****
+    - 本件、代表者変更の申請。
+    - '---'
+    - あああ
+    - テスト
+    top_values:
+    - 汎用稟議内容
+    - 稟議番号c
+    - '---'
+    - テスト
+    - 稟議番号a
+    - 稟議番号b
+    - 子稟議a
+    - 親稟議A
+    - 本件、代表者変更の申請です。旧代表者　旧代表者A　　→　　新代表者　　新代表者A****
+    - 本件、代表者変更の申請。
+  RGlap_SubTitle:
+    distinct_count: 80
+    null_ratio: 0.7589
+    sample_values:
+    - R_SUBTITLE0101
+    - R_SUBTITLE9301
+    - R_SUBTITLE1300
+    - R_SUBTITLE2301
+    - R_SUBTITLE1103
+    top_values:
+    - R_SUBTITLE0101
+    - R_SUBTITLE0501
+    - R_SUBTITLE9999
+    - R_SUBTITLE0103
+    - R_SUBTITLE0116
+    - R_SUBTITLE0503
+    - R_SUBTITLE2301
+    - R_SUBTITLE0117
+    - R_SUBTITLE1101
+    - R_SUBTITLE0115
+  RGlap_SubTitleSupplement:
+    distinct_count: 1042
+    null_ratio: 0.8672
+    sample_values:
+    - 0818条件変更その他を設定
+    - ああああああ
+    - '0004'
+    - '---'
+    - 稟議番号a
+    top_values:
+    - 第三者保証人徴求
+    - 第三者保証人設定
+    - 根抵当権全部抹消
+    - 第三者保証
+    - 住宅ローンレートダウン
+    - 商品物件売却に伴う根抵当権一部抹消
+    - 住宅ローンご契約手続きのご案内発行依頼
+    - 商品物件売却に伴う一部抹消
+    - 共用額変更
+    - 限定根保証人徴求
+  RGlap_ConditionCngTypeCode:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_ConditionExmptCrdtCode:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_ReleaseJdgmntIntrstRate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_ApplyInterestRate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_ConditionExemptDesc:
+    distinct_count: 1
+    null_ratio: 0.1316
+    sample_values:
+    - 条件緩和補足説明
+    top_values:
+    - 条件緩和補足説明
+  RGlap_OldVersionFlag:
+    distinct_count: 2
+    null_ratio: 0.0
+    sample_values:
+    - '0'
+    - '1'
+    top_values:
+    - '0'
+    - '1'
+  RGlap_RegisterFlag:
+    distinct_count: 6
+    null_ratio: 0.0
+    sample_values:
+    - '3'
+    - '0'
+    - '1'
+    - '2'
+    - '4'
+    top_values:
+    - '0'
+    - '1'
+    - '3'
+    - '5'
+    - '4'
+    - '2'
+  RGlap_RenovationFlag:
+    distinct_count: 2
+    null_ratio: 0.0
+    sample_values:
+    - '0'
+    - '1'
+    top_values:
+    - '0'
+    - '1'
+  RGlap_DraftDate:
+    distinct_count: 11483
+    null_ratio: 0.0
+    sample_values:
+    - 2024/11/18 17:50:04.070
+    - 2020/11/10 11:34:34.207
+    - 2024/07/11 9:49:44.423
+    - 2024/07/11 9:52:43.023
+    - 2024/07/11 10:02:57.300
+    top_values:
+    - 2019/02/22 13:52:40
+    - 2024/02/08 17:47:43.473
+    - 2020/11/10 11:34:34.207
+    - 2024/07/11 9:52:43.023
+    - 2017/05/22 18:00:28
+    - 2017/10/25 11:18:54.910
+    - 2023/02/03 13:47:36.277
+    - 2019/11/14 16:59:22.103
+    - 2024/07/19 15:17:52.113
+    - 2024/07/12 16:25:42.397
+  RGlap_DraftUserName:
+    distinct_count: 40
+    null_ratio: 0.0001
+    sample_values:
+    - 精華支店申請者A
+    - '***'
+    - システムユーザー
+    - 本営店全権限ユーザ
+    - 本営店支店申請者1
+    top_values:
+    - 起案者名
+    - 第一営業店申請者A
+    - 本営店支店申請者1
+    - 本部全権限ユーザ
+    - 精華支店申請者A
+    - 十条支店申請者
+    - 百万遍支店申請者A
+    - 百万遍支店申請者AA
+    - システム管理者
+    - 大手筋支店申請者1
+  RGlap_SecurityCode:
+    distinct_count: 29
+    null_ratio: 0.6242
+    sample_values:
+    - '1001'
+    - '4050'
+    - '4033'
+    - '4031'
+    - '4034'
+    top_values:
+    - '4050'
+    - '1001'
+    - '2001'
+    - '4015'
+    - '4033'
+    - '4032'
+    - '4048'
+    - '1005'
+    - '4029'
+    - '4049'
+  RGlap_TempFlag:
+    distinct_count: 2
+    null_ratio: 0.0
+    sample_values:
+    - '0'
+    - '1'
+    top_values:
+    - '0'
+    - '1'
+  RGlap_InChargeUserNo:
+    distinct_count: 937
+    null_ratio: 0.0026
+    sample_values:
+    - '10001'
+    - '014002'
+    - '601001'
+    - '0010000001'
+    - 0019999999
+    top_values:
+    - '10001'
+    - '31001'
+    - '9999999999'
+    - '0010000001'
+    - '014001'
+    - '1930001'
+    - '132721'
+    - '137975'
+    - '10091'
+    - '130305'
+  RGlap_InChargeUserName:
+    distinct_count: 60
+    null_ratio: 0.0026
+    sample_values:
+    - 精華支店申請者A
+    - '***'
+    - 中信ローン保証ユーザ
+    - 本営店支店申請者1
+    - 本営店全権限ユーザ
+    top_values:
+    - 現在の処理担当者名
+    - 第一営業店申請者A
+    - 本部全権限ユーザ
+    - 本営店支店申請者1
+    - 精華支店申請者A
+    - 十条支店申請者
+    - 百万遍支店申請者A
+    - 百万遍支店申請者AA
+    - システム管理者
+    - テストユーザ1
+  RGlap_HQInChargeUserNo:
+    distinct_count: 21
+    null_ratio: 0.9468
+    sample_values:
+    - '19103'
+    - '9999999999'
+    - '191001'
+    - '601001'
+    - '0000000001'
+    top_values:
+    - '9999999999'
+    - '11'
+    - '19101'
+    - '191001'
+    - '0000000001'
+    - '19102'
+    - '191999'
+    - '132185'
+    - '19103'
+    - '601001'
+  RGlap_HQInChargeUserName:
+    distinct_count: 14
+    null_ratio: 0.0871
+    sample_values:
+    - 本部次長
+    - 本部全権限ユーザ
+    - 審査部担当者
+    - 中信ローン保証ユーザ
+    - システム管理者
+    top_values:
+    - 本部審査担当者名
+    - 本部全権限ユーザ
+    - 髙橋　信之
+    - 本部初審
+    - システム管理者
+    - 本部課長
+    - 本部オールユーザ
+    - 本部次長
+    - 審査部担当者
+    - 中信ローン保証ユーザ
+  RGlap_ChangeStandardDate:
+    distinct_count: 152
+    null_ratio: 0.818
+    sample_values:
+    - '20240730'
+    - '20170404'
+    - '20171024'
+    - '20171025'
+    - '20171129'
+    top_values:
+    - '20180702'
+    - '20180601'
+    - '20180629'
+    - '20180531'
+    - '20180701'
+    - '20180630'
+    - '20180703'
+    - '20180731'
+    - '20180626'
+    - '20180615'
+  RGlap_CreditNo:
+    distinct_count: 1393
+    null_ratio: 0.59
+    sample_values:
+    - '310005606'
+    - '310005602'
+    - '310005599'
+    - '310005506'
+    - '310005505'
+    top_values:
+    - '0'
+    - '330003002'
+    - '330003001'
+    - '330003003'
+    - '330003004'
+    - '330003005'
+    - '330003006'
+    - '330003007'
+    - '330003010'
+    - '330003009'
+  RGlap_BillLimitDate:
+    distinct_count: 120
+    null_ratio: 0.9249
+    sample_values:
+    - '20170410'
+    - '20180621'
+    - '20270203'
+    - '20190320'
+    - '20171129'
+    top_values:
+    - '20180702'
+    - '20190531'
+    - '20190701'
+    - '20181031'
+    - '20190628'
+    - '20180831'
+    - '20180629'
+    - '20190104'
+    - '20180731'
+    - '20190731'
+  RGlap_RootManagementNo:
+    distinct_count: 22
+    null_ratio: 0.997
+    sample_values:
+    - '200'
+    - '1111111111'
+    - '10024'
+    - '128409'
+    - '129661'
+    top_values:
+    - '128409'
+    - '130894'
+    - '75325'
+    - '129661'
+    - '129197'
+    - '129956'
+    - '120520'
+    - '129044'
+    - '116992'
+    - '131520'
+  RGlap_SheetCount:
+    distinct_count: 24
+    null_ratio: 0.9101
+    sample_values:
+    - '1'
+    - '10'
+    - '1000'
+    - '2'
+    - '8'
+    top_values:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    - '6'
+    - '10'
+    - '7'
+    - '8'
+    - '9'
+  RGlap_BonusTotalMoney:
+    distinct_count: 119
+    null_ratio: 0.8691
+    sample_values:
+    - '0'
+    - '100'
+    - '10000'
+    - '33'
+    - '6000000'
+    top_values:
+    - '0'
+    - '6000000'
+    - '7000000'
+    - '5000000'
+    - '600000'
+    - '10000000'
+    - '13500000'
+    - '9000000'
+    - '400000'
+    - '300000'
+  RGlap_ForeignMoney:
+    distinct_count: 28
+    null_ratio: 0.9959
+    sample_values:
+    - '1500000.00'
+    - '1000000.00'
+    - '100000.00'
+    - '9999999.00'
+    - '5000000.00'
+    top_values:
+    - '1000000.00'
+    - '100000.00'
+    - '9450000.00'
+    - '5000000.00'
+    - '6000000.00'
+    - '100.00'
+    - '18960000.00'
+    - '59857.93'
+    - '15282000.00'
+    - '1500000.00'
+  RGlap_MonetaryUnit:
+    distinct_count: 2
+    null_ratio: 0.9958
+    sample_values:
+    - R_CURRENCY1
+    - R_CURRENCY99
+    top_values:
+    - R_CURRENCY1
+    - R_CURRENCY99
+  RGlap_Reservation:
+    distinct_count: 2
+    null_ratio: 0.9983
+    sample_values:
+    - R_RESERVATION1
+    - R_RESERVATION2
+    top_values:
+    - R_RESERVATION1
+    - R_RESERVATION2
+  RGlap_RefinanceDivision:
+    distinct_count: 5
+    null_ratio: 0.8817
+    sample_values:
+    - R_KARIKAEKBN1
+    - R_KARIKAEKBN2
+    - R_KARIKAEKBN3
+    - R_KARIKAEKBN4
+    - R_KARIKAEKBN5
+    top_values:
+    - R_KARIKAEKBN1
+    - R_KARIKAEKBN2
+    - R_KARIKAEKBN4
+    - R_KARIKAEKBN3
+    - R_KARIKAEKBN5
+  RGlap_RefinanceFirstDate:
+    distinct_count: 1036
+    null_ratio: 0.8813
+    sample_values:
+    - '20180827'
+    - '20171015'
+    - '20170323'
+    - '20190401'
+    - '20180101'
+    top_values:
+    - '20091228'
+    - '20170323'
+    - '20170509'
+    - '20170726'
+    - '20001122'
+    - '20170228'
+    - '20200201'
+    - '20160331'
+    - '20160229'
+    - '20170810'
+  RGlap_RefinanceUseDivision:
+    distinct_count: 50
+    null_ratio: 0.8814
+    sample_values:
+    - R_SIKINSITOM101
+    - R_SIKINSITOM129
+    - R_SIKINSITOM230
+    - R_SIKINSITOM357
+    - R_SIKINSITOM360
+    top_values:
+    - R_SIKINSITOM129
+    - R_SIKINSITOM121
+    - R_SIKINSITOM499
+    - R_SIKINSITOM101
+    - R_SIKINSITOM351
+    - R_SIKINSITOM249
+    - R_SIKINSITOM352
+    - R_SIKINSITOM105
+    - R_SIKINSITOM246
+    - R_SIKINSITOM481
+  RGlap_SelectTypeDivision:
+    distinct_count: 8
+    null_ratio: 0.8298
+    sample_values:
+    - R_KINRIKBN10
+    - R_KINRIKBN5
+    - R_KINRIKBN2
+    - R_KINRIKBN99
+    - R_KINRIKBN3
+    top_values:
+    - R_KINRIKBN99
+    - R_KINRIKBN10
+    - R_KINRIKBN5
+    - R_KINRIKBN2
+    - R_KINRIKBN20
+    - R_KINRIKBN15
+    - R_KINRIKBN3
+    - R_KINRIKBN7
+  RGlap_FixedContractualRate:
+    distinct_count: 64
+    null_ratio: 0.7449
+    sample_values:
+    - '-1.80000'
+    - '1.00000'
+    - '0.00000'
+    - '0.20000'
+    - '0.50000'
+    top_values:
+    - '0.00000'
+    - '-1.80000'
+    - '-1.70000'
+    - '-1.60000'
+    - '-1.50000'
+    - '-0.80000'
+    - '-1.30000'
+    - '-0.60000'
+    - '-1.00000'
+    - '1.00000'
+  RGlap_VariableContractualRate:
+    distinct_count: 92
+    null_ratio: 0.7449
+    sample_values:
+    - '-1.90000'
+    - '1.00000'
+    - '0.00000'
+    - '2.00000'
+    - '0.30000'
+    top_values:
+    - '0.00000'
+    - '-2.10000'
+    - '-1.80000'
+    - '-1.90000'
+    - '-2.00000'
+    - '-2.05000'
+    - '-0.80000'
+    - '-1.70000'
+    - '-1.95000'
+    - '-2.08000'
+  RGlap_StepRateAppliedDate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_StepRate:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_StepPeriod:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_OperateDetailItem1:
+    distinct_count: 1160
+    null_ratio: 0.5429
+    sample_values:
+    - 建築
+    - あ
+    - 自家用車購入
+    - 物件価格
+    - テスト１２３
+    top_values:
+    - 運転資金
+    - 土地
+    - 物件価格
+    - 土地建物
+    - 物件購入
+    - 経常運転資金
+    - 土地・建物
+    - 買掛支手決済
+    - 物件
+    - マンション
+  RGlap_OperateDetailItem2:
+    distinct_count: 589
+    null_ratio: 0.7825
+    sample_values:
+    - 外構費
+    - い
+    - 追加工事
+    - テスト１２３
+    - 新築
+    top_values:
+    - 諸費用
+    - 建物
+    - 運転資金
+    - リフォーム
+    - 改装費
+    - 真水
+    - 建物代金
+    - 生活費
+    - 既貸返済
+    - 諸経費
+  RGlap_OperateDetailItem3:
+    distinct_count: 285
+    null_ratio: 0.9175
+    sample_values:
+    - 解体費
+    - う
+    - 諸費用
+    - テスト１２３
+    - 諸費用等
+    top_values:
+    - 諸費用
+    - 運転資金
+    - 追加工事
+    - 外構工事
+    - 生活費
+    - 諸経費
+    - 外構
+    - 真水
+    - 外構費
+    - 解体
+  RGlap_OperateDetailItem4:
+    distinct_count: 137
+    null_ratio: 0.972
+    sample_values:
+    - 基礎補強費
+    - テスト１２３
+    - 太陽光
+    - 諸費用
+    - 付属工事
+    top_values:
+    - 諸費用
+    - 運転資金
+    - 諸経費
+    - 追加工事
+    - 外構
+    - 地盤改良
+    - 登記費用
+    - 解体
+    - 解体費
+    - 水道工事
+  RGlap_OperateDetailItem5:
+    distinct_count: 74
+    null_ratio: 0.9876
+    sample_values:
+    - 諸費用
+    - テスト１２３
+    - 諸経費
+    - 登記費用
+    - 外構費
+    top_values:
+    - 諸費用
+    - 諸経費
+    - 運転資金
+    - 経費
+    - 水道工事
+    - 旧建物解体
+    - 登記費用
+    - 外構費
+    - 建築設計
+    - 証3049
+  RGlap_OperateDetailItem6:
+    distinct_count: 31
+    null_ratio: 0.9951
+    sample_values:
+    - テスト１２３
+    - 諸費用
+    - 上下水道工事
+    - 専門コース費
+    - 真水
+    top_values:
+    - 諸費用
+    - 登記費用
+    - 運転資金
+    - 上下水道工事
+    - 真水
+    - 開発申請
+    - 解体工事
+    - 火災保険
+    - 追加工事
+    - 真水運転資金
+  RGlap_OperateDetailItem7:
+    distinct_count: 15
+    null_ratio: 0.9978
+    sample_values:
+    - テスト１２３
+    - その他
+    - 取得税
+    - 諸経費
+    - 解体工事
+    top_values:
+    - 諸費用
+    - 登記費用
+    - 運転資金
+    - その他
+    - 諸経費
+    - 解体工事
+    - テスト１２３
+    - 取得税
+    - その他費用
+    - 手2079
+  RGlap_OperateDetailItem8:
+    distinct_count: 10
+    null_ratio: 0.999
+    sample_values:
+    - テスト１２３
+    - 登録免許税
+    - 改修工事
+    - 印紙代
+    - 手2080
+    top_values:
+    - 運転資金
+    - テスト１２３
+    - 登録免許税
+    - 改修工事
+    - 印紙代
+    - 手2080
+    - 水道・ガス費
+    - 諸費用
+    - 仲介手数料
+    - 移転費用
+  RGlap_OperateDetailItem9:
+    distinct_count: 3
+    null_ratio: 0.9997
+    sample_values:
+    - テスト１２３
+    - 諸費用
+    - 登記・廃止
+    top_values:
+    - テスト１２３
+    - 諸費用
+    - 登記・廃止
+  RGlap_OperateDetailMoney1:
+    distinct_count: 2246
+    null_ratio: 0.5428
+    sample_values:
+    - '174960000'
+    - '1000'
+    - '3800000'
+    - '43300000'
+    - '30080000'
+    top_values:
+    - '10000000'
+    - '5000000'
+    - '3000000'
+    - '20000000'
+    - '30000000'
+    - '2000000'
+    - '1000000'
+    - '15000000'
+    - '50000000'
+    - '500000'
+  RGlap_OperateDetailMoney2:
+    distinct_count: 1427
+    null_ratio: 0.7823
+    sample_values:
+    - '3024000'
+    - '2000'
+    - '2810000'
+    - '10000000000000'
+    - '43700000'
+    top_values:
+    - '1000000'
+    - '2000000'
+    - '1500000'
+    - '3000000'
+    - '10000000'
+    - '500000'
+    - '800000'
+    - '1200000'
+    - '2200000'
+    - '1700000'
+  RGlap_OperateDetailMoney3:
+    distinct_count: 577
+    null_ratio: 0.9175
+    sample_values:
+    - '2862000'
+    - '3000'
+    - '2110000'
+    - '10000000000000'
+    - '7300000'
+    top_values:
+    - '1000000'
+    - '2000000'
+    - '1200000'
+    - '3000000'
+    - '1500000'
+    - '500000'
+    - '1700000'
+    - '1600000'
+    - '1300000'
+    - '10000000'
+  RGlap_OperateDetailMoney4:
+    distinct_count: 217
+    null_ratio: 0.972
+    sample_values:
+    - '4434000'
+    - '10000000000000'
+    - '3000000'
+    - '2020000'
+    - '2268000'
+    top_values:
+    - '1000000'
+    - '5000000'
+    - '1500000'
+    - '600000'
+    - '2500000'
+    - '2000000'
+    - '3000000'
+    - '500000'
+    - '5400000'
+    - '15000000'
+  RGlap_OperateDetailMoney5:
+    distinct_count: 113
+    null_ratio: 0.9876
+    sample_values:
+    - '5440000'
+    - '10000000000000'
+    - '2060000'
+    - '1520000'
+    - '500000'
+    top_values:
+    - '1500000'
+    - '2000000'
+    - '600000'
+    - '550000'
+    - '1400000'
+    - '18619000'
+    - '500000'
+    - '2430000'
+    - '5829000'
+    - '2100000'
+  RGlap_OperateDetailMoney6:
+    distinct_count: 47
+    null_ratio: 0.9951
+    sample_values:
+    - '10000000000000'
+    - '104000'
+    - '2235000'
+    - '50000'
+    - '321000'
+    top_values:
+    - '3000000'
+    - '2235000'
+    - '321000'
+    - '1500000'
+    - '1800000'
+    - '300000'
+    - '9418000'
+    - '10000000000000'
+    - '104000'
+    - '50000'
+  RGlap_OperateDetailMoney7:
+    distinct_count: 22
+    null_ratio: 0.9978
+    sample_values:
+    - '10000000000000'
+    - '5526000'
+    - '5629000'
+    - '2031000'
+    - '1199000'
+    top_values:
+    - '5526000'
+    - '600000'
+    - '166000'
+    - '10000000000000'
+    - '5629000'
+    - '2031000'
+    - '1199000'
+    - '10550000'
+    - '18400000'
+    - '2008000'
+  RGlap_OperateDetailMoney8:
+    distinct_count: 11
+    null_ratio: 0.999
+    sample_values:
+    - '10000000000000'
+    - '2897000'
+    - '13050000'
+    - '20000'
+    - '1200000'
+    top_values:
+    - '10000000000000'
+    - '2897000'
+    - '13050000'
+    - '20000'
+    - '1200000'
+    - '775000'
+    - '300000'
+    - '110000'
+    - '1355000'
+    - '867000'
+  RGlap_OperateDetailMoney9:
+    distinct_count: 3
+    null_ratio: 0.9997
+    sample_values:
+    - '10000000000000'
+    - '600000'
+    - '3540000'
+    top_values:
+    - '10000000000000'
+    - '600000'
+    - '3540000'
+  RGlap_RaiseDetailItem4:
+    distinct_count: 60
+    null_ratio: 0.9889
+    sample_values:
+    - テスト１２３
+    - 手貸
+    - 補助金
+    - 住宅ローン
+    - 同時借入
+    top_values:
+    - 自己資金
+    - 預金
+    - 同時申請
+    - 政策公庫
+    - 手元資金
+    - 当庫借入
+    - 補助金
+    - 住宅ローン
+    - 妻ローン
+    - 夫ローン
+  RGlap_RaiseDetailItem5:
+    distinct_count: 11
+    null_ratio: 0.9988
+    sample_values:
+    - テスト１２３
+    - 私学共済
+    - 親の援助
+    - 夫金融公庫
+    - 滋賀銀行借入
+    top_values:
+    - 夫金融公庫
+    - 京都銀行
+    - 三菱UFJ
+    - テスト１２３
+    - 私学共済
+    - 親の援助
+    - 滋賀銀行借入
+    - 申請予定解体
+    - 三井住友銀行
+    - ランドリアン
+  RGlap_RaiseDetailItem6:
+    distinct_count: 3
+    null_ratio: 0.9996
+    sample_values:
+    - テスト１２３
+    - 京都信金
+    - 京都
+    top_values:
+    - 京都信金
+    - 京都
+    - テスト１２３
+  RGlap_RaiseDetailMoney4:
+    distinct_count: 80
+    null_ratio: 0.988
+    sample_values:
+    - '10000000000000'
+    - '10000000'
+    - '3900000'
+    - '100000'
+    - '9000'
+    top_values:
+    - '10000000'
+    - '25000000'
+    - '50000000'
+    - '15000000'
+    - '35000000'
+    - '16000'
+    - '5000000'
+    - '14000000'
+    - '100000000'
+    - '12000000'
+  RGlap_RaiseDetailMoney5:
+    distinct_count: 10
+    null_ratio: 0.9988
+    sample_values:
+    - '10000000000000'
+    - '350000000'
+    - '12318000'
+    - '10000000'
+    - '100000000'
+    top_values:
+    - '10000000'
+    - '60000000'
+    - '125000000'
+    - '10000000000000'
+    - '350000000'
+    - '12318000'
+    - '100000000'
+    - '2000000'
+    - '50000000'
+    - '2100000'
+  RGlap_RaiseDetailMoney6:
+    distinct_count: 3
+    null_ratio: 0.9996
+    sample_values:
+    - '10000000000000'
+    - '70000000'
+    - '65000000'
+    top_values:
+    - '70000000'
+    - '10000000000000'
+    - '65000000'
+  RGlap_RepayDay:
+    distinct_count: 30
+    null_ratio: 0.4033
+    sample_values:
+    - '31'
+    - '06'
+    - '02'
+    - '20'
+    - '25'
+    top_values:
+    - '31'
+    - '10'
+    - '06'
+    - '25'
+    - '05'
+    - '27'
+    - '26'
+    - '01'
+    - '15'
+    - '20'
+  RGlap_FractionDivision:
+    distinct_count: 3
+    null_ratio: 0.513
+    sample_values:
+    - R_ADJHASU0
+    - R_ADJHASU2
+    - R_ADJHASU1
+    top_values:
+    - R_ADJHASU0
+    - R_ADJHASU2
+    - R_ADJHASU1
+  RGlap_DeferInterestIntrvlCode:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_BonusRepayMoney:
+    distinct_count: 188
+    null_ratio: 0.6435
+    sample_values:
+    - '0'
+    - '33'
+    - '8'
+    - '25'
+    - '11000'
+    top_values:
+    - '0'
+    - '213814'
+    - '250000'
+    - '102647'
+    - '100000'
+    - '113601'
+    - '25'
+    - '176699'
+    - '17577'
+    - '303581'
+  RGlap_BonusRepayCount:
+    distinct_count: 57
+    null_ratio: 0.8691
+    sample_values:
+    - '0'
+    - '3'
+    - '4'
+    - '11'
+    - '70'
+    top_values:
+    - '0'
+    - '70'
+    - '20'
+    - '40'
+    - '16'
+    - '10'
+    - '6'
+    - '4'
+    - '14'
+    - '48'
+  RGlap_BonusBeginDate:
+    distinct_count: 14
+    null_ratio: 0.9814
+    sample_values:
+    - '201906'
+    - '202106'
+    - '202406'
+    - '201808'
+    - '201806'
+    top_values:
+    - '201807'
+    - '201812'
+    - '201901'
+    - '201806'
+    - '201808'
+    - '201810'
+    - '201906'
+    - '201907'
+    - '201809'
+    - '201902'
+  RGlap_BonusMonth1:
+    distinct_count: 11
+    null_ratio: 0.9804
+    sample_values:
+    - '06'
+    - '03'
+    - 08
+    - '12'
+    - 09
+    top_values:
+    - '06'
+    - '01'
+    - '07'
+    - 08
+    - '03'
+    - '12'
+    - '04'
+    - '02'
+    - 09
+    - '05'
+  RGlap_BonusMonth2:
+    distinct_count: 11
+    null_ratio: 0.9804
+    sample_values:
+    - '12'
+    - 09
+    - '02'
+    - '06'
+    - '03'
+    top_values:
+    - '12'
+    - '07'
+    - '01'
+    - '02'
+    - 09
+    - '06'
+    - '10'
+    - 08
+    - '03'
+    - '11'
+  RGlap_CommissionDivision:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_GroupInsuranceDivision:
+    distinct_count: 3
+    null_ratio: 0.8137
+    sample_values:
+    - R_DANSINKBN1
+    - R_DANSINKBN3
+    - R_DANSINKBN2
+    top_values:
+    - R_DANSINKBN1
+    - R_DANSINKBN2
+    - R_DANSINKBN3
+  RGlap_DebtSupport:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_FireInsuranceFlag:
+    distinct_count: 2
+    null_ratio: 0.9111
+    sample_values:
+    - UMU1
+    - UMU2
+    top_values:
+    - UMU1
+    - UMU2
+  RGlap_StartRepayDate1:
+    distinct_count: 15
+    null_ratio: 0.9858
+    sample_values:
+    - '201703'
+    - '201601'
+    - '202204'
+    - '202409'
+    - '202509'
+    top_values:
+    - '201806'
+    - '201807'
+    - '201812'
+    - '202204'
+    - '201808'
+    - '202711'
+    - '201703'
+    - '201601'
+    - '202409'
+    - '202509'
+  RGlap_RepayDay1:
+    distinct_count: 11
+    null_ratio: 0.9859
+    sample_values:
+    - '01'
+    - 09
+    - '30'
+    - '31'
+    - '10'
+    top_values:
+    - '31'
+    - '15'
+    - '10'
+    - '20'
+    - '05'
+    - 09
+    - '27'
+    - '01'
+    - '25'
+    - '30'
+  RGlap_LastRepayDate1:
+    distinct_count: 33
+    null_ratio: 0.9858
+    sample_values:
+    - '201703'
+    - '201901'
+    - '202206'
+    - '202409'
+    - '202509'
+    top_values:
+    - '201811'
+    - '201812'
+    - '201905'
+    - '201906'
+    - '201807'
+    - '202206'
+    - '201810'
+    - '201809'
+    - '201901'
+    - '202711'
+  RGlap_RepayIntervalCode1:
+    distinct_count: 1
+    null_ratio: 0.9873
+    sample_values:
+    - R_KANKAKU1
+    top_values:
+    - R_KANKAKU1
+  RGlap_IncreaseDecreaseMoney1:
+    distinct_count: 88
+    null_ratio: 0.9858
+    sample_values:
+    - '100000000'
+    - '250'
+    - '11111'
+    - '5000'
+    - '250000'
+    top_values:
+    - '10000'
+    - '5000'
+    - '50000'
+    - '250'
+    - '16000'
+    - '6000'
+    - '11111'
+    - '40000'
+    - '20000'
+    - '15000'
+  RGlap_StartRepayDate2:
+    distinct_count: 31
+    null_ratio: 0.9866
+    sample_values:
+    - '201703'
+    - '201602'
+    - '202205'
+    - '202712'
+    - '201905'
+    top_values:
+    - '201812'
+    - '201901'
+    - '201906'
+    - '201907'
+    - '201808'
+    - '201811'
+    - '201810'
+    - '201905'
+    - '201807'
+    - '201809'
+  RGlap_RepayDay2:
+    distinct_count: 11
+    null_ratio: 0.9867
+    sample_values:
+    - '02'
+    - 09
+    - '30'
+    - '31'
+    - '10'
+    top_values:
+    - '31'
+    - '15'
+    - '10'
+    - '20'
+    - '05'
+    - '27'
+    - '25'
+    - '30'
+    - '02'
+    - 09
+  RGlap_LastRepayDate2:
+    distinct_count: 70
+    null_ratio: 0.9866
+    sample_values:
+    - '201703'
+    - '201902'
+    - '202207'
+    - '202712'
+    - '201906'
+    top_values:
+    - '202002'
+    - '201905'
+    - '201811'
+    - '202105'
+    - '202312'
+    - '202004'
+    - '201906'
+    - '202005'
+    - '201901'
+    - '202011'
+  RGlap_RepayIntervalCode2:
+    distinct_count: 3
+    null_ratio: 0.989
+    sample_values:
+    - R_KANKAKU2
+    - R_KANKAKU1
+    - R_KANKAKU6
+    top_values:
+    - R_KANKAKU1
+    - R_KANKAKU2
+    - R_KANKAKU6
+  RGlap_IncreaseDecreaseMoney2:
+    distinct_count: 100
+    null_ratio: 0.9867
+    sample_values:
+    - '2000000'
+    - '100'
+    - '5000'
+    - '482500'
+    - '1074000'
+    top_values:
+    - '250000'
+    - '50000'
+    - '167000'
+    - '150000'
+    - '67000'
+    - '125000'
+    - '500000'
+    - '400000'
+    - '192000'
+    - '25000'
+  RGlap_StartRepayDate3:
+    distinct_count: 61
+    null_ratio: 0.989
+    sample_values:
+    - '201703'
+    - '201903'
+    - '202206'
+    - '201907'
+    - '201906'
+    top_values:
+    - '202003'
+    - '201906'
+    - '202005'
+    - '202006'
+    - '202106'
+    - '202401'
+    - '202103'
+    - '201903'
+    - '201907'
+    - '202602'
+  RGlap_RepayDay3:
+    distinct_count: 11
+    null_ratio: 0.989
+    sample_values:
+    - '03'
+    - 09
+    - '31'
+    - '10'
+    - '30'
+    top_values:
+    - '31'
+    - '15'
+    - '10'
+    - '05'
+    - '20'
+    - '27'
+    - '25'
+    - '30'
+    - '03'
+    - 09
+  RGlap_LastRepayDate3:
+    distinct_count: 61
+    null_ratio: 0.989
+    sample_values:
+    - '201703'
+    - '201903'
+    - '202208'
+    - '201907'
+    - '201906'
+    top_values:
+    - '202003'
+    - '201906'
+    - '202005'
+    - '202006'
+    - '202012'
+    - '202106'
+    - '202401'
+    - '202103'
+    - '201903'
+    - '201907'
+  RGlap_RepayIntervalCode3:
+    distinct_count: 3
+    null_ratio: 0.9995
+    sample_values:
+    - R_KANKAKU3
+    - R_KANKAKU1
+    - R_KANKAKU6
+    top_values:
+    - R_KANKAKU1
+    - R_KANKAKU3
+    - R_KANKAKU6
+  RGlap_IncreaseDecreaseMoney3:
+    distinct_count: 122
+    null_ratio: 0.989
+    sample_values:
+    - '3000000'
+    - '100'
+    - '28418500'
+    - '10105000'
+    - '3513000'
+    top_values:
+    - '1032000'
+    - '441000'
+    - '490000'
+    - '16200000'
+    - '3000000'
+    - '100'
+    - '28418500'
+    - '10105000'
+    - '3513000'
+    - '150000'
+  RGlap_StartRepayDate4:
+    distinct_count: 7
+    null_ratio: 0.9994
+    sample_values:
+    - '201703'
+    - '201904'
+    - '202205'
+    - '202101'
+    - '201907'
+    top_values:
+    - '201703'
+    - '201904'
+    - '202205'
+    - '202101'
+    - '201907'
+    - '202405'
+    - '202102'
+  RGlap_RepayDay4:
+    distinct_count: 4
+    null_ratio: 0.9995
+    sample_values:
+    - '04'
+    - 09
+    - '31'
+    - '25'
+    top_values:
+    - '31'
+    - '04'
+    - 09
+    - '25'
+  RGlap_LastRepayDate4:
+    distinct_count: 7
+    null_ratio: 0.9994
+    sample_values:
+    - '201703'
+    - '201904'
+    - '202207'
+    - '202101'
+    - '201907'
+    top_values:
+    - '201703'
+    - '201904'
+    - '202207'
+    - '202101'
+    - '201907'
+    - '202405'
+    - '202102'
+  RGlap_RepayIntervalCode4:
+    distinct_count: 2
+    null_ratio: 0.9998
+    sample_values:
+    - R_KANKAKU4
+    - R_KANKAKU1
+    top_values:
+    - R_KANKAKU4
+    - R_KANKAKU1
+  RGlap_IncreaseDecreaseMoney4:
+    distinct_count: 6
+    null_ratio: 0.9995
+    sample_values:
+    - '400000000'
+    - '100'
+    - '3150000'
+    - '28418500'
+    - '9480778'
+    top_values:
+    - '400000000'
+    - '100'
+    - '3150000'
+    - '28418500'
+    - '9480778'
+    - '35739000'
+  RGlap_StartRepayDate5:
+    distinct_count: 3
+    null_ratio: 0.9997
+    sample_values:
+    - '201703'
+    - '201905'
+    - '202206'
+    top_values:
+    - '201703'
+    - '201905'
+    - '202206'
+  RGlap_RepayDay5:
+    distinct_count: 2
+    null_ratio: 0.9998
+    sample_values:
+    - '05'
+    - 09
+    top_values:
+    - '05'
+    - 09
+  RGlap_LastRepayDate5:
+    distinct_count: 3
+    null_ratio: 0.9997
+    sample_values:
+    - '201703'
+    - '201905'
+    - '202208'
+    top_values:
+    - '201703'
+    - '201905'
+    - '202208'
+  RGlap_RepayIntervalCode5:
+    distinct_count: 2
+    null_ratio: 0.9998
+    sample_values:
+    - R_KANKAKU6
+    - R_KANKAKU1
+    top_values:
+    - R_KANKAKU6
+    - R_KANKAKU1
+  RGlap_IncreaseDecreaseMoney5:
+    distinct_count: 2
+    null_ratio: 0.9998
+    sample_values:
+    - '50000000000000'
+    - '100'
+    top_values:
+    - '50000000000000'
+    - '100'
+  RGlap_RelatedLoanTotal:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_RelatedDepositTotal:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_RelatedLoanInterestTotal:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_RelatedDpstInterestTotal:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_DraftBranchNo:
+    distinct_count: 137
+    null_ratio: 0.0
+    sample_values:
+    - '010'
+    - '014'
+    - '310'
+    - '001'
+    - '005'
+    top_values:
+    - '001'
+    - '010'
+    - '310'
+    - '014'
+    - 059
+    - '002'
+    - '005'
+    - '006'
+    - '025'
+    - '011'
+  RGlap_DraftBranchName:
+    distinct_count: 140
+    null_ratio: 0.0002
+    sample_values:
+    - 百万遍支店
+    - '***'
+    - シナリオ第一営業店
+    - 本店営業部
+    - 四条支店
+    top_values:
+    - 本店営業部
+    - 百万遍支店
+    - シナリオ第一営業店
+    - 十条支店
+    - 吉祥院支店
+    - 市場支店
+    - 四条支店
+    - 三条支店
+    - 長岡支店
+    - 円町支店
+  RGlap_ExecutionBranchNo:
+    distinct_count: 134
+    null_ratio: 0.1138
+    sample_values:
+    - '014'
+    - '310'
+    - '001'
+    - '005'
+    - '171'
+    top_values:
+    - '171'
+    - '001'
+    - '010'
+    - 059
+    - '002'
+    - '006'
+    - '310'
+    - '014'
+    - '005'
+    - '011'
+  RGlap_StaffFinanceFlag:
+    distinct_count: 1
+    null_ratio: 0.3363
+    sample_values:
+    - '0'
+    top_values:
+    - '0'
+  RGlap_ScheduledCloseMoney:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_SimulScheduledCloseMoney:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_DepositSecurityMny:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_SimulDepositSecurityMny:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_SocietyLoadMoney:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_SimulSocietyLoadMoney:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_AutoJudgeSettAuthority:
+    distinct_count: 3
+    null_ratio: 0.0898
+    sample_values:
+    - R_KESSAIKENGE2
+    - R_KESSAIKENGE1
+    - R_KESSAIKENGE3
+    top_values:
+    - R_KESSAIKENGE2
+    - R_KESSAIKENGE1
+    - R_KESSAIKENGE3
+  RGlap_SettAuthorityJudgeDate:
+    distinct_count: 10245
+    null_ratio: 0.091
+    sample_values:
+    - 2020/11/10 11:37:23.350
+    - 2017/06/05 15:27:36.110
+    - 2017/05/22 18:01:23
+    - 2017/05/22 18:03:59.817
+    - 2017/05/22 20:17:58.967
+    top_values:
+    - 2025/10/20 15:32:24.390
+    - 2026/01/27 10:48:26.297
+    - 2026/01/16 15:32:05.840
+    - 2026/01/28 13:36:23.080
+    - 2025/10/22 17:10:12.733
+    - 2025/10/15 13:33:05.093
+    - 2025/11/06 14:22:56.863
+    - 2025/10/16 10:05:35.843
+    - 2025/10/20 13:52:08.717
+    - 2025/10/27 16:10:09.197
+  RGlap_SettAuthorityJudgeReason:
+    distinct_count: 62
+    null_ratio: 0.0438
+    sample_values:
+    - 担保条件　預金担保あり
+    - 金利変動区分変更
+    - 表債
+    - 本部該当理由なし
+    - 商品権限区分
+    top_values:
+    - 決済権限判定理由
+    - 一括稟議　本部決裁あり
+    - 表債
+    - 一括稟議　本部決裁なし
+    - 本部該当理由なし
+    - 住宅ローン専決
+    - 割引　一般貸
+    - 住宅ローン団信
+    - 割引手形　手形期日240日以上
+    - 極度稟議
+  RGlap_RespShareDivision:
+    distinct_count: 4
+    null_ratio: 0.9246
+    sample_values:
+    - R_RSPNSBLTY9
+    - R_RSPNSBLTY2
+    - R_RSPNSBLTY1
+    - R_RSPNSBLTY3
+    top_values:
+    - R_RSPNSBLTY2
+    - R_RSPNSBLTY9
+    - R_RSPNSBLTY1
+    - R_RSPNSBLTY3
+  RGlap_ReceiptYear:
+    distinct_count: 0
+    null_ratio: 1.0
+    sample_values: []
+    top_values: []
+  RGlap_FixedIntstRateSelectDate:
+    distinct_count: 99
+    null_ratio: 0.9667
+    sample_values:
+    - '20221106'
+    - '20191106'
+    - '20280331'
+    - '20281030'
+    - '20201130'
+    top_values:
+    - '20280630'
+    - '20280731'
+    - '20280531'
+    - '20280831'
+    - '20240731'
+    - '20250731'
+    - '20290331'
+    - '20230630'
+    - '20290131'
+    - '20290228'
+  RGlap_AppSlipErrFlag:
+    distinct_count: 2
+    null_ratio: 0.0
+    sample_values:
+    - '0'
+    - '1'
+    top_values:
+    - '0'
+    - '1'
+  RGlap_BasisCondUpdateTime:
+    distinct_count: 11479
+    null_ratio: 0.0
+    sample_values:
+    - 2024/11/18 17:50:04.070
+    - 2023/10/13 15:07:29.770
+    - 2024/07/11 9:49:44.423
+    - 2024/07/11 9:52:43.023
+    - 2024/07/11 10:02:57.300
+    top_values:
+    - 2020/04/17 15:24:42
+    - 2024/02/13 13:37:02.347
+    - 2024/07/11 9:52:43.023
+    - 2017/05/22 18:00:28
+    - 2017/12/15 10:49:34.207
+    - 2023/02/03 13:47:36.277
+    - 2021/05/12 12:23:02.677
+    - 2026/01/09 17:07:42.443
+    - 2025/10/23 17:15:04.957
+    - 2026/01/22 19:48:13.720
+  RGlap_AutoCalcEveryRepayMoney2:
+    distinct_count: 565
+    null_ratio: 0.9443
+    sample_values:
+    - '95488'
+    - '51322'
+    - '153968'
+    - '48939'
+    - '144286'
+    top_values:
+    - '51322'
+    - '317752'
+    - '458912'
+    - '48939'
+    - '144286'
+    - '42005'
+    - '29763'
+    - '115098'
+    - '122364'
+    - '95488'
+  RGlap_AutoCalcBonusRepayMoney:
+    distinct_count: 63
+    null_ratio: 0.9505
+    sample_values:
+    - '0'
+    - '25'
+    - '114434'
+    - '137330'
+    - '147932'
+    top_values:
+    - '0'
+    - '25'
+    - '176699'
+    - '303581'
+    - '124764'
+    - '206133'
+    - '40997'
+    - '114434'
+    - '137330'
+    - '147932'
+  RGlap_TempAdmitFlag:
+    distinct_count: 3
+    null_ratio: 0.0
+    sample_values:
+    - '0'
+    - '2'
+    - '1'
+    top_values:
+    - '0'
+    - '2'
+    - '1'
+  RGlap_ChushinSecurityFlag:
+    distinct_count: 2
+    null_ratio: 0.0
+    sample_values:
+    - '0'
+    - '1'
+    top_values:
+    - '0'
+    - '1'
+  RGlap_ReapplicationCode:
+    distinct_count: 4
+    null_ratio: 0.899
+    sample_values:
+    - R_SAISINSEI02
+    - R_SAISINSEI01
+    - R_SAISINSEI03
+    - R_SAISINSEI04
+    top_values:
+    - R_SAISINSEI01
+    - R_SAISINSEI02
+    - R_SAISINSEI03
+    - R_SAISINSEI04
+  RGlap_EstablishmentSupport:
+    distinct_count: 3
+    null_ratio: 0.2554
+    sample_values:
+    - R_SOGYOSHIEN0
+    - R_SOGYOSHIEN1
+    - R_SOGYOSHIEN2
+    top_values:
+    - R_SOGYOSHIEN0
+    - R_SOGYOSHIEN1
+    - R_SOGYOSHIEN2
+  RGlap_BusinessAssessment:
+    distinct_count: 3
+    null_ratio: 0.2515
+    sample_values:
+    - R_JIGYOHYOKA0
+    - R_JIGYOHYOKA1
+    - R_JIGYOHYOKA2
+    top_values:
+    - R_JIGYOHYOKA0
+    - R_JIGYOHYOKA1
+    - R_JIGYOHYOKA2
+  RGlap_ReapplyPrevApprovalNo:
+    distinct_count: 153
+    null_ratio: 0.9857
+    sample_values:
+    - '11111111'
+    - '17300051'
+    - '17300116'
+    - '17300099'
+    - '20300066'
+    top_values:
+    - '17300051'
+    - '20300067'
+    - '18308368'
+    - '18307959'
+    - '18309934'
+    - '18312900'
+    - '18302306'
+    - '18313076'
+    - '18309134'
+    - '18309366'
+  RGlap_BackinApproval:
+    distinct_count: 2
+    null_ratio: 0.0061
+    sample_values:
+    - '0'
+    - '1'
+    top_values:
+    - '0'
+    - '1'
+  RGlap_RateDownCreditNo:
+    distinct_count: 14
+    null_ratio: 0.9911
+    sample_values:
+    - '130004781'
+    - '310005401'
+    - '310005303'
+    - '25300007010'
+    - '25300005010'
+    top_values:
+    - '330003002'
+    - '330003001'
+    - '330003003'
+    - '330003004'
+    - '310005401'
+    - '330003005'
+    - '330003007'
+    - '330003006'
+    - '130004781'
+    - '310005303'
+  RGlap_NowSelectTypeDivision:
+    distinct_count: 9
+    null_ratio: 0.9928
+    sample_values:
+    - R_KINRIKBN10
+    - R_RIRITUHENDO03
+    - R_KINRIKBN2
+    - R_KINRIKBN7
+    - R_KINRIKBN15
+    top_values:
+    - R_KINRIKBN10
+    - R_KINRIKBN15
+    - R_KINRIKBN99
+    - R_KINRIKBN5
+    - R_KINRIKBN2
+    - R_KINRIKBN7
+    - R_KINRIKBN3
+    - R_RIRITUHENDO03
+    - R_KINRIKBN20
+  RGlap_NowInterestRate:
+    distinct_count: 52
+    null_ratio: 0.9913
+    sample_values:
+    - '0.02000'
+    - '3.00000'
+    - '0.80000'
+    - '0.10000'
+    - '1.20000'
+    top_values:
+    - '3.00000'
+    - '1.20000'
+    - '1.10000'
+    - '2.10000'
+    - '1.35000'
+    - '1.40000'
+    - '1.95000'
+    - '2.00000'
+    - '1.60000'
+    - '1.15000'
+  RGlap_SelectTypeDivision1:
+    distinct_count: 8
+    null_ratio: 0.9911
+    sample_values:
+    - R_KINRIKBN2
+    - R_KINRIKBN99
+    - R_KINRIKBN5
+    - R_KINRIKBN7
+    - R_KINRIKBN15
+    top_values:
+    - R_KINRIKBN99
+    - R_KINRIKBN10
+    - R_KINRIKBN2
+    - R_KINRIKBN5
+    - R_KINRIKBN15
+    - R_KINRIKBN7
+    - R_KINRIKBN3
+    - R_KINRIKBN20
+  RGlap_SelectTypeRate1:
+    distinct_count: 34
+    null_ratio: 0.9911
+    sample_values:
+    - '0.01000'
+    - '6.00000'
+    - '3.00000'
+    - '2.00000'
+    - '1.00000'
+    top_values:
+    - '1.00000'
+    - '0.77500'
+    - '0.87500'
+    - '1.10000'
+    - '0.85000'
+    - '0.62500'
+    - '0.97500'
+    - '0.95000'
+    - '1.07500'
+    - '0.72500'
+  RGlap_SelectTypeDivision2:
+    distinct_count: 7
+    null_ratio: 0.9963
+    sample_values:
+    - R_KINRIKBN3
+    - R_KINRIKBN99
+    - R_KINRIKBN20
+    - R_KINRIKBN2
+    - R_KINRIKBN10
+    top_values:
+    - R_KINRIKBN99
+    - R_KINRIKBN10
+    - R_KINRIKBN15
+    - R_KINRIKBN3
+    - R_KINRIKBN5
+    - R_KINRIKBN20
+    - R_KINRIKBN2
+  RGlap_SelectTypeRate2:
+    distinct_count: 27
+    null_ratio: 0.9963
+    sample_values:
+    - '0.01200'
+    - '5.50000'
+    - '2.50000'
+    - '1.00000'
+    - '2.00000'
+    top_values:
+    - '1.00000'
+    - '1.10000'
+    - '0.77500'
+    - '2.00000'
+    - '0.90000'
+    - '0.67500'
+    - '1.15000'
+    - '0.97500'
+    - '0.01200'
+    - '5.50000'
+  RGlap_SelectTypeDivision3:
+    distinct_count: 4
+    null_ratio: 0.9991
+    sample_values:
+    - R_KINRIKBN5
+    - R_KINRIKBN15
+    - R_KINRIKBN10
+    - R_KINRIKBN20
+    top_values:
+    - R_KINRIKBN5
+    - R_KINRIKBN20
+    - R_KINRIKBN10
+    - R_KINRIKBN15
+  RGlap_SelectTypeRate3:
+    distinct_count: 8
+    null_ratio: 0.9991
+    sample_values:
+    - '0.01300'
+    - '5.00000'
+    - '1.00000'
+    - '4.00000'
+    - '0.95000'
+    top_values:
+    - '1.00000'
+    - '1.20000'
+    - '0.01300'
+    - '5.00000'
+    - '4.00000'
+    - '0.95000'
+    - '1.56500'
+    - '0.80000'
+  RGlap_SelectTypeDivision4:
+    distinct_count: 4
+    null_ratio: 0.9995
+    sample_values:
+    - R_KINRIKBN10
+    - R_KINRIKBN7
+    - R_KINRIKBN15
+    - R_KINRIKBN99
+    top_values:
+    - R_KINRIKBN10
+    - R_KINRIKBN7
+    - R_KINRIKBN15
+    - R_KINRIKBN99
+  RGlap_SelectTypeRate4:
+    distinct_count: 6
+    null_ratio: 0.9995
+    sample_values:
+    - '0.01400'
+    - '4.50000'
+    - '1.00000'
+    - '6.00000'
+    - '1.15000'
+    top_values:
+    - '0.01400'
+    - '4.50000'
+    - '1.00000'
+    - '6.00000'
+    - '1.15000'
+    - '0.77500'
+  RGlap_SelectTypeDivision5:
+    distinct_count: 4
+    null_ratio: 0.9996
+    sample_values:
+    - R_KINRIKBN15
+    - R_KINRIKBN5
+    - R_KINRIKBN10
+    - R_KINRIKBN20
+    top_values:
+    - R_KINRIKBN15
+    - R_KINRIKBN5
+    - R_KINRIKBN10
+    - R_KINRIKBN20
+  RGlap_SelectTypeRate5:
+    distinct_count: 5
+    null_ratio: 0.9996
+    sample_values:
+    - '0.01500'
+    - '4.00000'
+    - '1.00000'
+    - '9.00000'
+    - '1.15000'
+    top_values:
+    - '0.01500'
+    - '4.00000'
+    - '1.00000'
+    - '9.00000'
+    - '1.15000'
+  RGlap_SelectTypeDivision6:
+    distinct_count: 3
+    null_ratio: 0.9997
+    sample_values:
+    - R_KINRIKBN20
+    - R_KINRIKBN3
+    - R_KINRIKBN15
+    top_values:
+    - R_KINRIKBN20
+    - R_KINRIKBN3
+    - R_KINRIKBN15
+  RGlap_SelectTypeRate6:
+    distinct_count: 4
+    null_ratio: 0.9997
+    sample_values:
+    - '0.01600'
+    - '3.50000'
+    - '1.00000'
+    - '14.00000'
+    top_values:
+    - '0.01600'
+    - '3.50000'
+    - '1.00000'
+    - '14.00000'
+  RGlap_SelectTypeDivision7:
+    distinct_count: 3
+    null_ratio: 0.9997
+    sample_values:
+    - R_KINRIKBN99
+    - R_KINRIKBN2
+    - R_KINRIKBN20
+    top_values:
+    - R_KINRIKBN99
+    - R_KINRIKBN2
+    - R_KINRIKBN20
+  RGlap_SelectTypeRate7:
+    distinct_count: 4
+    null_ratio: 0.9997
+    sample_values:
+    - '0.01700'
+    - '3.10000'
+    - '2.00000'
+    - '19.00000'
+    top_values:
+    - '0.01700'
+    - '3.10000'
+    - '2.00000'
+    - '19.00000'
+  RGlap_ConditionApprovalFlag:
+    distinct_count: 2
+    null_ratio: 0.0
+    sample_values:
+    - '0'
+    - '1'
+    top_values:
+    - '0'
+    - '1'
+  InsertDateTime:
+    distinct_count: 11483
+    null_ratio: 0.0
+    sample_values:
+    - 2024/11/18 17:50:04.070
+    - 2020/11/10 11:34:34.207
+    - 2024/07/11 9:49:44.423
+    - 2024/07/11 9:52:43.023
+    - 2024/07/11 10:02:57.300
+    top_values:
+    - 2019/02/22 13:52:40
+    - 2024/02/08 17:47:43.473
+    - 2020/11/10 11:34:34.207
+    - 2024/07/11 9:52:43.023
+    - 2017/05/22 18:00:28
+    - 2017/10/25 11:18:54.910
+    - 2023/02/03 13:47:36.277
+    - 2019/11/14 16:59:22.103
+    - 2024/07/19 15:17:52.113
+    - 2024/07/12 16:25:42.397
+  InsertUserNo:
+    distinct_count: 819
+    null_ratio: 0.0
+    sample_values:
+    - '10001'
+    - '014001'
+    - AutoLoanAp
+    - '0010000001'
+    - 0059999999
+    top_values:
+    - '10001'
+    - '31001'
+    - '0010000001'
+    - '9999999999'
+    - '014001'
+    - '10091'
+    - '0000000001'
+    - '001'
+    - '144072'
+    - '587962'
+  UpdateDateTime:
+    distinct_count: 10538
+    null_ratio: 0.0
+    sample_values:
+    - 2025/05/23 14:10:04.507
+    - 2023/10/13 15:07:29.770
+    - 2024/07/11 9:49:44.423
+    - 2024/07/11 9:52:43.023
+    - 2024/07/11 10:02:57.300
+    top_values:
+    - 2018/07/05 6:27:20.913
+    - 2018/07/02 3:51:36.953
+    - 2018/07/03 4:16:22.073
+    - 2018/06/26 3:42:29.923
+    - 2018/06/27 3:59:42.630
+    - 2018/07/04 4:14:33.293
+    - 2018/06/25 3:36:11.090
+    - 2018/06/07 4:03:16.183
+    - 2018/06/29 3:59:35.240
+    - 2025/10/27 13:48:11.577
+  UpdateUserNo:
+    distinct_count: 596
+    null_ratio: 0.0
+    sample_values:
+    - '10001'
+    - '0000000001'
+    - AutoLoanAp
+    - 0019999999
+    - '0'
+    top_values:
+    - '0'
+    - EXEC_SP
+    - '19301'
+    - '127799'
+    - '121042'
+    - '31001'
+    - '120276'
+    - '9999999999'
+    - '10001'
+    - '0000000001'
+warnings:
+- 'Required field has no inferred rule: RGlap_ApprovalNo'
+- 'Required field has no inferred rule: RGlap_CustomerId'
+- 'Required field has no inferred rule: RGlap_DraftUserName'

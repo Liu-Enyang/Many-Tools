@@ -1,0 +1,37 @@
+table_name: PRM_incidentlistmapping
+metadata:
+  rule_source:
+  - ddl_inference
+  has_csv: false
+field_sources:
+  RGoam_BranchNo:
+    value: input.BranchNo
+    source: inferred_from_name
+  RGoam_CustomerNo:
+    value: input.CustomerNo
+    source: inferred_from_name
+generated_fields: {}
+default_values:
+  RGoam_IncidentDate:
+    value: '@@now'
+    source: inferred_from_name
+  RGoam_Nissuu:
+    value: 0
+    source: inferred_from_type
+  InsertDateTime:
+    value: '@@now'
+    source: inferred_from_type
+  InsertUserNo:
+    value: TESTUSER
+    source: inferred_from_name
+  UpdateDateTime:
+    value: '@@now'
+    source: inferred_from_type
+  UpdateUserNo:
+    value: TESTUSER
+    source: inferred_from_name
+value_candidates: {}
+analysis: {}
+warnings:
+- No CSV found. Falling back to DDL-based rule inference.
+- 'Required field has no inferred rule: RGoam_IncidcentNo'

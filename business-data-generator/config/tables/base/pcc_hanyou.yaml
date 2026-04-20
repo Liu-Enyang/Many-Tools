@@ -1,0 +1,35 @@
+table_name: PCC_hanyou
+primary_key:
+- CChny_HanyouUniqueKey
+columns:
+- name: CChny_HanyouUniqueKey
+  type: varchar
+  length: '15'
+  nullable: false
+- name: CChny_HanyouCodeKey
+  type: varchar
+  length: '20'
+  nullable: false
+- name: CChny_Sort
+  type: smallint
+  length: null
+  nullable: false
+- name: CChny_HanyouCodeValue
+  type: varchar
+  length: '15'
+  nullable: false
+- name: CChny_HanyouCodeNaiyou
+  type: varchar
+  length: '20'
+  nullable: false
+- name: CChny_HanyouCodeSetumei
+  type: varchar
+  length: '255'
+  nullable: true
+required_fields:
+- CChny_HanyouUniqueKey
+- CChny_HanyouCodeKey
+- CChny_Sort
+- CChny_HanyouCodeValue
+- CChny_HanyouCodeNaiyou
+primary_key_count: 1
