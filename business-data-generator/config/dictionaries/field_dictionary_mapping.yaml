@@ -1,0 +1,41 @@
+
+
+# 字段 → 字典映射定义
+# 用于将业务表中的代码字段，关联到 PCC_hanyou 中的 code_key
+
+field_dictionary_mapping:
+  # ===== 稟議種類 =====
+  RGlap_ApprovalTypeCode:
+    table: PCC_hanyou
+    code_key: RINGISYURUI
+    description: 稟議種類（融資稟議・条件変更・事前稟議・継続稟議）
+
+  # ===== 稟議状態 =====
+  RGlap_ApprovalStatusCode:
+    table: PCC_hanyou
+    code_key: RINGIJYOTAI
+    description: 稟議状態（申請中・承認済・否認など）
+
+  # ===== 取引区分 =====
+  RGlap_DealingTypeCode:
+    table: PCC_hanyou
+    code_key: TORIHIKIKBN
+    description: 取引区分
+
+  # ===== 返済方法 =====
+  RGlap_RepaymentWayCode:
+    table: PCC_hanyou
+    code_key: HENSAIHOUHOU
+    description: 返済方法
+
+  # ===== 商品コード（例：必要に応じて拡張） =====
+  RGlap_SyohinCode:
+    table: PCC_hanyou
+    code_key: SYOHIN
+    description: 商品コード
+
+notes:
+  - このファイルはGUI表示用の辞書マッピングを定義する。
+  - value_candidates に dictionary が未設定の場合、このマッピングを参照する。
+  - code_key は PCC_hanyou の CChny_HanyouCodeKey と一致する必要がある。
+  - 必要に応じてプロジェクトごとに拡張する。

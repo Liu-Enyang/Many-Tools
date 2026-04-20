@@ -1,0 +1,14 @@
+table_name: PCC_hanyou
+mode: reference_only
+role: dictionary_source
+
+dictionary_definition:
+  key_field: CChny_HanyouCodeKey
+  value_field: CChny_HanyouCodeValue
+  label_field: CChny_HanyouCodeNaiyou
+  description_field: CChny_HanyouCodeSetumei
+
+notes:
+  - PCC_hanyou is a master dictionary table and should not be inserted or modified.
+  - It is used for translating code values into human-readable labels.
+  - GUI should display label_field first, then value_field in parentheses.
