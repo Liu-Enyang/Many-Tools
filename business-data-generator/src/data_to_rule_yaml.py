@@ -134,6 +134,7 @@ def build_column_map(base_yaml: dict[str, Any]) -> dict[str, dict[str, Any]]:
 def profile_csv(csv_path: Path) -> dict[str, dict[str, Any]]:
     stats: dict[str, dict[str, Any]] = {}
     total_rows = 0
+    print(f"   🔍 Profiling CSV: {csv_path.name}")
 
     with csv_path.open("r", encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
@@ -152,6 +153,8 @@ def profile_csv(csv_path: Path) -> dict[str, dict[str, Any]]:
 
         for row in reader:
             total_rows += 1
+            if total_rows % 1000 == 0:
+                print(f"   ⏳ Profiling rows: {total_rows}", end="\r")
             for field in reader.fieldnames:
                 value = normalize_cell(row.get(field))
                 field_stat = stats[field]
@@ -170,6 +173,7 @@ def profile_csv(csv_path: Path) -> dict[str, dict[str, Any]]:
                 if looks_like_datetime_text(value):
                     field_stat["datetime_like_count"] += 1
 
+    print(f"   ✅ Profiling completed. Total rows: {total_rows}")
     result: dict[str, dict[str, Any]] = {}
     for field, field_stat in stats.items():
         counter: Counter[str] = field_stat["counter"]
