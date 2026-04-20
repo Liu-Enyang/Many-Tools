@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 
 from collections import Counter
@@ -15,6 +13,8 @@ MAX_ENUM_VALUES = 20
 MAX_SAMPLED_VALUES = 10
 SAMPLE_VALUES_COUNT = 5
 TOP_VALUES_COUNT = 10
+
+CSV_ENCODINGS = ["utf-8-sig", "cp932", "shift_jis", "utf-8"]
 
 
 INPUT_SOURCE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
@@ -131,12 +131,53 @@ def build_column_map(base_yaml: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return {col["name"]: col for col in base_yaml.get("columns", []) if isinstance(col, dict) and "name" in col}
 
 
+def open_csv_with_fallback(csv_path: Path):
+    last_error: Exception | None = None
+    for encoding in CSV_ENCODINGS:
+        try:
+            f = csv_path.open("r", encoding=encoding, newline="")
+            f.read(1024)
+            f.seek(0)
+            return f, encoding
+        except UnicodeDecodeError as e:
+            last_error = e
+        except Exception as e:
+            last_error = e
+    raise RuntimeError(f"Unable to read CSV with supported encodings: {csv_path}") from last_error
+
+
+def find_csv_for_table(data_dir: Path, table_name: str) -> Path | None:
+    candidates = [
+        data_dir / f"{table_name}.csv",
+        data_dir / f"{table_name.lower()}.csv",
+        data_dir / f"dbo.{table_name}.csv",
+        data_dir / f"dbo.{table_name.lower()}.csv",
+    ]
+
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+
+    table_name_lower = table_name.lower()
+    for candidate in sorted(data_dir.glob("*.csv")):
+        stem_lower = candidate.stem.lower()
+        if stem_lower == table_name_lower:
+            return candidate
+        if stem_lower.endswith(f".{table_name_lower}"):
+            return candidate
+
+    return None
+
+
 def profile_csv(csv_path: Path) -> dict[str, dict[str, Any]]:
     stats: dict[str, dict[str, Any]] = {}
     total_rows = 0
     print(f"   🔍 Profiling CSV: {csv_path.name}")
 
-    with csv_path.open("r", encoding="utf-8-sig", newline="") as f:
+    file_obj, encoding = open_csv_with_fallback(csv_path)
+    print(f"   📝 CSV encoding: {encoding}")
+
+    with file_obj as f:
         reader = csv.DictReader(f)
         if not reader.fieldnames:
             return {}
@@ -396,19 +437,17 @@ def process_data_folder(
             print(f"⚠️ Skip invalid base yaml: {base_yaml_path.name}")
             continue
 
-        csv_path = data_dir / f"{table_name}.csv"
-        if not csv_path.exists():
-            csv_path = data_dir / f"{table_name.lower()}.csv"
+        csv_path = find_csv_for_table(data_dir, table_name)
 
         output_path = output_dir / base_yaml_path.name
 
         print(f"➡️ Processing ({idx}/{total}): {table_name}")
-        if csv_path.exists():
+        if csv_path:
             print(f"   📊 CSV found: {csv_path.name}")
         else:
             print(f"   ⚠️ No CSV found. Use DDL inference only.")
 
-        generate_rule_yaml_for_table(base_yaml_path, csv_path if csv_path.exists() else None, output_path)
+        generate_rule_yaml_for_table(base_yaml_path, csv_path, output_path)
         print(f"   ✅ Generated: {output_path.name}")
 
     print("🎉 All rule YAML draft files processed.")
