@@ -91,7 +91,24 @@ config/tables/base/
 
 ### 2️⃣（新）Clone 模式 — 快速复制单条数据
 
-从 CSV 中复制一条已有数据，自动替换主键，并可交互式修改区分（汎用テーブル）字段。
+#### GUI 模式（推荐）
+
+```
+streamlit run streamlit_app.py
+```
+
+浏览器自动打开 `http://localhost:8501`。
+
+操作步骤：
+
+1. 侧边栏选择目标表
+2. 输入 `RGlap_ApprovalNo` 等字段值进行搜索过滤
+3. 下拉选择 clone 来源行
+4. 主键自动显示为 max+1（可手动修改）
+5. 区分字段以下拉框显示 PCC_hanyou 选项，当前值为默认
+6. 点击「SQL 生成」按钮
+
+#### CLI 模式
 
 ```
 python app.py --clone <テーブル名>
@@ -104,22 +121,19 @@ python app.py --clone PRG_loanapproval
 python app.py --clone PJG_saikenmeisai
 ```
 
-**执行流程：**
+执行流程：列出所有行 → 输入行号 → 主键 max+1 → 区分交互选择 → 输出 SQL
 
-1. 读取 `data/dbo.<テーブル名>.csv`，列出所有行
-2. 输入行号选择 sample record（直接回车 = 第 0 行）
-3. 主键自动设为 max+1（char 类型保持原位数）
-4. 对该表中有区分映射的字段，逐一列出 PCC_hanyou 的选项：
-   - 显示当前值（用 `<-- current` 标记）
-   - 输入序号切换，直接回车保持不变
-5. 输出 SQL 文件
+---
 
-输出：
+输出（两种模式共通）：
+
 ```
 output/
-  clone_<テーブル名>.sql          ← INSERT SQL
-  rollback_clone_<テーブル名>.sql ← DELETE SQL（rollback 用）
+  clone_<テーブル名>.sql           ← INSERT SQL
+  rollback_clone_<テーブル名>.sql  ← DELETE SQL（rollback 用）
 ```
+
+---
 
 **前提条件：**
 
