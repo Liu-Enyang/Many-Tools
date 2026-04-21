@@ -3,6 +3,7 @@ import argparse
 
 from src.main import run, run_generate_base_yaml
 from src.data_to_rule_yaml import process_data_folder
+from src.clone_generator import run_clone
 
 
 def main():
@@ -11,9 +12,15 @@ def main():
     parser.add_argument("--input")
     parser.add_argument("--ddl-dir")
     parser.add_argument("--data-dir")
+    parser.add_argument("--clone", metavar="TABLE_NAME", help="Clone a sample row from CSV with new PKs")
     args = parser.parse_args()
 
     base_dir = Path(__file__).resolve().parent
+
+    # clone モード
+    if args.clone:
+        run_clone(base_dir, args.clone)
+        return
 
     # DDL -> base YAML 模式
     if args.ddl_dir:

@@ -1,0 +1,1 @@
+DELETE FROM PRG_loanapproval WHERE RGlap_ApprovalNo = '99900000002';

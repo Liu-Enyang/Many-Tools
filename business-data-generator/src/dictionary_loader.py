@@ -82,6 +82,7 @@ def load_pcc_hanyou_dictionary(data_dir: Path, config_dir: Path) -> dict[str, di
     value_field = dictionary_definition.get("value_field")
     label_field = dictionary_definition.get("label_field")
     description_field = dictionary_definition.get("description_field")
+    unique_key_field = dictionary_definition.get("unique_key_field")
 
     if not key_field or not value_field or not label_field:
         raise ValueError("Dictionary definition is missing required fields.")
@@ -90,11 +91,11 @@ def load_pcc_hanyou_dictionary(data_dir: Path, config_dir: Path) -> dict[str, di
     if not csv_path:
         raise FileNotFoundError(f"Dictionary CSV not found for table: {table_name}")
 
-    print(f"📘 Loading dictionary: {table_name}")
-    print(f"   📊 CSV found: {csv_path.name}")
+    print(f"[DICT] Loading dictionary: {table_name}")
+    print(f"   CSV found: {csv_path.name}")
 
     file_obj, encoding = open_csv_with_fallback(csv_path)
-    print(f"   📝 CSV encoding: {encoding}")
+    print(f"   CSV encoding: {encoding}")
 
     dictionaries: dict[str, dict[str, dict[str, str]]] = {}
 
@@ -115,12 +116,14 @@ def load_pcc_hanyou_dictionary(data_dir: Path, config_dir: Path) -> dict[str, di
             if code_key not in dictionaries:
                 dictionaries[code_key] = {}
 
+            unique_key = _normalize_text(row.get(unique_key_field)) if unique_key_field else ""
             dictionaries[code_key][code_value] = {
                 "label": label or code_value,
                 "description": description,
+                "unique_key": unique_key or code_value,
             }
 
-    print(f"   ✅ Dictionary loaded. Code groups: {len(dictionaries)}")
+    print(f"   Dictionary loaded. Code groups: {len(dictionaries)}")
     return dictionaries
 
 

@@ -1,0 +1,1 @@
+DELETE FROM PJG_saikenmeisai WHERE JGskm_SyoriId = '3000000000000473' AND JGskm_ShinseiNo = '900000002202202' AND JGskm_KasitukeNo = '19300006';

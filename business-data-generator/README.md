@@ -89,6 +89,62 @@ config/tables/base/
 
 ---
 
+### 2️⃣（新）Clone 模式 — 快速复制单条数据
+
+从 CSV 中复制一条已有数据，自动替换主键，并可交互式修改区分（汎用テーブル）字段。
+
+```
+python app.py --clone <テーブル名>
+```
+
+示例：
+
+```
+python app.py --clone PRG_loanapproval
+python app.py --clone PJG_saikenmeisai
+```
+
+**执行流程：**
+
+1. 读取 `data/dbo.<テーブル名>.csv`，列出所有行
+2. 输入行号选择 sample record（直接回车 = 第 0 行）
+3. 主键自动设为 max+1（char 类型保持原位数）
+4. 对该表中有区分映射的字段，逐一列出 PCC_hanyou 的选项：
+   - 显示当前值（用 `<-- current` 标记）
+   - 输入序号切换，直接回车保持不变
+5. 输出 SQL 文件
+
+输出：
+```
+output/
+  clone_<テーブル名>.sql          ← INSERT SQL
+  rollback_clone_<テーブル名>.sql ← DELETE SQL（rollback 用）
+```
+
+**前提条件：**
+
+| 文件 | 说明 |
+|------|------|
+| `data/dbo.<テーブル名>.csv` | 表的 sample 数据 |
+| `config/tables/base/<テーブル名>.yaml` | 主键定义（由 DDL 生成） |
+| `data/dbo.PCC_hanyou.csv` | 汎用テーブル（区分选项来源） |
+| `config/dictionaries/field_dictionary_mapping.yaml` | 字段 → 区分 code_key 映射 |
+
+**添加新表的区分映射：**
+
+在 `config/dictionaries/field_dictionary_mapping.yaml` 中添加：
+
+```yaml
+JGskm_KengenKubun:
+  table: PCC_hanyou
+  code_key: KENGEN        # PCC_hanyou の CChny_HanyouCodeKey と一致すること
+  description: 権限区分
+```
+
+`code_key` の確認方法：対象フィールドの格納値（例: `KENGEN2`）と `dbo.PCC_hanyou.csv` の `CChny_HanyouUniqueKey` を照合する。
+
+---
+
 ### 3️⃣ 输出结果
 
 ```

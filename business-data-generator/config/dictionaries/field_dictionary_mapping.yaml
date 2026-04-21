@@ -1,41 +1,199 @@
 
-
-# 字段 → 字典映射定义
-# 用于将业务表中的代码字段，关联到 PCC_hanyou 中的 code_key
+# フィールド → PCC_hanyou の CChny_HanyouCodeKey マッピング
+# code_key は PCC_hanyou の CChny_HanyouCodeKey と完全一致すること
+# stored value = CChny_HanyouUniqueKey (例: R_HENSAIHOU4)
 
 field_dictionary_mapping:
-  # ===== 稟議種類 =====
+
+  # ===== PRG_loanapproval =====
   RGlap_ApprovalTypeCode:
     table: PCC_hanyou
-    code_key: RINGISYURUI
-    description: 稟議種類（融資稟議・条件変更・事前稟議・継続稟議）
+    code_key: R_RINGISYURUI
+    description: 稟議種類
 
-  # ===== 稟議状態 =====
-  RGlap_ApprovalStatusCode:
+  RGlap_ApprovalItemCode:
     table: PCC_hanyou
-    code_key: RINGIJYOTAI
-    description: 稟議状態（申請中・承認済・否認など）
+    code_key: R_RINGIKAMOKU
+    description: 稟議科目
 
-  # ===== 取引区分 =====
+  RGlap_SettAuthorityCode:
+    table: PCC_hanyou
+    code_key: R_KESSAIKENGE
+    description: 決裁権限
+
   RGlap_DealingTypeCode:
     table: PCC_hanyou
-    code_key: TORIHIKIKBN
-    description: 取引区分
+    code_key: R_TORIHIKISYU
+    description: 取引種類
 
-  # ===== 返済方法 =====
   RGlap_RepaymentWayCode:
+    table: PCC_hanyou
+    code_key: R_HENSAIHOU
+    description: 返済方法
+
+  RGlap_RepaymentInterestCode:
+    table: PCC_hanyou
+    code_key: R_RIBARAIHOU
+    description: 利払方法
+
+  RGlap_InterestRateApplyType:
+    table: PCC_hanyou
+    code_key: R_RIRITUTEKI
+    description: 金利適用区分
+
+  RGlap_VariableInterestCode:
+    table: PCC_hanyou
+    code_key: R_RIRITUHENDO
+    description: 変動金利区分
+
+  RGlap_CapitalUseDivision:
+    table: PCC_hanyou
+    code_key: R_SIKINSITO
+    description: 資金使途（大分類）
+
+  RGlap_CapitalUseDetailDivision:
+    table: PCC_hanyou
+    code_key: R_SIKINSITOM
+    description: 資金使途（詳細）
+
+  RGlap_RepayIntervalCode:
+    table: PCC_hanyou
+    code_key: R_KANKAKU
+    description: 返済間隔
+
+  RGlap_RepayInterestIntrvlCode:
+    table: PCC_hanyou
+    code_key: R_RBRKANKAKU
+    description: 利払間隔
+
+  RGlap_SelectTypeDivision:
+    table: PCC_hanyou
+    code_key: R_KINRIKBN
+    description: 金利区分
+
+  RGlap_FractionDivision:
+    table: PCC_hanyou
+    code_key: R_ADJHASU
+    description: 端数区分
+
+  RGlap_GroupInsuranceDivision:
+    table: PCC_hanyou
+    code_key: R_DANSINKBN
+    description: 団信区分
+
+  # ===== PRG_changecondition =====
+  RGcgc_ApprovalTypeCode:
+    table: PCC_hanyou
+    code_key: R_RINGISYURUI
+    description: 稟議種類
+
+  RGcgc_ApprovalItemCode:
+    table: PCC_hanyou
+    code_key: R_RINGIKAMOKU
+    description: 稟議科目
+
+  RGcgc_RepaymentWayCode:
+    table: PCC_hanyou
+    code_key: R_HENSAIHOU
+    description: 返済方法
+
+  RGcgc_RepaymentInterestCode:
+    table: PCC_hanyou
+    code_key: R_RIBARAIHOU
+    description: 利払方法
+
+  RGcgc_InterestRateApplyDvsn:
+    table: PCC_hanyou
+    code_key: R_RIRITUTEKI
+    description: 金利適用区分
+
+  RGcgc_VariableInterestCode:
+    table: PCC_hanyou
+    code_key: R_RIRITUHENDO
+    description: 変動金利区分
+
+  RGcgc_CapitalUseDivision:
+    table: PCC_hanyou
+    code_key: R_SIKINSITO
+    description: 資金使途（大分類）
+
+  RGcgc_CapitalUseDetailDivision:
+    table: PCC_hanyou
+    code_key: R_SIKINSITOM
+    description: 資金使途（詳細）
+
+  RGcgc_RepayIntervalCode:
+    table: PCC_hanyou
+    code_key: R_KANKAKU
+    description: 返済間隔
+
+  RGcgc_RepayInterestIntrvlCode:
+    table: PCC_hanyou
+    code_key: R_RBRKANKAKU
+    description: 利払間隔
+
+  RGcgc_InerestSelectDivision:
+    table: PCC_hanyou
+    code_key: R_KINRIKBN
+    description: 金利区分
+
+  RGcgc_FractionDivision:
+    table: PCC_hanyou
+    code_key: R_ADJHASU
+    description: 端数区分
+
+  RGcgc_GroupInsuranceDivision:
+    table: PCC_hanyou
+    code_key: R_DANSINKBN
+    description: 団信区分
+
+  RGcgc_ResponsibilityDivision:
+    table: PCC_hanyou
+    code_key: R_RSPNSBLTY
+    description: 責任区分
+
+  # ===== PJG_saikenmeisai =====
+  JGskm_Kamoku:
+    table: PCC_hanyou
+    code_key: KAMOKU
+    description: 科目
+
+  JGskm_HensaiHouhou:
     table: PCC_hanyou
     code_key: HENSAIHOUHOU
     description: 返済方法
 
-  # ===== 商品コード（例：必要に応じて拡張） =====
-  RGlap_SyohinCode:
+  JGskm_SikinSito:
     table: PCC_hanyou
-    code_key: SYOHIN
-    description: 商品コード
+    code_key: SIKINSITO
+    description: 資金使途
+
+  JGskm_HosyoMokuteki:
+    table: PCC_hanyou
+    code_key: HOSYOMOKUTEKI
+    description: 保証目的
+
+  JGskm_JoukenHenkou:
+    table: PCC_hanyou
+    code_key: JYOUKEN
+    description: 条件変更
+
+  JGskm_KengenKubun:
+    table: PCC_hanyou
+    code_key: KENGEN
+    description: 権限区分
+
+  JGskm_Tokukasi1HendouJiyu:
+    table: PCC_hanyou
+    code_key: TOKUTEIHENDOU1
+    description: 特貸1変動事由
+
+  JGskm_Tokukasi2HendouJiyu:
+    table: PCC_hanyou
+    code_key: TOKUTEIHENDOU2
+    description: 特貸2変動事由
 
 notes:
-  - このファイルはGUI表示用の辞書マッピングを定義する。
-  - value_candidates に dictionary が未設定の場合、このマッピングを参照する。
-  - code_key は PCC_hanyou の CChny_HanyouCodeKey と一致する必要がある。
-  - 必要に応じてプロジェクトごとに拡張する。
+  - code_key は PCC_hanyou の CChny_HanyouCodeKey と完全一致すること
+  - stored value = CChny_HanyouUniqueKey (code_key + value が多いが例外あり)
+  - 新テーブル追加時は dbo.PCC_hanyou.csv との照合を必ず行うこと
