@@ -1,8 +1,9 @@
 import io
+import json
+import math
 import os
 import re
 import time
-import copy
 import hashlib
 import sys
 import threading
@@ -20,6 +21,50 @@ try:
     import pystray
 except ImportError:
     pystray = None
+
+
+# =========================
+# 设置文件
+# =========================
+if getattr(sys, 'frozen', False):
+    _APP_DIR = os.path.dirname(sys.executable)
+else:
+    _APP_DIR = os.path.dirname(os.path.abspath(__file__))
+
+_SETTINGS_FILE = os.path.join(_APP_DIR, "settings.json")
+
+_DEFAULT_SETTINGS: dict = {
+    "template_path": "",
+    "screenshot_marker": "{{screenshot}}",
+    "image_scale": 80,   # percentage 1-200
+    "excel_zoom": None,  # None = use template default (or 80 for non-template)
+    "image_gap": 2,      # blank rows between images
+    "excel_title": "【カスタマイズ】　概要画面の対応",
+    "sheet_name": "0001",
+    "output_dir": "",    # empty = use default (./output)
+}
+
+
+def _load_settings() -> dict:
+    if os.path.exists(_SETTINGS_FILE):
+        try:
+            with open(_SETTINGS_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            for k, v in _DEFAULT_SETTINGS.items():
+                if k not in data:
+                    data[k] = v
+            return data
+        except Exception:
+            pass
+    return dict(_DEFAULT_SETTINGS)
+
+
+def _save_settings(settings: dict) -> None:
+    try:
+        with open(_SETTINGS_FILE, "w", encoding="utf-8") as f:
+            json.dump(settings, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"[保存设置失败] {e}")
 
 
 # =========================
@@ -64,6 +109,9 @@ class TestCaptureApp:
         self.sheet_name = "0001"
         self.output_dir = self.base_output_dir
 
+        # 全局设置
+        self.settings = _load_settings()
+
     # -------------------------
     # UI 通知
     # -------------------------
@@ -99,7 +147,6 @@ class TestCaptureApp:
     def _get_resized_size(width: int, height: int, max_width: int) -> tuple[int, int]:
         if width <= max_width:
             return width, height
-
         ratio = max_width / width
         return int(width * ratio), int(height * ratio)
 
@@ -107,11 +154,50 @@ class TestCaptureApp:
         pil_img = Image.open(image_path)
         new_width = int(pil_img.width * scale)
         new_height = int(pil_img.height * scale)
-
         xl_img = XLImage(image_path)
         xl_img.width = new_width
         xl_img.height = new_height
         return xl_img
+
+    def _get_image_scale(self) -> float:
+        """从设置中获取图片缩放比例（返回 0.0~2.0 的小数）"""
+        scale = self.settings.get("image_scale", 80)
+        try:
+            f = float(scale)
+            return f / 100.0 if f > 1 else f
+        except (TypeError, ValueError):
+            return 0.8
+
+    def _get_image_gap(self) -> int:
+        """从设置中获取图片间距（空白行数）"""
+        gap = self.settings.get("image_gap", 2)
+        try:
+            return int(gap)
+        except (TypeError, ValueError):
+            return 2
+
+    def _apply_excel_zoom(self, ws, is_template: bool = False) -> None:
+        """应用 Excel 缩放比例；is_template=True 且未设置时保留模板原有缩放"""
+        zoom = self.settings.get("excel_zoom", None)
+        if zoom is not None:
+            try:
+                ws.sheet_view.zoomScale = int(zoom)
+                return
+            except (TypeError, ValueError):
+                pass
+        if not is_template:
+            ws.sheet_view.zoomScale = 80
+
+    def _find_template_markers(self, ws, marker: str) -> list:
+        """扫描模板 sheet，找出所有含标记文本的单元格，按行列升序排列"""
+        marker_stripped = marker.strip()
+        found = []
+        for row in ws.iter_rows():
+            for cell in row:
+                if cell.value is not None and str(cell.value).strip() == marker_stripped:
+                    found.append(cell)
+        found.sort(key=lambda c: (c.row, c.column))
+        return found
 
     # -------------------------
     # 会话管理
@@ -144,7 +230,7 @@ class TestCaptureApp:
         self.last_clipboard_hash = None
         self.stop_event.clear()
 
-        # 开始录制时记录当前剪贴板，避免把旧图保存进去
+        # 记录当前剪贴板避免把旧图保存进去
         try:
             clipboard_obj = ImageGrab.grabclipboard()
             if isinstance(clipboard_obj, Image.Image):
@@ -192,7 +278,6 @@ class TestCaptureApp:
     def reset_session(self) -> None:
         if self.session and self.session.is_recording:
             return
-
         self.session = None
         self.last_saved_hash = None
         self.last_clipboard_hash = None
@@ -213,7 +298,6 @@ class TestCaptureApp:
                 if isinstance(clipboard_obj, Image.Image):
                     current_hash = self._calculate_image_hash(clipboard_obj)
 
-                    # 剪贴板没变化，不处理
                     if current_hash == self.last_clipboard_hash:
                         time.sleep(0.3)
                         continue
@@ -260,45 +344,89 @@ class TestCaptureApp:
                 self.ui_callback()
 
     # -------------------------
-    # Excel 写入通用
+    # Excel 写入（无模板模式）
     # -------------------------
     def _write_sheet_content(
         self,
         ws,
         excel_title: str,
         image_paths: List[str],
-        zoom_scale: int = 80
+        image_scale: float = 0.8,
+        zoom_scale: int = 80,
+        image_gap: int = 2
     ) -> None:
         ws.sheet_view.zoomScale = zoom_scale
 
         ws["A1"] = excel_title
-        ws["A2"] = "＜前提＞"
-        ws["A45"] = "＜操作＞"
-        ws["A85"] = "＜結果＞"
 
-        # 图片从 C3 开始
         current_row = 3
         image_col = "C"
+        labels = ["＜前提＞", "＜操作＞", "＜結果＞"]
 
-        image_scale = 0.8
+        for i, image_path in enumerate(image_paths):
+            if not os.path.exists(image_path):
+                continue
+
+            if i < len(labels):
+                ws[f"A{current_row}"] = labels[i]
+
+            img_for_excel = self._create_resized_excel_image(image_path, scale=image_scale)
+            ws.add_image(img_for_excel, f"{image_col}{current_row}")
+
+            pil_img = Image.open(image_path)
+            display_height = int(pil_img.height * image_scale)
+            estimated_rows = max(1, math.ceil(display_height * 0.75 / 20))
+
+            for r in range(current_row, current_row + estimated_rows):
+                ws.row_dimensions[r].height = 20
+
+            current_row += estimated_rows + image_gap
+
+    # -------------------------
+    # Excel 写入（模板模式）
+    # -------------------------
+    def _write_template_sheet_content(
+        self,
+        ws,
+        image_paths: List[str],
+        image_scale: float,
+        marker: str,
+        image_gap: int = 2
+    ) -> None:
+        """找到模板中第一个标记，从该位置起顺序插入所有截图"""
+        # 找第一个标记单元格
+        first_marker = None
+        for row in ws.iter_rows():
+            for cell in row:
+                if cell.value is not None and str(cell.value).strip() == marker.strip():
+                    first_marker = cell
+                    break
+            if first_marker:
+                break
+
+        if first_marker:
+            first_marker.value = None  # 清除标记文本
+            current_row = first_marker.row
+            anchor_col = first_marker.column_letter
+        else:
+            current_row = 3
+            anchor_col = "C"
+
         for image_path in image_paths:
             if not os.path.exists(image_path):
                 continue
 
             img_for_excel = self._create_resized_excel_image(image_path, scale=image_scale)
-            anchor_cell = f"{image_col}{current_row}"
-            ws.add_image(img_for_excel, anchor_cell)
+            ws.add_image(img_for_excel, f"{anchor_col}{current_row}")
 
             pil_img = Image.open(image_path)
             display_height = int(pil_img.height * image_scale)
-
-            estimated_rows = max(18, int(display_height / 20))
+            estimated_rows = max(1, math.ceil(display_height * 0.75 / 20))
 
             for r in range(current_row, current_row + estimated_rows):
                 ws.row_dimensions[r].height = 20
 
-            # 例如：3~20，下一张从23开始
-            current_row += estimated_rows + 2
+            current_row += estimated_rows + image_gap
 
     # -------------------------
     # Excel 导出
@@ -307,27 +435,44 @@ class TestCaptureApp:
         if not self.session:
             return
 
-        wb = Workbook()
-        ws = wb.active
-        ws.title = self._safe_sheet_name(self.sheet_name)
-
         image_paths = [item.image_path for item in self.session.captures]
-        self._write_sheet_content(
-            ws=ws,
-            excel_title=self.excel_title,
-            image_paths=image_paths,
-            zoom_scale=80
-        )
+        image_scale = self._get_image_scale()
+        image_gap = self._get_image_gap()
+        template_path = self.settings.get("template_path", "")
+        marker = self.settings.get("screenshot_marker", "{{screenshot}}")
+
+        if template_path and os.path.exists(template_path):
+            wb = load_workbook(template_path)
+            ws = wb.active
+            ws.title = self._safe_sheet_name(self.sheet_name)
+            self._apply_excel_zoom(ws, is_template=True)
+            self._write_template_sheet_content(ws, image_paths, image_scale, marker, image_gap)
+        else:
+            zoom = self.settings.get("excel_zoom", None)
+            zoom_scale = int(zoom) if zoom is not None else 80
+            wb = Workbook()
+            ws = wb.active
+            ws.title = self._safe_sheet_name(self.sheet_name)
+            self._write_sheet_content(
+                ws=ws,
+                excel_title=self.excel_title,
+                image_paths=image_paths,
+                image_scale=image_scale,
+                zoom_scale=zoom_scale,
+                image_gap=image_gap
+            )
 
         wb.save(self.session.excel_path)
 
     def merge_all_excels(self) -> Optional[str]:
-        """
-        把当前 output_dir 下所有会话目录中的 Excel 整合到一个 Excel 文件中。
-        顺序按 sheet 名升顺。
-        """
+        """把当前 output_dir 下所有会话目录中的 Excel 整合到一个文件"""
         if not os.path.exists(self.output_dir):
             return None
+
+        image_scale = self._get_image_scale()
+        image_gap = self._get_image_gap()
+        zoom = self.settings.get("excel_zoom", None)
+        zoom_scale = int(zoom) if zoom is not None else 80
 
         merge_items = []
 
@@ -347,7 +492,6 @@ class TestCaptureApp:
             if not excel_files:
                 continue
 
-            # 每个会话目录通常只有一个 xlsx，取第一个即可
             excel_files.sort()
             source_excel = excel_files[0]
 
@@ -375,14 +519,13 @@ class TestCaptureApp:
         if not merge_items:
             return None
 
-        # 按 sheet 名升顺
         merge_items.sort(key=lambda x: x["sheet_name"])
 
         merged_wb = Workbook()
         default_ws = merged_wb.active
         merged_wb.remove(default_ws)
 
-        used_names = set()
+        used_names: set = set()
 
         for item in merge_items:
             base_sheet_name = self._safe_sheet_name(item["sheet_name"])
@@ -402,7 +545,9 @@ class TestCaptureApp:
                 ws=new_ws,
                 excel_title=item["excel_title"],
                 image_paths=item["image_paths"],
-                zoom_scale=80
+                image_scale=image_scale,
+                zoom_scale=zoom_scale,
+                image_gap=image_gap
             )
 
         merged_file_name = f"merged_sheets_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
@@ -410,6 +555,163 @@ class TestCaptureApp:
         merged_wb.save(merged_excel_path)
 
         return merged_excel_path
+
+
+# =========================
+# 设置对话框
+# =========================
+class SettingsDialog:
+    def __init__(self, parent: tk.Tk, settings: dict, on_save) -> None:
+        self.parent = parent
+        self.on_save = on_save
+
+        self.dialog = tk.Toplevel(parent)
+        self.dialog.title("Settings")
+        self.dialog.geometry("600x310")
+        self.dialog.resizable(False, False)
+        self.dialog.transient(parent)
+        self.dialog.grab_set()
+
+        self._init_vars(settings)
+        self._build_ui()
+        self._center_dialog()
+
+    def _init_vars(self, settings: dict) -> None:
+        self.template_var = tk.StringVar(value=settings.get("template_path", ""))
+        self.marker_var = tk.StringVar(value=settings.get("screenshot_marker", "{{screenshot}}"))
+        self.image_scale_var = tk.StringVar(value=str(settings.get("image_scale", 80)))
+        self.image_gap_var = tk.StringVar(value=str(settings.get("image_gap", 2)))
+        zoom = settings.get("excel_zoom", None)
+        self.excel_zoom_auto = tk.BooleanVar(value=(zoom is None))
+        self.excel_zoom_var = tk.StringVar(value=str(zoom) if zoom is not None else "80")
+
+    def _build_ui(self) -> None:
+        main = ttk.Frame(self.dialog, padding=16)
+        main.pack(fill="both", expand=True)
+
+        # --- 模板设置 ---
+        tmpl_frame = ttk.LabelFrame(main, text="Excel 模板", padding=10)
+        tmpl_frame.pack(fill="x", pady=(0, 10))
+
+        ttk.Label(tmpl_frame, text="模板文件").grid(row=0, column=0, sticky="w", padx=(0, 8), pady=4)
+        ttk.Entry(tmpl_frame, textvariable=self.template_var, width=42).grid(
+            row=0, column=1, sticky="ew", pady=4
+        )
+        ttk.Button(tmpl_frame, text="选择", command=self._choose_template).grid(
+            row=0, column=2, padx=(6, 4), pady=4
+        )
+        ttk.Button(tmpl_frame, text="清除", command=lambda: self.template_var.set("")).grid(
+            row=0, column=3, pady=4
+        )
+
+        ttk.Label(tmpl_frame, text="截图标记").grid(row=1, column=0, sticky="w", padx=(0, 8), pady=4)
+        ttk.Entry(tmpl_frame, textvariable=self.marker_var, width=24).grid(
+            row=1, column=1, sticky="w", pady=4
+        )
+        ttk.Label(
+            tmpl_frame,
+            text="在模板单元格中填入此文本作为截图占位符",
+            foreground="gray"
+        ).grid(row=1, column=2, columnspan=2, sticky="w", padx=(6, 0), pady=4)
+
+        tmpl_frame.columnconfigure(1, weight=1)
+
+        # --- 缩放设置 ---
+        scale_frame = ttk.LabelFrame(main, text="缩放设置", padding=10)
+        scale_frame.pack(fill="x", pady=(0, 10))
+
+        ttk.Label(scale_frame, text="图片缩放").grid(row=0, column=0, sticky="w", padx=(0, 8), pady=4)
+        ttk.Entry(scale_frame, textvariable=self.image_scale_var, width=8).grid(
+            row=0, column=1, sticky="w", pady=4
+        )
+        ttk.Label(scale_frame, text="%  （如：80 表示缩小到原图的 80%）").grid(
+            row=0, column=2, sticky="w", padx=(4, 0), pady=4
+        )
+
+        ttk.Label(scale_frame, text="图片间距").grid(row=1, column=0, sticky="w", padx=(0, 8), pady=4)
+        ttk.Entry(scale_frame, textvariable=self.image_gap_var, width=8).grid(
+            row=1, column=1, sticky="w", pady=4
+        )
+        ttk.Label(scale_frame, text="行  （相邻两张图之间的空白行数）").grid(
+            row=1, column=2, sticky="w", padx=(4, 0), pady=4
+        )
+
+        ttk.Label(scale_frame, text="Excel 缩放").grid(row=2, column=0, sticky="w", padx=(0, 8), pady=4)
+        zoom_row = ttk.Frame(scale_frame)
+        zoom_row.grid(row=2, column=1, columnspan=3, sticky="w", pady=4)
+        self.excel_zoom_entry = ttk.Entry(zoom_row, textvariable=self.excel_zoom_var, width=8)
+        self.excel_zoom_entry.pack(side="left")
+        ttk.Label(zoom_row, text="%").pack(side="left", padx=(4, 12))
+        ttk.Checkbutton(
+            zoom_row,
+            text="不指定（使用模板原有缩放比例）",
+            variable=self.excel_zoom_auto,
+            command=self._toggle_zoom
+        ).pack(side="left")
+
+        self._toggle_zoom()
+
+        # --- 按钮 ---
+        btn_frame = ttk.Frame(main)
+        btn_frame.pack(fill="x", side="bottom", pady=(4, 0))
+        ttk.Button(btn_frame, text="取消", command=self.dialog.destroy).pack(side="right", padx=(8, 0))
+        ttk.Button(btn_frame, text="保存", command=self._save).pack(side="right")
+
+    def _center_dialog(self) -> None:
+        self.dialog.update_idletasks()
+        x = self.parent.winfo_x() + (self.parent.winfo_width() - self.dialog.winfo_width()) // 2
+        y = self.parent.winfo_y() + (self.parent.winfo_height() - self.dialog.winfo_height()) // 2
+        self.dialog.geometry(f"+{x}+{y}")
+
+    def _toggle_zoom(self) -> None:
+        if self.excel_zoom_auto.get():
+            self.excel_zoom_entry.state(["disabled"])
+        else:
+            self.excel_zoom_entry.state(["!disabled"])
+
+    def _choose_template(self) -> None:
+        path = filedialog.askopenfilename(
+            title="选择 Excel 模板",
+            filetypes=[("Excel 文件", "*.xlsx *.xlsm"), ("所有文件", "*.*")],
+            parent=self.dialog
+        )
+        if path:
+            self.template_var.set(path)
+
+    def _save(self) -> None:
+        try:
+            image_scale = float(self.image_scale_var.get())
+            if not (1 <= image_scale <= 200):
+                raise ValueError()
+        except ValueError:
+            messagebox.showerror("错误", "图片缩放比例应为 1～200 之间的数字。", parent=self.dialog)
+            return
+
+        try:
+            image_gap = int(self.image_gap_var.get())
+        except ValueError:
+            messagebox.showerror("错误", "图片间距应为整数。", parent=self.dialog)
+            return
+
+        excel_zoom = None
+        if not self.excel_zoom_auto.get():
+            try:
+                excel_zoom = int(self.excel_zoom_var.get())
+                if not (10 <= excel_zoom <= 400):
+                    raise ValueError()
+            except ValueError:
+                messagebox.showerror("错误", "Excel 缩放比例应为 10～400 之间的整数。", parent=self.dialog)
+                return
+
+        new_settings = {
+            "template_path": self.template_var.get().strip(),
+            "screenshot_marker": self.marker_var.get().strip() or "{{screenshot}}",
+            "image_scale": image_scale,
+            "image_gap": image_gap,
+            "excel_zoom": excel_zoom,
+        }
+        self.on_save(new_settings)
+        self.dialog.destroy()
 
 
 # =========================
@@ -429,9 +731,10 @@ class TestCaptureGUI:
         self.capture_count_var = tk.StringVar(value="0")
         self.session_dir_var = tk.StringVar(value="")
         self.excel_path_var = tk.StringVar(value="")
-        self.output_dir_var = tk.StringVar(value=self.app.output_dir)
-        self.title_var = tk.StringVar(value=self.app.excel_title)
-        self.sheet_name_var = tk.StringVar(value=self.app.sheet_name)
+        s = self.app.settings
+        self.output_dir_var = tk.StringVar(value=s.get("output_dir") or self.app.output_dir)
+        self.title_var = tk.StringVar(value=s.get("excel_title") or self.app.excel_title)
+        self.sheet_name_var = tk.StringVar(value=s.get("sheet_name") or self.app.sheet_name)
 
         self.start_button: Optional[ttk.Button] = None
         self.stop_button: Optional[ttk.Button] = None
@@ -456,10 +759,14 @@ class TestCaptureGUI:
     def _create_menu(self) -> None:
         menubar = tk.Menu(self.root)
 
+        # Settings 菜单
+        settings_menu = tk.Menu(menubar, tearoff=0)
+        settings_menu.add_command(label="Settings", command=self.open_settings)
+        menubar.add_cascade(label="Settings", menu=settings_menu)
+
         # Help 菜单
         help_menu = tk.Menu(menubar, tearoff=0)
         help_menu.add_command(label="About", command=self.show_about)
-
         menubar.add_cascade(label="Help", menu=help_menu)
 
         self.root.config(menu=menubar)
@@ -467,8 +774,20 @@ class TestCaptureGUI:
     def show_about(self) -> None:
         messagebox.showinfo(
             "About",
-            "Test Capture Tool v1.0\n\nAuthor: Mysoft Liu\n© 2026"
+            "Test Capture Tool v2.0\n\nAuthor: Mysoft Liu\n© 2026"
         )
+
+    def open_settings(self) -> None:
+        SettingsDialog(
+            parent=self.root,
+            settings=self.app.settings,
+            on_save=self._on_settings_saved
+        )
+
+    def _on_settings_saved(self, new_settings: dict) -> None:
+        self.app.settings = new_settings
+        _save_settings(new_settings)
+
     # -------------------------
     # 热键
     # -------------------------
@@ -552,10 +871,10 @@ class TestCaptureGUI:
 
         help_text = (
             "开始方式：\n"
-            "  1. 点击“开始录制”按钮\n"
+            '  1. 点击"开始录制"按钮\n'
             "  2. 或按快捷键 Ctrl + Alt + F9\n\n"
             "结束方式：\n"
-            "  1. 点击“结束并导出 Excel”按钮\n"
+            '  1. 点击"结束并导出 Excel"按钮\n'
             "  2. 或按快捷键 Ctrl + Alt + F10\n\n"
             "截图方式：\n"
             "  使用 Alt + PrintScreen 截取当前活动窗口。\n\n"
@@ -573,6 +892,10 @@ class TestCaptureGUI:
         self.app.sheet_name = self.sheet_name_var.get().strip() or "0001"
         self.app.output_dir = self.output_dir_var.get().strip() or self.app.base_output_dir
         os.makedirs(self.app.output_dir, exist_ok=True)
+        self.app.settings["excel_title"] = self.app.excel_title
+        self.app.settings["sheet_name"] = self.app.sheet_name
+        self.app.settings["output_dir"] = self.app.output_dir
+        _save_settings(self.app.settings)
 
     def choose_output_dir(self) -> None:
         selected = filedialog.askdirectory(initialdir=self.output_dir_var.get() or os.getcwd())

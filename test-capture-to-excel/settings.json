@@ -1,0 +1,10 @@
+{
+  "template_path": "",
+  "screenshot_marker": "{{screenshot}}",
+  "image_scale": 80.0,
+  "image_gap": 2,
+  "excel_zoom": 80,
+  "excel_title": "【カスタマイズ】　概要画面の対応",
+  "sheet_name": "0001333",
+  "output_dir": "D:\\MyGit\\Many-Tools\\test-capture-to-excel\\output"
+}
